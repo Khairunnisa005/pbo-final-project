@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Npgsql;
+﻿using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using UniMind.Models;
-using UniMind.Utils;
+using pboFinalProfject.Model;
+using pboFinalProfject.Utils;
 
-namespace UniMind.Repositories
+namespace pboFinalProfject.Repositories
 {
     public class UserRepository
     {
@@ -18,7 +17,7 @@ namespace UniMind.Repositories
         }
 
         // Get user by ID
-        public Microsoft.VisualBasic.ApplicationServices.User GetById(int id)
+        public User GetById(int id)
         {
             string query = "SELECT * FROM users WHERE user_id = @id";
             var parameters = new[] { new NpgsqlParameter("@id", id) };
@@ -30,7 +29,7 @@ namespace UniMind.Repositories
         }
 
         // Get user by email
-        public Microsoft.VisualBasic.ApplicationServices.User GetByEmail(string email)
+        public User GetByEmail(string email)
         {
             string query = "SELECT * FROM users WHERE email = @email";
             var parameters = new[] { new NpgsqlParameter("@email", email) };
@@ -42,7 +41,7 @@ namespace UniMind.Repositories
         }
 
         // Get user by username (nama anonim)
-        public Microsoft.VisualBasic.ApplicationServices.User GetByUsername(string username)
+        public User GetByUsername(string username)
         {
             string query = "SELECT * FROM users WHERE username = @username";
             var parameters = new[] { new NpgsqlParameter("@username", username) };
@@ -54,7 +53,7 @@ namespace UniMind.Repositories
         }
 
         // Get user by no telepon
-        public Microsoft.VisualBasic.ApplicationServices.User GetByNoTelepon(string noTelepon)
+        public User GetByNoTelepon(string noTelepon)
         {
             string query = "SELECT * FROM users WHERE no_telepon = @no_telepon";
             var parameters = new[] { new NpgsqlParameter("@no_telepon", noTelepon) };
@@ -66,9 +65,9 @@ namespace UniMind.Repositories
         }
 
         // Get all users
-        public List<Microsoft.VisualBasic.ApplicationServices.User> GetAll()
+        public List<User> GetAll()
         {
-            List<Microsoft.VisualBasic.ApplicationServices.User> users = new List<Microsoft.VisualBasic.ApplicationServices.User>();
+            List<User> users = new List<User>();
             string query = "SELECT * FROM users ORDER BY user_id";
             DataTable dt = _db.ExecuteQuery(query);
 
@@ -79,9 +78,9 @@ namespace UniMind.Repositories
         }
 
         // Get users by role
-        public List<Microsoft.VisualBasic.ApplicationServices.User> GetByRole(string role)
+        public List<User> GetByRole(string role)
         {
-            List<Microsoft.VisualBasic.ApplicationServices.User> users = new List<Microsoft.VisualBasic.ApplicationServices.User>();
+            List<User> users = new List<User>();
             string query = "SELECT * FROM users WHERE role = @role";
             var parameters = new[] { new NpgsqlParameter("@role", role) };
             DataTable dt = _db.ExecuteQuery(query, parameters);
@@ -93,7 +92,7 @@ namespace UniMind.Repositories
         }
 
         // Insert new user
-        public bool Insert(Microsoft.VisualBasic.ApplicationServices.User entity)
+        public bool Insert(User entity)
         {
             string query = @"
                 INSERT INTO users (username, email, no_telepon, password_hash, nama_lengkap, role, preferensi_waktu, created_at) 
@@ -115,7 +114,7 @@ namespace UniMind.Repositories
         }
 
         // Update user
-        public bool Update(Microsoft.VisualBasic.ApplicationServices.User entity)
+        public bool Update(User entity)
         {
             string query = @"
                 UPDATE users 
@@ -175,9 +174,9 @@ namespace UniMind.Repositories
         }
 
         // Mapping DataRow ke User object
-        private Microsoft.VisualBasic.ApplicationServices.User MapToUser(DataRow row)
+        private User MapToUser(DataRow row)
         {
-            return new Microsoft.VisualBasic.ApplicationServices.User
+            return new User
             {
                 UserId = Convert.ToInt32(row["user_id"]),
                 Username = row["username"].ToString(),

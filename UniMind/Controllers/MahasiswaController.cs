@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UniMind.Controllers
+namespace pboFinalProfject.Controllers
 {
     internal class MahasiswaController
     {

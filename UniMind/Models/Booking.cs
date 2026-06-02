@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using pboFinalProfject.Model;
 
-namespace UniMind.Models
+namespace pboFinalProfject.Model
 {
     public class Booking
     {
@@ -18,7 +18,7 @@ namespace UniMind.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         //Navigation properties 
-        public Microsoft.VisualBasic.ApplicationServices.User User { get; set; }
+        public User User { get; set; }
         public Psikolog Psikolog { get; set; }
         public JadwalPsikolog JadwalPsikolog { get; set; }
         //public HasilAssessment HasilAssessment { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System;
-using UniMind.Models;
-using UniMind.Repositories;
+using pboFinalProfject.Model;
+using pboFinalProfject.Repositories;
 
-namespace UniMind.Services
+namespace pboFinalProfject.Services
 {
     public class AuthService : IAuthService
     {

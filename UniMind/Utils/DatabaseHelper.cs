@@ -2,7 +2,7 @@
 using System.Data;
 using Npgsql;
 
-namespace UniMind.Utils
+namespace pboFinalProfject.Utils
 {
     public class DatabaseHelper
     {
@@ -60,11 +60,8 @@ namespace UniMind.Utils
                 }
             }
         }
-    }
 
-    // Di Utils/DatabaseHelper.cs, tambahkan method ini:
-
-    public bool TestConnection()
+        public bool TestConnection()
         {
             try
             {

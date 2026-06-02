@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using UniMind.Models;
-using UniMind.Services;
-using UniMind.Session;
+using pboFinalProfject.Model;
+using pboFinalProfject.Services;
+using pboFinalProfject.Session;
 
-namespace UniMind.Controllers
+namespace pboFinalProfject.Controllers
 {
     public class AuthController
     {

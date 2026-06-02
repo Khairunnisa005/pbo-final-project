@@ -46,9 +46,9 @@
 
 using System;
 using System.Windows.Forms;
-//using UniMind.Views.Mahasiswa;  // nanti sesuaikan dengan namespace view
+//using pboFinalProfject.Views.Mahasiswa;  // nanti sesuaikan dengan namespace view
 
-namespace UniMind
+namespace pboFinalProfject
 {
     internal static class Program
     {

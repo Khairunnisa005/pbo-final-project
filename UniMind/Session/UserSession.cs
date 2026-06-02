@@ -1,6 +1,6 @@
-﻿using UniMind.Models;
+﻿using pboFinalProfject.Model;
 
-namespace UniMind.Session
+namespace pboFinalProfject.Session
 {
     public static class UserSession
     {
