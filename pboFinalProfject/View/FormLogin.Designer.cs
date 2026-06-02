@@ -71,13 +71,14 @@ namespace pboFinalProfject
             btnMasuk.BackColor = SystemColors.MenuHighlight;
             btnMasuk.Font = new Font("Segoe UI", 7F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnMasuk.ForeColor = SystemColors.ButtonHighlight;
-            btnMasuk.Location = new Point(494, 274);
+            btnMasuk.Location = new Point(494, 268);
             btnMasuk.Margin = new Padding(2);
             btnMasuk.Name = "btnMasuk";
             btnMasuk.Size = new Size(342, 41);
             btnMasuk.TabIndex = 2;
             btnMasuk.Text = "Masuk";
             btnMasuk.UseVisualStyleBackColor = false;
+            btnMasuk.Click += btnMasuk_Click_1;
             // 
             // labelDaftar
             // 
@@ -112,12 +113,14 @@ namespace pboFinalProfject
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(878, 493);
             Controls.Add(lblDaftar);
             Controls.Add(labelDaftar);
             Controls.Add(btnMasuk);
             Controls.Add(tbSandi);
             Controls.Add(tbEmail);
+            DoubleBuffered = true;
             Margin = new Padding(2);
             Name = "FormLogin";
             Text = "Form1";

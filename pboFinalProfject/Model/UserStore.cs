@@ -12,11 +12,11 @@ namespace pboFinalProfject.Model
         {
             users.Add(new User
             {
-                FullName = "Administrator",
+                NamaLengkap = "Administrator",
                 Email = "admin@demo.com",
                 Username = "admin",
-                Password = "admin123",
-                Phone = "+628000000000"
+                PasswordHash = "admin123",
+                NoTelepon = "+628000000000"
             });
         }
 
@@ -33,11 +33,7 @@ namespace pboFinalProfject.Model
         public static User? ValidateCredentials(string email, string password)
         {
             return users.FirstOrDefault(u => u.Email.Equals(email, System.StringComparison.OrdinalIgnoreCase)
-                                             && u.Password == password);
+                                             && u.PasswordHash == password);
         }
     }
 }
-
-Git failed with a fatal error.
-error: open(".vs/pbo-final-project.slnx/FileContentIndex/07d3a62b-67bb-4ac0-8048-a1755e9e13b1.vsidx"): Permission denied
-fatal: Unable to process path .vs/pbo-final-project.slnx/FileContentIndex/07d3a62b-67bb-4ac0-8048-a1755e9e13b1.vsidx 

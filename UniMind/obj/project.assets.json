@@ -191,11 +191,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\UniMind\\UniMind\\UniMind.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\pbo-final-project\\UniMind\\UniMind.csproj",
       "projectName": "UniMind",
-      "projectPath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\UniMind\\UniMind\\UniMind.csproj",
+      "projectPath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\pbo-final-project\\UniMind\\UniMind.csproj",
       "packagesPath": "C:\\Users\\LENOVO SLIM 3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\UniMind\\UniMind\\obj\\",
+      "outputPath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\pbo-final-project\\UniMind\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

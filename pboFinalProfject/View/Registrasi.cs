@@ -35,10 +35,10 @@ namespace pboFinalProfject.View
 
             var user = new User
             {
-                FullName = nama,
+                NamaLengkap = nama,
                 Email = email,
-                Phone = telepon,
-                Password = sandi,
+                NoTelepon = telepon,
+                PasswordHash = sandi,
                 Username = string.IsNullOrWhiteSpace(username) ? email : username,
             };
 
