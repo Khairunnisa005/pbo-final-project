@@ -13,7 +13,5 @@ namespace UniMind.Models
         public string TingkatStres { get; set; }
         public string Rekomendasi { get; set; }
 
-        // Navigation properties
-        public User Users { get; set; }
     }
 }

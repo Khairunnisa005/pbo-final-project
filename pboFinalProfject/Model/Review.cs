@@ -15,6 +15,5 @@ namespace UniMind.Models
 
         // Navigation properties
         public Psikolog Psikolog { get; set; }
-        public User Users { get; set; }
     }
 }

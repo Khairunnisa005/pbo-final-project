@@ -16,7 +16,5 @@ namespace UniMind.Models
         public bool MelayaniOffline { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        // Navigation Properties
-        public User Users { get; set; }
     }
 }

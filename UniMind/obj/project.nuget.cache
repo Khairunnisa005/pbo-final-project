@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t4Of/yZUIp8=",
+  "dgSpecHash": "rUt5u5fycOk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\UniMind\\UniMind\\UniMind.csproj",
+  "projectFilePath": "C:\\Users\\LENOVO SLIM 3\\source\\repos\\pbo-final-project\\UniMind\\UniMind.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO SLIM 3\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\LENOVO SLIM 3\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.0\\microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
