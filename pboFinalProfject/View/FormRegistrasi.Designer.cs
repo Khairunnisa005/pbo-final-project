@@ -1,6 +1,6 @@
 ﻿namespace pboFinalProfject.View
 {
-    partial class Registrasi
+    partial class FormRegistrasi
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registrasi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegistrasi));
             btnDaftar = new Button();
             tbNamaLengkap = new TextBox();
             tbEmail = new TextBox();
@@ -89,7 +89,6 @@
             tbTelepon.Size = new Size(528, 27);
             tbTelepon.TabIndex = 3;
             tbTelepon.Text = "+628 xxxx xxxx";
-            tbTelepon.TextChanged += textBox3_TextChanged;
             // 
             // tbSandi
             // 
@@ -164,7 +163,6 @@
             Margin = new Padding(2);
             Name = "Registrasi";
             Text = "Registrasi";
-            Load += Registrasi_Load;
             ResumeLayout(false);
             PerformLayout();
         }

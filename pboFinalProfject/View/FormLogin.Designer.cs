@@ -78,7 +78,6 @@ namespace pboFinalProfject
             btnMasuk.TabIndex = 2;
             btnMasuk.Text = "Masuk";
             btnMasuk.UseVisualStyleBackColor = false;
-            btnMasuk.Click += btnMasuk_Click_1;
             // 
             // labelDaftar
             // 

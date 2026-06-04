@@ -1,6 +1,6 @@
 ﻿namespace pboFinalProfject.View
 {
-    partial class Dashboard
+    partial class FormDashboardMahasiswa 
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboardMahasiswa));
             dataGridView1 = new DataGridView();
             lblJadwal = new Label();
             btnBeranda = new Button();

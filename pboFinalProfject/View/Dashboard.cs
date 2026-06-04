@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace pboFinalProfject.View
 {
-    public partial class Dashboard : Form
+    public partial class FormDashboardMahasiswa : Form
     {
         private Panel containerPanel;
         private FlowLayoutPanel flowPanel;
 
-        public Dashboard()
+        public FormDashboardMahasiswa()
         {
             InitializeComponent();
         }

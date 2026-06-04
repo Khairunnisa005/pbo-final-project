@@ -1,6 +1,7 @@
 ﻿using System;
 using pboFinalProfject.Model;
 using pboFinalProfject.Repositories;
+using pboFinalProfject.Services;
 
 namespace pboFinalProfject.Services
 {
@@ -13,32 +14,50 @@ namespace pboFinalProfject.Services
             _userRepository = new UserRepository();
         }
 
-        public User Login(string Username, string password)
+        public User LoginByEmail(string email, string password)
         {
             // Validasi input kosong
-            if (string.IsNullOrWhiteSpace(Username))
-                throw new ArgumentException("Email/Username tidak boleh kosong!");
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Email tidak boleh kosong!");
 
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Password tidak boleh kosong!");
 
-            // Cari user berdasarkan email atau username
-            User user = _userRepository.GetByEmail(Username);
-            if (user == null)
-                user = _userRepository.GetByUsername(Username);
+            // Cari user berdasarkan username
+            User user = _userRepository.GetByEmail(email);
 
             // Jika user tidak ditemukan
             if (user == null)
-                throw new Exception("Username atau password salah!");
+                throw new Exception("Email atau password salah!");
 
             // Verifikasi password (sementara pakai string langsung, nanti pakai hash)
+            if (user.PasswordHash != password)
+                throw new Exception("Email atau password salah!");
+
+            return user;
+        }
+
+        // Login pakai Username
+        public User LoginByUsername(string username, string password)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                throw new ArgumentException("Username tidak boleh kosong!");
+
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Password tidak boleh kosong!");
+
+            User user = _userRepository.GetByUsername(username);
+
+            if (user == null)
+                throw new Exception("Username atau password salah!");
+
             if (user.PasswordHash != password)
                 throw new Exception("Username atau password salah!");
 
             return user;
         }
 
-        public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string namaLengkap = null)
+        public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string nama)
         {
             // Validasi input kosong
             if (string.IsNullOrWhiteSpace(username))
@@ -52,6 +71,9 @@ namespace pboFinalProfject.Services
 
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Password tidak boleh kosong!");
+
+            if (string.IsNullOrEmpty(nama))
+                throw new ArgumentException("Nama lengkap tidak boleh kosong!");
 
             // Validasi format email sederhana
             if (!email.Contains("@") || !email.Contains("."))
@@ -74,7 +96,7 @@ namespace pboFinalProfject.Services
                 Email = email,
                 NoTelepon = noTelepon,
                 PasswordHash = password, // TODO: nanti di-hash pakai PasswordHelper
-                NamaLengkap = namaLengkap,
+                NamaLengkap = nama,
                 Role = "Mahasiswa",
                 PreferensiWaktu = null,
                 CreatedAt = DateTime.Now
@@ -118,14 +140,14 @@ namespace pboFinalProfject.Services
             return _userRepository.Insert(user);
         }
 
-        public bool IsEmailExist(string email)
-        {
-            return _userRepository.IsEmailExists(email);
-        }
-
         public bool IsUsernameExist(string username)
         {
             return _userRepository.IsUsernameExists(username);
+        }
+
+        public bool IsEmailExist(string email)
+        {
+            return _userRepository.GetByEmail(email) != null;
         }
 
         public bool IsNoTeleponExist(string noTelepon)

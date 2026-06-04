@@ -15,14 +15,12 @@ namespace pboFinalProfject.Controllers
             _service = new AuthService();
         }
 
-        /// <summary>
-        /// Login ke sistem
-        /// </summary>
-        public bool Login(string emailOrUsername, string password)
+        
+        public bool Login(string email, string password)
         {
             try
             {
-                User user = _service.Login(emailOrUsername, password);
+                User user = _service.LoginByEmail(email, password);
 
                 if (user != null)
                 {
@@ -30,7 +28,7 @@ namespace pboFinalProfject.Controllers
                     UserSession.CurrentUser = user;
 
                     // Tampilkan pesan sukses sesuai role
-                    string roleName = user.Role == "Mahasiswa" ? "Mahasiswa" : (user.Role == "Psikolog" ? "Psikolog" : "Admin");
+                    string roleName = user.Role;
                     MessageBox.Show($"Login Sukses sebagai {roleName}!", "Sukses",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -47,22 +45,13 @@ namespace pboFinalProfject.Controllers
             }
         }
 
-        /// <summary>
         /// Registrasi mahasiswa baru
-        /// </summary>
-        public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string confirmPassword, string namaLengkap = null)
+        public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string nama)
         {
             try
             {
-                // Validasi password konfirmasi
-                if (password != confirmPassword)
-                {
-                    MessageBox.Show("Password dan konfirmasi password tidak cocok!", "Validasi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
 
-                bool result = _service.RegisterMahasiswa(username, email, noTelepon, password, namaLengkap);
+                bool result = _service.RegisterMahasiswa(username, email, noTelepon, password, nama);
 
                 if (result)
                 {
@@ -81,9 +70,7 @@ namespace pboFinalProfject.Controllers
             }
         }
 
-        /// <summary>
         /// Logout dari sistem
-        /// </summary>
         public void Logout(Form currentForm)
         {
             UserSession.Clear();
@@ -92,17 +79,13 @@ namespace pboFinalProfject.Controllers
             currentForm.Close();
         }
 
-        /// <summary>
         /// Cek apakah user sudah login
-        /// </summary>
         public bool IsLoggedIn()
         {
             return UserSession.IsLoggedIn;
         }
 
-        /// <summary>
         /// Dapatkan user yang sedang login
-        /// </summary>
         public User GetCurrentUser()
         {
             return UserSession.CurrentUser;
