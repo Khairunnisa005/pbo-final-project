@@ -48,10 +48,10 @@
             dataGridView1.BackgroundColor = SystemColors.ControlLightLight;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(185, 258);
+            dataGridView1.Location = new Point(324, 511);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(681, 223);
+            dataGridView1.Size = new Size(1172, 328);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -59,20 +59,20 @@
             // 
             lblJadwal.AutoSize = true;
             lblJadwal.BackColor = SystemColors.ControlLightLight;
-            lblJadwal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJadwal.Location = new Point(208, 279);
+            lblJadwal.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJadwal.Location = new Point(345, 543);
             lblJadwal.Name = "lblJadwal";
-            lblJadwal.Size = new Size(134, 20);
+            lblJadwal.Size = new Size(205, 31);
             lblJadwal.TabIndex = 1;
             lblJadwal.Text = "Jadwal Konsultasi";
             // 
             // btnBeranda
             // 
             btnBeranda.BackColor = Color.Transparent;
-            btnBeranda.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBeranda.Location = new Point(37, 76);
+            btnBeranda.Font = new Font("Calibri", 12F);
+            btnBeranda.Location = new Point(80, 155);
             btnBeranda.Name = "btnBeranda";
-            btnBeranda.Size = new Size(70, 29);
+            btnBeranda.Size = new Size(165, 38);
             btnBeranda.TabIndex = 2;
             btnBeranda.Text = "Beranda";
             btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
@@ -82,11 +82,11 @@
             // btnProfile
             // 
             btnProfile.BackColor = Color.Transparent;
-            btnProfile.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnProfile.Font = new Font("Calibri", 12F);
             btnProfile.ImageAlign = ContentAlignment.TopRight;
-            btnProfile.Location = new Point(37, 224);
+            btnProfile.Location = new Point(82, 417);
             btnProfile.Name = "btnProfile";
-            btnProfile.Size = new Size(70, 29);
+            btnProfile.Size = new Size(165, 38);
             btnProfile.TabIndex = 3;
             btnProfile.Text = "Profil";
             btnProfile.TextAlign = ContentAlignment.MiddleLeft;
@@ -96,10 +96,10 @@
             // btnKonsultasi
             // 
             btnKonsultasi.BackColor = Color.Transparent;
-            btnKonsultasi.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnKonsultasi.Location = new Point(37, 184);
+            btnKonsultasi.Font = new Font("Calibri", 12F);
+            btnKonsultasi.Location = new Point(80, 352);
             btnKonsultasi.Name = "btnKonsultasi";
-            btnKonsultasi.Size = new Size(119, 29);
+            btnKonsultasi.Size = new Size(167, 38);
             btnKonsultasi.TabIndex = 4;
             btnKonsultasi.Text = "Jadwal Konsultasi";
             btnKonsultasi.TextAlign = ContentAlignment.MiddleLeft;
@@ -108,10 +108,10 @@
             // btnKonselor
             // 
             btnKonselor.BackColor = Color.Transparent;
-            btnKonselor.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnKonselor.Location = new Point(37, 149);
+            btnKonselor.Font = new Font("Calibri", 12F);
+            btnKonselor.Location = new Point(80, 289);
             btnKonselor.Name = "btnKonselor";
-            btnKonselor.Size = new Size(70, 29);
+            btnKonselor.Size = new Size(165, 38);
             btnKonselor.TabIndex = 5;
             btnKonselor.Text = "Konselor";
             btnKonselor.TextAlign = ContentAlignment.MiddleLeft;
@@ -120,22 +120,23 @@
             // btnKuisioner
             // 
             btnKuisioner.BackColor = Color.Transparent;
-            btnKuisioner.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKuisioner.Font = new Font("Calibri", 12F);
             btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
-            btnKuisioner.Location = new Point(37, 111);
+            btnKuisioner.Location = new Point(80, 221);
             btnKuisioner.Name = "btnKuisioner";
-            btnKuisioner.Size = new Size(70, 29);
+            btnKuisioner.Size = new Size(165, 38);
             btnKuisioner.TabIndex = 6;
             btnKuisioner.Text = "Kuisioner";
+            btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
             btnKuisioner.UseVisualStyleBackColor = false;
             // 
             // btnDaftar
             // 
             btnDaftar.BackColor = SystemColors.ControlLightLight;
-            btnDaftar.Font = new Font("Calibri", 7.20000029F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDaftar.Location = new Point(206, 194);
+            btnDaftar.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnDaftar.Location = new Point(345, 396);
             btnDaftar.Name = "btnDaftar";
-            btnDaftar.Size = new Size(174, 33);
+            btnDaftar.Size = new Size(312, 59);
             btnDaftar.TabIndex = 7;
             btnDaftar.Text = "Daftar Konselor";
             btnDaftar.UseVisualStyleBackColor = false;
@@ -143,10 +144,10 @@
             // btnJadwal
             // 
             btnJadwal.BackColor = SystemColors.ControlLightLight;
-            btnJadwal.Font = new Font("Calibri", 7.20000029F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnJadwal.Location = new Point(437, 194);
+            btnJadwal.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnJadwal.Location = new Point(751, 395);
             btnJadwal.Name = "btnJadwal";
-            btnJadwal.Size = new Size(174, 33);
+            btnJadwal.Size = new Size(312, 59);
             btnJadwal.TabIndex = 8;
             btnJadwal.Text = "Buat Janji";
             btnJadwal.UseVisualStyleBackColor = false;
@@ -154,10 +155,10 @@
             // btnKuis
             // 
             btnKuis.BackColor = SystemColors.ControlLightLight;
-            btnKuis.Font = new Font("Calibri", 7.20000029F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnKuis.Location = new Point(670, 194);
+            btnKuis.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKuis.Location = new Point(1157, 395);
             btnKuis.Name = "btnKuis";
-            btnKuis.Size = new Size(174, 33);
+            btnKuis.Size = new Size(312, 59);
             btnKuis.TabIndex = 9;
             btnKuis.Text = "Cek Keadaan";
             btnKuis.UseVisualStyleBackColor = false;
@@ -165,10 +166,10 @@
             // btnKeluar
             // 
             btnKeluar.BackColor = Color.Transparent;
-            btnKeluar.Font = new Font("Calibri", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnKeluar.Location = new Point(39, 454);
+            btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKeluar.Location = new Point(80, 785);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(70, 29);
+            btnKeluar.Size = new Size(116, 40);
             btnKeluar.TabIndex = 10;
             btnKeluar.Text = "Keluar";
             btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
@@ -179,7 +180,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(878, 493);
+            ClientSize = new Size(1517, 817);
             Controls.Add(btnKeluar);
             Controls.Add(btnKuis);
             Controls.Add(btnJadwal);
@@ -191,8 +192,12 @@
             Controls.Add(btnBeranda);
             Controls.Add(lblJadwal);
             Controls.Add(dataGridView1);
+            DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Dashboard";
+            StartPosition = FormStartPosition.Manual;
             Text = "Form1";
+            Load += Dashboard_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

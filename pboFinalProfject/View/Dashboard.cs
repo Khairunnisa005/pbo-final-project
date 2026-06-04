@@ -93,5 +93,10 @@ namespace pboFinalProfject.View
         {
 
         }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+            this.ClientSize = new System.Drawing.Size(1535, 864);
+        }
     }
 }
