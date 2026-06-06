@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using pboFinalProfject.Model;
 
-namespace UniMind.Models
+namespace pboFinalProfject.Models
 {
     public class Booking
     {

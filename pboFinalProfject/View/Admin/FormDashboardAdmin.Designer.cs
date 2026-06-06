@@ -1,9 +1,19 @@
-﻿namespace pboFinalProfject.View
+﻿using pboFinalProfject.View;
+using pboFinalProfject.Session;
+using pboFinalProfject.Controllers;
+namespace pboFinalProfject.View
 {
-    partial class AdminDashboard
+    partial class FormDashboardAdmin
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -15,335 +25,302 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.lblUnimindLogo = new System.Windows.Forms.Label();
-            this.lblTagline = new System.Windows.Forms.Label();
-            this.btnMenuJadwal = new System.Windows.Forms.Button();
-            this.btnMenuPasien = new System.Windows.Forms.Button();
-            this.pnlUserProfile = new System.Windows.Forms.Panel();
-            this.lblAdminName = new System.Windows.Forms.Label();
-            this.lblAdminRole = new System.Windows.Forms.Label();
-            this.btnKeluar = new System.Windows.Forms.Button();
-            this.pnlMainContent = new System.Windows.Forms.Panel();
-            this.lblSelamatDatang = new System.Windows.Forms.Label();
-            this.lblSubSelamatDatang = new System.Windows.Forms.Label();
-            this.pnlStatsCard = new System.Windows.Forms.Panel();
-            this.lblCountBooking = new System.Windows.Forms.Label();
-            this.lblCountPasien = new System.Windows.Forms.Label();
-            this.pnlTableContainer = new System.Windows.Forms.Panel();
-            this.lblTableTitle = new System.Windows.Forms.Label();
-            this.lblTableSub = new System.Windows.Forms.Label();
-            this.dgvBookingMasuk = new System.Windows.Forms.DataGridView();
-            this.btnKelolaJadwal = new System.Windows.Forms.Button();
-            this.pnlSidebar.SuspendLayout();
-            this.pnlUserProfile.SuspendLayout();
-            this.pnlMainContent.SuspendLayout();
-            this.pnlStatsCard.SuspendLayout();
-            this.pnlTableContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBookingMasuk)).BeginInit();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            pnlHeader = new Panel();
+            lblSubJudul = new Label();
+            lblJudulApp = new Label();
+            btnKeluar = new Button();
+            btnLogout = new Button();
+            btnRefresh = new Button();
+            pnlStatMahasiswa = new Panel();
+            lblTotalMahasiswa = new Label();
+            lblTitleMhs = new Label();
+            pnlStatKonselor = new Panel();
+            lblTotalKonselor = new Label();
+            lblTitleKonselor = new Label();
+            dgvAntreanKonseling = new DataGridView();
+            lblTabelTitle = new Label();
+            btnKelolaUser = new Button();
+            btnLaporan = new Button();
+            pnlHeader.SuspendLayout();
+            pnlStatMahasiswa.SuspendLayout();
+            pnlStatKonselor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).BeginInit();
+            SuspendLayout();
             // 
-            // pnlSidebar
+            // pnlHeader
             // 
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(71)))), ((int)(((byte)(161)))));
-            this.pnlSidebar.Controls.Add(this.btnKeluar);
-            this.pnlSidebar.Controls.Add(this.pnlUserProfile);
-            this.pnlSidebar.Controls.Add(this.btnMenuPasien);
-            this.pnlSidebar.Controls.Add(this.btnMenuJadwal);
-            this.pnlSidebar.Controls.Add(this.lblTagline);
-            this.pnlSidebar.Controls.Add(this.lblUnimindLogo);
-            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(240, 680);
-            this.pnlSidebar.TabIndex = 0;
+            pnlHeader.BackColor = Color.FromArgb(31, 47, 152);
+            pnlHeader.Controls.Add(lblSubJudul);
+            pnlHeader.Controls.Add(lblJudulApp);
+            pnlHeader.Controls.Add(btnKeluar);
+            pnlHeader.Controls.Add(btnLogout);
+            pnlHeader.Controls.Add(btnRefresh);
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(3, 4, 3, 4);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(900, 100);
+            pnlHeader.TabIndex = 0;
             // 
-            // lblUnimindLogo
+            // lblSubJudul
             // 
-            this.lblUnimindLogo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblUnimindLogo.ForeColor = System.Drawing.Color.White;
-            this.lblUnimindLogo.Location = new System.Drawing.Point(20, 25);
-            this.lblUnimindLogo.Name = "lblUnimindLogo";
-            this.lblUnimindLogo.Size = new System.Drawing.Size(200, 35);
-            this.lblUnimindLogo.Text = "Unimind";
+            lblSubJudul.AutoSize = true;
+            lblSubJudul.Font = new Font("Segoe UI", 10F);
+            lblSubJudul.ForeColor = Color.FromArgb(74, 222, 222);
+            lblSubJudul.Location = new Point(22, 54);
+            lblSubJudul.Name = "lblSubJudul";
+            lblSubJudul.Size = new Size(277, 23);
+            lblSubJudul.TabIndex = 0;
+            lblSubJudul.Text = "Panel Kontrol Utama Administrator";
             // 
-            // lblTagline
+            // lblJudulApp
             // 
-            this.lblTagline.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblTagline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(222)))), ((int)(((byte)(251)))));
-            this.lblTagline.Location = new System.Drawing.Point(22, 60);
-            this.lblTagline.Name = "lblTagline";
-            this.lblTagline.Size = new System.Drawing.Size(200, 20);
-            this.lblTagline.Text = "Learn • Grow • Achieve";
-            // 
-            // btnMenuJadwal
-            // 
-            this.btnMenuJadwal.FlatAppearance.BorderSize = 0;
-            this.btnMenuJadwal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenuJadwal.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnMenuJadwal.ForeColor = System.Drawing.Color.White;
-            this.btnMenuJadwal.Location = new System.Drawing.Point(0, 130);
-            this.btnMenuJadwal.Name = "btnMenuJadwal";
-            this.btnMenuJadwal.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnMenuJadwal.Size = new System.Drawing.Size(240, 50);
-            this.btnMenuJadwal.Text = "📅  Jadwal Konseling";
-            this.btnMenuJadwal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenuJadwal.UseVisualStyleBackColor = true;
-            this.btnMenuJadwal.Click += new System.EventHandler(this.menuJadwal_Click);
-            // 
-            // btnMenuPasien
-            // 
-            this.btnMenuPasien.FlatAppearance.BorderSize = 0;
-            this.btnMenuPasien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenuPasien.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnMenuPasien.ForeColor = System.Drawing.Color.White;
-            this.btnMenuPasien.Location = new System.Drawing.Point(0, 185);
-            this.btnMenuPasien.Name = "btnMenuPasien";
-            this.btnMenuPasien.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnMenuPasien.Size = new System.Drawing.Size(240, 50);
-            this.btnMenuPasien.Text = "👥  Daftar Pasien";
-            this.btnMenuPasien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenuPasien.UseVisualStyleBackColor = true;
-            this.btnMenuPasien.Click += new System.EventHandler(this.menuPasien_Click);
-            // 
-            // pnlUserProfile
-            // 
-            this.pnlUserProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlUserProfile.Controls.Add(this.lblAdminRole);
-            this.pnlUserProfile.Controls.Add(this.lblAdminName);
-            this.pnlUserProfile.Location = new System.Drawing.Point(0, 550);
-            this.pnlUserProfile.Name = "pnlUserProfile";
-            this.pnlUserProfile.Size = new System.Drawing.Size(240, 65);
-            // 
-            // lblAdminName
-            // 
-            this.lblAdminName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblAdminName.ForeColor = System.Drawing.Color.White;
-            this.lblAdminName.Location = new System.Drawing.Point(25, 12);
-            this.lblAdminName.Name = "lblAdminName";
-            this.lblAdminName.Size = new System.Drawing.Size(190, 20);
-            this.lblAdminName.Text = "Admin";
-            // 
-            // lblAdminRole
-            // 
-            this.lblAdminRole.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblAdminRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(202)))), ((int)(((byte)(249)))));
-            this.lblAdminRole.Location = new System.Drawing.Point(25, 34);
-            this.lblAdminRole.Name = "lblAdminRole";
-            this.lblAdminRole.Size = new System.Drawing.Size(190, 15);
-            this.lblAdminRole.Text = "Administrator";
+            lblJudulApp.AutoSize = true;
+            lblJudulApp.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblJudulApp.ForeColor = Color.White;
+            lblJudulApp.Location = new Point(20, 11);
+            lblJudulApp.Name = "lblJudulApp";
+            lblJudulApp.Size = new Size(128, 37);
+            lblJudulApp.TabIndex = 1;
+            lblJudulApp.Text = "UniMind";
             // 
             // btnKeluar
             // 
-            this.btnKeluar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnKeluar.FlatAppearance.BorderSize = 0;
-            this.btnKeluar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnKeluar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnKeluar.ForeColor = System.Drawing.Color.White;
-            this.btnKeluar.Location = new System.Drawing.Point(0, 620);
-            this.btnKeluar.Name = "btnKeluar";
-            this.btnKeluar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnKeluar.Size = new System.Drawing.Size(240, 45);
-            this.btnKeluar.Text = "🚪  Keluar";
-            this.btnKeluar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKeluar.UseVisualStyleBackColor = true;
-            this.btnKeluar.Click += new System.EventHandler(this.btnKeluar_Click);
+            btnKeluar.BackColor = Color.FromArgb(220, 53, 69);
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(817, 15);
+            btnKeluar.Margin = new Padding(2, 2, 2, 2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(76, 36);
+            btnKeluar.TabIndex = 6;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.UseVisualStyleBackColor = false;
             // 
-            // pnlMainContent
+            // btnLogout
             // 
-            this.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.pnlMainContent.Controls.Add(this.btnKelolaJadwal);
-            this.pnlMainContent.Controls.Add(this.pnlTableContainer);
-            this.pnlMainContent.Controls.Add(this.pnlStatsCard);
-            this.pnlMainContent.Controls.Add(this.lblSubSelamatDatang);
-            this.pnlMainContent.Controls.Add(this.lblSelamatDatang);
-            this.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMainContent.Location = new System.Drawing.Point(240, 0);
-            this.pnlMainContent.Name = "pnlMainContent";
-            this.pnlMainContent.Size = new System.Drawing.Size(814, 680);
-            this.pnlMainContent.TabIndex = 1;
+            btnLogout.BackColor = Color.FromArgb(255, 193, 7);
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(735, 15);
+            btnLogout.Margin = new Padding(2, 2, 2, 2);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(78, 36);
+            btnLogout.TabIndex = 8;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
             // 
-            // lblSelamatDatang
+            // btnRefresh
             // 
-            this.lblSelamatDatang.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.lblSelamatDatang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(28)))), ((int)(((byte)(63)))));
-            this.lblSelamatDatang.Location = new System.Drawing.Point(30, 25);
-            this.lblSelamatDatang.Name = "lblSelamatDatang";
-            this.lblSelamatDatang.Size = new System.Drawing.Size(400, 40);
-            this.lblSelamatDatang.Text = "Selamat Datang";
+            btnRefresh.BackColor = Color.FromArgb(40, 167, 69);
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Location = new Point(655, 15);
+            btnRefresh.Margin = new Padding(2, 2, 2, 2);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(75, 36);
+            btnRefresh.TabIndex = 7;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // lblSubSelamatDatang
+            // pnlStatMahasiswa
             // 
-            this.lblSubSelamatDatang.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSubSelamatDatang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
-            this.lblSubSelamatDatang.Location = new System.Drawing.Point(32, 65);
-            this.lblSubSelamatDatang.Name = "lblSubSelamatDatang";
-            this.lblSubSelamatDatang.Size = new System.Drawing.Size(400, 25);
-            this.lblSubSelamatDatang.Text = "Silakan kelola booking konseling yang masuk.";
+            pnlStatMahasiswa.BackColor = Color.FromArgb(120, 127, 246);
+            pnlStatMahasiswa.Controls.Add(lblTotalMahasiswa);
+            pnlStatMahasiswa.Controls.Add(lblTitleMhs);
+            pnlStatMahasiswa.Location = new Point(27, 131);
+            pnlStatMahasiswa.Margin = new Padding(3, 4, 3, 4);
+            pnlStatMahasiswa.Name = "pnlStatMahasiswa";
+            pnlStatMahasiswa.Size = new Size(240, 125);
+            pnlStatMahasiswa.TabIndex = 1;
             // 
-            // pnlStatsCard
+            // lblTotalMahasiswa
             // 
-            this.pnlStatsCard.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlStatsCard.BackColor = System.Drawing.Color.White;
-            this.pnlStatsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlStatsCard.Controls.Add(this.lblCountPasien);
-            this.pnlStatsCard.Controls.Add(this.lblCountBooking);
-            this.pnlStatsCard.Location = new System.Drawing.Point(35, 110);
-            this.pnlStatsCard.Name = "pnlStatsCard";
-            this.pnlStatsCard.Size = new System.Drawing.Size(744, 85);
-            this.pnlStatsCard.TabIndex = 2;
+            lblTotalMahasiswa.AutoSize = true;
+            lblTotalMahasiswa.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+            lblTotalMahasiswa.ForeColor = Color.White;
+            lblTotalMahasiswa.Location = new Point(15, 44);
+            lblTotalMahasiswa.Name = "lblTotalMahasiswa";
+            lblTotalMahasiswa.Size = new Size(43, 50);
+            lblTotalMahasiswa.TabIndex = 0;
+            lblTotalMahasiswa.Text = "0";
             // 
-            // lblCountBooking
+            // lblTitleMhs
             // 
-            this.lblCountBooking.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblCountBooking.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(71)))), ((int)(((byte)(161)))));
-            this.lblCountBooking.Location = new System.Drawing.Point(25, 25);
-            this.lblCountBooking.Name = "lblCountBooking";
-            this.lblCountBooking.Size = new System.Drawing.Size(250, 35);
-            this.lblCountBooking.Text = "0 Sesi Aktif";
+            lblTitleMhs.AutoSize = true;
+            lblTitleMhs.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTitleMhs.ForeColor = Color.FromArgb(31, 47, 152);
+            lblTitleMhs.Location = new Point(15, 15);
+            lblTitleMhs.Name = "lblTitleMhs";
+            lblTitleMhs.Size = new Size(140, 23);
+            lblTitleMhs.TabIndex = 1;
+            lblTitleMhs.Text = "Total Mahasiswa";
             // 
-            // lblCountPasien
+            // pnlStatKonselor
             // 
-            this.lblCountPasien.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblCountPasien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
-            this.lblCountPasien.Location = new System.Drawing.Point(380, 25);
-            this.lblCountPasien.Name = "lblCountPasien";
-            this.lblCountPasien.Size = new System.Drawing.Size(250, 35);
-            this.lblCountPasien.Text = "0 Pasien Terdaftar";
+            pnlStatKonselor.BackColor = Color.FromArgb(123, 213, 245);
+            pnlStatKonselor.Controls.Add(lblTotalKonselor);
+            pnlStatKonselor.Controls.Add(lblTitleKonselor);
+            pnlStatKonselor.Location = new Point(285, 131);
+            pnlStatKonselor.Margin = new Padding(3, 4, 3, 4);
+            pnlStatKonselor.Name = "pnlStatKonselor";
+            pnlStatKonselor.Size = new Size(240, 125);
+            pnlStatKonselor.TabIndex = 2;
             // 
-            // pnlTableContainer
+            // lblTotalKonselor
             // 
-            this.pnlTableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTableContainer.BackColor = System.Drawing.Color.White;
-            this.pnlTableContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTableContainer.Controls.Add(this.dgvBookingMasuk);
-            this.pnlTableContainer.Controls.Add(this.lblTableSub);
-            this.pnlTableContainer.Controls.Add(this.lblTableTitle);
-            this.pnlTableContainer.Location = new System.Drawing.Point(35, 220);
-            this.pnlTableContainer.Name = "pnlTableContainer";
-            this.pnlTableContainer.Size = new System.Drawing.Size(744, 380);
-            this.pnlTableContainer.TabIndex = 3;
+            lblTotalKonselor.AutoSize = true;
+            lblTotalKonselor.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+            lblTotalKonselor.ForeColor = Color.FromArgb(31, 47, 152);
+            lblTotalKonselor.Location = new Point(15, 44);
+            lblTotalKonselor.Name = "lblTotalKonselor";
+            lblTotalKonselor.Size = new Size(43, 50);
+            lblTotalKonselor.TabIndex = 0;
+            lblTotalKonselor.Text = "0";
             // 
-            // lblTableTitle
+            // lblTitleKonselor
             // 
-            this.lblTableTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(28)))), ((int)(((byte)(63)))));
-            this.lblTableTitle.Location = new System.Drawing.Point(20, 15);
-            this.lblTableTitle.Name = "lblTableTitle";
-            this.lblTableTitle.Size = new System.Drawing.Size(300, 25);
-            this.lblTableTitle.Text = "Daftar Booking Masuk";
+            lblTitleKonselor.AutoSize = true;
+            lblTitleKonselor.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTitleKonselor.ForeColor = Color.FromArgb(31, 47, 152);
+            lblTitleKonselor.Location = new Point(15, 15);
+            lblTitleKonselor.Name = "lblTitleKonselor";
+            lblTitleKonselor.Size = new Size(201, 23);
+            lblTitleKonselor.TabIndex = 1;
+            lblTitleKonselor.Text = "Konselor/Psikolog Aktif";
             // 
-            // lblTableSub
+            // dgvAntreanKonseling
             // 
-            this.lblTableSub.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTableSub.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
-            this.lblTableSub.Location = new System.Drawing.Point(20, 42);
-            this.lblTableSub.Name = "lblTableSub";
-            this.lblTableSub.Size = new System.Drawing.Size(500, 20);
-            this.lblTableSub.Text = "Daftar mahasiswa yang telah melakukan booking konseling.";
+            dgvAntreanKonseling.AllowUserToAddRows = false;
+            dgvAntreanKonseling.AllowUserToDeleteRows = false;
+            dgvAntreanKonseling.BackgroundColor = Color.White;
+            dgvAntreanKonseling.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(31, 47, 152);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvAntreanKonseling.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvAntreanKonseling.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(123, 213, 245);
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvAntreanKonseling.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvAntreanKonseling.EnableHeadersVisualStyles = false;
+            dgvAntreanKonseling.Location = new Point(27, 325);
+            dgvAntreanKonseling.Margin = new Padding(3, 4, 3, 4);
+            dgvAntreanKonseling.Name = "dgvAntreanKonseling";
+            dgvAntreanKonseling.ReadOnly = true;
+            dgvAntreanKonseling.RowHeadersWidth = 51;
+            dgvAntreanKonseling.RowTemplate.Height = 30;
+            dgvAntreanKonseling.Size = new Size(846, 325);
+            dgvAntreanKonseling.TabIndex = 3;
             // 
-            // dgvBookingMasuk
+            // lblTabelTitle
             // 
-            this.dgvBookingMasuk.AllowUserToAddRows = false;
-            this.dgvBookingMasuk.AllowUserToDeleteRows = false;
-            this.dgvBookingMasuk.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvBookingMasuk.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBookingMasuk.BackgroundColor = System.Drawing.Color.White;
-            this.dgvBookingMasuk.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(71)))), ((int)(((byte)(161)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBookingMasuk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvBookingMasuk.ColumnHeadersHeight = 38;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBookingMasuk.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvBookingMasuk.EnableHeadersVisualStyles = false;
-            this.dgvBookingMasuk.Location = new System.Drawing.Point(22, 80);
-            this.dgvBookingMasuk.Name = "dgvBookingMasuk";
-            this.dgvBookingMasuk.ReadOnly = true;
-            this.dgvBookingMasuk.RowHeadersVisible = false;
-            this.dgvBookingMasuk.RowTemplate.Height = 30;
-            this.dgvBookingMasuk.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBookingMasuk.Size = new System.Drawing.Size(700, 275);
-            this.dgvBookingMasuk.TabIndex = 2;
+            lblTabelTitle.AutoSize = true;
+            lblTabelTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTabelTitle.ForeColor = Color.FromArgb(31, 47, 152);
+            lblTabelTitle.Location = new Point(22, 282);
+            lblTabelTitle.Name = "lblTabelTitle";
+            lblTabelTitle.Size = new Size(268, 28);
+            lblTabelTitle.TabIndex = 6;
+            lblTabelTitle.Text = "Antrean Konsultasi Hari Ini";
             // 
-            // btnKelolaJadwal
+            // btnKelolaUser
             // 
-            this.btnKelolaJadwal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnKelolaJadwal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(71)))), ((int)(((byte)(161)))));
-            this.btnKelolaJadwal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnKelolaJadwal.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.btnKelolaJadwal.ForeColor = System.Drawing.Color.White;
-            this.btnKelolaJadwal.Location = new System.Drawing.Point(629, 615);
-            this.btnKelolaJadwal.Name = "btnKelolaJadwal";
-            this.btnKelolaJadwal.Size = new System.Drawing.Size(150, 42);
-            this.btnKelolaJadwal.Text = "📅 Kelola Jadwal";
-            this.btnKelolaJadwal.UseVisualStyleBackColor = false;
-            this.btnKelolaJadwal.Click += new System.EventHandler(this.btnKelolaJadwal_Click);
+            btnKelolaUser.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser.FlatStyle = FlatStyle.Flat;
+            btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaUser.ForeColor = Color.White;
+            btnKelolaUser.Location = new Point(546, 169);
+            btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaUser.Name = "btnKelolaUser";
+            btnKelolaUser.Size = new Size(160, 56);
+            btnKelolaUser.TabIndex = 4;
+            btnKelolaUser.Text = "Kelola Pengguna";
+            btnKelolaUser.UseVisualStyleBackColor = false;
             // 
-            // AdminDashboard
+            // btnLaporan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 680);
-            this.Controls.Add(this.pnlMainContent);
-            this.Controls.Add(this.pnlSidebar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "AdminDashboard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UniMind Admin - Dashboard Admin";
-            this.Load += new System.EventHandler(this.AdminDashboard_Load);
-            this.pnlSidebar.ResumeLayout(false);
-            this.pnlUserProfile.ResumeLayout(false);
-            this.pnlMainContent.ResumeLayout(false);
-            this.pnlStatsCard.ResumeLayout(false);
-            this.pnlTableContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBookingMasuk)).EndInit();
-            this.ResumeLayout(false);
+            btnLaporan.BackColor = Color.FromArgb(31, 47, 152);
+            btnLaporan.FlatStyle = FlatStyle.Flat;
+            btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLaporan.ForeColor = Color.White;
+            btnLaporan.Location = new Point(713, 169);
+            btnLaporan.Margin = new Padding(3, 4, 3, 4);
+            btnLaporan.Name = "btnLaporan";
+            btnLaporan.Size = new Size(160, 56);
+            btnLaporan.TabIndex = 5;
+            btnLaporan.Text = "Lihat Laporan";
+            btnLaporan.UseVisualStyleBackColor = false;
+            // 
+            // FormDashboardAdmin
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(240, 244, 248);
+            ClientSize = new Size(900, 687);
+            Controls.Add(btnLaporan);
+            Controls.Add(btnKelolaUser);
+            Controls.Add(lblTabelTitle);
+            Controls.Add(dgvAntreanKonseling);
+            Controls.Add(pnlStatKonselor);
+            Controls.Add(pnlStatMahasiswa);
+            Controls.Add(pnlHeader);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            Name = "FormDashboardAdmin";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "UniMind Admin Dashboard Center";
+            pnlHeader.ResumeLayout(false);
+            pnlHeader.PerformLayout();
+            pnlStatMahasiswa.ResumeLayout(false);
+            pnlStatMahasiswa.PerformLayout();
+            pnlStatKonselor.ResumeLayout(false);
+            pnlStatKonselor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlSidebar;
-        private System.Windows.Forms.Label lblUnimindLogo;
-        private System.Windows.Forms.Label lblTagline;
-        private System.Windows.Forms.Button btnMenuJadwal;
-        private System.Windows.Forms.Button btnMenuPasien;
-        private System.Windows.Forms.Panel pnlUserProfile;
-        private System.Windows.Forms.Label lblAdminName;
-        private System.Windows.Forms.Label lblAdminRole;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Label lblJudulApp;
+        private System.Windows.Forms.Label lblSubJudul;
+        private System.Windows.Forms.Panel pnlStatMahasiswa;
+        private System.Windows.Forms.Label lblTotalMahasiswa;
+        private System.Windows.Forms.Label lblTitleMhs;
+        private System.Windows.Forms.Panel pnlStatKonselor;
+        private System.Windows.Forms.Label lblTotalKonselor;
+        private System.Windows.Forms.Label lblTitleKonselor;
+        private System.Windows.Forms.DataGridView dgvAntreanKonseling;
+        private System.Windows.Forms.Label lblTabelTitle;
+        private System.Windows.Forms.Button btnKelolaUser;
+        private System.Windows.Forms.Button btnLaporan;
         private System.Windows.Forms.Button btnKeluar;
-        private System.Windows.Forms.Panel pnlMainContent;
-        private System.Windows.Forms.Label lblSelamatDatang;
-        private System.Windows.Forms.Label lblSubSelamatDatang;
-        private System.Windows.Forms.Panel pnlStatsCard;
-        private System.Windows.Forms.Label lblCountBooking;
-        private System.Windows.Forms.Label lblCountPasien;
-        private System.Windows.Forms.Panel pnlTableContainer;
-        private System.Windows.Forms.Label lblTableTitle;
-        private System.Windows.Forms.Label lblTableSub;
-        private System.Windows.Forms.DataGridView dgvBookingMasuk;
-        private System.Windows.Forms.Button btnKelolaJadwal;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnLogout;
+
     }
 }

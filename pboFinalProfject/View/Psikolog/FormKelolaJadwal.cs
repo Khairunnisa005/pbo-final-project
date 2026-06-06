@@ -1,181 +1,319 @@
 ﻿using System;
 using System.Drawing;
+using System.Data;
 using System.Windows.Forms;
+using pboFinalProfject.Utils;
+using pboFinalProfject.Controllers;
+using pboFinalProfject.Session;
 
-namespace pboFinalProfject.View
+namespace pboFinalProfject
 {
     public partial class FormKelolaJadwal : Form
     {
-        private DatabaseHelper dbHelper = new DatabaseHelper();
-        private int selectedSlotId = -1; // Menyimpan ID baris yang sedang dipilih/diedit
+        private PsikologController _psikologController;  // ← pakai PsikologController
+        private int _psikologId;
+        private int _selectedJadwalId = 0;
 
-        public FormKelolaJadwal()
+        public FormKelolaJadwal(int psikologId)
         {
             InitializeComponent();
 
-            // Registrasi Event Form & Komponen
-            this.Load += new EventHandler(this.FormKelolaJadwal_Load);
-            this.dgvSlotJadwal.CellClick += new DataGridViewCellEventHandler(this.dgvSlotJadwal_CellClick);
+            _psikologController = new PsikologController();  // ← Pakai PsikologController
+            _psikologId = psikologId;
 
-            // Registrasi Event Tombol CRUD
-            this.btnTambah.Click += new EventHandler(this.btnTambah_Click);
-            this.btnUbah.Click += new EventHandler(this.btnUbah_Click);
-            this.btnHapus.Click += new EventHandler(this.btnHapus_Click);
-            this.btnBersihkan.Click += new EventHandler(this.btnBersihkan_Click);
+            btnTambah.Click += BtnTambah_Click;
+            btnUbah.Click += BtnUbah_Click;
+            btnHapus.Click += BtnHapus_Click;
+            btnBersihkan.Click += BtnBersihkan_Click;
+            dgvSlotJadwal.SelectionChanged += DgvSlotJadwal_SelectionChanged;
+
+            LoadData();
         }
 
         private void FormKelolaJadwal_Load(object sender, EventArgs e)
         {
-            ResetForm();
-            RefreshDataGrid();
+            // Cek apakah user yang login adalah Psikolog
+            if (!UserSession.IsPsikolog)
+            {
+                MessageBox.Show("Akses ditolak! Hanya psikolog yang dapat mengakses halaman ini.",
+                    "Akses Ditolak", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+            // Set default values
+            dtpJamMulai.Value = DateTime.Today.AddHours(9);
+            dtpJamSelesai.Value = DateTime.Today.AddHours(10);
+            chkIsActive.Checked = true;
+            tbKuota.Text = "1";
+
+            LoadData();
         }
 
-        // ==================== OPERASI CRUD ====================
-
-        // 1. READ: Menampilkan & Menyegarkan Data Grid
-        private void RefreshDataGrid()
+        private void LoadData()
         {
-            string query = "SELECT * FROM jadwal_psikolog ORDER BY jadwal_id";
             try
             {
-                DataTable dt = DatabaseHelper.EksekusiSelect(query);
+                DataTable dt = _psikologController.GetJadwalByPsikologId(_psikologId);
                 dgvSlotJadwal.DataSource = dt;
+
+                // Sembunyikan kolom yang tidak perlu
+                if (dgvSlotJadwal.Columns.Contains("jadwal_id"))
+                    dgvSlotJadwal.Columns["jadwal_id"].Visible = false;
+
+                // Atur header kolom
+                if (dgvSlotJadwal.Columns.Contains("hari"))
+                    dgvSlotJadwal.Columns["hari"].HeaderText = "Hari";
+
+                if (dgvSlotJadwal.Columns.Contains("jam_mulai"))
+                    dgvSlotJadwal.Columns["jam_mulai"].HeaderText = "Jam Mulai";
+
+                if (dgvSlotJadwal.Columns.Contains("jam_selesai"))
+                    dgvSlotJadwal.Columns["jam_selesai"].HeaderText = "Jam Selesai";
+
+                if (dgvSlotJadwal.Columns.Contains("metode"))
+                    dgvSlotJadwal.Columns["metode"].HeaderText = "Metode";
+
+                if (dgvSlotJadwal.Columns.Contains("kuota"))
+                    dgvSlotJadwal.Columns["kuota"].HeaderText = "Kuota";
+
+                if (dgvSlotJadwal.Columns.Contains("is_active"))
+                {
+                    dgvSlotJadwal.Columns["is_active"].HeaderText = "Status";
+
+                    // Format tampilan status
+                    dgvSlotJadwal.CellFormatting += (s, ev) =>
+                    {
+                        if (ev.ColumnIndex == dgvSlotJadwal.Columns["is_active"].Index && ev.Value != null)
+                        {
+                            bool isActive = Convert.ToBoolean(ev.Value);
+                            ev.Value = isActive ? "✅ Aktif" : "❌ Tidak Aktif";
+                            ev.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
+                        }
+                    };
+                }
+
+                // Auto-size columns
                 dgvSlotJadwal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Tampil Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gagal memuat data jadwal: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        
         }
 
-        // 2. CREATE: Tambah Slot Jadwal Baru
-        private void btnTambah_Click(object sender, EventArgs e)
+        private void BersihkanForm()
         {
-            string hari = cmbHari.SelectedItem.ToString();
-            string jamMulai = dtpJamMulai.Value.ToString("HH:mm:ss");
-            string jamSelesai = dtpJamSelesai.Value.ToString("HH:mm:ss");
-            string metode = cmbMetode.SelectedItem.ToString();
-            int kuota = int.Parse(tbKuota.Text);
-            bool isActive = chkIsActive.Checked;
+            cmbHari.SelectedIndex = -1;
+            dtpJamMulai.Value = DateTime.Today.AddHours(9);
+            dtpJamSelesai.Value = DateTime.Today.AddHours(10);
+            cmbMetode.SelectedIndex = -1;
+            tbKuota.Text = "1";
+            chkIsActive.Checked = true;
+            _selectedJadwalId = 0;
 
-            string query = $"INSERT INTO jadwal_psikolog (hari, jam_mulai, jam_selesai, metode, kuota, is_active) " +
-                           $"VALUES ('{hari}', '{jamMulai}', '{jamSelesai}', '{metode}', {kuota}, {isActive})";
-
-            try
-            {
-                dbHelper.ExecuteNonQuery(query);
-                MessageBox.Show("Slot jadwal berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ResetForm();
-                RefreshDataGrid();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error Tambah Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            btnTambah.Enabled = true;
+            btnUbah.Enabled = false;
+            btnHapus.Enabled = false;
         }
 
-        // 3. UPDATE: Mengubah Data Slot Jadwal yang Dipilih
-        private void btnUbah_Click(object sender, EventArgs e)
+
+        private void DgvSlotJadwal_SelectionChanged(object sender, EventArgs e)
         {
-            if (selectedSlotId == -1)
+            if (dgvSlotJadwal.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Pilih data pada tabel terlebih dahulu untuk diubah!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                DataGridViewRow row = dgvSlotJadwal.SelectedRows[0];
 
-            string hari = cmbHari.SelectedItem.ToString();
-            string jamMulai = dtpJamMulai.Value.ToString("HH:mm:ss");
-            string jamSelesai = dtpJamSelesai.Value.ToString("HH:mm:ss");
-            string metode = cmbMetode.SelectedItem.ToString();
-            int kuota = int.Parse(tbKuota.Text);
-            bool isActive = chkIsActive.Checked;
+                // Pastikan kolom yang diperlukan ada
+                if (dgvSlotJadwal.Columns.Contains("jadwal_id"))
+                    _selectedJadwalId = Convert.ToInt32(row.Cells["jadwal_id"].Value);
 
-            string query = $"UPDATE jadwal_psikolog SET hari='{hari}', jam_mulai='{jamMulai}', " +
-                           $"jam_selesai='{jamSelesai}', metode='{metode}', kuota={kuota}, is_active={isActive} " +
-                           $"WHERE jadwal_id={selectedSlotId}";
+                if (dgvSlotJadwal.Columns.Contains("hari") && row.Cells["hari"].Value != null)
+                    cmbHari.SelectedItem = row.Cells["hari"].Value.ToString();
 
-            try
-            {
-                dbHelper.ExecuteNonQuery(query);
-                MessageBox.Show("Slot jadwal berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ResetForm();
-                RefreshDataGrid();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error Update Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+                if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value != null)
+                    dtpJamMulai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_mulai"].Value);
 
-        // 4. DELETE: Menghapus Slot Jadwal
-        private void btnHapus_Click(object sender, EventArgs e)
-        {
-            if (selectedSlotId == -1)
-            {
-                MessageBox.Show("Pilih data pada tabel terlebih dahulu untuk dihapus!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value != null)
+                    dtpJamSelesai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_selesai"].Value);
 
-            DialogResult konfirmasi = MessageBox.Show("Apakah Anda yakin ingin menghapus slot jadwal ini?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (konfirmasi == DialogResult.Yes)
-            {
-                string query = $"DELETE FROM jadwal_psikolog WHERE jadwal_id={selectedSlotId}";
-                try
-                {
-                    dbHelper.ExecuteNonQuery(query);
-                    MessageBox.Show("Slot jadwal berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ResetForm();
-                    RefreshDataGrid();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error Hapus Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+                if (dgvSlotJadwal.Columns.Contains("metode") && row.Cells["metode"].Value != null)
+                    cmbMetode.SelectedItem = row.Cells["metode"].Value.ToString();
 
-        // ==================== LOGIKA KONTROL INTERFACE ====================
+                if (dgvSlotJadwal.Columns.Contains("kuota") && row.Cells["kuota"].Value != null)
+                    tbKuota.Text = row.Cells["kuota"].Value.ToString();
 
-        // Mengambil data dari baris grid yang diklik user untuk dimasukkan kembali ke form input
-        private void dgvSlotJadwal_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvSlotJadwal.Rows[e.RowIndex];
+                if (dgvSlotJadwal.Columns.Contains("is_active") && row.Cells["is_active"].Value != null)
+                    chkIsActive.Checked = Convert.ToBoolean(row.Cells["is_active"].Value);
 
-                selectedSlotId = Convert.ToInt32(row.Cells["ID"].Value);
-                cmbHari.SelectedItem = row.Cells["Hari"].Value.ToString();
-
-                // Parsing string jam dari DB agar bisa dibaca oleh DateTimePicker
-                dtpJamMulai.Value = DateTime.Parse(row.Cells["Jam Mulai"].Value.ToString());
-                dtpJamSelesai.Value = DateTime.Parse(row.Cells["Jam Selesai"].Value.ToString());
-
-
-                // Atur tombol status saat mengedit data
                 btnTambah.Enabled = false;
                 btnUbah.Enabled = true;
                 btnHapus.Enabled = true;
             }
         }
 
-        private void btnBersihkan_Click(object sender, EventArgs e)
+        private void BtnTambah_Click(object sender, EventArgs e)
         {
-            ResetForm();
+            try
+            {
+                // Validasi input
+                if (cmbHari.SelectedItem == null)
+                {
+                    MessageBox.Show("Pilih hari terlebih dahulu!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (cmbMetode.SelectedItem == null)
+                {
+                    MessageBox.Show("Pilih metode terlebih dahulu!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(tbKuota.Text, out int kuota) || kuota < 1)
+                {
+                    MessageBox.Show("Kuota harus berupa angka positif (minimal 1)!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string hari = cmbHari.SelectedItem.ToString();
+                TimeSpan jamMulai = dtpJamMulai.Value.TimeOfDay;
+                TimeSpan jamSelesai = dtpJamSelesai.Value.TimeOfDay;
+                string metode = cmbMetode.SelectedItem.ToString();
+                bool isActive = chkIsActive.Checked;
+
+                bool berhasil = _psikologController.TambahJadwal(_psikologId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
+
+                if (berhasil)
+                {
+                    MessageBox.Show("Jadwal berhasil ditambahkan!", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    BersihkanForm();
+                    LoadData();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal menambah jadwal: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        // Mengembalikan inputan form ke kondisi default
-        private void ResetForm()
-        {
-            selectedSlotId = -1;
-            cmbHari.SelectedIndex = 0; // Pilih Senin secara default
-            dtpJamMulai.Value = DateTime.Today.AddHours(08); // Default jam 08:00
-            dtpJamSelesai.Value = DateTime.Today.AddHours(09); // Default jam 09:00
 
-            btnTambah.Enabled = true;
-            btnUbah.Enabled = false;
-            btnHapus.Enabled = false;
+        private void BtnUbah_Click(object sender, EventArgs e)
+        {
+            if (_selectedJadwalId == 0)
+            {
+                MessageBox.Show("Pilih jadwal yang akan diubah terlebih dahulu!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Validasi input
+                if (cmbHari.SelectedItem == null)
+                {
+                    MessageBox.Show("Pilih hari terlebih dahulu!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (cmbMetode.SelectedItem == null)
+                {
+                    MessageBox.Show("Pilih metode terlebih dahulu!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(tbKuota.Text, out int kuota) || kuota < 1)
+                {
+                    MessageBox.Show("Kuota harus berupa angka positif (minimal 1)!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string hari = cmbHari.SelectedItem.ToString();
+                TimeSpan jamMulai = dtpJamMulai.Value.TimeOfDay;
+                TimeSpan jamSelesai = dtpJamSelesai.Value.TimeOfDay;
+                string metode = cmbMetode.SelectedItem.ToString();
+                bool isActive = chkIsActive.Checked;
+
+                bool berhasil = _psikologController.UpdateJadwal(_selectedJadwalId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
+
+                if (berhasil)
+                {
+                    MessageBox.Show("Jadwal berhasil diubah!", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    BersihkanForm();
+                    LoadData();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal mengubah jadwal: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+        private void BtnHapus_Click(object sender, EventArgs e)
+        {
+            if (_selectedJadwalId == 0)
+            {
+                MessageBox.Show("Pilih jadwal yang akan dihapus terlebih dahulu!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin menghapus jadwal ini?\n\nJika jadwal sudah memiliki booking, penghapusan akan ditolak.",
+                "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    bool berhasil = _psikologController.HapusJadwal(_selectedJadwalId);
+
+                    if (berhasil)
+                    {
+                        MessageBox.Show("Jadwal berhasil dihapus!", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        BersihkanForm();
+                        LoadData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal menghapus jadwal: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void BtnBersihkan_Click(object sender, EventArgs e)
+        {
+            BersihkanForm();
+        }
+
+
+        // Mengambil data dari baris grid yang diklik user untuk dimasukkan kembali ke form input
+        private void dgvSlotJadwal_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+
         private void FormKelolaJadwal_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelForm_Paint(object sender, PaintEventArgs e)
         {
 
         }

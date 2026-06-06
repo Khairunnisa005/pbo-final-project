@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject.View
+﻿namespace pboFinalProfject
 {
     partial class FormKonfirmasiBooking
     {

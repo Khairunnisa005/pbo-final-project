@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UniMind.Models
+namespace pboFinalProfject.Models
 {
     public class JawabanAssessment
     {

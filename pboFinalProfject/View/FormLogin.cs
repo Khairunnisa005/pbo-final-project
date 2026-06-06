@@ -107,12 +107,22 @@ namespace pboFinalProfject
 
                 if (UserSession.IsAdmin)
                 {
-                    dashboard = null;
+                    dashboard = new FormDashboardAdmin();
+                    dashboard.StartPosition = FormStartPosition.Manual;
+                    dashboard.Size = this.Size; // keep same size as login form
+                    dashboard.Show();
+                    this.Hide();
+                    dashboard.FormClosed += (s, ev) => this.Close();
                 }
 
                 else if (UserSession.IsPsikolog)
                 {
-                    dashboard = null;
+                    dashboard = new FormDashboardPsikolog();
+                    dashboard.StartPosition = FormStartPosition.Manual;
+                    dashboard.Size = this.Size; // keep same size as login form
+                    dashboard.Show();
+                    this.Hide();
+                    dashboard.FormClosed += (s, ev) => this.Close();
                 }
                 else if (UserSession.IsMahasiswa)
                 {

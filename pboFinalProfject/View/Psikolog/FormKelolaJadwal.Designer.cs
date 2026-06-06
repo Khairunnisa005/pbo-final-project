@@ -1,4 +1,4 @@
-﻿namespace UniMind
+﻿namespace pboFinalProfject
 {
     partial class FormKelolaJadwal
     {
@@ -17,250 +17,310 @@
 
         private void InitializeComponent()
         {
-            lblJudul = new Label();
-            lblHari = new Label();
-            cmbHari = new ComboBox();
-            lblJamMulai = new Label();
-            dtpJamMulai = new DateTimePicker();
-            lblJamSelesai = new Label();
-            dtpJamSelesai = new DateTimePicker();
-            lblMetode = new Label();
-            cmbMetode = new ComboBox();
-            lblKuota = new Label();
-            tbKuota = new TextBox();
-            lblIsActive = new Label();
-            chkIsActive = new CheckBox();
-            dgvSlotJadwal = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            lblTitle = new Label();
+            panelForm = new Panel();
+            btnBersihkan = new Button();
             btnTambah = new Button();
             btnUbah = new Button();
             btnHapus = new Button();
-            btnBersihkan = new Button();
+            chkIsActive = new CheckBox();
+            lblIsActive = new Label();
+            tbKuota = new TextBox();
+            lblKuota = new Label();
+            cmbMetode = new ComboBox();
+            lblMetode = new Label();
+            dtpJamSelesai = new DateTimePicker();
+            lblJamSelesai = new Label();
+            dtpJamMulai = new DateTimePicker();
+            lblJamMulai = new Label();
+            cmbHari = new ComboBox();
+            lblHari = new Label();
+            dgvSlotJadwal = new DataGridView();
+            panelForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).BeginInit();
             SuspendLayout();
             // 
-            // lblJudul
+            // lblTitle
             // 
-            lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblJudul.ForeColor = Color.White;
-            lblJudul.Location = new Point(20, 20);
-            lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(400, 30);
-            lblJudul.TabIndex = 0;
-            lblJudul.Text = "Manajemen Slot Jadwal Konseling";
+            lblTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(20, 20);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(400, 40);
+            lblTitle.TabIndex = 7;
+            lblTitle.Text = "Manajemen Jadwal Konseling";
+            lblTitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // lblHari
+            // panelForm
             // 
-            lblHari.BackColor = Color.FromArgb(31, 47, 152);
-            lblHari.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHari.ForeColor = Color.White;
-            lblHari.Location = new Point(874, 70);
-            lblHari.Name = "lblHari";
-            lblHari.Size = new Size(200, 38);
-            lblHari.TabIndex = 11;
-            lblHari.Text = "Hari";
+            panelForm.BackColor = Color.FromArgb(240, 242, 245);
+            panelForm.BorderStyle = BorderStyle.FixedSingle;
+            panelForm.Controls.Add(btnBersihkan);
+            panelForm.Controls.Add(btnTambah);
+            panelForm.Controls.Add(btnUbah);
+            panelForm.Controls.Add(btnHapus);
+            panelForm.Controls.Add(chkIsActive);
+            panelForm.Controls.Add(lblIsActive);
+            panelForm.Controls.Add(tbKuota);
+            panelForm.Controls.Add(lblKuota);
+            panelForm.Controls.Add(cmbMetode);
+            panelForm.Controls.Add(lblMetode);
+            panelForm.Controls.Add(dtpJamSelesai);
+            panelForm.Controls.Add(lblJamSelesai);
+            panelForm.Controls.Add(dtpJamMulai);
+            panelForm.Controls.Add(lblJamMulai);
+            panelForm.Controls.Add(cmbHari);
+            panelForm.Controls.Add(lblHari);
+            panelForm.Location = new Point(20, 70);
+            panelForm.Name = "panelForm";
+            panelForm.Size = new Size(380, 661);
+            panelForm.TabIndex = 1;
+            panelForm.Paint += panelForm_Paint;
             // 
-            // cmbHari
+            // btnBersihkan
             // 
-            cmbHari.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbHari.Items.AddRange(new object[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" });
-            cmbHari.Location = new Point(874, 111);
-            cmbHari.Name = "cmbHari";
-            cmbHari.Size = new Size(200, 33);
-            cmbHari.TabIndex = 1;
-            // 
-            // lblJamMulai
-            // 
-            lblJamMulai.BackColor = Color.FromArgb(31, 47, 152);
-            lblJamMulai.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJamMulai.ForeColor = Color.White;
-            lblJamMulai.Location = new Point(874, 147);
-            lblJamMulai.Name = "lblJamMulai";
-            lblJamMulai.Size = new Size(200, 38);
-            lblJamMulai.TabIndex = 11;
-            lblJamMulai.Text = "Jam Mulai";
-            // 
-            // dtpJamMulai
-            // 
-            dtpJamMulai.CustomFormat = "HH:mm";
-            dtpJamMulai.Format = DateTimePickerFormat.Custom;
-            dtpJamMulai.Location = new Point(874, 188);
-            dtpJamMulai.Name = "dtpJamMulai";
-            dtpJamMulai.ShowUpDown = true;
-            dtpJamMulai.Size = new Size(200, 31);
-            dtpJamMulai.TabIndex = 2;
-            // 
-            // lblJamSelesai
-            // 
-            lblJamSelesai.BackColor = Color.FromArgb(31, 47, 152);
-            lblJamSelesai.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJamSelesai.ForeColor = Color.White;
-            lblJamSelesai.Location = new Point(874, 222);
-            lblJamSelesai.Name = "lblJamSelesai";
-            lblJamSelesai.Size = new Size(200, 38);
-            lblJamSelesai.TabIndex = 12;
-            lblJamSelesai.Text = "Jam Selesai";
-            // 
-            // dtpJamSelesai
-            // 
-            dtpJamSelesai.CustomFormat = "HH:mm";
-            dtpJamSelesai.Format = DateTimePickerFormat.Custom;
-            dtpJamSelesai.Location = new Point(874, 263);
-            dtpJamSelesai.Name = "dtpJamSelesai";
-            dtpJamSelesai.ShowUpDown = true;
-            dtpJamSelesai.Size = new Size(200, 31);
-            dtpJamSelesai.TabIndex = 3;
-            // 
-            // lblMetode
-            // 
-            lblMetode.BackColor = Color.FromArgb(31, 47, 152);
-            lblMetode.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMetode.ForeColor = Color.White;
-            lblMetode.Location = new Point(874, 297);
-            lblMetode.Name = "lblMetode";
-            lblMetode.Size = new Size(200, 38);
-            lblMetode.TabIndex = 13;
-            lblMetode.Text = "Metode";
-            // 
-            // cmbMetode
-            // 
-            cmbMetode.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMetode.Items.AddRange(new object[] { "Online", "Offline" });
-            cmbMetode.Location = new Point(874, 338);
-            cmbMetode.Name = "cmbMetode";
-            cmbMetode.Size = new Size(200, 33);
-            cmbMetode.TabIndex = 4;
-            // 
-            // lblKuota
-            // 
-            lblKuota.BackColor = Color.FromArgb(31, 47, 152);
-            lblKuota.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblKuota.ForeColor = Color.White;
-            lblKuota.Location = new Point(874, 374);
-            lblKuota.Name = "lblKuota";
-            lblKuota.Size = new Size(200, 38);
-            lblKuota.TabIndex = 14;
-            lblKuota.Text = "Kuota";
-            // 
-            // tbKuota
-            // 
-            tbKuota.Location = new Point(874, 415);
-            tbKuota.Name = "tbKuota";
-            tbKuota.Size = new Size(200, 31);
-            tbKuota.TabIndex = 5;
-            // 
-            // lblIsActive
-            // 
-            lblIsActive.BackColor = Color.FromArgb(31, 47, 152);
-            lblIsActive.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblIsActive.ForeColor = Color.White;
-            lblIsActive.Location = new Point(874, 449);
-            lblIsActive.Name = "lblIsActive";
-            lblIsActive.Size = new Size(200, 38);
-            lblIsActive.TabIndex = 15;
-            lblIsActive.Text = "Status";
-            // 
-            // chkIsActive
-            // 
-            chkIsActive.BackColor = Color.White;
-            chkIsActive.FlatStyle = FlatStyle.Flat;
-            chkIsActive.ForeColor = Color.Black;
-            chkIsActive.Location = new Point(874, 490);
-            chkIsActive.Name = "chkIsActive";
-            chkIsActive.Size = new Size(200, 31);
-            chkIsActive.TabIndex = 6;
-            chkIsActive.Text = "Aktif";
-            chkIsActive.UseVisualStyleBackColor = false;
-            // 
-            // dgvSlotJadwal
-            // 
-            dgvSlotJadwal.AllowUserToAddRows = false;
-            dgvSlotJadwal.BackgroundColor = Color.FromArgb(74, 222, 222);
-            dgvSlotJadwal.ColumnHeadersHeight = 34;
-            dgvSlotJadwal.Location = new Point(20, 70);
-            dgvSlotJadwal.Name = "dgvSlotJadwal";
-            dgvSlotJadwal.ReadOnly = true;
-            dgvSlotJadwal.RowHeadersWidth = 62;
-            dgvSlotJadwal.Size = new Size(838, 451);
-            dgvSlotJadwal.TabIndex = 5;
+            btnBersihkan.BackColor = Color.Gray;
+            btnBersihkan.FlatStyle = FlatStyle.Flat;
+            btnBersihkan.Font = new Font("Segoe UI", 9F);
+            btnBersihkan.ForeColor = Color.White;
+            btnBersihkan.Location = new Point(20, 520);
+            btnBersihkan.Name = "btnBersihkan";
+            btnBersihkan.Size = new Size(340, 35);
+            btnBersihkan.TabIndex = 10;
+            btnBersihkan.Text = "Bersihkan Form";
+            btnBersihkan.UseVisualStyleBackColor = false;
             // 
             // btnTambah
             // 
             btnTambah.BackColor = Color.FromArgb(28, 167, 236);
+            btnTambah.FlatStyle = FlatStyle.Flat;
+            btnTambah.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnTambah.ForeColor = Color.White;
-            btnTambah.Location = new Point(979, 527);
+            btnTambah.Location = new Point(20, 470);
             btnTambah.Name = "btnTambah";
-            btnTambah.Size = new Size(95, 30);
-            btnTambah.TabIndex = 6;
+            btnTambah.Size = new Size(110, 40);
+            btnTambah.TabIndex = 7;
             btnTambah.Text = "Tambah";
             btnTambah.UseVisualStyleBackColor = false;
             // 
             // btnUbah
             // 
             btnUbah.BackColor = Color.FromArgb(120, 127, 246);
+            btnUbah.FlatStyle = FlatStyle.Flat;
+            btnUbah.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnUbah.ForeColor = Color.White;
-            btnUbah.Location = new Point(874, 527);
+            btnUbah.Location = new Point(135, 470);
             btnUbah.Name = "btnUbah";
-            btnUbah.Size = new Size(95, 30);
-            btnUbah.TabIndex = 7;
+            btnUbah.Size = new Size(110, 40);
+            btnUbah.TabIndex = 8;
             btnUbah.Text = "Ubah";
             btnUbah.UseVisualStyleBackColor = false;
             // 
             // btnHapus
             // 
             btnHapus.BackColor = Color.Crimson;
+            btnHapus.FlatStyle = FlatStyle.Flat;
+            btnHapus.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnHapus.ForeColor = Color.White;
-            btnHapus.Location = new Point(773, 527);
+            btnHapus.Location = new Point(250, 470);
             btnHapus.Name = "btnHapus";
-            btnHapus.Size = new Size(95, 30);
-            btnHapus.TabIndex = 8;
+            btnHapus.Size = new Size(110, 40);
+            btnHapus.TabIndex = 9;
             btnHapus.Text = "Hapus";
             btnHapus.UseVisualStyleBackColor = false;
             // 
-            // btnBersihkan
+            // chkIsActive
             // 
-            btnBersihkan.BackColor = Color.Gray;
-            btnBersihkan.ForeColor = Color.White;
-            btnBersihkan.Location = new Point(672, 527);
-            btnBersihkan.Name = "btnBersihkan";
-            btnBersihkan.Size = new Size(95, 30);
-            btnBersihkan.TabIndex = 9;
-            btnBersihkan.Text = "Clear";
-            btnBersihkan.UseVisualStyleBackColor = false;
+            chkIsActive.AutoSize = true;
+            chkIsActive.BackColor = Color.White;
+            chkIsActive.Checked = true;
+            chkIsActive.CheckState = CheckState.Checked;
+            chkIsActive.FlatStyle = FlatStyle.Flat;
+            chkIsActive.Font = new Font("Segoe UI", 10F);
+            chkIsActive.Location = new Point(20, 423);
+            chkIsActive.Name = "chkIsActive";
+            chkIsActive.Size = new Size(62, 27);
+            chkIsActive.TabIndex = 11;
+            chkIsActive.Text = "Aktif";
+            chkIsActive.UseVisualStyleBackColor = false;
+            // 
+            // lblIsActive
+            // 
+            lblIsActive.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblIsActive.ForeColor = Color.FromArgb(31, 47, 152);
+            lblIsActive.Location = new Point(20, 395);
+            lblIsActive.Name = "lblIsActive";
+            lblIsActive.Size = new Size(100, 25);
+            lblIsActive.TabIndex = 12;
+            lblIsActive.Text = "Status";
+            lblIsActive.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tbKuota
+            // 
+            tbKuota.Font = new Font("Segoe UI", 10F);
+            tbKuota.Location = new Point(20, 348);
+            tbKuota.Name = "tbKuota";
+            tbKuota.Size = new Size(340, 30);
+            tbKuota.TabIndex = 5;
+            tbKuota.Text = "1";
+            // 
+            // lblKuota
+            // 
+            lblKuota.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblKuota.ForeColor = Color.FromArgb(31, 47, 152);
+            lblKuota.Location = new Point(20, 320);
+            lblKuota.Name = "lblKuota";
+            lblKuota.Size = new Size(100, 25);
+            lblKuota.TabIndex = 13;
+            lblKuota.Text = "Kuota";
+            lblKuota.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // cmbMetode
+            // 
+            cmbMetode.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMetode.Font = new Font("Segoe UI", 10F);
+            cmbMetode.Items.AddRange(new object[] { "Online", "Luring" });
+            cmbMetode.Location = new Point(20, 273);
+            cmbMetode.Name = "cmbMetode";
+            cmbMetode.Size = new Size(340, 31);
+            cmbMetode.TabIndex = 4;
+            // 
+            // lblMetode
+            // 
+            lblMetode.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblMetode.ForeColor = Color.FromArgb(31, 47, 152);
+            lblMetode.Location = new Point(20, 245);
+            lblMetode.Name = "lblMetode";
+            lblMetode.Size = new Size(100, 25);
+            lblMetode.TabIndex = 14;
+            lblMetode.Text = "Metode";
+            lblMetode.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // dtpJamSelesai
+            // 
+            dtpJamSelesai.CustomFormat = "HH:mm";
+            dtpJamSelesai.Font = new Font("Segoe UI", 10F);
+            dtpJamSelesai.Format = DateTimePickerFormat.Custom;
+            dtpJamSelesai.Location = new Point(20, 198);
+            dtpJamSelesai.Name = "dtpJamSelesai";
+            dtpJamSelesai.ShowUpDown = true;
+            dtpJamSelesai.Size = new Size(340, 30);
+            dtpJamSelesai.TabIndex = 3;
+            // 
+            // lblJamSelesai
+            // 
+            lblJamSelesai.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblJamSelesai.ForeColor = Color.FromArgb(31, 47, 152);
+            lblJamSelesai.Location = new Point(20, 170);
+            lblJamSelesai.Name = "lblJamSelesai";
+            lblJamSelesai.Size = new Size(100, 25);
+            lblJamSelesai.TabIndex = 15;
+            lblJamSelesai.Text = "Jam Selesai";
+            lblJamSelesai.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // dtpJamMulai
+            // 
+            dtpJamMulai.CustomFormat = "HH:mm";
+            dtpJamMulai.Font = new Font("Segoe UI", 10F);
+            dtpJamMulai.Format = DateTimePickerFormat.Custom;
+            dtpJamMulai.Location = new Point(20, 123);
+            dtpJamMulai.Name = "dtpJamMulai";
+            dtpJamMulai.ShowUpDown = true;
+            dtpJamMulai.Size = new Size(340, 30);
+            dtpJamMulai.TabIndex = 2;
+            // 
+            // lblJamMulai
+            // 
+            lblJamMulai.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblJamMulai.ForeColor = Color.FromArgb(31, 47, 152);
+            lblJamMulai.Location = new Point(20, 95);
+            lblJamMulai.Name = "lblJamMulai";
+            lblJamMulai.Size = new Size(100, 25);
+            lblJamMulai.TabIndex = 16;
+            lblJamMulai.Text = "Jam Mulai";
+            lblJamMulai.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // cmbHari
+            // 
+            cmbHari.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbHari.Font = new Font("Segoe UI", 10F);
+            cmbHari.Items.AddRange(new object[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" });
+            cmbHari.Location = new Point(20, 48);
+            cmbHari.Name = "cmbHari";
+            cmbHari.Size = new Size(340, 31);
+            cmbHari.TabIndex = 1;
+            // 
+            // lblHari
+            // 
+            lblHari.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblHari.ForeColor = Color.FromArgb(31, 47, 152);
+            lblHari.Location = new Point(20, 20);
+            lblHari.Name = "lblHari";
+            lblHari.Size = new Size(100, 25);
+            lblHari.TabIndex = 17;
+            lblHari.Text = "Hari";
+            lblHari.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // dgvSlotJadwal
+            // 
+            dgvSlotJadwal.AllowUserToAddRows = false;
+            dgvSlotJadwal.AllowUserToDeleteRows = false;
+            dgvSlotJadwal.BackgroundColor = Color.White;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(31, 47, 152);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvSlotJadwal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvSlotJadwal.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(28, 167, 236);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvSlotJadwal.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvSlotJadwal.EnableHeadersVisualStyles = false;
+            dgvSlotJadwal.Location = new Point(420, 70);
+            dgvSlotJadwal.Name = "dgvSlotJadwal";
+            dgvSlotJadwal.ReadOnly = true;
+            dgvSlotJadwal.RowHeadersVisible = false;
+            dgvSlotJadwal.RowHeadersWidth = 51;
+            dgvSlotJadwal.RowTemplate.Height = 30;
+            dgvSlotJadwal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSlotJadwal.Size = new Size(1020, 661);
+            dgvSlotJadwal.TabIndex = 6;
             // 
             // FormKelolaJadwal
             // 
             BackColor = Color.FromArgb(31, 47, 152);
-            ClientSize = new Size(1109, 640);
-            Controls.Add(lblHari);
-            Controls.Add(lblJamMulai);
-            Controls.Add(lblJamSelesai);
-            Controls.Add(lblMetode);
-            Controls.Add(lblKuota);
-            Controls.Add(lblIsActive);
-            Controls.Add(lblJudul);
-            Controls.Add(cmbHari);
-            Controls.Add(dtpJamMulai);
-            Controls.Add(dtpJamSelesai);
-            Controls.Add(cmbMetode);
-            Controls.Add(tbKuota);
-            Controls.Add(chkIsActive);
+            ClientSize = new Size(1517, 817);
             Controls.Add(dgvSlotJadwal);
-            Controls.Add(btnTambah);
-            Controls.Add(btnUbah);
-            Controls.Add(btnHapus);
-            Controls.Add(btnBersihkan);
+            Controls.Add(panelForm);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FormKelolaJadwal";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Kelola Jadwal - UniMind";
-            Load += FormKelolaJadwal_Load_1;
+            panelForm.ResumeLayout(false);
+            panelForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblJudul;
+        // Panel dan Label Title
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panelForm;
+
+        // Input Components
         private System.Windows.Forms.Label lblHari;
         private System.Windows.Forms.ComboBox cmbHari;
         private System.Windows.Forms.Label lblJamMulai;
@@ -273,10 +333,14 @@
         private System.Windows.Forms.TextBox tbKuota;
         private System.Windows.Forms.Label lblIsActive;
         private System.Windows.Forms.CheckBox chkIsActive;
-        private System.Windows.Forms.DataGridView dgvSlotJadwal;
+
+        // Buttons
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Button btnUbah;
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnBersihkan;
+
+        // DataGridView
+        private System.Windows.Forms.DataGridView dgvSlotJadwal;
     }
 }

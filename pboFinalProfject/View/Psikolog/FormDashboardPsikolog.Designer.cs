@@ -1,4 +1,9 @@
-﻿namespace UniMind
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace pboFinalProfject
 {
     partial class FormDashboardPsikolog
     {
@@ -34,7 +39,6 @@
             dgvPasien = new DataGridView();
             btnKelolaJadwal = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
-            SuspendLayout();
             // 
             // dgvPasien
             // 
@@ -104,5 +108,6 @@
         #endregion
         private System.Windows.Forms.DataGridView dgvPasien;
         private System.Windows.Forms.Button btnKelolaJadwal;
+
     }
 }

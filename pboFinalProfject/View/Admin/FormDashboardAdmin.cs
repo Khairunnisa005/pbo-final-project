@@ -1,79 +1,197 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using pboFinalProfject.Controllers;
+using pboFinalProfject.Session;
+using pboFinalProfject.View;
 
 namespace pboFinalProfject.View
 {
-    public partial class AdminDashboard : Form
+    public partial class FormDashboardAdmin : Form
     {
-        public AdminDashboard()
+        private AdminController _adminController;
+        private AuthController _authController;
+
+        public FormDashboardAdmin()
         {
             InitializeComponent();
+            _adminController = new AdminController();
+            _authController = new AuthController();
+
+            // hook event handler
+            this.Load += FormDashboardAdmin_Load;
+            btnKelolaUser.Click += btnKelolaUser_Click;
+            btnLaporan.Click += btnLaporan_Click;
+
         }
 
-        private void AdminDashboard_Load(object sender, EventArgs e)
+        private void FormDashboardAdmin_Load(object sender, EventArgs e)
         {
-            ResetStateDashboard();
-            MuatDataDashboard();
+            // cek apakah user yang login adalah admin
+            if (!UserSession.IsAdmin)
+            {
+                MessageBox.Show("Akses ditolak! Hanya admin yang dapat mengakses halaman ini.", "Akses Ditolak", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+            // Load data dashboard
+            LoadDataDashboard();
+            LoadDaftarAntreanKonseling();
         }
 
-        private void ResetStateDashboard()
-        {
-            // State awal bersih sebelum data ditarik
-            lblCountBooking.Text = "0 Sesi";
-            lblCountPasien.Text = "0 Pasien";
-        }
-
-        private void MuatDataDashboard()
+        private void LoadDataDashboard()
         {
             try
             {
-                // Bagian integrasi ke DatabaseHelper untuk mengambil jumlah aktual
-                // Contoh pengisian data simulasi:
-                lblCountBooking.Text = "12 Sesi";
-                lblCountPasien.Text = "48 Pasien";
+                // ambil data statistik dari database via AdminController
+                DataTable dtStatistik = _adminController.GetStatistikDashboard();
+                if (dtStatistik.Rows.Count > 0)
+                {
+                    DataRow row = dtStatistik.Rows[0];
 
-                MuatDaftarBookingMasuk();
+                    // total pasien = total mahasiswa
+                    int totalMahasiswa = Convert.ToInt32(row["total_mahasiswa"]);
+                    lblTotalMahasiswa.Text = totalMahasiswa.ToString();
+
+                    // total psikolog/konselor aktif
+                    int totalPsikolog = Convert.ToInt32(row["total_psikolog"]);
+                    lblTotalKonselor.Text = totalPsikolog.ToString();
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Gagal memuat informasi dashboard: " + ex.Message,
                                 "Error Sistem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // set default value jika error
+                lblTotalMahasiswa.Text = "0";
+                lblTotalKonselor.Text= "0";
             }
         }
 
-        private void MuatDaftarBookingMasuk()
+        private void LoadDaftarAntreanKonseling()
         {
-            // Simulasi struktur datatable untuk Grid View (Daftar Booking Masuk)
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID Mahasiswa", typeof(string));
-            dt.Columns.Add("Username", typeof(string));
-            dt.Columns.Add("Program Studi", typeof(string));
-            dt.Columns.Add("Status", typeof(string));
+            try
+            {
+                // Simulasi struktur datatable untuk Grid View (Daftar Booking Masuk)
+                DataTable dt = _adminController.GetDaftarBookingTerbaru(20);
+                dgvAntreanKonseling.DataSource = dt;
 
-            // Jika database helper Anda belum mengembalikan data, grid akan otomatis menampilkan state kosong yang rapi
-            dgvBookingMasuk.DataSource = dt;
+                // sembunyikan bookinng id
+                if (dgvAntreanKonseling.Columns.Contains("booking_id"))
+                    dgvAntreanKonseling.Columns["booking_id"].Visible = false;
+
+                // atur header kolom sesuai dengan data yang diterima
+                if (dgvAntreanKonseling.Columns.Contains("jam_mulai"))
+                    dgvAntreanKonseling.Columns["jam_mulai"].HeaderText = "Jam";
+                if (dgvAntreanKonseling.Columns.Contains("mahasiswa"))
+                    dgvAntreanKonseling.Columns["mahasiswa"].HeaderText = "Mahasiswa";
+                if (dgvAntreanKonseling.Columns.Contains("psikolog"))
+                    dgvAntreanKonseling.Columns["psikolog"].HeaderText = "Psikolog";
+                if (dgvAntreanKonseling.Columns.Contains("metode"))
+                    dgvAntreanKonseling.Columns["metode"].HeaderText = "Metode";
+                if (dgvAntreanKonseling.Columns.Contains("status"))
+                    dgvAntreanKonseling.Columns["status"].HeaderText = "Status";
+
+                // Warna status berdasarkan nilai
+                dgvAntreanKonseling.CellFormatting += (s, e) =>
+                {
+                    if (e.ColumnIndex == dgvAntreanKonseling.Columns["status"]?.Index && e.Value != null)
+                    {
+                        string status = e.Value.ToString();
+                        switch (status)
+                        {
+                            case "Disetujui":
+                                e.CellStyle.ForeColor = Color.Green;
+                                e.Value = "Disetujui";
+                                break;
+                            case "Pending":
+                                e.CellStyle.ForeColor = Color.Orange;
+                                e.Value = "Pending";
+                                break;
+                            case "Ditolak":
+                                e.CellStyle.ForeColor = Color.Red;
+                                e.Value = "Ditolak";
+                                break;
+                            case "Selesai":
+                                e.CellStyle.ForeColor = Color.Blue;
+                                e.Value = "Selesai";
+                                break;
+                            case "Batal":
+                                e.CellStyle.ForeColor = Color.Gray;
+                                e.Value = "Batal";
+                                break;
+                        }
+                    }
+                };
+                // Atur auto-size columns
+                dgvAntreanKonseling.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat daftar booking: " + ex.Message,
+                                "Error Sistem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Tampilkan DataGridView kosong jika error
+                DataTable dtEmpty = new DataTable();
+                dtEmpty.Columns.Add("Tanggal Booking", typeof(string));
+                dtEmpty.Columns.Add("Mahasiswa", typeof(string));
+                dtEmpty.Columns.Add("Psikolog", typeof(string));
+                dtEmpty.Columns.Add("Status", typeof(string));
+                dgvAntreanKonseling.DataSource = dtEmpty;
+            }
         }
 
-        private void btnKelolaJadwal_Click(object sender, EventArgs e)
+        private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Membuka halaman Kelola Jadwal Konseling...", "Sistem Unimind", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // TODO: Implementasi FormKelolaUser
+            MessageBox.Show("Membuka Modul Manajemen Pengguna Kampus UniMind...\n\nFitur yang tersedia:\n- Tambah/Edit/Hapus Psikolog\n- Lihat daftar Mahasiswa\n- Reset password pengguna",
+                "Manajemen Pengguna", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Ketika form sudah dibuat, aktifkan kode di bawah:
+            // FormKelolaUser formUser = new FormKelolaUser();
+            // formUser.ShowDialog();
+            // LoadDataDashboard(); // Refresh jika ada perubahan
         }
 
-        private void menuJadwal_Click(object sender, EventArgs e)
+        private void btnLaporan_Click(object sender, EventArgs e)
         {
-            // Logika pindah ke panel/form Jadwal Konseling
+            // TODO: Implementasi FormLaporanAdmin
+            MessageBox.Show("Membuka Modul Rekapitulasi Laporan Grafik Konseling...\n\nFitur yang tersedia:\n- Laporan booking per periode\n- Grafik tren konseling\n- Export data ke CSV",
+                "Laporan Konseling", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            FormLaporanAdmin formLaporan = new FormLaporanAdmin();
+            formLaporan.ShowDialog();
         }
 
-        private void menuPasien_Click(object sender, EventArgs e)
-        {
-            // Logika pindah ke panel/form Daftar Pasien
-        }
 
         private void btnKeluar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show("Apakah anda yakin ingin keluar aplikasi?", "Konfirmasi keluar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            // Refresh data dashboard
+            LoadDataDashboard();
+            LoadDaftarAntreanKonseling();
+            MessageBox.Show("Data dashboard berhasil di-refresh!", "Info",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            // Logout dan kembali ke form login
+            _authController.Logout(this);
         }
     }
 }
