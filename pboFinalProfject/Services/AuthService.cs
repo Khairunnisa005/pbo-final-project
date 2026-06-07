@@ -23,7 +23,7 @@ namespace pboFinalProfject.Services
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Password tidak boleh kosong!");
 
-            // Cari user berdasarkan username
+            // Cari user berdasarkan email
             User user = _userRepository.GetByEmail(email);
 
             // Jika user tidak ditemukan
