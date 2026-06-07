@@ -24,6 +24,9 @@ namespace pboFinalProfject.View
             this.Load += FormDashboardAdmin_Load;
             btnKelolaUser.Click += btnKelolaUser_Click;
             btnLaporan.Click += btnLaporan_Click;
+            btnKeluar.Click += btnKeluar_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            btnLogout.Click += btnLogout_Click;
 
         }
 

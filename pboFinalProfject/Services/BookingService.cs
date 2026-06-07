@@ -215,11 +215,11 @@ namespace pboFinalProfject
             string query = @"
                 SELECT 
                     b.booking_id,
-                    u.username as mahasiswa_anonim,
+                    u.username as mahasiswa,
                     u.email as mahasiswa_email,
                     u.no_telepon as mahasiswa_telepon,
                     p2.nama_lengkap as psikolog_nama,
-                    b.created_at,
+                    b.created_at as tanggal_booking,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,
@@ -243,7 +243,6 @@ namespace pboFinalProfject
                 new NpgsqlParameter("@booking_id", bookingId),
                 new NpgsqlParameter("@psikolog_id", psikologId)
             };
-
             return _db.ExecuteQuery(query, parameters);
         }
 

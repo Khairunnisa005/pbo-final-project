@@ -35,6 +35,18 @@ namespace pboFinalProfject
                 this.Close();
                 return;
             }
+
+            // Ambil psikolog_id dari user yang login
+            int userId = UserSession.GetCurrentUserId();
+            _currentPsikologId = _psikologController.GetPsikologIdByUserId(userId);
+
+            if (_currentPsikologId == 0)
+            {
+                MessageBox.Show("Data psikolog tidak ditemukan. Silakan hubungi admin.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
             // Load data
             LoadDaftarPasien();
         }
@@ -58,8 +70,8 @@ namespace pboFinalProfject
                     dgvPasien.Columns["user_id"].Visible = false;
 
                 // Atur header kolom
-                if (dgvPasien.Columns.Contains("mahasiswa_anonim"))
-                    dgvPasien.Columns["mahasiswa_anonim"].HeaderText = "Nama Mahasiswa";
+                if (dgvPasien.Columns.Contains("mahasiswa"))
+                    dgvPasien.Columns["mahasiswa"].HeaderText = "Nama Mahasiswa";
 
                 if (dgvPasien.Columns.Contains("created_at"))
                     dgvPasien.Columns["created_at"].HeaderText = "Tanggal Konseling";
@@ -76,20 +88,17 @@ namespace pboFinalProfject
                 if (dgvPasien.Columns.Contains("status"))
                     dgvPasien.Columns["status"].HeaderText = "Status";
 
-                // Tambahkan kolom tombol aksi jika belum ada
-                if (dgvPasien.Columns["btnAksi"] == null)
-                {
-                    DataGridViewButtonColumn btnAksi = new DataGridViewButtonColumn();
-                    btnAksi.Name = "btnAksi";
-                    btnAksi.HeaderText = "Aksi";
-                    btnAksi.Text = "Proses";
-                    btnAksi.UseColumnTextForButtonValue = true;
-                    dgvPasien.Columns.Add(btnAksi);
-                }
-
-                // Warna status
+                // Format tampilan tanggal (created_at)
                 dgvPasien.CellFormatting += (s, ev) =>
                 {
+                    if (ev.ColumnIndex == dgvPasien.Columns["created_at"]?.Index && ev.Value != null)
+                    {
+                        DateTime tanggal = Convert.ToDateTime(ev.Value);
+                        ev.Value = tanggal.ToString("dd MMM yyyy");
+                        ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+
+                    // Warna status
                     if (ev.ColumnIndex == dgvPasien.Columns["status"]?.Index && ev.Value != null)
                     {
                         string status = ev.Value.ToString();
@@ -117,11 +126,55 @@ namespace pboFinalProfject
                                 break;
                         }
                     }
+
+                    // Format jam (Berlaku untuk jam_mulai dan jam_selesai)
+                    if ((ev.ColumnIndex == dgvPasien.Columns["jam_mulai"]?.Index ||
+                         ev.ColumnIndex == dgvPasien.Columns["jam_selesai"]?.Index) && ev.Value != null)
+                    {
+                        // Cek jika tipenya TimeOnly (bawaan PostgreSQL di .NET baru)
+                        if (ev.Value is TimeOnly jamOnly)
+                        {
+                            ev.Value = jamOnly.ToString("HH:mm"); // Format 24 jam (Contoh: 14:30)
+                        }
+                        // Backup: Cek jika tipenya TimeSpan (agar tidak error jika ada perubahan)
+                        else if (ev.Value is TimeSpan jamSpan)
+                        {
+                            ev.Value = jamSpan.ToString(@"hh\:mm");
+                        }
+
+                        // Atur posisi teks di tengah-tengah cell
+                        ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+
+                    //// Format jam
+                    //if (ev.ColumnIndex == dgvPasien.Columns["jam_mulai"]?.Index && ev.Value != null)
+                    //{
+                    //    TimeSpan jam = (TimeSpan)ev.Value;
+                    //    ev.Value = jam.ToString(@"hh\:mm");
+                    //    ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //}
+
+                    //if (ev.ColumnIndex == dgvPasien.Columns["jam_selesai"]?.Index && ev.Value != null)
+                    //{
+                    //    TimeSpan jam = (TimeSpan)ev.Value;
+                    //    ev.Value = jam.ToString(@"hh\:mm");
+                    //    ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //}
                 };
+
+                // Tambahkan kolom tombol aksi jika belum ada
+                if (dgvPasien.Columns["btnAksi"] == null)
+                {
+                    DataGridViewButtonColumn btnAksi = new DataGridViewButtonColumn();
+                    btnAksi.Name = "btnAksi";
+                    btnAksi.HeaderText = "Aksi";
+                    btnAksi.Text = "Proses";
+                    btnAksi.UseColumnTextForButtonValue = true;
+                    dgvPasien.Columns.Add(btnAksi);
+                }
 
                 // Event klik untuk tombol aksi
                 dgvPasien.CellClick += DgvPasien_CellClick;
-
                 // Atur auto-size columns
                 dgvPasien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
@@ -145,23 +198,43 @@ namespace pboFinalProfject
 
                 if (status == "Pending")
                 {
-                    // Buka form konfirmasi booking
                     FormKonfirmasiBooking formKonfirmasi = new FormKonfirmasiBooking(bookingId, _currentPsikologId);
                     formKonfirmasi.ShowDialog();
-                    LoadDaftarPasien(); // Refresh setelah konfirmasi
+                    LoadDaftarPasien(); // Refresh
                 }
                 else if (status == "Disetujui")
                 {
-                    // Buka form selesaikan konseling
                     FormSelesaikanKonseling formSelesaikan = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
                     formSelesaikan.ShowDialog();
-                    LoadDaftarPasien(); // Refresh setelah selesai
+                    LoadDaftarPasien(); // Refresh
                 }
                 else
                 {
-                    // Tampilkan detail booking
-                    ShowDetailBooking(bookingId);
+                    FormDetailBooking formDetail = new FormDetailBooking(bookingId, _currentPsikologId);
+                    formDetail.ShowDialog();
                 }
+
+                ShowDetailBooking(bookingId);
+
+                //if (status == "Pending")
+                //{
+                //    // Buka form konfirmasi booking
+                //    FormKonfirmasiBooking formKonfirmasi = new FormKonfirmasiBooking(bookingId, _currentPsikologId);
+                //    formKonfirmasi.ShowDialog();
+                //    LoadDaftarPasien(); // Refresh setelah konfirmasi
+                //}
+                //else if (status == "Disetujui")
+                //{
+                //    // Buka form selesaikan konseling
+                //    FormSelesaikanKonseling formSelesaikan = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
+                //    formSelesaikan.ShowDialog();
+                //    LoadDaftarPasien(); // Refresh setelah selesai
+                //}
+                //else
+                //{
+                //    // Tampilkan detail booking
+                //    ShowDetailBooking(bookingId);
+                //}
             }
         }
 
@@ -169,7 +242,7 @@ namespace pboFinalProfject
         {
             try
             {
-                DataTable dt = _psikologController.GetDetailBookingById(bookingId);
+                DataTable dt = _psikologController.GetDetailBookingById(bookingId, _currentPsikologId);
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
@@ -201,9 +274,14 @@ namespace pboFinalProfject
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            base.OnFormClosed(e);
-            // Optional: Logout atau kembali ke form login
-            // _authController.Logout(this);
+            //base.OnFormClosed(e);
+            //// Optional: Logout atau kembali ke form login
+            //_authController.Logout(this);
+
+            // Mematikan seluruh proses aplikasi secara bersih, termasuk form yang di-hide
+            Application.Exit();
         }
+
+
     }
 }

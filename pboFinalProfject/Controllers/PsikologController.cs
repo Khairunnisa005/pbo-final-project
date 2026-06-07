@@ -38,7 +38,7 @@ namespace pboFinalProfject
                     b.booking_id,
                     b.user_id,
                     b.psikolog_id,
-                    u.username as mahasiswa_anonim,
+                    u.username as mahasiswa,
                     b.created_at,
                     j.jam_mulai,
                     j.jam_selesai,
@@ -60,25 +60,39 @@ namespace pboFinalProfject
         /// <summary>
         /// Mendapatkan detail booking berdasarkan ID
         /// </summary>
-        public DataTable GetDetailBookingById(int bookingId)
+        public DataTable GetDetailBookingById(int bookingId, int psikologId)
         {
             string query = @"
                 SELECT 
                     b.booking_id,
-                    u.username as mahasiswa_anonim,
-                    b.created_at,
+                    u.username as mahasiswa,
+                    u.email as mahasiswa_email,
+                    u.no_telepon as mahasiswa_telepon,
+                    p2.nama_lengkap as psikolog_nama,
+                    b.created_at as tanggal_booking,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,
                     b.status,
                     b.catatan_user,
-                    b.catatan_psikolog
+                    b.catatan_psikolog,
+                    h.tingkat_stres,
+                    h.skor_total,
+                    h.rekomendasi
                 FROM booking b
                 JOIN users u ON b.user_id = u.user_id
+                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
+                JOIN users p2 ON ps.user_id = p2.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                WHERE b.booking_id = @booking_id";
+                LEFT JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
+                WHERE b.booking_id = @booking_id 
+                AND b.psikolog_id = @psikolog_id";
 
-            var parameters = new[] { new NpgsqlParameter("@booking_id", bookingId) };
+            var parameters = new[] 
+            { 
+                new NpgsqlParameter("@booking_id", bookingId),
+                new NpgsqlParameter("@psikolog_id", psikologId)
+            };
             return _db.ExecuteQuery(query, parameters);
         }
 

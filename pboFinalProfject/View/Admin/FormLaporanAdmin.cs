@@ -262,7 +262,7 @@ namespace pboFinalProfject.View
             for (int i = 0; i < dgvLaporan.Rows.Count; i++)
             {
                 DataGridViewRow row = dgvLaporan.Rows[i];
-                string tanggal = row.Cells["created_at"]?.Value?.ToString() ?? "-";
+                string tanggal = row.Cells["tgl_booking"]?.Value?.ToString() ?? "-";
                 string mahasiswa = row.Cells["mahasiswa"]?.Value?.ToString() ?? "-";
                 string psikolog = row.Cells["psikolog"]?.Value?.ToString() ?? "-";
                 string metode = row.Cells["metode"]?.Value?.ToString() ?? "-";
