@@ -142,7 +142,7 @@ namespace pboFinalProfject.Services
 
         public bool IsUsernameExist(string username)
         {
-            return _userRepository.IsUsernameExists(username);
+            return _userRepository.IsUsernameExists(username) != null;
         }
 
         public bool IsEmailExist(string email)

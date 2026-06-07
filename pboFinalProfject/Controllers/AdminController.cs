@@ -1,20 +1,29 @@
 ﻿using Npgsql;
+using pboFinalProfject.Model;
+using pboFinalProfject.Repositories;
 using pboFinalProfject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using pboFinalProfject.Model;
 
 namespace pboFinalProfject.Controllers
 {
     internal class AdminController
     {
         private DatabaseHelper _db;
+        private readonly UserRepository _userRepository;
+        private readonly PsikologRepository _psikologRepository;
+        private readonly BookingRepository _bookingRepository;
         public AdminController()
         {
             _db = new DatabaseHelper();
+            _userRepository = new UserRepository();
+            _psikologRepository = new PsikologRepository();
+            _bookingRepository = new BookingRepository();
         }
+
+        // Dashboard Statistik
         public DataTable GetStatistikDashboard()
         {
             string query = @"
@@ -31,6 +40,7 @@ namespace pboFinalProfject.Controllers
         {
             string query = @"
                 SELECT 
+                    b.booking_id,
                     b.created_at as tanggal,
                     u.username as mahasiswa,
                     p2.nama_lengkap as psikolog,
@@ -45,27 +55,27 @@ namespace pboFinalProfject.Controllers
             return _db.ExecuteQuery(query, parameters);
         }
 
-        //public DataTable GetDaftarBookingHariIni()
-        //{
-        //    string query = @"
-        //        SELECT 
-        //            b.booking_id,
-        //            b.jam_mulai,
-        //            u.username as mahasiswa,
-        //            p2.nama_lengkap as psikolog,
-        //            j.metode,
-        //            b.status
-        //        FROM booking b
-        //        JOIN users u ON b.user_id = u.user_id
-        //        JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
-        //        JOIN users p2 ON ps.user_id = p2.user_id
-        //        JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-        //        WHERE b.created_at = CURRENT_DATE
-        //        AND b.status IN ('Pending', 'Disetujui')
-        //        ORDER BY b.jam_mulai ASC";
+        public DataTable GetDaftarBookingHariIni()
+        {
+            string query = @"
+                SELECT 
+                    b.booking_id,
+                    b.jam_mulai,
+                    u.username as mahasiswa,
+                    p2.nama_lengkap as psikolog,
+                    j.metode,
+                    b.status
+                FROM booking b
+                JOIN users u ON b.user_id = u.user_id
+                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
+                JOIN users p2 ON ps.user_id = p2.user_id
+                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                WHERE b.created_at = CURRENT_DATE
+                AND b.status IN ('Pending', 'Disetujui')
+                ORDER BY b.jam_mulai ASC";
 
-        //    return _db.ExecuteQuery(query);
-        //}
+            return _db.ExecuteQuery(query);
+        }
 
         public DataTable GetDaftarPsikolog()
         {
@@ -89,6 +99,64 @@ namespace pboFinalProfject.Controllers
                 JOIN users u ON p.user_id = u.user_id
                 ORDER BY u.created_at DESC";
             return _db.ExecuteQuery(query);
+        }
+
+        public bool TambahPsikolog(User user, Psikolog psikolog)
+        {
+            using (var conn = _db.GetConnection())
+            {
+                conn.Open();
+                using (var trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Insert ke users
+                        string userQuery = @"
+                            INSERT INTO users (username, email, no_telepon, password_hash, nama_lengkap, role, created_at) 
+                            VALUES (@username, @email, @no_telepon, @password_hash, @nama_lengkap, 'Psikolog', @created_at)
+                            RETURNING user_id";
+
+                        using (var cmd = new NpgsqlCommand(userQuery, conn, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@username", user.Username);
+                            cmd.Parameters.AddWithValue("@email", user.Email);
+                            cmd.Parameters.AddWithValue("@no_telepon", (object)user.NoTelepon ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@password_hash", user.PasswordHash);
+                            cmd.Parameters.AddWithValue("@nama_lengkap", (object)user.NamaLengkap ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@created_at", DateTime.Now);
+
+                            int userId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            // Insert ke psikolog
+                            string psikologQuery = @"
+                                INSERT INTO psikolog (user_id, gelar, pendidikan, no_izin_praktek, deskripsi_singkat, melayani_online, melayani_offline, created_at) 
+                                VALUES (@user_id, @gelar, @pendidikan, @no_izin_praktek, @deskripsi_singkat, @melayani_online, @melayani_offline, @created_at)";
+
+                            using (var cmd2 = new NpgsqlCommand(psikologQuery, conn, trans))
+                            {
+                                cmd2.Parameters.AddWithValue("@user_id", userId);
+                                cmd2.Parameters.AddWithValue("@gelar", (object)psikolog.Gelar ?? DBNull.Value);
+                                cmd2.Parameters.AddWithValue("@pendidikan", (object)psikolog.Pendidikan ?? DBNull.Value);
+                                cmd2.Parameters.AddWithValue("@no_izin_praktek", (object)psikolog.NoIzinPraktek ?? DBNull.Value);
+                                cmd2.Parameters.AddWithValue("@deskripsi_singkat", (object)psikolog.DeskripsiSingkat ?? DBNull.Value);
+                                cmd2.Parameters.AddWithValue("@melayani_online", psikolog.MelayaniOnline);
+                                cmd2.Parameters.AddWithValue("@melayani_offline", psikolog.MelayaniOffline);
+                                cmd2.Parameters.AddWithValue("@created_at", DateTime.Now);
+
+                                cmd2.ExecuteNonQuery();
+                            }
+                        }
+
+                        trans.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
 
         public DataTable GetPsikologById(int psikologId)
@@ -116,72 +184,73 @@ namespace pboFinalProfject.Controllers
             return _db.ExecuteQuery(query, parameters);
         }
 
-        public bool TambahPsikolog(User user, Psikolog psikolog)
-        {
-            // Gunakan transaksi untuk insert ke users dan psikolog
-            using (var conn = _db.GetConnection())
-            {
-                conn.Open();
-                using (var trans = conn.BeginTransaction())
-                {
-                    try
-                    {
-                        // Insert ke users
-                        string userQuery = @"
-                            INSERT INTO users (username, email, no_telepon, password_hash, nama_lengkap, role, created_at) 
-                            VALUES (@username, @email, @no_telepon, @password_hash, @nama_lengkap, 'Psikolog', @created_at)
-                            RETURNING user_id";
+        //public bool TambahPsikolog(User user, Psikolog psikolog)
+        //{
+        //    // Gunakan transaksi untuk insert ke users dan psikolog
+        //    using (var conn = _db.GetConnection())
+        //    {
+        //        conn.Open();
+        //        using (var trans = conn.BeginTransaction())
+        //        {
+        //            try
+        //            {
+        //                // Insert ke users
+        //                string userQuery = @"
+        //                    INSERT INTO users (username, email, no_telepon, password_hash, nama_lengkap, role, created_at) 
+        //                    VALUES (@username, @email, @no_telepon, @password_hash, @nama_lengkap, 'Psikolog', @created_at)
+        //                    RETURNING user_id";
 
-                        var userParams = new[]
-                        {
-                            new NpgsqlParameter("@username", user.Username),
-                            new NpgsqlParameter("@email", user.Email),
-                            new NpgsqlParameter("@no_telepon", (object)user.NoTelepon ?? DBNull.Value),
-                            new NpgsqlParameter("@password_hash", user.PasswordHash),
-                            new NpgsqlParameter("@nama_lengkap", user.NamaLengkap),
-                            new NpgsqlParameter("@created_at", DateTime.Now)
-                        };
+        //                var userParams = new[]
+        //                {
+        //                    new NpgsqlParameter("@username", user.Username),
+        //                    new NpgsqlParameter("@email", user.Email),
+        //                    new NpgsqlParameter("@no_telepon", (object)user.NoTelepon ?? DBNull.Value),
+        //                    new NpgsqlParameter("@password_hash", user.PasswordHash),
+        //                    new NpgsqlParameter("@nama_lengkap", user.NamaLengkap),
+        //                    new NpgsqlParameter("@created_at", DateTime.Now)
+        //                };
 
-                        using (var cmd = new NpgsqlCommand(userQuery, conn, trans))
-                        {
-                            cmd.Parameters.AddRange(userParams);
-                            int userId = Convert.ToInt32(cmd.ExecuteScalar());
+        //                using (var cmd = new NpgsqlCommand(userQuery, conn, trans))
+        //                {
+        //                    cmd.Parameters.AddRange(userParams);
+        //                    int userId = Convert.ToInt32(cmd.ExecuteScalar());
 
-                            // Insert ke psikolog
-                            string psikologQuery = @"
-                                INSERT INTO psikolog (user_id, gelar, pendidikan, no_izin_praktek, deskripsi_singkat, melayani_online, melayani_offline, created_at) 
-                                VALUES (@user_id, @gelar, @pendidikan, @no_izin_praktek, @deskripsi_singkat, @melayani_online, @melayani_offline, @created_at)";
+        //                    // Insert ke psikolog
+        //                    string psikologQuery = @"
+        //                        INSERT INTO psikolog (user_id, gelar, pendidikan, no_izin_praktek, deskripsi_singkat, melayani_online, melayani_offline, created_at) 
+        //                        VALUES (@user_id, @gelar, @pendidikan, @no_izin_praktek, @deskripsi_singkat, @melayani_online, @melayani_offline, @created_at)";
 
-                            var psikologParams = new[]
-                            {
-                                new NpgsqlParameter("@user_id", userId),
-                                new NpgsqlParameter("@gelar", (object)psikolog.Gelar ?? DBNull.Value),
-                                new NpgsqlParameter("@pendidikan", (object)psikolog.Pendidikan ?? DBNull.Value),
-                                new NpgsqlParameter("@no_izin_praktek", (object)psikolog.NoIzinPraktek ?? DBNull.Value),
-                                new NpgsqlParameter("@deskripsi_singkat", (object)psikolog.DeskripsiSingkat ?? DBNull.Value),
-                                new NpgsqlParameter("@melayani_online", psikolog.MelayaniOnline),
-                                new NpgsqlParameter("@melayani_offline", psikolog.MelayaniOffline),
-                                new NpgsqlParameter("@created_at", DateTime.Now)
-                            };
+        //                    var psikologParams = new[]
+        //                    {
+        //                        new NpgsqlParameter("@user_id", userId),
+        //                        new NpgsqlParameter("@gelar", (object)psikolog.Gelar ?? DBNull.Value),
+        //                        new NpgsqlParameter("@pendidikan", (object)psikolog.Pendidikan ?? DBNull.Value),
+        //                        new NpgsqlParameter("@no_izin_praktek", (object)psikolog.NoIzinPraktek ?? DBNull.Value),
+        //                        new NpgsqlParameter("@deskripsi_singkat", (object)psikolog.DeskripsiSingkat ?? DBNull.Value),
+        //                        new NpgsqlParameter("@melayani_online", psikolog.MelayaniOnline),
+        //                        new NpgsqlParameter("@melayani_offline", psikolog.MelayaniOffline),
+        //                        new NpgsqlParameter("@created_at", DateTime.Now)
 
-                            using (var cmd2 = new NpgsqlCommand(psikologQuery, conn, trans))
-                            {
-                                cmd2.Parameters.AddRange(psikologParams);
-                                cmd2.ExecuteNonQuery();
-                            }
-                        }
+        //                    };
 
-                        trans.Commit();
-                        return true;
-                    }
-                    catch
-                    {
-                        trans.Rollback();
-                        throw;
-                    }
-                }
-            }
-        }
+        //                    using (var cmd2 = new NpgsqlCommand(psikologQuery, conn, trans))
+        //                    {
+        //                        cmd2.Parameters.AddRange(psikologParams);
+        //                        cmd2.ExecuteNonQuery();
+        //                    }
+        //                }
+
+        //                trans.Commit();
+        //                return true;
+        //            }
+        //            catch
+        //            {
+        //                trans.Rollback();
+        //                throw;
+        //            }
+        //        }
+        //    }
+        //}
         public bool UpdatePsikolog(User user, Psikolog psikolog)
         {
             string userQuery = @"
@@ -237,6 +306,8 @@ namespace pboFinalProfject.Controllers
             return _db.ExecuteNonQuery(query, parameters) > 0;
         }
 
+        // Kelola Mahasiswa
+
         public DataTable GetDaftarMahasiswa()
         {
             string query = @"
@@ -266,15 +337,19 @@ namespace pboFinalProfject.Controllers
         //    return _db.ExecuteNonQuery(query, parameters) > 0;
         //}
 
-        //public bool HapusMahasiswa(int userId)
-        //{
-        //    string query = "DELETE FROM users WHERE user_id = @user_id AND role = 'Mahasiswa'";
-        //    var parameters = new[] { new NpgsqlParameter("@user_id", userId) };
-        //    return _db.ExecuteNonQuery(query, parameters) > 0;
-        //}
+        public bool HapusMahasiswa(int userId)
+        {
+            string query = "DELETE FROM users WHERE user_id = @user_id AND role = 'Mahasiswa'";
+            var parameters = new[] { new NpgsqlParameter("@user_id", userId) };
+            return _db.ExecuteNonQuery(query, parameters) > 0;
+        }
 
+        // Laporan
         public DataTable GetLaporanBooking(DateTime startDate, DateTime endDate, string status = null)
         {
+            // Tambahkan 1 hari ke endDate agar mencakup seluruh hari
+            DateTime endDateInclusive = endDate.AddDays(1);
+
             string query = @"
                 SELECT 
                     b.booking_id,
@@ -291,21 +366,20 @@ namespace pboFinalProfject.Controllers
                 JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
                 JOIN users p2 ON ps.user_id = p2.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                WHERE b.created_at BETWEEN @start_date AND @end_date
-                ORDER BY b.created_at";
+                WHERE b.created_at BETWEEN @start_date AND @end_date";
 
-            var parameters = new System.Collections.Generic.List<NpgsqlParameter>
+            var parameters = new List<NpgsqlParameter>
             {
                 new NpgsqlParameter("@start_date", startDate),
-                new NpgsqlParameter("@end_date", endDate)
+                new NpgsqlParameter("@end_date", endDateInclusive)
             };
-            if (!string.IsNullOrEmpty(status))
+            if (!string.IsNullOrEmpty(status) && status != "Semua")
             {
                 query += "AND b.status = @status";
                 parameters.Add(new NpgsqlParameter("@status", status));
             }
 
-            //query += "ORDER BY b.created_at DESC";
+            //query += "ORDER BY created_at DESC";
             return _db.ExecuteQuery(query, parameters.ToArray());
         }
 

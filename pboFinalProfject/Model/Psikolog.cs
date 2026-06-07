@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using pboFinalProfject.Model;
 
 namespace pboFinalProfject.Model
 {
@@ -15,6 +16,7 @@ namespace pboFinalProfject.Model
         public bool MelayaniOnline { get; set; }
         public bool MelayaniOffline { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public User User { get; set; }
 
     }
 }

@@ -11,6 +11,7 @@ namespace pboFinalProfject.Models
         public int PertanyaanId { get; set; }
         public char Jawaban { get; set; } // A, B, C
         public int Nilai { get; set; } // 1, 2, 3 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     }
 }

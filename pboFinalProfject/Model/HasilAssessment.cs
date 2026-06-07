@@ -12,6 +12,7 @@ namespace pboFinalProfject.Models
         public int SkorTotal { get; set; }
         public string TingkatStres { get; set; }
         public string Rekomendasi { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     }
 }

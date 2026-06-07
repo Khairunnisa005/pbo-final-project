@@ -59,9 +59,21 @@ namespace pboFinalProfject.View
             {
                 DateTime startDate = dtpMulai.Value.Date;
                 DateTime endDate = dtpSelesai.Value.Date.AddDays(1).AddSeconds(-1); // Sampai akhir hari
-                string status = cmbStatus.SelectedItem?.ToString() == "Semua" ? null : cmbStatus.SelectedItem.ToString();
+
+                // Ambil status dari combobox
+                string status = cmbStatus.SelectedItem?.ToString();
+
+                // Debug: tampilkan parameter yang dipilih
+                Console.WriteLine($"Filter: {startDate:yyyy-MM-dd} s/d {endDate:yyyy-MM-dd}, Status: {status}");
 
                 DataTable dt = _adminController.GetLaporanBooking(startDate, endDate, status);
+
+                // Debug: cek jumlah data
+                MessageBox.Show($"Jumlah data ditemukan: {dt.Rows.Count} baris\n\n" +
+                                $"Periode: {startDate:dd/MM/yyyy} - {endDate:dd/MM/yyyy}\n" +
+                                $"Status: {status}",
+                                "Debug Filter", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 dgvLaporan.DataSource = dt;
 
                 // Sembunyikan kolom yang tidak perlu
