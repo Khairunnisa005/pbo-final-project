@@ -72,6 +72,7 @@ using pboFinalProfject.Controllers;
 using pboFinalProfject.Session;
 using pboFinalProfject.Model;
 using pboFinalProfject.View;
+using pboFinalProfject.View.Mahasiswa;
 
 namespace pboFinalProfject
 {

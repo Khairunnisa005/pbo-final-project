@@ -86,8 +86,8 @@ namespace pboFinalProfject.View
                     dgvAntreanKonseling.Columns["booking_id"].Visible = false;
 
                 // atur header kolom sesuai dengan data yang diterima
-                if (dgvAntreanKonseling.Columns.Contains("jam_mulai"))
-                    dgvAntreanKonseling.Columns["jam_mulai"].HeaderText = "Jam";
+                if (dgvAntreanKonseling.Columns.Contains("tanggal"))
+                    dgvAntreanKonseling.Columns["tanggal"].HeaderText = "Tanggal";
                 if (dgvAntreanKonseling.Columns.Contains("mahasiswa"))
                     dgvAntreanKonseling.Columns["mahasiswa"].HeaderText = "Mahasiswa";
                 if (dgvAntreanKonseling.Columns.Contains("psikolog"))
@@ -154,9 +154,9 @@ namespace pboFinalProfject.View
                 "Manajemen Pengguna", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Ketika form sudah dibuat, aktifkan kode di bawah:
-            // FormKelolaUser formUser = new FormKelolaUser();
-            // formUser.ShowDialog();
-            // LoadDataDashboard(); // Refresh jika ada perubahan
+            //FormKelolaUser formUser = new FormKelolaUser();
+            //formUser.ShowDialog();
+            //LoadDataDashboard(); // Refresh jika ada perubahan
         }
 
         private void btnLaporan_Click(object sender, EventArgs e)

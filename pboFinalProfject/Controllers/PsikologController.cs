@@ -39,7 +39,7 @@ namespace pboFinalProfject
                     b.user_id,
                     b.psikolog_id,
                     u.username as mahasiswa_anonim,
-                    b.tanggal_booking,
+                    b.created_at,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,
@@ -51,7 +51,7 @@ namespace pboFinalProfject
                 JOIN users u ON b.user_id = u.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
                 WHERE b.psikolog_id = @psikolog_id
-                ORDER BY b.tanggal_booking DESC, j.jam_mulai ASC";
+                ORDER BY b.created_at DESC, j.jam_mulai ASC";
 
             var parameters = new[] { new NpgsqlParameter("@psikolog_id", psikologId) };
             return _db.ExecuteQuery(query, parameters);
@@ -66,7 +66,7 @@ namespace pboFinalProfject
                 SELECT 
                     b.booking_id,
                     u.username as mahasiswa_anonim,
-                    b.tanggal_booking,
+                    b.created_at,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,

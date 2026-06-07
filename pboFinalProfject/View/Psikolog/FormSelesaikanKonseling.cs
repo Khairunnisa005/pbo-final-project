@@ -54,7 +54,7 @@ namespace pboFinalProfject
                     lblValNama.Text = row["mahasiswa_anonim"]?.ToString() ?? "-";
 
                     // Format jadwal
-                    DateTime tanggal = Convert.ToDateTime(row["tanggal_booking"]);
+                    DateTime tanggal = Convert.ToDateTime(row["created_at"]);
                     TimeSpan jamMulai = (TimeSpan)row["jam_mulai"];
                     TimeSpan jamSelesai = (TimeSpan)row["jam_selesai"];
                     lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulai:hh\\:mm} - {jamSelesai:hh\\:mm} WIB";

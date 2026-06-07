@@ -69,11 +69,14 @@ namespace pboFinalProfject.View
                     dgvLaporan.Columns["booking_id"].Visible = false;
 
                 // Atur header kolom
-                if (dgvLaporan.Columns.Contains("tanggal_booking"))
-                    dgvLaporan.Columns["tanggal_booking"].HeaderText = "Tanggal Booking";
+                if (dgvLaporan.Columns.Contains("tgl_booking"))
+                    dgvLaporan.Columns["tgl_booking"].HeaderText = "Tanggal Booking";
 
                 if (dgvLaporan.Columns.Contains("mahasiswa"))
                     dgvLaporan.Columns["mahasiswa"].HeaderText = "Mahasiswa";
+
+                if (dgvLaporan.Columns.Contains("email_mahasiswa"))
+                    dgvLaporan.Columns["email_mahasiswa"].HeaderText = "Email Mahasiswa";
 
                 if (dgvLaporan.Columns.Contains("psikolog"))
                     dgvLaporan.Columns["psikolog"].HeaderText = "Psikolog";
@@ -83,6 +86,12 @@ namespace pboFinalProfject.View
 
                 if (dgvLaporan.Columns.Contains("status"))
                     dgvLaporan.Columns["status"].HeaderText = "Status";
+
+                if (dgvLaporan.Columns.Contains("catatan_user"))
+                    dgvLaporan.Columns["catatan_user"].HeaderText = "Catatan Mahasiswa";
+
+                if (dgvLaporan.Columns.Contains("catatan_psikolog"))
+                    dgvLaporan.Columns["catatan_psikolog"].HeaderText = "Catatan Psikolog";
 
                 // Update total sesi
                 lblTotalSesi.Text = $"{dt.Rows.Count} Sesi";
@@ -253,7 +262,7 @@ namespace pboFinalProfject.View
             for (int i = 0; i < dgvLaporan.Rows.Count; i++)
             {
                 DataGridViewRow row = dgvLaporan.Rows[i];
-                string tanggal = row.Cells["tanggal_booking"]?.Value?.ToString() ?? "-";
+                string tanggal = row.Cells["created_at"]?.Value?.ToString() ?? "-";
                 string mahasiswa = row.Cells["mahasiswa"]?.Value?.ToString() ?? "-";
                 string psikolog = row.Cells["psikolog"]?.Value?.ToString() ?? "-";
                 string metode = row.Cells["metode"]?.Value?.ToString() ?? "-";

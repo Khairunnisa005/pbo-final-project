@@ -22,7 +22,7 @@ namespace pboFinalProfject.Controllers
                     (SELECT COUNT (*) FROM users WHERE role = 'Mahasiswa') as total_mahasiswa,
                     (SELECT COUNT (*) FROM users WHERE role = 'Psikolog') as total_psikolog,
                     (SELECT COUNT (*) FROM booking) as total_booking,
-                    (SELECT COUNT (*) FROM booking WHERE status = 'Pending' AND tanggal_booking = CURENT_DATE) as antrean_hari_ini,
+                    (SELECT COUNT (*) FROM booking WHERE status = 'Pending' AND created_at = CURRENT_DATE) as antrean_hari_ini,
                     (SELECT COUNT (*) FROM booking WHERE status = 'Pending') as booking_pending,
                     (SELECT COUNT (*) FROM booking WHERE status = 'Selesai') as booking_selesai";
             return _db.ExecuteQuery(query);
@@ -45,27 +45,27 @@ namespace pboFinalProfject.Controllers
             return _db.ExecuteQuery(query, parameters);
         }
 
-        public DataTable GetDaftarBookingHariIni()
-        {
-            string query = @"
-                SELECT 
-                    b.booking_id,
-                    b.jam_mulai,
-                    u.username as mahasiswa,
-                    p2.nama_lengkap as psikolog,
-                    j.metode,
-                    b.status
-                FROM booking b
-                JOIN users u ON b.user_id = u.user_id
-                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
-                JOIN users p2 ON ps.user_id = p2.user_id
-                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                WHERE b.tanggal_booking = CURRENT_DATE
-                AND b.status IN ('Pending', 'Disetujui')
-                ORDER BY b.jam_mulai ASC";
+        //public DataTable GetDaftarBookingHariIni()
+        //{
+        //    string query = @"
+        //        SELECT 
+        //            b.booking_id,
+        //            b.jam_mulai,
+        //            u.username as mahasiswa,
+        //            p2.nama_lengkap as psikolog,
+        //            j.metode,
+        //            b.status
+        //        FROM booking b
+        //        JOIN users u ON b.user_id = u.user_id
+        //        JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
+        //        JOIN users p2 ON ps.user_id = p2.user_id
+        //        JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+        //        WHERE b.created_at = CURRENT_DATE
+        //        AND b.status IN ('Pending', 'Disetujui')
+        //        ORDER BY b.jam_mulai ASC";
 
-            return _db.ExecuteQuery(query);
-        }
+        //    return _db.ExecuteQuery(query);
+        //}
 
         public DataTable GetDaftarPsikolog()
         {
@@ -291,7 +291,8 @@ namespace pboFinalProfject.Controllers
                 JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
                 JOIN users p2 ON ps.user_id = p2.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                WHERE b.created_at BETWEEN @start_date AND @end_date";
+                WHERE b.created_at BETWEEN @start_date AND @end_date
+                ORDER BY b.created_at";
 
             var parameters = new System.Collections.Generic.List<NpgsqlParameter>
             {
@@ -304,7 +305,7 @@ namespace pboFinalProfject.Controllers
                 parameters.Add(new NpgsqlParameter("@status", status));
             }
 
-            query += "ORDER BY b.created_at DESC";
+            //query += "ORDER BY b.created_at DESC";
             return _db.ExecuteQuery(query, parameters.ToArray());
         }
 
@@ -324,7 +325,7 @@ namespace pboFinalProfject.Controllers
             // Data
             foreach (DataRow row in dt.Rows)
             {
-                string tanggal = Convert.ToDateTime(row["tanggal_booking"]).ToString("dd/MM/yyyy HH:mm");
+                string tanggal = Convert.ToDateTime(row["tgl_booking"]).ToString("dd/MM/yyyy HH:mm");
                 string mahasiswa = row["mahasiswa"].ToString().Replace(",", ";");
                 string email = row["email_mahasiswa"].ToString().Replace(",", ";");
                 string psikolog = row["psikolog"].ToString().Replace(",", ";");

@@ -219,7 +219,7 @@ namespace pboFinalProfject
                     u.email as mahasiswa_email,
                     u.no_telepon as mahasiswa_telepon,
                     p2.nama_lengkap as psikolog_nama,
-                    b.tanggal_booking,
+                    b.created_at,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,

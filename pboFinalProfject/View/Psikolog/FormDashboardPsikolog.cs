@@ -61,8 +61,8 @@ namespace pboFinalProfject
                 if (dgvPasien.Columns.Contains("mahasiswa_anonim"))
                     dgvPasien.Columns["mahasiswa_anonim"].HeaderText = "Nama Mahasiswa";
 
-                if (dgvPasien.Columns.Contains("tanggal_booking"))
-                    dgvPasien.Columns["tanggal_booking"].HeaderText = "Tanggal Konseling";
+                if (dgvPasien.Columns.Contains("created_at"))
+                    dgvPasien.Columns["created_at"].HeaderText = "Tanggal Konseling";
 
                 if (dgvPasien.Columns.Contains("jam_mulai"))
                     dgvPasien.Columns["jam_mulai"].HeaderText = "Jam Mulai";
@@ -175,7 +175,7 @@ namespace pboFinalProfject
                     DataRow row = dt.Rows[0];
                     string detail = $"Detail Konseling\n\n" +
                                     $"Mahasiswa: {row["mahasiswa_anonim"]}\n" +
-                                    $"Tanggal: {Convert.ToDateTime(row["tanggal_booking"]):dd MMMM yyyy}\n" +
+                                    $"Tanggal: {Convert.ToDateTime(row["created_at"]):dd MMMM yyyy}\n" +
                                     $"Jam: {row["jam_mulai"]} - {row["jam_selesai"]}\n" +
                                     $"Metode: {row["metode"]}\n" +
                                     $"Status: {row["status"]}\n" +

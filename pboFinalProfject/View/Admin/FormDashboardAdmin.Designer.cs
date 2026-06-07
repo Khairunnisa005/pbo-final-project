@@ -242,7 +242,7 @@ namespace pboFinalProfject.View
             lblTabelTitle.Name = "lblTabelTitle";
             lblTabelTitle.Size = new Size(268, 28);
             lblTabelTitle.TabIndex = 6;
-            lblTabelTitle.Text = "Antrean Konsultasi Hari Ini";
+            lblTabelTitle.Text = "Daftar Aktivitas Booking";
             // 
             // btnKelolaUser
             // 

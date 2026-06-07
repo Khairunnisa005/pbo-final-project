@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Windows;
 
-namespace pboFinalProfject.View
+
+namespace pboFinalProfject.View.Mahasiswa
 {
+
     public partial class FormDashboardMahasiswa : Form
     {
         private Panel containerPanel;
