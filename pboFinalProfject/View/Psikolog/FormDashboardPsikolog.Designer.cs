@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject.view
+﻿namespace pboFinalProfject.View
 {
     partial class FormDashboardPsikolog
     {
@@ -35,7 +35,6 @@
             btnKelolaJadwal = new Button();
             btnKembali = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
-            SuspendLayout();
             // 
             // dgvPasien
             // 

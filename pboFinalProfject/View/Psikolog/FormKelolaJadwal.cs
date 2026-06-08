@@ -6,7 +6,7 @@ using pboFinalProfject.Utils;
 using pboFinalProfject.Controllers;
 using pboFinalProfject.Session;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormKelolaJadwal : Form
     {
@@ -24,6 +24,7 @@ namespace pboFinalProfject
             btnTambah.Click += BtnTambah_Click;
             btnUbah.Click += BtnUbah_Click;
             btnHapus.Click += BtnHapus_Click;
+            btnKembali.Click += BtnKembali_Click;
             btnBersihkan.Click += BtnBersihkan_Click;
             dgvSlotJadwal.SelectionChanged += DgvSlotJadwal_SelectionChanged;
 
@@ -333,7 +334,7 @@ namespace pboFinalProfject
         }
 
 
-        private void FormKelolaJadwal_Load_1(object sender, EventArgs e)
+        private void BtnKembali_Click(object sender, EventArgs e)
         {
 
         }

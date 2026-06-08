@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject.view
+﻿namespace pboFinalProfject.View
 {
     partial class FormLaporanAdmin
     {
@@ -34,10 +34,7 @@
             btnEkspor = new Button();
             btnCetak = new Button();
             lblTitle = new Label();
-            pnlFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLaporan).BeginInit();
-            pnlSummary.SuspendLayout();
-            SuspendLayout();
             // 
             // pnlFilter
             // 
