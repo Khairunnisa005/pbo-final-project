@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject
+﻿namespace pboFinalProfject.view
 {
     partial class FormKonfirmasiBooking
     {
@@ -28,6 +28,7 @@
             lblValJadwal = new Label();
             btnSetuju = new Button();
             btnBatal = new Button();
+            btnKembali = new Button();
             SuspendLayout();
             // 
             // lblTitle
@@ -46,7 +47,7 @@
             lblPrompt.ForeColor = Color.FromArgb(127, 140, 141);
             lblPrompt.Location = new Point(16, 56);
             lblPrompt.Name = "lblPrompt";
-            lblPrompt.Size = new Size(320, 35);
+            lblPrompt.Size = new Size(322, 58);
             lblPrompt.TabIndex = 9;
             lblPrompt.Text = "Apakah Anda yakin ingin menyetujui permintaan jadwal konseling berikut?";
             lblPrompt.Click += lblPrompt_Click;
@@ -54,7 +55,7 @@
             // panelGaris
             // 
             panelGaris.BackColor = Color.FromArgb(230, 233, 237);
-            panelGaris.Location = new Point(20, 85);
+            panelGaris.Location = new Point(20, 112);
             panelGaris.Name = "panelGaris";
             panelGaris.Size = new Size(310, 2);
             panelGaris.TabIndex = 8;
@@ -63,16 +64,17 @@
             // 
             lblID.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblID.ForeColor = Color.FromArgb(52, 73, 94);
-            lblID.Location = new Point(20, 105);
+            lblID.Location = new Point(20, 114);
             lblID.Name = "lblID";
             lblID.Size = new Size(100, 20);
             lblID.TabIndex = 7;
             lblID.Text = "ID Registrasi";
+            lblID.Click += lblID_Click;
             // 
             // lblValID
             // 
             lblValID.Font = new Font("Segoe UI", 9.5F);
-            lblValID.Location = new Point(130, 105);
+            lblValID.Location = new Point(130, 114);
             lblValID.Name = "lblValID";
             lblValID.Size = new Size(200, 20);
             lblValID.TabIndex = 6;
@@ -82,7 +84,7 @@
             // 
             lblNama.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblNama.ForeColor = Color.FromArgb(52, 73, 94);
-            lblNama.Location = new Point(20, 140);
+            lblNama.Location = new Point(16, 146);
             lblNama.Name = "lblNama";
             lblNama.Size = new Size(100, 20);
             lblNama.TabIndex = 5;
@@ -91,7 +93,7 @@
             // lblValNama
             // 
             lblValNama.Font = new Font("Segoe UI", 9.5F);
-            lblValNama.Location = new Point(130, 140);
+            lblValNama.Location = new Point(130, 146);
             lblValNama.Name = "lblValNama";
             lblValNama.Size = new Size(200, 20);
             lblValNama.TabIndex = 4;
@@ -101,7 +103,7 @@
             // 
             lblJadwal.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblJadwal.ForeColor = Color.FromArgb(52, 73, 94);
-            lblJadwal.Location = new Point(20, 175);
+            lblJadwal.Location = new Point(16, 175);
             lblJadwal.Name = "lblJadwal";
             lblJadwal.Size = new Size(100, 20);
             lblJadwal.TabIndex = 3;
@@ -144,10 +146,23 @@
             btnBatal.UseVisualStyleBackColor = false;
             btnBatal.Click += btnBatal_Click;
             // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(20, 306);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(145, 45);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
+            // 
             // FormKonfirmasiBooking
             // 
             BackColor = Color.White;
-            ClientSize = new Size(350, 278);
+            ClientSize = new Size(350, 363);
+            Controls.Add(btnKembali);
             Controls.Add(btnBatal);
             Controls.Add(btnSetuju);
             Controls.Add(lblValJadwal);
@@ -181,5 +196,6 @@
         private System.Windows.Forms.Label lblValJadwal;
         private System.Windows.Forms.Button btnSetuju;
         private System.Windows.Forms.Button btnBatal;
+        private System.Windows.Forms.Button btnKembali;
     }
 }

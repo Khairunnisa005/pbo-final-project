@@ -1,9 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace pboFinalProfject
+﻿namespace pboFinalProfject.view
 {
     partial class FormDashboardPsikolog
     {
@@ -35,10 +30,11 @@ namespace pboFinalProfject
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(FormDashboardPsikolog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboardPsikolog));
             dgvPasien = new DataGridView();
             btnKelolaJadwal = new Button();
-            ((ISupportInitialize)dgvPasien).BeginInit();
+            btnKembali = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
             SuspendLayout();
             // 
             // dgvPasien
@@ -63,12 +59,12 @@ namespace pboFinalProfject
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvPasien.DefaultCellStyle = dataGridViewCellStyle2;
             dgvPasien.EnableHeadersVisualStyles = false;
-            dgvPasien.Location = new Point(204, 193);
-            dgvPasien.Margin = new Padding(3, 4, 3, 4);
+            dgvPasien.Location = new Point(255, 241);
+            dgvPasien.Margin = new Padding(4, 5, 4, 5);
             dgvPasien.Name = "dgvPasien";
             dgvPasien.RowHeadersWidth = 51;
             dgvPasien.RowTemplate.Height = 30;
-            dgvPasien.Size = new Size(784, 275);
+            dgvPasien.Size = new Size(980, 344);
             dgvPasien.TabIndex = 1;
             // 
             // btnKelolaJadwal
@@ -77,31 +73,44 @@ namespace pboFinalProfject
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
             btnKelolaJadwal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = Color.White;
-            btnKelolaJadwal.Location = new Point(825, 476);
-            btnKelolaJadwal.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaJadwal.Location = new Point(1031, 595);
+            btnKelolaJadwal.Margin = new Padding(4, 5, 4, 5);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
-            btnKelolaJadwal.Size = new Size(163, 45);
+            btnKelolaJadwal.Size = new Size(204, 56);
             btnKelolaJadwal.TabIndex = 2;
             btnKelolaJadwal.Text = "Kelola Jadwal";
             btnKelolaJadwal.UseVisualStyleBackColor = false;
             btnKelolaJadwal.Click += btnKelolaJadwal_Click;
             // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(1125, 12);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(110, 56);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
+            // 
             // FormDashboardPsikolog
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1021, 568);
+            ClientSize = new Size(1276, 710);
             Controls.Add(btnKelolaJadwal);
             Controls.Add(dgvPasien);
+            Controls.Add(btnKembali);
             DoubleBuffered = true;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormDashboardPsikolog";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind Dashboard";
-            ((ISupportInitialize)dgvPasien).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPasien).EndInit();
             ResumeLayout(false);
 
         }
@@ -109,6 +118,6 @@ namespace pboFinalProfject
         #endregion
         private System.Windows.Forms.DataGridView dgvPasien;
         private System.Windows.Forms.Button btnKelolaJadwal;
-
+        private System.Windows.Forms.Button btnKembali;
     }
 }
