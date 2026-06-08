@@ -53,97 +53,52 @@ namespace pboFinalProfject.View
 
 
 
+        //private void LoadLaporan()
         private void LoadLaporan()
         {
             try
             {
                 DateTime startDate = dtpMulai.Value.Date;
-                DateTime endDate = dtpSelesai.Value.Date.AddDays(1).AddSeconds(-1); // Sampai akhir hari
+                DateTime endDate = dtpSelesai.Value.Date;
 
                 // Ambil status dari combobox
                 string status = cmbStatus.SelectedItem?.ToString();
 
-                // Debug: tampilkan parameter yang dipilih
-                Console.WriteLine($"Filter: {startDate:yyyy-MM-dd} s/d {endDate:yyyy-MM-dd}, Status: {status}");
+                // Handle status "Semua"
+                if (status == "Semua")
+                {
+                    status = null;
+                }
 
                 DataTable dt = _adminController.GetLaporanBooking(startDate, endDate, status);
 
-                // Debug: cek jumlah data
-                MessageBox.Show($"Jumlah data ditemukan: {dt.Rows.Count} baris\n\n" +
-                                $"Periode: {startDate:dd/MM/yyyy} - {endDate:dd/MM/yyyy}\n" +
-                                $"Status: {status}",
-                                "Debug Filter", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 dgvLaporan.DataSource = dt;
 
-                // Sembunyikan kolom yang tidak perlu
+                // Sembunyikan kolom booking_id jika ada
                 if (dgvLaporan.Columns.Contains("booking_id"))
                     dgvLaporan.Columns["booking_id"].Visible = false;
 
                 // Atur header kolom
-                if (dgvLaporan.Columns.Contains("tgl_booking"))
-                    dgvLaporan.Columns["tgl_booking"].HeaderText = "Tanggal Booking";
-
+                if (dgvLaporan.Columns.Contains("tanggal_booking"))
+                    dgvLaporan.Columns["tanggal_booking"].HeaderText = "Tanggal Booking";
                 if (dgvLaporan.Columns.Contains("mahasiswa"))
                     dgvLaporan.Columns["mahasiswa"].HeaderText = "Mahasiswa";
-
                 if (dgvLaporan.Columns.Contains("email_mahasiswa"))
                     dgvLaporan.Columns["email_mahasiswa"].HeaderText = "Email Mahasiswa";
-
                 if (dgvLaporan.Columns.Contains("psikolog"))
                     dgvLaporan.Columns["psikolog"].HeaderText = "Psikolog";
-
                 if (dgvLaporan.Columns.Contains("metode"))
                     dgvLaporan.Columns["metode"].HeaderText = "Metode";
-
                 if (dgvLaporan.Columns.Contains("status"))
                     dgvLaporan.Columns["status"].HeaderText = "Status";
 
-                if (dgvLaporan.Columns.Contains("catatan_user"))
-                    dgvLaporan.Columns["catatan_user"].HeaderText = "Catatan Mahasiswa";
-
-                if (dgvLaporan.Columns.Contains("catatan_psikolog"))
-                    dgvLaporan.Columns["catatan_psikolog"].HeaderText = "Catatan Psikolog";
-
                 // Update total sesi
                 lblTotalSesi.Text = $"{dt.Rows.Count} Sesi";
-
-                // Warna status
-                dgvLaporan.CellFormatting += (s, ev) =>
-                {
-                    if (ev.ColumnIndex == dgvLaporan.Columns["status"]?.Index && ev.Value != null)
-                    {
-                        string statusVal = ev.Value.ToString();
-                        switch (statusVal)
-                        {
-                            case "Disetujui":
-                                ev.CellStyle.ForeColor = Color.Green;
-                                ev.Value = "✅ Disetujui";
-                                break;
-                            case "Pending":
-                                ev.CellStyle.ForeColor = Color.Orange;
-                                ev.Value = "⏳ Pending";
-                                break;
-                            case "Ditolak":
-                                ev.CellStyle.ForeColor = Color.Red;
-                                ev.Value = "❌ Ditolak";
-                                break;
-                            case "Selesai":
-                                ev.CellStyle.ForeColor = Color.Blue;
-                                ev.Value = "✔️ Selesai";
-                                break;
-                            case "Batal":
-                                ev.CellStyle.ForeColor = Color.Gray;
-                                ev.Value = "🚫 Batal";
-                                break;
-                        }
-                    }
-                };
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal memuat laporan: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Gagal memuat laporan: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

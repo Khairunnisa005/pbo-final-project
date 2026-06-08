@@ -39,7 +39,7 @@ namespace pboFinalProfject
                     b.user_id,
                     b.psikolog_id,
                     u.username as mahasiswa,
-                    b.created_at,
+                    b.created_at as tgl_booking,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,
@@ -189,7 +189,7 @@ namespace pboFinalProfject
             {
                 throw new Exception("Jadwal bentrok dengan jadwal yang sudah ada!");
             }
-
+            // insert jadwaal baru
             string query = @"
                 INSERT INTO jadwal_psikolog (psikolog_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active, created_at) 
                 VALUES (@psikolog_id, @hari, @jam_mulai, @jam_selesai, @metode, @kuota, @is_active, @created_at)";
@@ -206,7 +206,9 @@ namespace pboFinalProfject
                 new NpgsqlParameter("@created_at", DateTime.Now)
             };
 
-            return _db.ExecuteNonQuery(query, parameters) > 0;
+            //return _db.ExecuteNonQuery(query, parameters) > 0;
+            int result = _db.ExecuteNonQuery(query, parameters);
+            return result > 0;
         }
 
         public bool UpdateJadwal(int jadwalId, string hari, TimeSpan jamMulai, TimeSpan jamSelesai, string metode, int kuota, bool isActive)

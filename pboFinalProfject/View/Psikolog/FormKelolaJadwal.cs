@@ -77,22 +77,23 @@ namespace pboFinalProfject
                 if (dgvSlotJadwal.Columns.Contains("kuota"))
                     dgvSlotJadwal.Columns["kuota"].HeaderText = "Kuota";
 
+                //if (dgvSlotJadwal.Columns.Contains("is_active"))
+                //{
+                //    dgvSlotJadwal.Columns["is_active"].HeaderText = "Status";
+
+                //    //// Format tampilan status
+                //    //dgvSlotJadwal.CellFormatting += (s, ev) =>
+                //    //{
+                //    //    if (ev.ColumnIndex == dgvSlotJadwal.Columns["is_active"].Index && ev.Value != null)
+                //    //    {
+                //    //        bool isActive = Convert.ToBoolean(ev.Value);
+                //    //        ev.Value = isActive ? "✅ Aktif" : "❌ Tidak Aktif";
+                //    //        ev.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
+                //    //    }
+                //    //};
+                //}
                 if (dgvSlotJadwal.Columns.Contains("is_active"))
-                {
                     dgvSlotJadwal.Columns["is_active"].HeaderText = "Status";
-
-                    // Format tampilan status
-                    dgvSlotJadwal.CellFormatting += (s, ev) =>
-                    {
-                        if (ev.ColumnIndex == dgvSlotJadwal.Columns["is_active"].Index && ev.Value != null)
-                        {
-                            bool isActive = Convert.ToBoolean(ev.Value);
-                            ev.Value = isActive ? "✅ Aktif" : "❌ Tidak Aktif";
-                            ev.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
-                        }
-                    };
-                }
-
                 // Auto-size columns
                 dgvSlotJadwal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
@@ -133,11 +134,19 @@ namespace pboFinalProfject
                 if (dgvSlotJadwal.Columns.Contains("hari") && row.Cells["hari"].Value != null)
                     cmbHari.SelectedItem = row.Cells["hari"].Value.ToString();
 
-                if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value != null)
-                    dtpJamMulai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_mulai"].Value);
+                //if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value != null)
+                //    dtpJamMulai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_mulai"].Value);
+                if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value is TimeOnly jamMulai)
+                {
+                    dtpJamMulai.Value = DateTime.Today.Add(jamMulai.ToTimeSpan());
+                }
 
-                if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value != null)
-                    dtpJamSelesai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_selesai"].Value);
+                //if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value != null)
+                //    dtpJamSelesai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_selesai"].Value);
+                if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value is TimeOnly jamSelesai)
+                {
+                    dtpJamMulai.Value = DateTime.Today.Add(jamSelesai.ToTimeSpan());
+                }
 
                 if (dgvSlotJadwal.Columns.Contains("metode") && row.Cells["metode"].Value != null)
                     cmbMetode.SelectedItem = row.Cells["metode"].Value.ToString();
@@ -148,7 +157,7 @@ namespace pboFinalProfject
                 if (dgvSlotJadwal.Columns.Contains("is_active") && row.Cells["is_active"].Value != null)
                     chkIsActive.Checked = Convert.ToBoolean(row.Cells["is_active"].Value);
 
-                btnTambah.Enabled = false;
+                btnTambah.Enabled = true;
                 btnUbah.Enabled = true;
                 btnHapus.Enabled = true;
             }
@@ -186,6 +195,17 @@ namespace pboFinalProfject
                 string metode = cmbMetode.SelectedItem.ToString();
                 bool isActive = chkIsActive.Checked;
 
+                // DEBUG: Tampilkan parameter yang akan dikirim
+                MessageBox.Show($"Debug - Parameter:\n\n" +
+                    $"psikologId: {_psikologId}\n" +
+                    $"hari: {hari}\n" +
+                    $"jamMulai: {jamMulai}\n" +
+                    $"jamSelesai: {jamSelesai}\n" +
+                    $"metode: {metode}\n" +
+                    $"kuota: {kuota}\n" +
+                    $"isActive: {isActive}",
+                    "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 bool berhasil = _psikologController.TambahJadwal(_psikologId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
 
                 if (berhasil)
@@ -194,6 +214,11 @@ namespace pboFinalProfject
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BersihkanForm();
                     LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menambah jadwal: Method mengembalikan false.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

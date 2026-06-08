@@ -345,9 +345,10 @@ namespace pboFinalProfject.Controllers
         }
 
         // Laporan
+
         public DataTable GetLaporanBooking(DateTime startDate, DateTime endDate, string status = null)
         {
-            // Tambahkan 1 hari ke endDate agar mencakup seluruh hari
+            // Tambah 1 hari ke endDate agar mencakup seluruh hari
             DateTime endDateInclusive = endDate.AddDays(1);
 
             string query = @"
@@ -357,30 +358,32 @@ namespace pboFinalProfject.Controllers
                     u.username as mahasiswa,
                     u.email as email_mahasiswa,
                     p2.nama_lengkap as psikolog,
-                    j.metode,
+                    COALESCE(j.metode, '-') as metode,
                     b.status,
-                    b.catatan_user,
-                    b.catatan_psikolog
+                    COALESCE(b.catatan_user, '-') as catatan_user,
+                    COALESCE(b.catatan_psikolog, '-') as catatan_psikolog
                 FROM booking b
-                JOIN users u ON b.user_id = u.user_id
-                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
-                JOIN users p2 ON ps.user_id = p2.user_id
-                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                WHERE b.created_at BETWEEN @start_date AND @end_date";
+                INNER JOIN users u ON b.user_id = u.user_id
+                INNER JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
+                INNER JOIN users p2 ON ps.user_id = p2.user_id
+                LEFT JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                WHERE b.created_at >= @start_date AND b.created_at < @end_date";
 
-            var parameters = new List<NpgsqlParameter>
+                    var parameters = new List<NpgsqlParameter>
             {
                 new NpgsqlParameter("@start_date", startDate),
                 new NpgsqlParameter("@end_date", endDateInclusive)
             };
-            if (!string.IsNullOrEmpty(status) && status != "Semua")
-            {
-                query += "AND b.status = @status";
-                parameters.Add(new NpgsqlParameter("@status", status));
-            }
 
-            //query += "ORDER BY created_at DESC";
-            return _db.ExecuteQuery(query, parameters.ToArray());
+                    if (!string.IsNullOrEmpty(status) && status != "Semua")
+                    {
+                        query += " AND b.status = @status";
+                        parameters.Add(new NpgsqlParameter("@status", status));
+                    }
+
+                    query += " ORDER BY b.created_at DESC";
+
+                    return _db.ExecuteQuery(query, parameters.ToArray());
         }
 
         public string ExportLaporanToCsv(DateTime startDate, DateTime endDate, string status = null)
