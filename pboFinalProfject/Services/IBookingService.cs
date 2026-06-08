@@ -32,6 +32,11 @@ namespace pboFinalProfject
         DataTable GetDetailBookingById(int bookingId, int psikologId);
 
         /// <summary>
+        /// Mendapatkan detail booking untuk mahasiswa (menggunakan mahasiswaId)
+        /// </summary>
+        DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId);
+
+        /// <summary>
         /// Mengupdate status booking (untuk psikolog)
         /// </summary>
         bool UpdateStatusBooking(int bookingId, string status, string catatanPsikolog = null);

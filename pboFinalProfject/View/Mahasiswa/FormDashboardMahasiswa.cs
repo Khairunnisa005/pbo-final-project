@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows;
+using System.Windows.Forms;
 
 
 namespace pboFinalProfject.View.Mahasiswa
@@ -10,10 +10,17 @@ namespace pboFinalProfject.View.Mahasiswa
     {
         private Panel containerPanel;
         private FlowLayoutPanel flowPanel;
+        private Controllers.MahasiswaController _mahasiswaController;
 
         public FormDashboardMahasiswa()
         {
             InitializeComponent();
+            _mahasiswaController = new Controllers.MahasiswaController();
+
+            // wire existing buttons
+            btnKuisioner.Click += btnKuisioner_Click;
+            btnKuis.Click += btnCekKeadaan_Click;
+            btnJadwal.Click += BtnJadwal_Click;
         }
 
         //private void InitializeDashboard()
@@ -96,9 +103,66 @@ namespace pboFinalProfject.View.Mahasiswa
 
         }
 
+        private void btnKuisioner_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var form = new FormKuesioner();
+                form.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal membuka kuisioner: " + ex.Message);
+            }
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            var f = new FormProfilMahasiswa();
+            f.ShowDialog(this);
+        }
+
+        private void btnDaftar_Click(object sender, EventArgs e)
+        {
+            var f = new FormDaftarKonselor();
+            f.ShowDialog(this);
+        }
+
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            var auth = new Controllers.AuthController();
+            auth.Logout(this);
+            var login = new FormLogin();
+            login.Show();
+        }
+
+        private void btnCekKeadaan_Click(object sender, EventArgs e)
+        {
+            var form = new FormCekKeadaan();
+            form.ShowDialog(this);
+        }
+
+        private void BtnJadwal_Click(object sender, EventArgs e)
+        {
+            var form = new FormJadwal();
+            form.ShowDialog(this);
+        }
+
         private void Dashboard_Load(object sender, EventArgs e)
         {
             this.ClientSize = new System.Drawing.Size(1535, 864);
+            // Load jadwal ke dataGridView1 sebagai Jadwal Konsultasi summary
+            try
+            {
+                var dt = _mahasiswaController.GetJadwalAktif();
+                dataGridView1.DataSource = dt;
+                if (dataGridView1.Columns.Contains("jadwal_id")) dataGridView1.Columns["jadwal_id"].Visible = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception ex)
+            {
+                // jangan crash dashboard
+            }
         }
     }
 }

@@ -91,7 +91,7 @@ partial class FormDashboardMahasiswa
         btnProfile.Text = "Profil";
         btnProfile.TextAlign = ContentAlignment.MiddleLeft;
         btnProfile.UseVisualStyleBackColor = false;
-        btnProfile.Click += button1_Click_1;
+        btnProfile.Click += btnProfile_Click;
         // 
         // btnKonsultasi
         // 
@@ -129,6 +129,7 @@ partial class FormDashboardMahasiswa
         btnKuisioner.Text = "Kuisioner";
         btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
         btnKuisioner.UseVisualStyleBackColor = false;
+        btnKuisioner.Click += btnKuisioner_Click;
         // 
         // btnDaftar
         // 
@@ -140,6 +141,7 @@ partial class FormDashboardMahasiswa
         btnDaftar.TabIndex = 7;
         btnDaftar.Text = "Daftar Konselor";
         btnDaftar.UseVisualStyleBackColor = false;
+        btnDaftar.Click += btnDaftar_Click;
         // 
         // btnJadwal
         // 
@@ -151,6 +153,7 @@ partial class FormDashboardMahasiswa
         btnJadwal.TabIndex = 8;
         btnJadwal.Text = "Buat Janji";
         btnJadwal.UseVisualStyleBackColor = false;
+        btnJadwal.Click += BtnJadwal_Click;
         // 
         // btnKuis
         // 
@@ -162,6 +165,7 @@ partial class FormDashboardMahasiswa
         btnKuis.TabIndex = 9;
         btnKuis.Text = "Cek Keadaan";
         btnKuis.UseVisualStyleBackColor = false;
+        btnKuis.Click += btnCekKeadaan_Click;
         // 
         // btnKeluar
         // 
@@ -174,13 +178,14 @@ partial class FormDashboardMahasiswa
         btnKeluar.Text = "Keluar";
         btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
         btnKeluar.UseVisualStyleBackColor = false;
+        btnKeluar.Click += btnKeluar_Click;
         // 
-        // Dashboard
+        // FormDashboardMahasiswa
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-        ClientSize = new Size(1517, 817);
+        ClientSize = new Size(1518, 817);
         Controls.Add(btnKeluar);
         Controls.Add(btnKuis);
         Controls.Add(btnJadwal);
@@ -194,8 +199,8 @@ partial class FormDashboardMahasiswa
         Controls.Add(dataGridView1);
         DoubleBuffered = true;
         Icon = (Icon)resources.GetObject("$this.Icon");
-        Name = "Dashboard";
-        StartPosition = FormStartPosition.Manual;
+        Name = "FormDashboardMahasiswa";
+        StartPosition = FormStartPosition.CenterParent;
         Text = "Form1";
         Load += Dashboard_Load;
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

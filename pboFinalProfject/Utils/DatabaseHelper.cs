@@ -7,7 +7,7 @@ namespace pboFinalProfject.Utils
     public class DatabaseHelper
     {
         // GANTI CONNECTION STRING INI SESUAI DENGAN POSTGRESQL-MU
-        private readonly string _connectionString = "Host=localhost;Port=5432;Database=unimind;Username=postgres;Password=post16;";
+        private readonly string _connectionString = "Host=localhost;Port=5432;Database=unimind;Username=postgres;Password=12345678;";
 
         // Alternatif connection string yang sering dipakai:
         // "Host=localhost;Database=unimind;Username=postgres;Password=postgres;"

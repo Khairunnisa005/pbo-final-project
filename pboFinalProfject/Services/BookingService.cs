@@ -21,6 +21,46 @@ namespace pboFinalProfject
         }
 
         /// <summary>
+        /// Mendapatkan detail booking untuk mahasiswa (tanpa membutuhkan psikolog_id)
+        /// </summary>
+        public DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId)
+        {
+            string query = @"
+                SELECT 
+                    b.booking_id,
+                    u.username as mahasiswa,
+                    u.email as mahasiswa_email,
+                    u.no_telepon as mahasiswa_telepon,
+                    p2.nama_lengkap as psikolog_nama,
+                    b.created_at as tanggal_booking,
+                    j.jam_mulai,
+                    j.jam_selesai,
+                    j.metode,
+                    b.status,
+                    b.catatan_user,
+                    b.catatan_psikolog,
+                    h.tingkat_stres,
+                    h.skor_total,
+                    h.rekomendasi
+                FROM booking b
+                JOIN users u ON b.user_id = u.user_id
+                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
+                JOIN users p2 ON ps.user_id = p2.user_id
+                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                LEFT JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
+                WHERE b.booking_id = @booking_id 
+                AND b.user_id = @user_id";
+
+            var parameters = new[]
+            {
+                new NpgsqlParameter("@booking_id", bookingId),
+                new NpgsqlParameter("@user_id", mahasiswaId)
+            };
+
+            return _db.ExecuteQuery(query, parameters);
+        }
+
+        /// <summary>
         /// Mendapatkan daftar jadwal yang tersedia untuk psikolog tertentu
         /// </summary>
         public DataTable GetJadwalTersediaByPsikolog(int psikologId)
@@ -76,56 +116,69 @@ namespace pboFinalProfject
                 {
                     try
                     {
-                        // 1. Cek apakah slot masih tersedia
-                        if (!CekKetersediaanSlot(jadwalId))
+                        // 1. Cek apakah slot masih tersedia (use the same connection)
+                        using (var cmdCheck = new NpgsqlCommand(@"
+                            SELECT 
+                                CASE 
+                                    WHEN j.kuota > COALESCE(b.jumlah_booking, 0) AND j.is_active = true THEN true 
+                                    ELSE false END as tersedia
+                            FROM jadwal_psikolog j
+                            LEFT JOIN (
+                                SELECT jadwal_id, COUNT(*) as jumlah_booking
+                                FROM booking
+                                WHERE status IN ('Pending', 'Disetujui')
+                                GROUP BY jadwal_id
+                            ) b ON j.jadwal_id = b.jadwal_id
+                            WHERE j.jadwal_id = @jadwal_id", conn, trans))
                         {
-                            throw new Exception("Slot jadwal sudah penuh atau tidak tersedia!");
+                            cmdCheck.Parameters.AddWithValue("@jadwal_id", jadwalId);
+                            var avail = cmdCheck.ExecuteScalar();
+                            if (avail == null || !Convert.ToBoolean(avail))
+                                throw new Exception("Slot jadwal sudah penuh atau tidak tersedia!");
                         }
 
-                        // 2. Cek apakah mahasiswa sudah booking di slot yang sama
+                        // 2. Cek apakah mahasiswa sudah booking di slot yang sama (same connection)
                         string cekDoubleQuery = @"
                             SELECT COUNT(*) FROM booking b
-                            JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
                             WHERE b.user_id = @user_id 
-                            AND j.jadwal_id = @jadwal_id
+                            AND b.jadwal_id = @jadwal_id
                             AND b.status IN ('Pending', 'Disetujui')";
 
-                        var cekDoubleParams = new[]
+                        using (var cmdDouble = new NpgsqlCommand(cekDoubleQuery, conn, trans))
                         {
-                            new NpgsqlParameter("@user_id", mahasiswaId),
-                            new NpgsqlParameter("@jadwal_id", jadwalId)
-                        };
-
-                        int doubleCount = Convert.ToInt32(_db.ExecuteScalar(cekDoubleQuery, cekDoubleParams));
-                        if (doubleCount > 0)
-                        {
-                            throw new Exception("Anda sudah melakukan booking untuk jadwal ini!");
+                            cmdDouble.Parameters.AddWithValue("@user_id", mahasiswaId);
+                            cmdDouble.Parameters.AddWithValue("@jadwal_id", jadwalId);
+                            int doubleCount = Convert.ToInt32(cmdDouble.ExecuteScalar());
+                            if (doubleCount > 0)
+                                throw new Exception("Anda sudah melakukan booking untuk jadwal ini!");
                         }
 
-                        // 3. Ambil data jadwal untuk mendapatkan psikolog_id
-                        string getJadwalQuery = "SELECT psikolog_id FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id";
-                        var getJadwalParams = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
-                        int psikologId = Convert.ToInt32(_db.ExecuteScalar(getJadwalQuery, getJadwalParams));
+                        // 3. Ambil data jadwal untuk mendapatkan psikolog_id (same connection)
+                        int psikologId;
+                        using (var cmdGet = new NpgsqlCommand("SELECT psikolog_id FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id", conn, trans))
+                        {
+                            cmdGet.Parameters.AddWithValue("@jadwal_id", jadwalId);
+                            psikologId = Convert.ToInt32(cmdGet.ExecuteScalar());
+                        }
 
-                        // 4. Insert booking
+                        // 4. Insert booking (same connection & transaction)
                         string insertQuery = @"
                             INSERT INTO booking (user_id, psikolog_id, jadwal_id, status, catatan_user, hasil_assessment_id, created_at) 
                             VALUES (@user_id, @psikolog_id, @jadwal_id, 'Pending', @catatan_user, @hasil_assessment_id, @created_at)";
 
-                        var insertParams = new[]
+                        using (var cmdInsert = new NpgsqlCommand(insertQuery, conn, trans))
                         {
-                            new NpgsqlParameter("@user_id", mahasiswaId),
-                            new NpgsqlParameter("@psikolog_id", psikologId),
-                            new NpgsqlParameter("@jadwal_id", jadwalId),
-                            new NpgsqlParameter("@catatan_user", string.IsNullOrEmpty(catatanUser) ? DBNull.Value : (object)catatanUser),
-                            new NpgsqlParameter("@hasil_assessment_id", hasilAssessmentId.HasValue ? (object)hasilAssessmentId.Value : DBNull.Value),
-                            new NpgsqlParameter("@created_at", DateTime.Now)
-                        };
+                            cmdInsert.Parameters.AddWithValue("@user_id", mahasiswaId);
+                            cmdInsert.Parameters.AddWithValue("@psikolog_id", psikologId);
+                            cmdInsert.Parameters.AddWithValue("@jadwal_id", jadwalId);
+                            cmdInsert.Parameters.AddWithValue("@catatan_user", string.IsNullOrEmpty(catatanUser) ? (object)DBNull.Value : (object)catatanUser);
+                            cmdInsert.Parameters.AddWithValue("@hasil_assessment_id", hasilAssessmentId.HasValue ? (object)hasilAssessmentId.Value : (object)DBNull.Value);
+                            cmdInsert.Parameters.AddWithValue("@created_at", DateTime.Now);
 
-                        int result = _db.ExecuteNonQuery(insertQuery, insertParams);
-
-                        trans.Commit();
-                        return result > 0;
+                            int result = cmdInsert.ExecuteNonQuery();
+                            trans.Commit();
+                            return result > 0;
+                        }
                     }
                     catch (Exception)
                     {

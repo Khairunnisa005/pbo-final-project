@@ -47,6 +47,11 @@ namespace pboFinalProfject
             return _bookingService.GetDetailBookingById(bookingId, psikologId);
         }
 
+        public DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId)
+        {
+            return _bookingService.GetDetailBookingForMahasiswa(bookingId, mahasiswaId);
+        }
+
         public bool SetujuiBooking(int bookingId, string catatanPsikolog = null)
         {
             try
