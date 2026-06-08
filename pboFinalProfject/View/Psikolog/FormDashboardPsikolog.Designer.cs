@@ -35,7 +35,6 @@
             btnKelolaJadwal = new Button();
             btnKembali = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
-            SuspendLayout();
             // 
             // dgvPasien
             // 

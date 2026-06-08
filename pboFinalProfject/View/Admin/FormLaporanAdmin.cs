@@ -29,6 +29,8 @@ namespace pboFinalProfject.View
             cmbStatus.Items.Add("Selesai");
             cmbStatus.Items.Add("Batal");
             cmbStatus.SelectedIndex=0; // default semua
+
+            btnKembali.Click += btnKembali_Click;
         }
 
         // Event saat form pertama kali dimuat
@@ -243,6 +245,11 @@ namespace pboFinalProfject.View
             content += "========================================\n";
 
             return content;
+        }
+
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

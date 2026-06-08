@@ -132,7 +132,7 @@
             btnKembali.TabIndex = 10;
             btnKembali.Text = "Kembali";
             btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += btnKembali_Click;
+            btnKembali.Click += BtnKembali_Click;
             // 
             // FormKelolaJadwal
             // 
@@ -153,7 +153,7 @@
             Name = "FormKelolaJadwal";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Kelola Jadwal - UniMind";
-            Load += FormKelolaJadwal_Load_1;
+            Load += FormKelolaJadwal_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).EndInit();
             ResumeLayout(false);
             PerformLayout();

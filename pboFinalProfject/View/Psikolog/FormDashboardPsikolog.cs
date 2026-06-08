@@ -6,7 +6,7 @@ using pboFinalProfject.View;
 using System;
 using System.Data;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormDashboardPsikolog : Form
     {
@@ -23,6 +23,8 @@ namespace pboFinalProfject
 
             // Hook event handlers
             this.Load += FormDashboardPsikolog_Load;
+            btnKelolaJadwal.Click += btnKelolaJadwal_Click;
+
         }
 
         private void FormDashboardPsikolog_Load(object sender, EventArgs e)
@@ -282,6 +284,9 @@ namespace pboFinalProfject
             Application.Exit();
         }
 
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

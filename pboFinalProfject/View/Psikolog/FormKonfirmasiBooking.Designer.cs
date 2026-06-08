@@ -156,7 +156,7 @@
             btnKembali.TabIndex = 10;
             btnKembali.Text = "Kembali";
             btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += btnKembali_Click;
+            btnKembali.Click += BtnKembali_Click;
             // 
             // FormKonfirmasiBooking
             // 
