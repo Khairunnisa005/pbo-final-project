@@ -49,7 +49,7 @@ namespace pboFinalProfject
 
                     // Isi data ke label
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
-                    lblValNama.Text = row["mahasiswa_anonim"]?.ToString() ?? "-";
+                    lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
 
                     // Format jadwal
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);

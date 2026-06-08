@@ -46,7 +46,7 @@ namespace pboFinalProfject.Repositories
         public DataTable GetByPsikologId(int psikologId)
         {
             string query = @"
-                SELECT b.*, u.username as mahasiswa_anonim, j.hari, j.jam_mulai, j.jam_selesai, j.metode
+                SELECT b.*, u.username as mahasiswa, j.hari, j.jam_mulai, j.jam_selesai, j.metode
                 FROM booking b
                 JOIN users u ON b.user_id = u.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
@@ -68,7 +68,7 @@ namespace pboFinalProfject.Repositories
         public DataTable GetPendingByPsikologId(int psikologId)
         {
             string query = @"
-                SELECT b.*, u.username as mahasiswa_anonim, j.hari, j.jam_mulai, j.jam_selesai, j.metode
+                SELECT b.*, u.username as mahasiswa, j.hari, j.jam_mulai, j.jam_selesai, j.metode
                 FROM booking b
                 JOIN users u ON b.user_id = u.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
