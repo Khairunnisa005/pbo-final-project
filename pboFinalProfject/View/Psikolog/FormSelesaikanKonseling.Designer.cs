@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject
+﻿namespace pboFinalProfject.View
 {
     partial class FormSelesaikanKonseling
     {

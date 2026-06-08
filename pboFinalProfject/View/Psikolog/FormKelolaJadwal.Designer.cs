@@ -1,4 +1,4 @@
-﻿namespace pboFinalProfject.view
+﻿namespace pboFinalProfject.View
 {
     partial class FormKelolaJadwal
     {
