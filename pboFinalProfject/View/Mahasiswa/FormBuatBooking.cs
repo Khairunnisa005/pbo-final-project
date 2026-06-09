@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using pboFinalProfject.Controllers;
+using pboFinalProfject.Repositories;
 using pboFinalProfject.Session;
 
 namespace pboFinalProfject.View.Mahasiswa
@@ -11,12 +12,15 @@ namespace pboFinalProfject.View.Mahasiswa
     {
         private BookingController _bookingController;
         private PsikologController _psikologController;
+        private JadwalRepository _jadwalRepo;
+        private int? _editJadwalId;
 
         public FormBuatBooking()
         {
             InitializeComponent();
             _bookingController = new BookingController();
             _psikologController = new PsikologController();
+            _jadwalRepo = new JadwalRepository();
 
             // wire events
             comboKategori.SelectedIndexChanged += ComboKategori_SelectedIndexChanged;
@@ -25,6 +29,88 @@ namespace pboFinalProfject.View.Mahasiswa
             btnSubmit.Click += BtnSubmit_Click;
 
             LoadCategories();
+        }
+
+        /// <summary>
+        /// Constructor untuk mode edit: prefill dengan jadwal tertentu.
+        /// </summary>
+        public FormBuatBooking(int jadwalId) : this()
+        {
+            _editJadwalId = jadwalId;
+            this.Text = "Edit Jadwal Konsultasi";
+            btnSubmit.Text = "Simpan Perubahan";
+            LoadEditJadwal(jadwalId);
+        }
+
+        private void LoadEditJadwal(int jadwalId)
+        {
+            try
+            {
+                var jadwal = _jadwalRepo.GetById(jadwalId);
+                if (jadwal == null)
+                {
+                    MessageBox.Show("Jadwal tidak ditemukan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Load all psikolog and select the matching one
+                var psikologTable = _psikologController.GetAllPsikolog();
+                if (psikologTable == null || psikologTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("Data psikolog tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Find matching psikolog row
+                DataRow matchRow = null;
+                foreach (DataRow row in psikologTable.Rows)
+                {
+                    int pid = Convert.ToInt32(row["psikolog_id"]);
+                    if (pid == jadwal.PsikologId)
+                    {
+                        matchRow = row;
+                        break;
+                    }
+                }
+
+                if (matchRow != null)
+                {
+                    comboPsikolog.DisplayMember = psikologTable.Columns.Contains("nama_lengkap") ? "nama_lengkap" : "username";
+                    comboPsikolog.ValueMember = "psikolog_id";
+                    comboPsikolog.DataSource = psikologTable;
+                    comboPsikolog.DisplayMember = psikologTable.Columns.Contains("nama_lengkap")
+                        ? "nama_lengkap"
+                        : "username";
+                    comboPsikolog.ValueMember = "psikolog_id";
+
+                    comboPsikolog.SelectedValue = jadwal.PsikologId;
+                }
+
+                // Load jadwal for the psikolog
+                var jadwalDt = _bookingController.GetJadwalTersediaByPsikolog(jadwal.PsikologId);
+                if (jadwalDt != null && jadwalDt.Rows.Count > 0)
+                {
+                    dgvJadwal.DataSource = jadwalDt;
+                    if (dgvJadwal.Columns.Contains("jadwal_id")) dgvJadwal.Columns["jadwal_id"].Visible = false;
+                    dgvJadwal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                    // Select the matching jadwal row
+                    foreach (DataGridViewRow row in dgvJadwal.Rows)
+                    {
+                        var val = row.Cells["jadwal_id"].Value;
+                        if (val != null && Convert.ToInt32(val) == jadwalId)
+                        {
+                            row.Selected = true;
+                            dgvJadwal.CurrentCell = row.Cells[0];
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data jadwal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadCategories()
@@ -183,7 +269,10 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void SubmitBooking(int jadwalId)
         {
-            var confirm = MessageBox.Show("Kirim permintaan booking untuk jadwal ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string msg = _editJadwalId.HasValue 
+                ? "Simpan perubahan untuk jadwal ini?" 
+                : "Kirim permintaan booking untuk jadwal ini?";
+            var confirm = MessageBox.Show(msg, "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
 
             try
@@ -214,25 +303,38 @@ namespace pboFinalProfject.View.Mahasiswa
                 bool ok = _bookingController.BuatBooking(userId, jadwalId, catatan, hasilId);
                 if (ok)
                 {
-                    MessageBox.Show("Permintaan booking berhasil dikirim.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string successMsg = _editJadwalId.HasValue
+                        ? "Jadwal berhasil diperbarui."
+                        : "Permintaan booking berhasil dikirim.";
+                    MessageBox.Show(successMsg, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Gagal mengirim permintaan booking.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string errorMsg = _editJadwalId.HasValue
+                        ? "Gagal memperbarui jadwal."
+                        : "Gagal mengirim permintaan booking.";
+                    MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                // show full exception to help debugging in development
-                MessageBox.Show("Gagal membuat booking: " + ex.Message + "\n\n" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errTitle = _editJadwalId.HasValue
+                    ? "Gagal memperbarui jadwal: "
+                    : "Gagal membuat booking: ";
+                MessageBox.Show(errTitle + ex.Message + "\n\n" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FormBuatBooking_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,58 +15,123 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void InitializeComponent()
         {
-            this.tbUsername = new System.Windows.Forms.TextBox();
-            this.tbNama = new System.Windows.Forms.TextBox();
-            this.tbEmail = new System.Windows.Forms.TextBox();
-            this.tbTelepon = new System.Windows.Forms.TextBox();
-            this.btnSimpan = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            btnKuisioner = new Button();
+            btnKonselor = new Button();
+            btnKonsultasi = new Button();
+            btnProfile = new Button();
+            btnBeranda = new Button();
+            btnSubmit = new Button();
+            btnKembali = new Button();
+            SuspendLayout();
             // 
-            // tbUsername
+            // btnKuisioner
             // 
-            this.tbUsername.Location = new System.Drawing.Point(12, 12);
-            this.tbUsername.Size = new System.Drawing.Size(400, 27);
+            btnKuisioner.BackColor = Color.Transparent;
+            btnKuisioner.Font = new Font("Calibri", 12F);
+            btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
+            btnKuisioner.Location = new Point(63, 213);
+            btnKuisioner.Name = "btnKuisioner";
+            btnKuisioner.Size = new Size(165, 38);
+            btnKuisioner.TabIndex = 18;
+            btnKuisioner.Text = "Kuisioner";
+            btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
+            btnKuisioner.UseVisualStyleBackColor = false;
             // 
-            // tbNama
+            // btnKonselor
             // 
-            this.tbNama.Location = new System.Drawing.Point(12, 50);
-            this.tbNama.Size = new System.Drawing.Size(400, 27);
+            btnKonselor.BackColor = Color.Transparent;
+            btnKonselor.Font = new Font("Calibri", 12F);
+            btnKonselor.Location = new Point(63, 281);
+            btnKonselor.Name = "btnKonselor";
+            btnKonselor.Size = new Size(165, 38);
+            btnKonselor.TabIndex = 17;
+            btnKonselor.Text = "Konselor";
+            btnKonselor.TextAlign = ContentAlignment.MiddleLeft;
+            btnKonselor.UseVisualStyleBackColor = false;
             // 
-            // tbEmail
+            // btnKonsultasi
             // 
-            this.tbEmail.Location = new System.Drawing.Point(12, 88);
-            this.tbEmail.Size = new System.Drawing.Size(400, 27);
+            btnKonsultasi.BackColor = Color.Transparent;
+            btnKonsultasi.Font = new Font("Calibri", 12F);
+            btnKonsultasi.Location = new Point(63, 338);
+            btnKonsultasi.Name = "btnKonsultasi";
+            btnKonsultasi.Size = new Size(167, 38);
+            btnKonsultasi.TabIndex = 16;
+            btnKonsultasi.Text = "Jadwal Konsultasi";
+            btnKonsultasi.TextAlign = ContentAlignment.MiddleLeft;
+            btnKonsultasi.UseVisualStyleBackColor = false;
             // 
-            // tbTelepon
+            // btnProfile
             // 
-            this.tbTelepon.Location = new System.Drawing.Point(12, 126);
-            this.tbTelepon.Size = new System.Drawing.Size(400, 27);
+            btnProfile.BackColor = Color.Transparent;
+            btnProfile.Font = new Font("Calibri", 12F);
+            btnProfile.ImageAlign = ContentAlignment.TopRight;
+            btnProfile.Location = new Point(65, 419);
+            btnProfile.Name = "btnProfile";
+            btnProfile.Size = new Size(165, 38);
+            btnProfile.TabIndex = 15;
+            btnProfile.Text = "Profil";
+            btnProfile.TextAlign = ContentAlignment.MiddleLeft;
+            btnProfile.UseVisualStyleBackColor = false;
             // 
-            // btnSimpan
+            // btnBeranda
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(12, 164);
-            this.btnSimpan.Size = new System.Drawing.Size(120, 34);
-            this.btnSimpan.Text = "Simpan";
+            btnBeranda.BackColor = Color.Transparent;
+            btnBeranda.Font = new Font("Calibri", 12F);
+            btnBeranda.Location = new Point(63, 144);
+            btnBeranda.Name = "btnBeranda";
+            btnBeranda.Size = new Size(165, 38);
+            btnBeranda.TabIndex = 14;
+            btnBeranda.Text = "Beranda";
+            btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
+            btnBeranda.UseVisualStyleBackColor = false;
+            // 
+            // btnSubmit
+            // 
+            btnSubmit.BackColor = SystemColors.ControlLightLight;
+            btnSubmit.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnSubmit.Location = new Point(1253, 752);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new Size(215, 45);
+            btnSubmit.TabIndex = 19;
+            btnSubmit.Text = "Kirim Kuisioner";
+            btnSubmit.UseVisualStyleBackColor = false;
+            // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = SystemColors.ControlLightLight;
+            btnKembali.Font = new Font("Calibri", 10F);
+            btnKembali.Location = new Point(1034, 753);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(193, 45);
+            btnKembali.TabIndex = 20;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Visible = false;
             // 
             // FormProfilMahasiswa
             // 
-            this.ClientSize = new System.Drawing.Size(440, 210);
-            this.Controls.Add(this.btnSimpan);
-            this.Controls.Add(this.tbTelepon);
-            this.Controls.Add(this.tbEmail);
-            this.Controls.Add(this.tbNama);
-            this.Controls.Add(this.tbUsername);
-            this.Name = "FormProfilMahasiswa";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Profil";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            BackgroundImage = Properties.Resources.profil__2_;
+            ClientSize = new Size(1518, 817);
+            Controls.Add(btnSubmit);
+            Controls.Add(btnKembali);
+            Controls.Add(btnKuisioner);
+            Controls.Add(btnKonselor);
+            Controls.Add(btnKonsultasi);
+            Controls.Add(btnProfile);
+            Controls.Add(btnBeranda);
+            Name = "FormProfilMahasiswa";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Profil";
+            ResumeLayout(false);
         }
 
-        private System.Windows.Forms.TextBox tbUsername;
-        private System.Windows.Forms.TextBox tbNama;
-        private System.Windows.Forms.TextBox tbEmail;
-        private System.Windows.Forms.TextBox tbTelepon;
-        private System.Windows.Forms.Button btnSimpan;
+        private Button btnKuisioner;
+        private Button btnKonselor;
+        private Button btnKonsultasi;
+        private Button btnProfile;
+        private Button btnBeranda;
+        private Button btnSubmit;
+        private Button btnKembali;
     }
 }

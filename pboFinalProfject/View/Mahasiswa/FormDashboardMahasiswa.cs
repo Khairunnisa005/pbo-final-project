@@ -1,4 +1,6 @@
-﻿using System;
+﻿using pboFinalProfject.Controllers;
+using pboFinalProfject.Session;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -19,7 +21,7 @@ namespace pboFinalProfject.View.Mahasiswa
 
             // wire existing buttons
             btnKuisioner.Click += btnKuisioner_Click;
-            btnKuis.Click += btnCekKeadaan_Click;
+            //btnKuis.Click += btnCekKeadaan_Click;
             btnJadwal.Click += BtnJadwal_Click;
         }
 
@@ -136,15 +138,15 @@ namespace pboFinalProfject.View.Mahasiswa
             login.Show();
         }
 
-        private void btnCekKeadaan_Click(object sender, EventArgs e)
-        {
-            var form = new FormCekKeadaan();
-            form.ShowDialog(this);
-        }
+        //private void btnCekKeadaan_Click(object sender, EventArgs e)
+        //{
+        //    var form = new FormCekKeadaan();
+        //    form.ShowDialog(this);
+        //}
 
         private void BtnJadwal_Click(object sender, EventArgs e)
         {
-            var form = new FormJadwal();
+            var form = new FormBuatBooking();
             form.ShowDialog(this);
         }
 
@@ -158,11 +160,83 @@ namespace pboFinalProfject.View.Mahasiswa
                 dataGridView1.DataSource = dt;
                 if (dataGridView1.Columns.Contains("jadwal_id")) dataGridView1.Columns["jadwal_id"].Visible = false;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                // add edit/delete buttons if not present
+                if (!dataGridView1.Columns.Contains("_edit"))
+                {
+                    var edit = new DataGridViewButtonColumn { Name = "_edit", HeaderText = "Edit", Text = "Edit", UseColumnTextForButtonValue = true };
+                    var del = new DataGridViewButtonColumn { Name = "_delete", HeaderText = "Hapus", Text = "Hapus", UseColumnTextForButtonValue = true };
+                    dataGridView1.Columns.Add(edit);
+                    dataGridView1.Columns.Add(del);
+                    dataGridView1.CellContentClick += DataGridView1_CellContentClick;
+                }
             }
             catch (Exception ex)
             {
                 // jangan crash dashboard
             }
+        }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            var grid = sender as DataGridView;
+            var row = grid.Rows[e.RowIndex];
+            if (grid.Columns[e.ColumnIndex].Name == "_edit")
+            {
+                if (!grid.Columns.Contains("jadwal_id")) return;
+                int jadwalId = Convert.ToInt32(row.Cells["jadwal_id"].Value);
+                var form = new FormBuatBooking(jadwalId);
+                form.Text = "Edit Jadwal Konsultasi";
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    Dashboard_Load(this, EventArgs.Empty);
+                }
+            }
+            else if (grid.Columns[e.ColumnIndex].Name == "_delete")
+            {
+                if (!grid.Columns.Contains("booking_id")) return;
+                int bookingId = Convert.ToInt32(row.Cells["booking_id"].Value);
+                int userId;
+                try
+                {
+                    userId = UserSession.GetCurrentUserId();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Tidak ada user yang login.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var confirm = MessageBox.Show("Hapus booking ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm == DialogResult.Yes)
+                {
+                    try
+                    {
+                        var ctrl = new Controllers.MahasiswaController();
+                        bool ok = ctrl.HapusBooking(bookingId, userId);
+                        if (ok)
+                        {
+                            MessageBox.Show("Booking dihapus.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Dashboard_Load(this, EventArgs.Empty);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tidak ada data yang terhapus. Pastikan booking memang ada.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Gagal menghapus booking: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+        }
+
+        private void btnKuis_Click(object sender, EventArgs e)
+        {
+            var form = new FormKuesioner();
+            form.ShowDialog(this);
         }
     }
 }

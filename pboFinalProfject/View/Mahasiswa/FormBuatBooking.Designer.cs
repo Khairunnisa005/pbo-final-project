@@ -15,128 +15,181 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void InitializeComponent()
         {
-            this.lblKategori = new System.Windows.Forms.Label();
-            this.comboKategori = new System.Windows.Forms.ComboBox();
-            this.lblPsikolog = new System.Windows.Forms.Label();
-            this.comboPsikolog = new System.Windows.Forms.ComboBox();
-            this.lblJadwal = new System.Windows.Forms.Label();
-            this.dgvJadwal = new System.Windows.Forms.DataGridView();
-            this.lblCatatan = new System.Windows.Forms.Label();
-            this.txtCatatan = new System.Windows.Forms.TextBox();
-            this.chkAttachAssessment = new System.Windows.Forms.CheckBox();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.btnKembali = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJadwal)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // lblKategori
-            // 
-            this.lblKategori.Location = new System.Drawing.Point(12, 15);
-            this.lblKategori.Name = "lblKategori";
-            this.lblKategori.Size = new System.Drawing.Size(100, 23);
-            this.lblKategori.Text = "Kategori";
+            comboKategori = new ComboBox();
+            comboPsikolog = new ComboBox();
+            dgvJadwal = new DataGridView();
+            txtCatatan = new TextBox();
+            chkAttachAssessment = new CheckBox();
+            btnSubmit = new Button();
+            btnKembali = new Button();
+            btnKuisioner = new Button();
+            btnKonselor = new Button();
+            btnKonsultasi = new Button();
+            btnProfile = new Button();
+            btnBeranda = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvJadwal).BeginInit();
+            SuspendLayout();
             // 
             // comboKategori
             // 
-            this.comboKategori.Location = new System.Drawing.Point(120, 12);
-            this.comboKategori.Name = "comboKategori";
-            this.comboKategori.Size = new System.Drawing.Size(300, 28);
-            // 
-            // lblPsikolog
-            // 
-            this.lblPsikolog.Location = new System.Drawing.Point(12, 55);
-            this.lblPsikolog.Name = "lblPsikolog";
-            this.lblPsikolog.Size = new System.Drawing.Size(100, 23);
-            this.lblPsikolog.Text = "Pilih Psikolog";
+            comboKategori.Font = new Font("Segoe UI", 12F);
+            comboKategori.Location = new Point(487, 210);
+            comboKategori.Name = "comboKategori";
+            comboKategori.Size = new Size(435, 36);
+            comboKategori.TabIndex = 8;
             // 
             // comboPsikolog
             // 
-            this.comboPsikolog.Location = new System.Drawing.Point(120, 52);
-            this.comboPsikolog.Name = "comboPsikolog";
-            this.comboPsikolog.Size = new System.Drawing.Size(300, 28);
-            // 
-            // lblJadwal
-            // 
-            this.lblJadwal.Location = new System.Drawing.Point(12, 95);
-            this.lblJadwal.Name = "lblJadwal";
-            this.lblJadwal.Size = new System.Drawing.Size(100, 23);
-            this.lblJadwal.Text = "Pilih Jadwal";
+            comboPsikolog.Font = new Font("Segoe UI", 12F);
+            comboPsikolog.Location = new Point(487, 266);
+            comboPsikolog.Name = "comboPsikolog";
+            comboPsikolog.Size = new Size(435, 36);
+            comboPsikolog.TabIndex = 6;
             // 
             // dgvJadwal
             // 
-            this.dgvJadwal.Location = new System.Drawing.Point(12, 120);
-            this.dgvJadwal.Name = "dgvJadwal";
-            this.dgvJadwal.Size = new System.Drawing.Size(760, 250);
-            this.dgvJadwal.TabIndex = 0;
-            // 
-            // lblCatatan
-            // 
-            this.lblCatatan.Location = new System.Drawing.Point(12, 385);
-            this.lblCatatan.Name = "lblCatatan";
-            this.lblCatatan.Size = new System.Drawing.Size(100, 23);
-            this.lblCatatan.Text = "Catatan";
+            dgvJadwal.BackgroundColor = SystemColors.ControlLightLight;
+            dgvJadwal.BorderStyle = BorderStyle.Fixed3D;
+            dgvJadwal.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvJadwal.ColumnHeadersHeight = 29;
+            dgvJadwal.Location = new Point(301, 364);
+            dgvJadwal.Name = "dgvJadwal";
+            dgvJadwal.RowHeadersWidth = 51;
+            dgvJadwal.Size = new Size(1169, 174);
+            dgvJadwal.TabIndex = 0;
             // 
             // txtCatatan
             // 
-            this.txtCatatan.Location = new System.Drawing.Point(120, 382);
-            this.txtCatatan.Multiline = true;
-            this.txtCatatan.Name = "txtCatatan";
-            this.txtCatatan.Size = new System.Drawing.Size(652, 80);
+            txtCatatan.Location = new Point(487, 571);
+            txtCatatan.Multiline = true;
+            txtCatatan.Name = "txtCatatan";
+            txtCatatan.Size = new Size(983, 106);
+            txtCatatan.TabIndex = 3;
             // 
             // chkAttachAssessment
             // 
-            this.chkAttachAssessment.Location = new System.Drawing.Point(12, 475);
-            this.chkAttachAssessment.Name = "chkAttachAssessment";
-            this.chkAttachAssessment.Size = new System.Drawing.Size(300, 24);
-            this.chkAttachAssessment.Text = "Lampirkan hasil kuisioner terbaru";
+            chkAttachAssessment.BackColor = SystemColors.ControlLightLight;
+            chkAttachAssessment.Location = new Point(298, 701);
+            chkAttachAssessment.Name = "chkAttachAssessment";
+            chkAttachAssessment.Size = new Size(300, 24);
+            chkAttachAssessment.TabIndex = 2;
+            chkAttachAssessment.Text = "Lampirkan hasil kuisioner terbaru";
+            chkAttachAssessment.UseVisualStyleBackColor = false;
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(632, 508);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(140, 36);
-            this.btnSubmit.Text = "Kirim Permintaan";
+            btnSubmit.Location = new Point(1257, 751);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new Size(213, 47);
+            btnSubmit.TabIndex = 1;
+            btnSubmit.Text = "Kirim Permintaan";
             // 
             // btnKembali
             // 
-            this.btnKembali.Location = new System.Drawing.Point(486, 508);
-            this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(120, 36);
-            this.btnKembali.Text = "Kembali";
-            this.btnKembali.Click += new System.EventHandler(this.btnKembali_Click);
+            btnKembali.Location = new Point(1032, 751);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(195, 47);
+            btnKembali.TabIndex = 0;
+            btnKembali.Text = "Kembali";
+            btnKembali.Click += btnKembali_Click;
+            // 
+            // btnKuisioner
+            // 
+            btnKuisioner.BackColor = Color.Transparent;
+            btnKuisioner.Font = new Font("Calibri", 12F);
+            btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
+            btnKuisioner.Location = new Point(60, 211);
+            btnKuisioner.Name = "btnKuisioner";
+            btnKuisioner.Size = new Size(165, 38);
+            btnKuisioner.TabIndex = 13;
+            btnKuisioner.Text = "Kuisioner";
+            btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
+            btnKuisioner.UseVisualStyleBackColor = false;
+            // 
+            // btnKonselor
+            // 
+            btnKonselor.BackColor = Color.Transparent;
+            btnKonselor.Font = new Font("Calibri", 12F);
+            btnKonselor.Location = new Point(60, 281);
+            btnKonselor.Name = "btnKonselor";
+            btnKonselor.Size = new Size(165, 38);
+            btnKonselor.TabIndex = 12;
+            btnKonselor.Text = "Konselor";
+            btnKonselor.TextAlign = ContentAlignment.MiddleLeft;
+            btnKonselor.UseVisualStyleBackColor = false;
+            // 
+            // btnKonsultasi
+            // 
+            btnKonsultasi.BackColor = Color.Transparent;
+            btnKonsultasi.Font = new Font("Calibri", 12F);
+            btnKonsultasi.Location = new Point(60, 348);
+            btnKonsultasi.Name = "btnKonsultasi";
+            btnKonsultasi.Size = new Size(167, 38);
+            btnKonsultasi.TabIndex = 11;
+            btnKonsultasi.Text = "Jadwal Konsultasi";
+            btnKonsultasi.TextAlign = ContentAlignment.MiddleLeft;
+            btnKonsultasi.UseVisualStyleBackColor = false;
+            // 
+            // btnProfile
+            // 
+            btnProfile.BackColor = Color.Transparent;
+            btnProfile.Font = new Font("Calibri", 12F);
+            btnProfile.ImageAlign = ContentAlignment.TopRight;
+            btnProfile.Location = new Point(62, 417);
+            btnProfile.Name = "btnProfile";
+            btnProfile.Size = new Size(165, 38);
+            btnProfile.TabIndex = 10;
+            btnProfile.Text = "Profil";
+            btnProfile.TextAlign = ContentAlignment.MiddleLeft;
+            btnProfile.UseVisualStyleBackColor = false;
+            // 
+            // btnBeranda
+            // 
+            btnBeranda.BackColor = Color.Transparent;
+            btnBeranda.Font = new Font("Calibri", 12F);
+            btnBeranda.Location = new Point(60, 142);
+            btnBeranda.Name = "btnBeranda";
+            btnBeranda.Size = new Size(165, 38);
+            btnBeranda.TabIndex = 9;
+            btnBeranda.Text = "Beranda";
+            btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
+            btnBeranda.UseVisualStyleBackColor = false;
             // 
             // FormBuatBooking
             // 
-            this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.btnKembali);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.chkAttachAssessment);
-            this.Controls.Add(this.txtCatatan);
-            this.Controls.Add(this.lblCatatan);
-            this.Controls.Add(this.dgvJadwal);
-            this.Controls.Add(this.lblJadwal);
-            this.Controls.Add(this.comboPsikolog);
-            this.Controls.Add(this.lblPsikolog);
-            this.Controls.Add(this.comboKategori);
-            this.Controls.Add(this.lblKategori);
-            this.Name = "FormBuatBooking";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Buat Booking";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJadwal)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            BackgroundImage = Properties.Resources.booking;
+            ClientSize = new Size(1518, 817);
+            Controls.Add(btnKuisioner);
+            Controls.Add(btnKonselor);
+            Controls.Add(btnKonsultasi);
+            Controls.Add(btnProfile);
+            Controls.Add(btnBeranda);
+            Controls.Add(btnKembali);
+            Controls.Add(btnSubmit);
+            Controls.Add(chkAttachAssessment);
+            Controls.Add(txtCatatan);
+            Controls.Add(dgvJadwal);
+            Controls.Add(comboPsikolog);
+            Controls.Add(comboKategori);
+            Name = "FormBuatBooking";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Buat Booking";
+            Load += FormBuatBooking_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvJadwal).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
-
-        private System.Windows.Forms.Label lblKategori;
         private System.Windows.Forms.ComboBox comboKategori;
-        private System.Windows.Forms.Label lblPsikolog;
         private System.Windows.Forms.ComboBox comboPsikolog;
-        private System.Windows.Forms.Label lblJadwal;
         private System.Windows.Forms.DataGridView dgvJadwal;
-        private System.Windows.Forms.Label lblCatatan;
         private System.Windows.Forms.TextBox txtCatatan;
         private System.Windows.Forms.CheckBox chkAttachAssessment;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnKembali;
+        private Button btnKuisioner;
+        private Button btnKonselor;
+        private Button btnKonsultasi;
+        private Button btnProfile;
+        private Button btnBeranda;
     }
 }

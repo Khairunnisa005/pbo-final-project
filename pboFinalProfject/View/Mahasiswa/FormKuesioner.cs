@@ -17,6 +17,7 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private List<PertanyaanAssessment> _questions;
         private List<GroupBox> _questionBoxes = new List<GroupBox>();
+        private static object lblResult;
 
         public FormKuesioner()
         {
@@ -39,9 +40,9 @@ namespace pboFinalProfject.View.Mahasiswa
                     Location = new Point(10, y)
                 };
 
-                var rbA = new RadioButton { Text = "A (Ringan)", Tag = new Tuple<int,char>(q.BobotA,'A'), Location = new Point(10, 25), AutoSize = true };
-                var rbB = new RadioButton { Text = "B (Sedang)", Tag = new Tuple<int,char>(q.BobotB,'B'), Location = new Point(140, 25), AutoSize = true };
-                var rbC = new RadioButton { Text = "C (Berat)", Tag = new Tuple<int,char>(q.BobotC,'C'), Location = new Point(300, 25), AutoSize = true };
+                var rbA = new RadioButton { Text = "A (Ringan)", Tag = new Tuple<int, char>(q.BobotA, 'A'), Location = new Point(10, 25), AutoSize = true };
+                var rbB = new RadioButton { Text = "B (Sedang)", Tag = new Tuple<int, char>(q.BobotB, 'B'), Location = new Point(140, 25), AutoSize = true };
+                var rbC = new RadioButton { Text = "C (Berat)", Tag = new Tuple<int, char>(q.BobotC, 'C'), Location = new Point(300, 25), AutoSize = true };
 
                 gb.Controls.Add(rbA);
                 gb.Controls.Add(rbB);
@@ -68,7 +69,7 @@ namespace pboFinalProfject.View.Mahasiswa
                     return;
                 }
 
-                var tuple = (Tuple<int,char>)selected.Tag;
+                var tuple = (Tuple<int, char>)selected.Tag;
                 answers.Add(new JawabanAssessment
                 {
                     PertanyaanId = _questions[i].PertanyaanId,
@@ -111,12 +112,13 @@ namespace pboFinalProfject.View.Mahasiswa
             int hasilId = _hasilRepo.Insert(hasil);
             if (hasilId > 0)
             {
+                // assign hasil id to each answer then bulk insert
+                foreach (var a in answers) a.HasilId = hasilId;
                 var saved = _jawabanRepo.InsertMany(hasilId, answers);
                 if (saved)
                 {
                     // show result and offer mulai lagi / kembali
-                    lblResult.Text = $"Kuisioner selesai. Skor: {total} - {tingkat}\n{rekom}";
-                    lblResult.Visible = true;
+                    kuisTotal(total, tingkat, rekom);
                     btnMulaiLagi.Visible = true;
                     btnKembali.Visible = true;
                     btnSubmit.Enabled = false;
@@ -132,6 +134,21 @@ namespace pboFinalProfject.View.Mahasiswa
                 MessageBox.Show("Gagal menyimpan hasil.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //static void kuisTotal(int total, string tingkat, string rekom)
+            //{
+            //    lblResult.Text = $"Kuisioner selesai. Skor: {total} - {tingkat}\n{rekom}";
+            //    lblResult.Visible = true;
+            //}
+        }
+
+        private void kuisTotal(int total, string tingkat, string rekom)
+        {
+            try
+            {
+                string msg = $"Kuisioner selesai. Skor: {total} - {tingkat}\n{rekom}";
+                MessageBox.Show(msg, "Hasil Kuisioner", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch { }
         }
 
         private void btnMulaiLagi_Click(object sender, EventArgs e)
@@ -145,12 +162,17 @@ namespace pboFinalProfject.View.Mahasiswa
             btnSubmit.Enabled = true;
             btnMulaiLagi.Visible = false;
             btnKembali.Visible = false;
-            lblResult.Visible = false;
+            //lblResult.Visible = false;
         }
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FormKuesioner_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

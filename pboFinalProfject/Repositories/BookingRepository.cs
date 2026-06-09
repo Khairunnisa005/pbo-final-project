@@ -17,6 +17,30 @@ namespace pboFinalProfject.Repositories
             _db = new DatabaseHelper();
         }
 
+        /// <summary>
+        /// Update booking's jadwal and psikolog (used for reschedule from mahasiswa)
+        /// </summary>
+        public bool UpdateBookingJadwal(int bookingId, int psikologId, int jadwalId, string catatanUser = null)
+        {
+            string query = @"
+                UPDATE booking
+                SET psikolog_id = @psikolog_id,
+                    jadwal_id = @jadwal_id,
+                    catatan_user = @catatan_user,
+                    status = 'Pending'
+                WHERE booking_id = @booking_id";
+
+            var parameters = new[]
+            {
+                new NpgsqlParameter("@psikolog_id", psikologId),
+                new NpgsqlParameter("@jadwal_id", jadwalId),
+                new NpgsqlParameter("@catatan_user", string.IsNullOrEmpty(catatanUser) ? DBNull.Value : (object)catatanUser),
+                new NpgsqlParameter("@booking_id", bookingId)
+            };
+
+            return _db.ExecuteNonQuery(query, parameters) > 0;
+        }
+
         public Booking GetById(int bookingId)
         {
             string query = "SELECT * FROM booking WHERE booking_id = @booking_id";

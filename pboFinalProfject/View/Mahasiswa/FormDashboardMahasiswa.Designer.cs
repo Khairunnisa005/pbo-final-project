@@ -48,10 +48,10 @@ partial class FormDashboardMahasiswa
         dataGridView1.BackgroundColor = SystemColors.ControlLightLight;
         dataGridView1.BorderStyle = BorderStyle.Fixed3D;
         dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Location = new Point(324, 511);
+        dataGridView1.Location = new Point(314, 535);
         dataGridView1.Name = "dataGridView1";
         dataGridView1.RowHeadersWidth = 51;
-        dataGridView1.Size = new Size(1172, 328);
+        dataGridView1.Size = new Size(1179, 253);
         dataGridView1.TabIndex = 0;
         dataGridView1.CellContentClick += dataGridView1_CellContentClick;
         // 
@@ -60,7 +60,7 @@ partial class FormDashboardMahasiswa
         lblJadwal.AutoSize = true;
         lblJadwal.BackColor = SystemColors.ControlLightLight;
         lblJadwal.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        lblJadwal.Location = new Point(345, 543);
+        lblJadwal.Location = new Point(314, 501);
         lblJadwal.Name = "lblJadwal";
         lblJadwal.Size = new Size(205, 31);
         lblJadwal.TabIndex = 1;
@@ -135,9 +135,9 @@ partial class FormDashboardMahasiswa
         // 
         btnDaftar.BackColor = SystemColors.ControlLightLight;
         btnDaftar.Font = new Font("Calibri", 12F, FontStyle.Bold);
-        btnDaftar.Location = new Point(345, 396);
+        btnDaftar.Location = new Point(345, 395);
         btnDaftar.Name = "btnDaftar";
-        btnDaftar.Size = new Size(312, 59);
+        btnDaftar.Size = new Size(311, 59);
         btnDaftar.TabIndex = 7;
         btnDaftar.Text = "Daftar Konselor";
         btnDaftar.UseVisualStyleBackColor = false;
@@ -149,7 +149,7 @@ partial class FormDashboardMahasiswa
         btnJadwal.Font = new Font("Calibri", 12F, FontStyle.Bold);
         btnJadwal.Location = new Point(751, 395);
         btnJadwal.Name = "btnJadwal";
-        btnJadwal.Size = new Size(312, 59);
+        btnJadwal.Size = new Size(315, 59);
         btnJadwal.TabIndex = 8;
         btnJadwal.Text = "Buat Janji";
         btnJadwal.UseVisualStyleBackColor = false;
@@ -159,13 +159,13 @@ partial class FormDashboardMahasiswa
         // 
         btnKuis.BackColor = SystemColors.ControlLightLight;
         btnKuis.Font = new Font("Calibri", 12F, FontStyle.Bold);
-        btnKuis.Location = new Point(1157, 395);
+        btnKuis.Location = new Point(1159, 395);
         btnKuis.Name = "btnKuis";
-        btnKuis.Size = new Size(312, 59);
+        btnKuis.Size = new Size(312, 58);
         btnKuis.TabIndex = 9;
         btnKuis.Text = "Cek Keadaan";
         btnKuis.UseVisualStyleBackColor = false;
-        btnKuis.Click += btnCekKeadaan_Click;
+        btnKuis.Click += btnKuis_Click;
         // 
         // btnKeluar
         // 
@@ -182,8 +182,7 @@ partial class FormDashboardMahasiswa
         // 
         // FormDashboardMahasiswa
         // 
-        AutoScaleDimensions = new SizeF(8F, 20F);
-        AutoScaleMode = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.None;
         BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
         ClientSize = new Size(1518, 817);
         Controls.Add(btnKeluar);
@@ -198,7 +197,11 @@ partial class FormDashboardMahasiswa
         Controls.Add(lblJadwal);
         Controls.Add(dataGridView1);
         DoubleBuffered = true;
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Icon = (Icon)resources.GetObject("$this.Icon");
+        MaximizeBox = false;
+        MaximumSize = new Size(1536, 864);
+        MinimumSize = new Size(1536, 864);
         Name = "FormDashboardMahasiswa";
         StartPosition = FormStartPosition.CenterParent;
         Text = "Form1";
@@ -212,13 +215,15 @@ partial class FormDashboardMahasiswa
 
     private DataGridView dataGridView1;
     private Label lblJadwal;
-    private Button btnBeranda;
-    private Button btnProfile;
-    private Button btnKonsultasi;
-    private Button btnKonselor;
-    private Button btnKuisioner;
-    private Button btnDaftar;
-    private Button btnJadwal;
-    private Button btnKuis;
-    private Button btnKeluar;
+        private Button btnBeranda;
+        private Button btnProfile;
+        private Button btnKonsultasi;
+        private Button btnKonselor;
+        private Button btnKuisioner;
+        private Button btnDaftar;
+        private Button btnJadwal;
+        private Button btnKuis;
+        private Button btnKeluar;
+        private DataGridViewButtonColumn colEdit;
+        private DataGridViewButtonColumn colDelete;
 }

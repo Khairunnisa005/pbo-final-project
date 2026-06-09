@@ -9,6 +9,7 @@ namespace pboFinalProfject.Controllers
     public class AuthController
     {
         private readonly IAuthService _service;
+        internal static int CurrentUserId;
 
         public AuthController()
         {

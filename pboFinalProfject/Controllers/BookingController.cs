@@ -15,6 +15,11 @@ namespace pboFinalProfject
             _bookingService = new BookingService();
         }
 
+        public bool UpdateBookingJadwal(int bookingId, int psikologId, int jadwalId, string catatanUser = null)
+        {
+            return _bookingService.UpdateBookingJadwal(bookingId, psikologId, jadwalId, catatanUser);
+        }
+
         public DataTable GetJadwalTersediaByPsikolog(int psikologId)
         {
             return _bookingService.GetJadwalTersediaByPsikolog(psikologId);

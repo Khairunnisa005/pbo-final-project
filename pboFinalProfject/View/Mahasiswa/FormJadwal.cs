@@ -48,10 +48,37 @@ namespace pboFinalProfject.View.Mahasiswa
             if (!dgvJadwal.Columns.Contains("booking_id")) return;
             int bookingId = Convert.ToInt32(row.Cells["booking_id"].Value);
 
-            // buka form detail booking mahasiswa
-            var detail = new FormDetailBookingMahasiswa(bookingId);
-            detail.ShowDialog(this);
+            // try to open a detail form named FormDetailBookingMahasiswa if it exists
+            try
+            {
+                var type = Type.GetType("pboFinalProfject.View.Mahasiswa.FormDetailBookingMahasiswa");
+                if (type != null)
+                {
+                    var detail = (Form)Activator.CreateInstance(type, bookingId)!;
+                    detail.ShowDialog(this);
+                }
+                else
+                {
+                    MessageBox.Show("Detail booking tidak tersedia.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal membuka detail booking: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        //private void DgvJadwal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex < 0) return;
+        //    var row = dgvJadwal.Rows[e.RowIndex];
+        //    if (!dgvJadwal.Columns.Contains("booking_id")) return;
+        //    int bookingId = Convert.ToInt32(row.Cells["booking_id"].Value);
+
+        //    // buka form detail booking mahasiswa
+        //    var detail = new FormDetailBookingMahasiswa(bookingId);
+        //    detail.ShowDialog(this);
+        //}
 
         private void BtnBuat_Click(object sender, EventArgs e)
         {

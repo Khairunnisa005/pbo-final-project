@@ -4,9 +4,6 @@ using pboFinalProfject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using Npgsql;
-using pboFinalProfject.Utils;
 
 namespace pboFinalProfject.Repositories
 {
@@ -60,6 +57,29 @@ namespace pboFinalProfject.Repositories
 
             var parameters = new[] { new NpgsqlParameter("@psikolog_id", psikologId) };
             return _db.ExecuteQuery(query, parameters);
+        }
+
+        public JadwalPsikolog GetById(int jadwalId)
+        {
+            string query = "SELECT * FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id";
+            var parameters = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
+            DataTable dt = _db.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
+                return MapToJadwal(dt.Rows[0]);
+            return null;
+        }
+
+        public DataTable GetAll()
+        {
+            string query = @"
+                SELECT j.*, u.nama_lengkap as psikolog_nama
+                FROM jadwal_psikolog j
+                JOIN psikolog p ON j.psikolog_id = p.psikolog_id
+                JOIN users u ON p.user_id = u.user_id
+                ORDER BY j.created_at DESC";
+
+            return _db.ExecuteQuery(query);
         }
 
         public bool TambahJadwal(int psikologId, string hari, TimeSpan jamMulai, TimeSpan jamSelesai, string metode, int kuota, bool isActive)
@@ -141,113 +161,6 @@ namespace pboFinalProfject.Repositories
             var parameters = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
             return _db.ExecuteNonQuery(query, parameters) > 0;
         }
-    public class JadwalRepository
-    {
-        private readonly DatabaseHelper _db;
-
-        public JadwalRepository()
-        {
-            _db = new DatabaseHelper();
-        }
-
-        public JadwalPsikolog GetById(int jadwalId)
-        {
-            string query = "SELECT * FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id";
-            var parameters = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
-            DataTable dt = _db.ExecuteQuery(query, parameters);
-
-            if (dt.Rows.Count > 0)
-                return MapToJadwal(dt.Rows[0]);
-            return null;
-        }
-
-        public DataTable GetByPsikologId(int psikologId)
-        {
-            string query = @"
-                SELECT jadwal_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active, created_at 
-                FROM jadwal_psikolog 
-                WHERE psikolog_id = @psikolog_id 
-                ORDER BY 
-                    CASE hari 
-                        WHEN 'Senin' THEN 1
-                        WHEN 'Selasa' THEN 2
-                        WHEN 'Rabu' THEN 3
-                        WHEN 'Kamis' THEN 4
-                        WHEN 'Jumat' THEN 5
-                        WHEN 'Sabtu' THEN 6
-                        WHEN 'Minggu' THEN 7
-                    END, 
-                    jam_mulai";
-
-            var parameters = new[] { new NpgsqlParameter("@psikolog_id", psikologId) };
-            return _db.ExecuteQuery(query, parameters);
-        }
-
-        public DataTable GetAll()
-        {
-            string query = @"
-                SELECT j.*, u.nama_lengkap as psikolog_nama
-                FROM jadwal_psikolog j
-                JOIN psikolog p ON j.psikolog_id = p.psikolog_id
-                JOIN users u ON p.user_id = u.user_id
-                ORDER BY j.created_at DESC";
-
-            return _db.ExecuteQuery(query);
-        }
-
-        public bool Insert(JadwalPsikolog entity)
-        {
-            string query = @"
-                INSERT INTO jadwal_psikolog (psikolog_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active, created_at) 
-                VALUES (@psikolog_id, @hari, @jam_mulai, @jam_selesai, @metode, @kuota, @is_active, @created_at)";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", entity.PsikologId),
-                new NpgsqlParameter("@hari", entity.Hari),
-                new NpgsqlParameter("@jam_mulai", entity.JamMulai),
-                new NpgsqlParameter("@jam_selesai", entity.JamSelesai),
-                new NpgsqlParameter("@metode", entity.Metode),
-                new NpgsqlParameter("@kuota", entity.Kuota),
-                new NpgsqlParameter("@is_active", entity.IsActive),
-                new NpgsqlParameter("@created_at", DateTime.Now)
-            };
-
-            return _db.ExecuteNonQuery(query, parameters) > 0;
-        }
-
-        public bool Update(JadwalPsikolog entity)
-        {
-            string query = @"
-                UPDATE jadwal_psikolog 
-                SET hari = @hari, 
-                    jam_mulai = @jam_mulai, 
-                    jam_selesai = @jam_selesai, 
-                    metode = @metode, 
-                    kuota = @kuota, 
-                    is_active = @is_active 
-                WHERE jadwal_id = @jadwal_id";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@jadwal_id", entity.JadwalId),
-                new NpgsqlParameter("@hari", entity.Hari),
-                new NpgsqlParameter("@jam_mulai", entity.JamMulai),
-                new NpgsqlParameter("@jam_selesai", entity.JamSelesai),
-                new NpgsqlParameter("@metode", entity.Metode),
-                new NpgsqlParameter("@kuota", entity.Kuota),
-                new NpgsqlParameter("@is_active", entity.IsActive)
-            };
-
-            return _db.ExecuteNonQuery(query, parameters) > 0;
-        }
-
-        public bool Delete(int jadwalId)
-        {
-            string query = "DELETE FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id";
-            var parameters = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
-            return _db.ExecuteNonQuery(query, parameters) > 0;
-        }
 
         public bool IsSlotAvailable(int jadwalId)
         {
@@ -279,14 +192,13 @@ namespace pboFinalProfject.Repositories
                 JadwalId = Convert.ToInt32(row["jadwal_id"]),
                 PsikologId = Convert.ToInt32(row["psikolog_id"]),
                 Hari = row["hari"].ToString(),
-                JamMulai = (TimeSpan)row["jam_mulai"],
-                JamSelesai = (TimeSpan)row["jam_selesai"],
-                Metode = row["metode"].ToString(),
-                Kuota = Convert.ToInt32(row["kuota"]),
-                IsActive = Convert.ToBoolean(row["is_active"]),
-                CreatedAt = Convert.ToDateTime(row["created_at"])
+                JamMulai = row.Table.Columns.Contains("jam_mulai") && row["jam_mulai"] != DBNull.Value ? (TimeSpan)row["jam_mulai"] : TimeSpan.Zero,
+                JamSelesai = row.Table.Columns.Contains("jam_selesai") && row["jam_selesai"] != DBNull.Value ? (TimeSpan)row["jam_selesai"] : TimeSpan.Zero,
+                Metode = row.Table.Columns.Contains("metode") ? row["metode"].ToString() : null,
+                Kuota = row.Table.Columns.Contains("kuota") && row["kuota"] != DBNull.Value ? Convert.ToInt32(row["kuota"]) : 0,
+                IsActive = row.Table.Columns.Contains("is_active") && row["is_active"] != DBNull.Value ? Convert.ToBoolean(row["is_active"]) : false,
+                CreatedAt = row.Table.Columns.Contains("created_at") && row["created_at"] != DBNull.Value ? Convert.ToDateTime(row["created_at"]) : DateTime.MinValue
             };
         }
-
     }
 }
