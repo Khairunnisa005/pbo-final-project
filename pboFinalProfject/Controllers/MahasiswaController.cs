@@ -39,14 +39,19 @@ namespace pboFinalProfject.Controllers
             string query = @"
         SELECT 
             b.booking_id,
+            b.psikolog_id,
             j.jadwal_id,
             j.hari,
             j.jam_mulai,
             j.jam_selesai,
             j.metode,
-            b.status
+            b.status,
+            u.nama_lengkap as psikolog_nama,
+            (SELECT k.nama_keahlian FROM keahlian_psikolog k WHERE k.psikolog_id = j.psikolog_id LIMIT 1) as kategori
         FROM booking b
         JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+        JOIN psikolog p ON j.psikolog_id = p.psikolog_id
+        JOIN users u ON p.user_id = u.user_id
         WHERE b.user_id = @uid
         ORDER BY j.hari, j.jam_mulai";
 

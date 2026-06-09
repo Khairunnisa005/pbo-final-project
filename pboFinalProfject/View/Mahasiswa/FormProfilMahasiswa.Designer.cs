@@ -113,6 +113,66 @@ namespace pboFinalProfject.View.Mahasiswa
             // 
             BackgroundImage = Properties.Resources.profil__2_;
             ClientSize = new Size(1518, 817);
+            // profile fields
+            lblUsername = new Label();
+            lblUsername.Location = new Point(320, 200);
+            lblUsername.Size = new Size(100, 24);
+            lblUsername.Text = "Username:";
+            Controls.Add(lblUsername);
+
+            tbUsername = new TextBox();
+            tbUsername.Location = new Point(430, 200);
+            tbUsername.Size = new Size(300, 30);
+            Controls.Add(tbUsername);
+
+            lblNama = new Label();
+            lblNama.Location = new Point(320, 250);
+            lblNama.Size = new Size(100, 24);
+            lblNama.Text = "Nama Lengkap:";
+            Controls.Add(lblNama);
+
+            tbNama = new TextBox();
+            tbNama.Location = new Point(430, 250);
+            tbNama.Size = new Size(600, 30);
+            Controls.Add(tbNama);
+
+            lblEmail = new Label();
+            lblEmail.Location = new Point(320, 300);
+            lblEmail.Size = new Size(100, 24);
+            lblEmail.Text = "Email:";
+            Controls.Add(lblEmail);
+
+            tbEmail = new TextBox();
+            tbEmail.Location = new Point(430, 300);
+            tbEmail.Size = new Size(400, 30);
+            Controls.Add(tbEmail);
+
+            lblTelepon = new Label();
+            lblTelepon.Location = new Point(320, 350);
+            lblTelepon.Size = new Size(100, 24);
+            lblTelepon.Text = "No. Telepon:";
+            Controls.Add(lblTelepon);
+
+            tbTelepon = new TextBox();
+            tbTelepon.Location = new Point(430, 350);
+            tbTelepon.Size = new Size(300, 30);
+            Controls.Add(tbTelepon);
+
+            // action buttons
+            btnSave = new Button();
+            btnSave.Location = new Point(1180, 750);
+            btnSave.Size = new Size(150, 45);
+            btnSave.Text = "Simpan";
+            Controls.Add(btnSave);
+
+            btnDelete = new Button();
+            btnDelete.Location = new Point(980, 750);
+            btnDelete.Size = new Size(150, 45);
+            btnDelete.Text = "Hapus Akun";
+            btnDelete.BackColor = Color.FromArgb(220, 53, 69);
+            btnDelete.ForeColor = Color.White;
+            Controls.Add(btnDelete);
+
             Controls.Add(btnSubmit);
             Controls.Add(btnKembali);
             Controls.Add(btnKuisioner);

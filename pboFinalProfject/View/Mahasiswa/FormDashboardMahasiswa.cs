@@ -159,6 +159,8 @@ namespace pboFinalProfject.View.Mahasiswa
                 var dt = _mahasiswaController.GetJadwalAktif();
                 dataGridView1.DataSource = dt;
                 if (dataGridView1.Columns.Contains("jadwal_id")) dataGridView1.Columns["jadwal_id"].Visible = false;
+                if (dataGridView1.Columns.Contains("psikolog_nama")) dataGridView1.Columns["psikolog_nama"].HeaderText = "Psikolog";
+                if (dataGridView1.Columns.Contains("kategori")) dataGridView1.Columns["kategori"].HeaderText = "Kategori";
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 // add edit/delete buttons if not present
                 if (!dataGridView1.Columns.Contains("_edit"))
@@ -183,13 +185,22 @@ namespace pboFinalProfject.View.Mahasiswa
             var row = grid.Rows[e.RowIndex];
             if (grid.Columns[e.ColumnIndex].Name == "_edit")
             {
-                if (!grid.Columns.Contains("jadwal_id")) return;
-                int jadwalId = Convert.ToInt32(row.Cells["jadwal_id"].Value);
-                var form = new FormBuatBooking(jadwalId);
-                form.Text = "Edit Jadwal Konsultasi";
-                if (form.ShowDialog(this) == DialogResult.OK)
+                // Edit booking: open booking-edit mode so previous booking info is shown
+                if (!grid.Columns.Contains("booking_id")) return;
+                int bookingId = Convert.ToInt32(row.Cells["booking_id"].Value);
+                try
+                {
+                    // The TimeSpan/System exception reported earlier likely came from invalid cast of jam columns; ensure Safe
+                    var form = new FormBuatBooking(bookingId, true);
+                    form.Text = "Edit Booking";
+                    if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     Dashboard_Load(this, EventArgs.Empty);
+                }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal membuka mode edit: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (grid.Columns[e.ColumnIndex].Name == "_delete")

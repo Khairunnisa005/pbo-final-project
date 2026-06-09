@@ -192,13 +192,29 @@ namespace pboFinalProfject.Repositories
                 JadwalId = Convert.ToInt32(row["jadwal_id"]),
                 PsikologId = Convert.ToInt32(row["psikolog_id"]),
                 Hari = row["hari"].ToString(),
-                JamMulai = row.Table.Columns.Contains("jam_mulai") && row["jam_mulai"] != DBNull.Value ? (TimeSpan)row["jam_mulai"] : TimeSpan.Zero,
-                JamSelesai = row.Table.Columns.Contains("jam_selesai") && row["jam_selesai"] != DBNull.Value ? (TimeSpan)row["jam_selesai"] : TimeSpan.Zero,
+                JamMulai = row.Table.Columns.Contains("jam_mulai") && row["jam_mulai"] != DBNull.Value ? ParseTimeSpan(row["jam_mulai"]) : TimeSpan.Zero,
+                JamSelesai = row.Table.Columns.Contains("jam_selesai") && row["jam_selesai"] != DBNull.Value ? ParseTimeSpan(row["jam_selesai"]) : TimeSpan.Zero,
                 Metode = row.Table.Columns.Contains("metode") ? row["metode"].ToString() : null,
                 Kuota = row.Table.Columns.Contains("kuota") && row["kuota"] != DBNull.Value ? Convert.ToInt32(row["kuota"]) : 0,
                 IsActive = row.Table.Columns.Contains("is_active") && row["is_active"] != DBNull.Value ? Convert.ToBoolean(row["is_active"]) : false,
                 CreatedAt = row.Table.Columns.Contains("created_at") && row["created_at"] != DBNull.Value ? Convert.ToDateTime(row["created_at"]) : DateTime.MinValue
             };
+        }
+
+        private TimeSpan ParseTimeSpan(object value)
+        {
+            if (value == null || value == DBNull.Value) return TimeSpan.Zero;
+            try
+            {
+                if (value is TimeSpan ts) return ts;
+                if (value is DateTime dt) return dt.TimeOfDay;
+                var s = value.ToString();
+                if (TimeSpan.TryParse(s, out var parsed)) return parsed;
+                // sometimes provider returns string like "12:30:00"
+                if (DateTime.TryParse(s, out var dt2)) return dt2.TimeOfDay;
+            }
+            catch { }
+            return TimeSpan.Zero;
         }
     }
 }

@@ -24,8 +24,7 @@
             tbKuota = new TextBox();
             chkIsActive = new CheckBox();
             dgvSlotJadwal = new DataGridView();
-            btnUbah = new Button();
-            btnHapus = new Button();
+            // duplicates removed
             btnTambah = new Button();
             btnBersihkan = new Button();
             btnKembali = new Button();
@@ -216,8 +215,7 @@
         private System.Windows.Forms.CheckBox chkIsActive;
         private System.Windows.Forms.DataGridView dgvSlotJadwal;
         private System.Windows.Forms.Button btnTambah;
-        private System.Windows.Forms.Button btnUbah;
-        private System.Windows.Forms.Button btnHapus;
+        // duplicate fields removed
         private System.Windows.Forms.Button btnBersihkan;
         private System.Windows.Forms.Button btnKembali;
         private System.Windows.Forms.Button btnUbah;

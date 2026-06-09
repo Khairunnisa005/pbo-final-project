@@ -65,6 +65,15 @@ namespace pboFinalProfject.View.Mahasiswa
             txtCatatan.Name = "txtCatatan";
             txtCatatan.Size = new Size(983, 106);
             txtCatatan.TabIndex = 3;
+
+            // previous booking info label
+            lblPrevInfo = new Label();
+            lblPrevInfo.Location = new Point(487, 330);
+            lblPrevInfo.Name = "lblPrevInfo";
+            lblPrevInfo.Size = new Size(983, 24);
+            lblPrevInfo.Text = string.Empty;
+            lblPrevInfo.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            Controls.Add(lblPrevInfo);
             // 
             // chkAttachAssessment
             // 
@@ -186,6 +195,7 @@ namespace pboFinalProfject.View.Mahasiswa
         private System.Windows.Forms.CheckBox chkAttachAssessment;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.Label lblPrevInfo;
         private Button btnKuisioner;
         private Button btnKonselor;
         private Button btnKonsultasi;

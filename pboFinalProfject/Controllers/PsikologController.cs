@@ -166,48 +166,6 @@ namespace pboFinalProfject
             return _jadwalRepo.TambahJadwal(psikologId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
         }
 
-            // Cek apakah sudah ada jadwal yang bentrok
-            string cekQuery = @"
-                SELECT COUNT(*) FROM jadwal_psikolog 
-                WHERE psikolog_id = @psikolog_id 
-                AND hari = @hari 
-                AND ((jam_mulai <= @jam_mulai AND jam_selesai > @jam_mulai)
-                  OR (jam_mulai < @jam_selesai AND jam_selesai >= @jam_selesai)
-                  OR (@jam_mulai <= jam_mulai AND @jam_selesai >= jam_selesai))";
-
-            var cekParams = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", psikologId),
-                new NpgsqlParameter("@hari", hari),
-                new NpgsqlParameter("@jam_mulai", jamMulai),
-                new NpgsqlParameter("@jam_selesai", jamSelesai)
-            };
-
-            int count = Convert.ToInt32(_db.ExecuteScalar(cekQuery, cekParams));
-            if (count > 0)
-            {
-                throw new Exception("Jadwal bentrok dengan jadwal yang sudah ada!");
-            }
-
-            string query = @"
-                INSERT INTO jadwal_psikolog (psikolog_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active, created_at) 
-                VALUES (@psikolog_id, @hari, @jam_mulai, @jam_selesai, @metode, @kuota, @is_active, @created_at)";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", psikologId),
-                new NpgsqlParameter("@hari", hari),
-                new NpgsqlParameter("@jam_mulai", jamMulai),
-                new NpgsqlParameter("@jam_selesai", jamSelesai),
-                new NpgsqlParameter("@metode", metode),
-                new NpgsqlParameter("@kuota", kuota),
-                new NpgsqlParameter("@is_active", isActive),
-                new NpgsqlParameter("@created_at", DateTime.Now)
-            };
-
-            return _db.ExecuteNonQuery(query, parameters) > 0;
-        }
-
         public bool UpdateJadwal(int jadwalId, string hari, TimeSpan jamMulai, TimeSpan jamSelesai, string metode, int kuota, bool isActive)
         {
             return _jadwalRepo.UpdateJadwal(jadwalId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
@@ -286,8 +244,35 @@ namespace pboFinalProfject
 
             try
             {
-                // 3. Kirim paket transaksi ke DatabaseHelper
-                return _db.ExecuteNonQuery(queries, parameterSets) > 0;
+                using (var conn = _db.GetConnection())
+                {
+                    conn.Open();
+                    using (var trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (var cmd = new NpgsqlCommand(queries[0], conn, trans))
+                            {
+                                cmd.Parameters.AddRange(paramUser);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (var cmd2 = new NpgsqlCommand(queries[1], conn, trans))
+                            {
+                                cmd2.Parameters.AddRange(paramPsikolog);
+                                cmd2.ExecuteNonQuery();
+                            }
+
+                            trans.Commit();
+                            return true;
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
