@@ -17,7 +17,6 @@
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormKelolaJadwal));
             cmbHari = new ComboBox();
             dtpJamMulai = new DateTimePicker();
             dtpJamSelesai = new DateTimePicker();
@@ -30,6 +29,8 @@
             btnTambah = new Button();
             btnBersihkan = new Button();
             btnKembali = new Button();
+            btnUbah = new Button();
+            btnHapus = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).BeginInit();
             SuspendLayout();
             // 
@@ -106,9 +107,9 @@
             // 
             btnTambah.BackColor = Color.FromArgb(28, 167, 236);
             btnTambah.ForeColor = Color.White;
-            btnTambah.Location = new Point(1164, 706);
+            btnTambah.Location = new Point(1221, 706);
             btnTambah.Name = "btnTambah";
-            btnTambah.Size = new Size(310, 56);
+            btnTambah.Size = new Size(253, 56);
             btnTambah.TabIndex = 6;
             btnTambah.Text = "Tambah";
             btnTambah.UseVisualStyleBackColor = false;
@@ -139,7 +140,7 @@
             // 
             btnBersihkan.BackColor = Color.Gray;
             btnBersihkan.ForeColor = Color.White;
-            btnBersihkan.Location = new Point(1026, 719);
+            btnBersihkan.Location = new Point(928, 706);
             btnBersihkan.Name = "btnBersihkan";
             btnBersihkan.Size = new Size(95, 30);
             btnBersihkan.TabIndex = 9;
@@ -150,18 +151,39 @@
             // 
             btnKembali.BackColor = Color.FromArgb(28, 167, 236);
             btnKembali.ForeColor = Color.White;
-            btnKembali.Location = new Point(1164, 12);
+            btnKembali.Location = new Point(1366, 12);
             btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(310, 56);
+            btnKembali.Size = new Size(108, 56);
             btnKembali.TabIndex = 10;
             btnKembali.Text = "Kembali";
             btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += BtnKembali_Click;
             // 
+            // btnUbah
+            // 
+            btnUbah.BackColor = Color.FromArgb(28, 167, 236);
+            btnUbah.ForeColor = Color.White;
+            btnUbah.Location = new Point(1125, 706);
+            btnUbah.Name = "btnUbah";
+            btnUbah.Size = new Size(90, 56);
+            btnUbah.TabIndex = 6;
+            btnUbah.Text = "Ubah";
+            btnUbah.UseVisualStyleBackColor = false;
+            // 
+            // btnHapus
+            // 
+            btnHapus.BackColor = Color.FromArgb(28, 167, 236);
+            btnHapus.ForeColor = Color.White;
+            btnHapus.Location = new Point(1029, 706);
+            btnHapus.Name = "btnHapus";
+            btnHapus.Size = new Size(90, 56);
+            btnHapus.TabIndex = 6;
+            btnHapus.Text = "Hapus";
+            btnHapus.UseVisualStyleBackColor = false;
+            // 
             // FormKelolaJadwal
             // 
             BackColor = Color.FromArgb(31, 47, 152);
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1514, 808);
             Controls.Add(cmbHari);
@@ -174,6 +196,8 @@
             Controls.Add(btnTambah);
             Controls.Add(btnBersihkan);
             Controls.Add(btnKembali);
+            Controls.Add(btnUbah);
+            Controls.Add(btnHapus);
             Name = "FormKelolaJadwal";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Kelola Jadwal - UniMind";
@@ -196,5 +220,7 @@
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnBersihkan;
         private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.Button btnUbah;
+        private System.Windows.Forms.Button btnHapus;
     }
 }

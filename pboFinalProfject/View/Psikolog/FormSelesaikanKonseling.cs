@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using pboFinalProfject.Services;
 using pboFinalProfject.Session;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormSelesaikanKonseling : Form
     {
