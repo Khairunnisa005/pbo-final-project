@@ -41,7 +41,7 @@ namespace pboFinalProfject.Repositories
             return null;
         }
 
-        // Get user by username (nama anonim)
+        // Get user by username 
         public User GetByUsername(string username)
         {
             string query = "SELECT * FROM users WHERE username = @username";

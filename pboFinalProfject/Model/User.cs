@@ -11,6 +11,7 @@ namespace pboFinalProfject.Model
         public string Role { get; set; } // Mahasiswa, Psikolog, Admin
         public string PreferensiWaktu { get; set; } // Pagi, Siang, Malam
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        
     }
 }
 

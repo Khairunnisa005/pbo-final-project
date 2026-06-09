@@ -20,49 +20,7 @@ namespace pboFinalProfject
             //_psikologRepository = new PsikologRepository();
         }
 
-        /// <summary>
-        /// Mendapatkan detail booking untuk mahasiswa (tanpa membutuhkan psikolog_id)
-        /// </summary>
-        public DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId)
-        {
-            string query = @"
-                SELECT 
-                    b.booking_id,
-                    u.username as mahasiswa,
-                    u.email as mahasiswa_email,
-                    u.no_telepon as mahasiswa_telepon,
-                    p2.nama_lengkap as psikolog_nama,
-                    b.created_at as tanggal_booking,
-                    j.jam_mulai,
-                    j.jam_selesai,
-                    j.metode,
-                    b.status,
-                    b.catatan_user,
-                    b.catatan_psikolog,
-                    h.tingkat_stres,
-                    h.skor_total,
-                    h.rekomendasi
-                FROM booking b
-                JOIN users u ON b.user_id = u.user_id
-                JOIN psikolog ps ON b.psikolog_id = ps.psikolog_id
-                JOIN users p2 ON ps.user_id = p2.user_id
-                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                LEFT JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
-                WHERE b.booking_id = @booking_id 
-                AND b.user_id = @user_id";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@booking_id", bookingId),
-                new NpgsqlParameter("@user_id", mahasiswaId)
-            };
-
-            return _db.ExecuteQuery(query, parameters);
-        }
-
-        /// <summary>
         /// Mendapatkan daftar jadwal yang tersedia untuk psikolog tertentu
-        /// </summary>
         public DataTable GetJadwalTersediaByPsikolog(int psikologId)
         {
             string query = @"
@@ -104,9 +62,7 @@ namespace pboFinalProfject
             return _db.ExecuteQuery(query, parameters);
         }
 
-        /// <summary>
         /// Membuat booking baru oleh mahasiswa (dengan transaksi)
-        /// </summary>
         public bool BuatBooking(int mahasiswaId, int jadwalId, string catatanUser, int? hasilAssessmentId = null)
         {
             using (var conn = _db.GetConnection())
@@ -189,9 +145,7 @@ namespace pboFinalProfject
             }
         }
 
-        /// <summary>
         /// Mendapatkan riwayat booking berdasarkan mahasiswa ID
-        /// </summary>
         public DataTable GetRiwayatBookingByMahasiswa(int mahasiswaId)
         {
             string query = @"
@@ -220,9 +174,7 @@ namespace pboFinalProfject
             return _db.ExecuteQuery(query, parameters);
         }
 
-        /// <summary>
         /// Mendapatkan daftar booking untuk psikolog tertentu
-        /// </summary>
         public DataTable GetBookingByPsikolog(int psikologId)
         {
             string query = @"
@@ -232,7 +184,7 @@ namespace pboFinalProfject
                     b.catatan_user,
                     b.catatan_psikolog,
                     b.created_at as tgl_booking,
-                    u.username as mahasiswa_anonim,
+                    u.username as mahasiswa,
                     u.user_id as mahasiswa_id,
                     j.hari,
                     j.jam_mulai,
@@ -260,9 +212,7 @@ namespace pboFinalProfject
             return _db.ExecuteQuery(query, parameters);
         }
 
-        /// <summary>
         /// Mendapatkan detail booking berdasarkan ID
-        /// </summary>
         public DataTable GetDetailBookingById(int bookingId, int psikologId)
         {
             string query = @"
@@ -272,7 +222,7 @@ namespace pboFinalProfject
                     u.email as mahasiswa_email,
                     u.no_telepon as mahasiswa_telepon,
                     p2.nama_lengkap as psikolog_nama,
-                    b.created_at as tanggal_booking,
+                    b.created_at as tgl_booking,
                     j.jam_mulai,
                     j.jam_selesai,
                     j.metode,
@@ -299,9 +249,7 @@ namespace pboFinalProfject
             return _db.ExecuteQuery(query, parameters);
         }
 
-        /// <summary>
         /// Mengupdate status booking (untuk psikolog)
-        /// </summary>
         public bool UpdateStatusBooking(int bookingId, string status, string catatanPsikolog = null)
         {
             string query = @"
@@ -320,17 +268,13 @@ namespace pboFinalProfject
             return _db.ExecuteNonQuery(query, parameters) > 0;
         }
 
-        /// <summary>
         /// Menyetujui booking
-        /// </summary>
         public bool SetujuiBooking(int bookingId, string catatanPsikolog = null)
         {
             return UpdateStatusBooking(bookingId, "Disetujui", catatanPsikolog);
         }
 
-        /// <summary>
         /// Menolak booking
-        /// </summary>
         public bool TolakBooking(int bookingId, string alasanPenolakan)
         {
             if (string.IsNullOrEmpty(alasanPenolakan))
@@ -339,9 +283,7 @@ namespace pboFinalProfject
             return UpdateStatusBooking(bookingId, "Ditolak", alasanPenolakan);
         }
 
-        /// <summary>
         /// Menyelesaikan konseling (mengubah status menjadi Selesai)
-        /// </summary>
         public bool SelesaikanBooking(int bookingId, string catatanPsikolog)
         {
             if (string.IsNullOrEmpty(catatanPsikolog))
@@ -350,9 +292,7 @@ namespace pboFinalProfject
             return UpdateStatusBooking(bookingId, "Selesai", catatanPsikolog);
         }
 
-        /// <summary>
         /// Membatalkan booking oleh mahasiswa
-        /// </summary>
         public bool BatalkanBooking(int bookingId, int mahasiswaId)
         {
             // Pastikan booking milik mahasiswa tersebut
@@ -373,9 +313,7 @@ namespace pboFinalProfject
             return _db.ExecuteNonQuery(query, parameters) > 0;
         }
 
-        /// <summary>
         /// Mengecek apakah slot jadwal masih tersedia
-        /// </summary>
         public bool CekKetersediaanSlot(int jadwalId)
         {
             string query = @"

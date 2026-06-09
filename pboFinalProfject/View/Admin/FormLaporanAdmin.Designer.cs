@@ -17,215 +17,241 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlFilter = new System.Windows.Forms.Panel();
-            this.btnFilter = new System.Windows.Forms.Button();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.dtpSelesai = new System.Windows.Forms.DateTimePicker();
-            this.lblSampai = new System.Windows.Forms.Label();
-            this.dtpMulai = new System.Windows.Forms.DateTimePicker();
-            this.lblPeriode = new System.Windows.Forms.Label();
-            this.dgvLaporan = new System.Windows.Forms.DataGridView();
-            this.pnlSummary = new System.Windows.Forms.Panel();
-            this.lblTotalSesi = new System.Windows.Forms.Label();
-            this.lblTotalTitle = new System.Windows.Forms.Label();
-            this.btnEkspor = new System.Windows.Forms.Button();
-            this.btnCetak = new System.Windows.Forms.Button();
-            this.pnlFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLaporan)).BeginInit();
-            this.pnlSummary.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185);
-            this.lblTitle.Location = new System.Drawing.Point(16, 15);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(300, 35);
-            this.lblTitle.Text = "LAPORAN AKTIVITAS ADMIN";
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            pnlFilter = new Panel();
+            btnFilter = new Button();
+            cmbStatus = new ComboBox();
+            lblStatus = new Label();
+            dtpSelesai = new DateTimePicker();
+            lblSampai = new Label();
+            dtpMulai = new DateTimePicker();
+            lblPeriode = new Label();
+            btnKembali = new Button();
+            dgvLaporan = new DataGridView();
+            pnlSummary = new Panel();
+            lblTotalSesi = new Label();
+            lblTotalTitle = new Label();
+            btnEkspor = new Button();
+            btnCetak = new Button();
+            lblTitle = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvLaporan).BeginInit();
             // 
             // pnlFilter
             // 
-            this.pnlFilter.BackColor = System.Drawing.Color.White;
-            this.pnlFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFilter.Controls.Add(this.btnFilter);
-            this.pnlFilter.Controls.Add(this.cmbStatus);
-            this.pnlFilter.Controls.Add(this.lblStatus);
-            this.pnlFilter.Controls.Add(this.dtpSelesai);
-            this.pnlFilter.Controls.Add(this.lblSampai);
-            this.pnlFilter.Controls.Add(this.dtpMulai);
-            this.pnlFilter.Controls.Add(this.lblPeriode);
-            this.pnlFilter.Location = new System.Drawing.Point(20, 65);
-            this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(744, 60);
+            pnlFilter.BackColor = Color.White;
+            pnlFilter.BorderStyle = BorderStyle.FixedSingle;
+            pnlFilter.Controls.Add(btnFilter);
+            pnlFilter.Controls.Add(cmbStatus);
+            pnlFilter.Controls.Add(lblStatus);
+            pnlFilter.Controls.Add(dtpSelesai);
+            pnlFilter.Controls.Add(lblSampai);
+            pnlFilter.Controls.Add(dtpMulai);
+            pnlFilter.Controls.Add(lblPeriode);
+            pnlFilter.Location = new Point(20, 65);
+            pnlFilter.Name = "pnlFilter";
+            pnlFilter.Size = new Size(801, 65);
+            pnlFilter.TabIndex = 4;
             // 
             // btnFilter
             // 
-            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnFilter.ForeColor = System.Drawing.Color.White;
-            this.btnFilter.Location = new System.Drawing.Point(630, 14);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(95, 28);
-            this.btnFilter.Text = "Terapkan";
-            this.btnFilter.UseVisualStyleBackColor = false;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            btnFilter.BackColor = Color.FromArgb(41, 128, 185);
+            btnFilter.FlatStyle = FlatStyle.Flat;
+            btnFilter.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnFilter.ForeColor = Color.White;
+            btnFilter.Location = new Point(669, 14);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(109, 35);
+            btnFilter.TabIndex = 0;
+            btnFilter.Text = "Terapkan";
+            btnFilter.UseVisualStyleBackColor = false;
+            btnFilter.Click += btnFilter_Click;
             // 
             // cmbStatus
             // 
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cmbStatus.Location = new System.Drawing.Point(465, 16);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(140, 23);
+            cmbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbStatus.Font = new Font("Segoe UI", 9F);
+            cmbStatus.Location = new Point(510, 16);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(140, 33);
+            cmbStatus.TabIndex = 1;
             // 
             // lblStatus
             // 
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblStatus.Location = new System.Drawing.Point(415, 19);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(50, 20);
-            this.lblStatus.Text = "Status:";
+            lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblStatus.Location = new Point(441, 19);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(85, 20);
+            lblStatus.TabIndex = 2;
+            lblStatus.Text = "Status:";
             // 
             // dtpSelesai
             // 
-            this.dtpSelesai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpSelesai.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpSelesai.Location = new System.Drawing.Point(265, 16);
-            this.dtpSelesai.Name = "dtpSelesai";
-            this.dtpSelesai.Size = new System.Drawing.Size(120, 23);
+            dtpSelesai.Font = new Font("Segoe UI", 9F);
+            dtpSelesai.Format = DateTimePickerFormat.Short;
+            dtpSelesai.Location = new Point(279, 16);
+            dtpSelesai.Name = "dtpSelesai";
+            dtpSelesai.Size = new Size(144, 31);
+            dtpSelesai.TabIndex = 3;
             // 
             // lblSampai
             // 
-            this.lblSampai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblSampai.Location = new System.Drawing.Point(235, 19);
-            this.lblSampai.Name = "lblSampai";
-            this.lblSampai.Size = new System.Drawing.Size(30, 20);
-            this.lblSampai.Text = "s/d";
+            lblSampai.Font = new Font("Segoe UI", 9F);
+            lblSampai.Location = new Point(235, 19);
+            lblSampai.Name = "lblSampai";
+            lblSampai.Size = new Size(48, 20);
+            lblSampai.TabIndex = 4;
+            lblSampai.Text = "s/d";
             // 
             // dtpMulai
             // 
-            this.dtpMulai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpMulai.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpMulai.Location = new System.Drawing.Point(110, 16);
-            this.dtpMulai.Name = "dtpMulai";
-            this.dtpMulai.Size = new System.Drawing.Size(120, 23);
+            dtpMulai.Font = new Font("Segoe UI", 9F);
+            dtpMulai.Format = DateTimePickerFormat.Short;
+            dtpMulai.Location = new Point(96, 16);
+            dtpMulai.Name = "dtpMulai";
+            dtpMulai.Size = new Size(134, 31);
+            dtpMulai.TabIndex = 5;
             // 
             // lblPeriode
             // 
-            this.lblPeriode.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblPeriode.Location = new System.Drawing.Point(15, 19);
-            this.lblPeriode.Name = "lblPeriode";
-            this.lblPeriode.Size = new System.Drawing.Size(90, 20);
-            this.lblPeriode.Text = "Pilih Periode:";
+            lblPeriode.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblPeriode.Location = new Point(15, 19);
+            lblPeriode.Name = "lblPeriode";
+            lblPeriode.Size = new Size(90, 20);
+            lblPeriode.TabIndex = 6;
+            lblPeriode.Text = "Pilih Periode:";
+            // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(697, 12);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(124, 45);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
             // 
             // dgvLaporan
             // 
-            this.dgvLaporan.AllowUserToAddRows = false;
-            this.dgvLaporan.AllowUserToDeleteRows = false;
-            this.dgvLaporan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvLaporan.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(247)))));
-            this.dgvLaporan.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLaporan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLaporan.ColumnHeadersHeight = 30;
-            this.dgvLaporan.EnableHeadersVisualStyles = false;
-            this.dgvLaporan.Location = new System.Drawing.Point(20, 140);
-            this.dgvLaporan.Name = "dgvLaporan";
-            this.dgvLaporan.ReadOnly = true;
-            this.dgvLaporan.RowHeadersVisible = false;
-            this.dgvLaporan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLaporan.Size = new System.Drawing.Size(560, 350);
+            dgvLaporan.AllowUserToAddRows = false;
+            dgvLaporan.AllowUserToDeleteRows = false;
+            dgvLaporan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLaporan.BackgroundColor = Color.FromArgb(245, 245, 247);
+            dgvLaporan.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 128, 185);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvLaporan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvLaporan.ColumnHeadersHeight = 30;
+            dgvLaporan.EnableHeadersVisualStyles = false;
+            dgvLaporan.Location = new Point(20, 136);
+            dgvLaporan.Name = "dgvLaporan";
+            dgvLaporan.ReadOnly = true;
+            dgvLaporan.RowHeadersVisible = false;
+            dgvLaporan.RowHeadersWidth = 62;
+            dgvLaporan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLaporan.Size = new Size(626, 354);
+            dgvLaporan.TabIndex = 3;
             // 
             // pnlSummary
             // 
-            this.pnlSummary.BackColor = System.Drawing.Color.White;
-            this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSummary.Controls.Add(this.lblTotalSesi);
-            this.pnlSummary.Controls.Add(this.lblTotalTitle);
-            this.pnlSummary.Location = new System.Drawing.Point(595, 140);
-            this.pnlSummary.Name = "pnlSummary";
-            this.pnlSummary.Size = new System.Drawing.Size(169, 100);
+            pnlSummary.BackColor = Color.White;
+            pnlSummary.BorderStyle = BorderStyle.FixedSingle;
+            pnlSummary.Controls.Add(lblTotalSesi);
+            pnlSummary.Controls.Add(lblTotalTitle);
+            pnlSummary.Location = new Point(652, 136);
+            pnlSummary.Name = "pnlSummary";
+            pnlSummary.Size = new Size(169, 100);
+            pnlSummary.TabIndex = 2;
             // 
             // lblTotalSesi
             // 
-            this.lblTotalSesi.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTotalSesi.ForeColor = System.Drawing.Color.FromArgb(46, 125, 50);
-            this.lblTotalSesi.Location = new System.Drawing.Point(10, 40);
-            this.lblTotalSesi.Name = "lblTotalSesi";
-            this.lblTotalSesi.Size = new System.Drawing.Size(145, 40);
-            this.lblTotalSesi.Text = "0 Sesi";
-            this.lblTotalSesi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblTotalSesi.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblTotalSesi.ForeColor = Color.FromArgb(46, 125, 50);
+            lblTotalSesi.Location = new Point(10, 40);
+            lblTotalSesi.Name = "lblTotalSesi";
+            lblTotalSesi.Size = new Size(145, 40);
+            lblTotalSesi.TabIndex = 0;
+            lblTotalSesi.Text = "0 Sesi";
+            lblTotalSesi.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTotalTitle
             // 
-            this.lblTotalTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblTotalTitle.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
-            this.lblTotalTitle.Location = new System.Drawing.Point(10, 15);
-            this.lblTotalTitle.Name = "lblTotalTitle";
-            this.lblTotalTitle.Size = new System.Drawing.Size(145, 20);
-            this.lblTotalTitle.Text = "Total Terfilter";
-            this.lblTotalTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblTotalTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblTotalTitle.ForeColor = Color.FromArgb(127, 140, 141);
+            lblTotalTitle.Location = new Point(10, 15);
+            lblTotalTitle.Name = "lblTotalTitle";
+            lblTotalTitle.Size = new Size(145, 20);
+            lblTotalTitle.TabIndex = 1;
+            lblTotalTitle.Text = "Total Terfilter";
+            lblTotalTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnEkspor
             // 
-            this.btnEkspor.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnEkspor.Location = new System.Drawing.Point(595, 413);
-            this.btnEkspor.Name = "btnEkspor";
-            this.btnEkspor.Size = new System.Drawing.Size(169, 32);
-            this.btnEkspor.Text = "Ekspor ke CSV/Excel";
-            this.btnEkspor.UseVisualStyleBackColor = true;
-            this.btnEkspor.Click += new System.EventHandler(this.btnEkspor_Click);
+            btnEkspor.Font = new Font("Segoe UI", 9F);
+            btnEkspor.Location = new Point(652, 413);
+            btnEkspor.Name = "btnEkspor";
+            btnEkspor.Size = new Size(169, 32);
+            btnEkspor.TabIndex = 1;
+            btnEkspor.Text = "Ekspor ke CSV/Excel";
+            btnEkspor.UseVisualStyleBackColor = true;
+            btnEkspor.Click += btnEkspor_Click;
             // 
             // btnCetak
             // 
-            this.btnCetak.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.btnCetak.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCetak.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnCetak.ForeColor = System.Drawing.Color.White;
-            this.btnCetak.Location = new System.Drawing.Point(595, 458);
-            this.btnCetak.Name = "btnCetak";
-            this.btnCetak.Size = new System.Drawing.Size(169, 32);
-            this.btnCetak.Text = "Cetak Laporan";
-            this.btnCetak.UseVisualStyleBackColor = false;
-            this.btnCetak.Click += new System.EventHandler(this.btnCetak_Click);
+            btnCetak.BackColor = Color.FromArgb(52, 73, 94);
+            btnCetak.FlatStyle = FlatStyle.Flat;
+            btnCetak.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnCetak.ForeColor = Color.White;
+            btnCetak.Location = new Point(652, 458);
+            btnCetak.Name = "btnCetak";
+            btnCetak.Size = new Size(169, 32);
+            btnCetak.TabIndex = 0;
+            btnCetak.Text = "Cetak Laporan";
+            btnCetak.UseVisualStyleBackColor = false;
+            btnCetak.Click += btnCetak_Click;
+            // 
+            // lblTitle
+            // 
+            lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.FromArgb(41, 128, 185);
+            lblTitle.Location = new Point(16, 15);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(300, 35);
+            lblTitle.TabIndex = 5;
+            lblTitle.Text = "LAPORAN AKTIVITAS ADMIN";
             // 
             // FormLaporanAdmin
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(784, 511);
-            this.Controls.Add(this.btnCetak);
-            this.Controls.Add(this.btnEkspor);
-            this.Controls.Add(this.pnlSummary);
-            this.Controls.Add(this.dgvLaporan);
-            this.Controls.Add(this.pnlFilter);
-            this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FormLaporanAdmin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Unimind Admin - Panel Laporan";
-            this.Load += new System.EventHandler(this.FormLaporanAdmin_Load);
-            this.pnlFilter.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLaporan)).EndInit();
-            this.pnlSummary.ResumeLayout(false);
-            this.ResumeLayout(false);
+            BackColor = Color.FromArgb(250, 250, 250);
+            ClientSize = new Size(839, 545);
+            Controls.Add(btnCetak);
+            Controls.Add(btnEkspor);
+            Controls.Add(pnlSummary);
+            Controls.Add(dgvLaporan);
+            Controls.Add(pnlFilter);
+            Controls.Add(lblTitle);
+            Controls.Add(btnKembali);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FormLaporanAdmin";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Unimind Admin - Panel Laporan";
+            Load += FormLaporanAdmin_Load;
+            pnlFilter.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvLaporan).EndInit();
+            pnlSummary.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.Label lblPeriode;
         private System.Windows.Forms.DateTimePicker dtpMulai;
@@ -240,5 +266,7 @@
         private System.Windows.Forms.Label lblTotalSesi;
         private System.Windows.Forms.Button btnEkspor;
         private System.Windows.Forms.Button btnCetak;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Button btnKembali;
     }
 }

@@ -110,23 +110,23 @@ namespace pboFinalProfject.View
                         {
                             case "Disetujui":
                                 e.CellStyle.ForeColor = Color.Green;
-                                e.Value = "Disetujui";
+                                e.Value = "✅ Disetujui";
                                 break;
                             case "Pending":
                                 e.CellStyle.ForeColor = Color.Orange;
-                                e.Value = "Pending";
+                                e.Value = "⏳ Pending";
                                 break;
                             case "Ditolak":
                                 e.CellStyle.ForeColor = Color.Red;
-                                e.Value = "Ditolak";
+                                e.Value = "❌ Ditolak";
                                 break;
                             case "Selesai":
                                 e.CellStyle.ForeColor = Color.Blue;
-                                e.Value = "Selesai";
+                                e.Value = "✔️ Selesai";
                                 break;
                             case "Batal":
                                 e.CellStyle.ForeColor = Color.Gray;
-                                e.Value = "Batal";
+                                e.Value = "🚫 Batal";
                                 break;
                         }
                     }
@@ -157,9 +157,9 @@ namespace pboFinalProfject.View
                 "Manajemen Pengguna", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Ketika form sudah dibuat, aktifkan kode di bawah:
-            //FormKelolaUser formUser = new FormKelolaUser();
-            //formUser.ShowDialog();
-            //LoadDataDashboard(); // Refresh jika ada perubahan
+            FormManageUser formUser = new FormManageUser();
+            formUser.ShowDialog();
+            LoadDataDashboard(); // Refresh jika ada perubahan
         }
 
         private void btnLaporan_Click(object sender, EventArgs e)
@@ -194,7 +194,21 @@ namespace pboFinalProfject.View
         private void btnLogout_Click(object sender, EventArgs e)
         {
             // Logout dan kembali ke form login
-            _authController.Logout(this);
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin logout?",
+                "Konfirmasi Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Bersihkan session
+                UserSession.Clear();
+
+                // Tutup form dashboard
+                this.Close();
+
+                // Buka form login baru
+                FormLogin formLogin = new FormLogin();
+                formLogin.Show();
+            }
         }
     }
 }

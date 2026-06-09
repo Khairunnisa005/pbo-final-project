@@ -1,24 +1,38 @@
-﻿using System;
+﻿using Npgsql; // Library Connector PostgreSQL
+using pboFinalProfject.Controllers;
+using pboFinalProfject.Model;
+using pboFinalProfject.Session;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using Npgsql; // Library Connector PostgreSQL
 
 namespace pboFinalProfject.View
 {
     public partial class FormManageUser : Form
     {
-        // Ganti dengan string koneksi database PostgreSQL Anda yang sebenarnya
-        private readonly string connString = "Host=localhost;Port=5432;Database=unimind_db;Username=postgres;Password=yourpassword;";
-        private int selectedIdPsikolog = -1;
-        private int selectedIdMahasiswa = -1;
+        private AdminController _adminController;
+        private int _selectedPsikologId = 0;
+        private int _selectedMahasiswaId = 0;
 
         public FormManageUser()
         {
             InitializeComponent();
+            _adminController = new AdminController();
+
         }
 
         private void FormManageUser_Load(object sender, EventArgs e)
         {
+            // Cek akses (hanya admin)
+            if (!UserSession.IsAdmin)
+            {
+                MessageBox.Show("Akses ditolak! Hanya admin yang dapat mengakses halaman ini.",
+                    "Akses Ditolak", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+
             LoadDataPsikolog();
             LoadDataMahasiswa();
         }
@@ -29,20 +43,31 @@ namespace pboFinalProfject.View
         {
             try
             {
-                using (var conn = new NpgsqlConnection(connString))
-                {
-                    conn.Open();
-                    string query = @"SELECT user_id, username, nama_lengkap, email, no_telepon
-                                     FROM users
-                                     ORDER BY user_id";
+                DataTable dt = _adminController.GetDaftarPsikolog();
+                dgvPsikolog.DataSource = dt;
 
-                    using (var da = new NpgsqlDataAdapter(query, conn))
-                    {
-                        var dt = new DataTable();
-                        da.Fill(dt);
-                        dgvPsikolog.DataSource = dt;
-                    }
-                }
+                // Sembunyikan kolom ID
+                if (dgvPsikolog.Columns.Contains("psikolog_id"))
+                    dgvPsikolog.Columns["psikolog_id"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("user_id"))
+                    dgvPsikolog.Columns["user_id"].Visible = false;
+
+                // Atur header
+                if (dgvPsikolog.Columns.Contains("username"))
+                    dgvPsikolog.Columns["username"].HeaderText = "Username";
+                if (dgvPsikolog.Columns.Contains("nama_lengkap"))
+                    dgvPsikolog.Columns["nama_lengkap"].HeaderText = "Nama Lengkap";
+                if (dgvPsikolog.Columns.Contains("email"))
+                    dgvPsikolog.Columns["email"].HeaderText = "Email";
+                if (dgvPsikolog.Columns.Contains("no_telepon"))
+                    dgvPsikolog.Columns["no_telepon"].HeaderText = "No. Telepon";
+                if (dgvPsikolog.Columns.Contains("gelar"))
+                    dgvPsikolog.Columns["gelar"].HeaderText = "Gelar";
+                if (dgvPsikolog.Columns.Contains("keahlian"))
+                    dgvPsikolog.Columns["keahlian"].HeaderText = "Keahlian";
+
+                dgvPsikolog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                
             }
             catch (Exception ex)
             {
@@ -52,41 +77,78 @@ namespace pboFinalProfject.View
 
         private void btnSimpanPsikolog_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtUserPsi.Text) || string.IsNullOrWhiteSpace(txtNamaPsi.Text))
-            {
-                MessageBox.Show("Username dan Nama Psikolog wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            
             try
             {
-                using (var conn = new NpgsqlConnection(connString))
+                string username = txtUserPsi.Text.Trim();
+                string namaLengkap = txtNamaPsi.Text.Trim();
+                string email = txtEmailPsi.Text.Trim();
+                string noTelepon = txtTelpPsi.Text.Trim();
+                string keahlian = txtKeahlian.Text.Trim();
+
+                // validasi
+                if (string.IsNullOrWhiteSpace(txtUserPsi.Text) || string.IsNullOrWhiteSpace(txtNamaPsi.Text))
                 {
-                    conn.Open();
-                    using (var trans = conn.BeginTransaction())
-                    {
-                        // 1. Insert ke Tabel Utama (Supertype)
-                        string sqlAkun = @"INSERT INTO akun (username, email, no_telepon, password_hash, nama_lengkap, role) 
-                                           VALUES (@u, @e, @t, @p, @n, 'Psikolog') RETURNING id_akun";
-                        int newId;
-                        using (var cmd = new NpgsqlCommand(sqlAkun, conn))
-                        {
-                            cmd.Parameters.AddWithValue("u", txtUserPsi.Text.Trim());
-                            cmd.Parameters.AddWithValue("p", "Psi123!"); // Default password awal
-                            cmd.Parameters.AddWithValue("n", txtNamaPsi.Text.Trim());
-                            cmd.Parameters.AddWithValue("e", txtEmailPsi.Text.Trim());
-                            cmd.Parameters.AddWithValue("t", txtTelpPsi.Text.Trim());
-                            newId = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-
-                        
-
-                        trans.Commit();
-                    }
-                    MessageBox.Show("Akun Psikolog baru sukses didaftarkan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDataPsikolog();
-                    ClearFieldsPsikolog();
+                    MessageBox.Show("Username dan Nama Psikolog wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+                if (string.IsNullOrEmpty(namaLengkap))
+                {
+                    MessageBox.Show("Nama lengkap harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (string.IsNullOrEmpty(email))
+                {
+                    MessageBox.Show("Email harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                //tambahkan
+                if (_selectedPsikologId == 0)
+                {
+                    // TAMBAH PSIKOLOG BARU
+                    string password = "psikolog123"; // Default password
+
+                    User newUser = new User
+                    {
+                        Username = username,
+                        Email = email,
+                        NoTelepon = noTelepon,
+                        PasswordHash = password,
+                        NamaLengkap = namaLengkap,
+                        Role = "Psikolog",
+                        CreatedAt = DateTime.Now
+                    };
+
+                    Psikolog newPsikolog = new Psikolog
+                    {
+                        Gelar = "",
+                        Pendidikan = "",
+                        NoIzinPraktek = "",
+                        DeskripsiSingkat = keahlian,
+                        MelayaniOnline = true,
+                        MelayaniOffline = true,
+                        CreatedAt = DateTime.Now
+                    };
+
+                    bool berhasil = _adminController.TambahPsikolog(newUser, newPsikolog);
+                    if (berhasil)
+                    {
+                        MessageBox.Show("Psikolog berhasil ditambahkan!", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearFieldsPsikolog();
+                        LoadDataPsikolog();
+                    }
+                }
+                else
+                {
+                    // UPDATE PSIKOLOG (belum diimplementasikan di AdminController)
+                    MessageBox.Show("Fitur update psikolog belum tersedia. Silakan hapus dan tambah baru.",
+                        "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -96,28 +158,34 @@ namespace pboFinalProfject.View
 
         private void btnHapusPsi_Click(object sender, EventArgs e)
         {
-            if (selectedIdPsikolog == -1) return;
+            if (_selectedPsikologId == 0)
+            {
+                MessageBox.Show("Pilih psikolog yang akan dihapus terlebih dahulu!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            var result = MessageBox.Show("Apakah Anda yakin ingin menghapus akun psikolog ini?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show($"Hapus psikolog {txtNamaPsi.Text}?",
+                "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
                 try
                 {
-                    using (var conn = new NpgsqlConnection(connString))
+                    bool berhasil = _adminController.HapusPsikolog(_selectedPsikologId);
+                    if (berhasil)
                     {
-                        conn.Open();
-                        // Berkat klausa 'ON DELETE CASCADE' di DDL, menghapus di tabel Akun otomatis membersihkan tabel Karyawan
-                        string sql = "DELETE FROM users WHERE user_id = @id";
-                        using (var cmd = new NpgsqlCommand(sql, conn))
-                        {
-                            cmd.Parameters.AddWithValue("id", selectedIdPsikolog);
-                            cmd.ExecuteNonQuery();
-                        }
+                        MessageBox.Show("Psikolog berhasil dihapus!", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearFieldsPsikolog();
+                        LoadDataPsikolog();
                     }
-                    LoadDataPsikolog();
-                    ClearFieldsPsikolog();
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal menghapus psikolog: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -126,18 +194,30 @@ namespace pboFinalProfject.View
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvPsikolog.Rows[e.RowIndex];
-                selectedIdPsikolog = Convert.ToInt32(row.Cells["id_akun"].Value);
-                txtUserPsi.Text = row.Cells["username"].Value.ToString();
-                txtNamaPsi.Text = row.Cells["nama"].Value.ToString();
-                txtEmailPsi.Text = row.Cells["email"].Value.ToString();
-                txtTelpPsi.Text = row.Cells["no_telepon"].Value.ToString();
+
+                _selectedPsikologId = Convert.ToInt32(row.Cells["psikolog_id"].Value);
+                txtUserPsi.Text = row.Cells["username"].Value?.ToString();
+                txtNamaPsi.Text = row.Cells["nama_lengkap"].Value?.ToString();
+                txtEmailPsi.Text = row.Cells["email"].Value?.ToString();
+                txtTelpPsi.Text = row.Cells["no_telepon"].Value?.ToString();
+                txtKeahlian.Text = row.Cells["keahlian"].Value?.ToString();
+
+                // Ubah tombol simpan menjadi "UPDATE"
+                btnSimpanPsikolog.Text = "UPDATE PSIKOLOG";
+                btnSimpanPsikolog.BackColor = Color.FromArgb(52, 152, 219);
             }
         }
 
         private void ClearFieldsPsikolog()
         {
-            txtUserPsi.Clear(); txtNamaPsi.Clear(); txtEmailPsi.Clear(); txtTelpPsi.Clear();
-            selectedIdPsikolog = -1;
+            txtUserPsi.Clear();
+            txtNamaPsi.Clear();
+            txtEmailPsi.Clear();
+            txtTelpPsi.Clear();
+            txtKeahlian.Clear();
+            _selectedPsikologId = 0;
+            btnSimpanPsikolog.Text = "TAMBAH PSIKOLOG";
+            btnSimpanPsikolog.BackColor = Color.FromArgb(26, 54, 141);
         }
 
         #endregion
@@ -148,20 +228,26 @@ namespace pboFinalProfject.View
         {
             try
             {
-                using (var conn = new NpgsqlConnection(connString))
-                {
-                    conn.Open();
-                    string query = @"SELECT user_id, username, nama_lengkap, email, no_telepon 
-                                     FROM users
-                                     ORDER BY user_id";
+                DataTable dt = _adminController.GetDaftarMahasiswa();
+                dgvMahasiswa.DataSource = dt;
 
-                    using (var da = new NpgsqlDataAdapter(query, conn))
-                    {
-                        var dt = new DataTable();
-                        da.Fill(dt);
-                        dgvMahasiswa.DataSource = dt;
-                    }
-                }
+                // Sembunyikan kolom ID
+                if (dgvMahasiswa.Columns.Contains("user_id"))
+                    dgvMahasiswa.Columns["user_id"].Visible = false;
+
+                // Atur header
+                if (dgvMahasiswa.Columns.Contains("username"))
+                    dgvMahasiswa.Columns["username"].HeaderText = "Username (NIM)";
+                if (dgvMahasiswa.Columns.Contains("nama_lengkap"))
+                    dgvMahasiswa.Columns["nama_lengkap"].HeaderText = "Nama Lengkap";
+                if (dgvMahasiswa.Columns.Contains("email"))
+                    dgvMahasiswa.Columns["email"].HeaderText = "Email";
+                if (dgvMahasiswa.Columns.Contains("no_telepon"))
+                    dgvMahasiswa.Columns["no_telepon"].HeaderText = "No. Telepon";
+                if (dgvMahasiswa.Columns.Contains("tgl_daftar"))
+                    dgvMahasiswa.Columns["tgl_daftar"].HeaderText = "Tanggal Daftar";
+
+                dgvMahasiswa.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {
@@ -171,65 +257,44 @@ namespace pboFinalProfject.View
 
         private void btnSimpanMhs_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtUserMhs.Text) || string.IsNullOrWhiteSpace(txtNamaMhs.Text))
-            {
-                MessageBox.Show("Username dan Nama Mahasiswa wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                using (var conn = new NpgsqlConnection(connString))
-                {
-                    conn.Open();
-                    using (var trans = conn.BeginTransaction())
-                    {
-                        string sqlUser = @"INSERT INTO users (username, password, nama_lengkap, email, no_telepon) 
-                                           VALUES (@u, @p, @n, @e, @t) RETURNING user_id";
-                        int newId;
-                        using (var cmd = new NpgsqlCommand(sqlUser, conn))
-                        {
-                            cmd.Parameters.AddWithValue("u", txtUserMhs.Text.Trim());
-                            cmd.Parameters.AddWithValue("p", "Mhs123!");
-                            cmd.Parameters.AddWithValue("n", txtNamaMhs.Text.Trim());
-                            cmd.Parameters.AddWithValue("e", txtEmailMhs.Text.Trim());
-                            cmd.Parameters.AddWithValue("t", txtTelpMhs.Text.Trim());
-                            newId = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-
-                        trans.Commit();
-                    }
-                    MessageBox.Show("Data Mahasiswa baru berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDataMahasiswa();
-                    ClearFieldsMahasiswa();
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            // Untuk mahasiswa, registrasi dilakukan dari form login
+            // Fitur update belum diimplementasikan
+            MessageBox.Show("Pendaftaran mahasiswa dilakukan melalui form registrasi.\n\n" +
+                "Untuk mengubah data mahasiswa, silakan hubungi admin sistem.",
+                "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnHapusMhs_Click(object sender, EventArgs e)
         {
-            if (selectedIdMahasiswa == -1) return;
+            if (_selectedMahasiswaId == 0)
+            {
+                MessageBox.Show("Pilih mahasiswa yang akan dihapus terlebih dahulu!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            var result = MessageBox.Show("Hapus data mahasiswa pilihan?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show($"Hapus mahasiswa {txtNamaMhs.Text}?\n\n" +
+                "Data booking dan riwayat konseling juga akan dihapus!",
+                "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
                 try
                 {
-                    using (var conn = new NpgsqlConnection(connString))
+                    bool berhasil = _adminController.HapusMahasiswa(_selectedMahasiswaId);
+                    if (berhasil)
                     {
-                        conn.Open();
-                        string sql = "DELETE FROM users WHERE user_id = @id";
-                        using (var cmd = new NpgsqlCommand(sql, conn))
-                        {
-                            cmd.Parameters.AddWithValue("id", selectedIdMahasiswa);
-                            cmd.ExecuteNonQuery();
-                        }
+                        MessageBox.Show("Mahasiswa berhasil dihapus!", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearFieldsMahasiswa();
+                        LoadDataMahasiswa();
                     }
-                    LoadDataMahasiswa();
-                    ClearFieldsMahasiswa();
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal menghapus mahasiswa: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -238,20 +303,28 @@ namespace pboFinalProfject.View
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvMahasiswa.Rows[e.RowIndex];
-                selectedIdMahasiswa = Convert.ToInt32(row.Cells["id_akun"].Value);
-                txtUserMhs.Text = row.Cells["username"].Value.ToString();
-                txtNamaMhs.Text = row.Cells["nama"].Value.ToString();
-                txtEmailMhs.Text = row.Cells["email"].Value.ToString();
-                txtTelpMhs.Text = row.Cells["no_telepon"].Value.ToString();
-                cmbStatusMhs.Text = row.Cells["status_customer"].Value.ToString();
+
+                _selectedMahasiswaId = Convert.ToInt32(row.Cells["user_id"].Value);
+                txtUserMhs.Text = row.Cells["username"].Value?.ToString();
+                txtNamaMhs.Text = row.Cells["nama_lengkap"].Value?.ToString();
+                txtEmailMhs.Text = row.Cells["email"].Value?.ToString();
+                txtTelpMhs.Text = row.Cells["no_telepon"].Value?.ToString();
+
+                btnSimpanMhs.Text = "UPDATE MAHASISWA";
+                btnSimpanMhs.BackColor = Color.FromArgb(52, 152, 219);
             }
         }
 
         private void ClearFieldsMahasiswa()
         {
-            txtUserMhs.Clear(); txtNamaMhs.Clear(); txtEmailMhs.Clear(); txtTelpMhs.Clear();
-            cmbStatusMhs.SelectedIndex = 0;
-            selectedIdMahasiswa = -1;
+            txtUserMhs.Clear();
+            txtNamaMhs.Clear();
+            txtEmailMhs.Clear();
+            txtTelpMhs.Clear();
+            cmbStatusMhs.SelectedIndex = -1;
+            _selectedMahasiswaId = 0;
+            btnSimpanMhs.Text = "TAMBAH MAHASISWA";
+            btnSimpanMhs.BackColor = Color.FromArgb(26, 54, 141);
         }
 
         #endregion

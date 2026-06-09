@@ -57,7 +57,7 @@ namespace pboFinalProfject
 
                     // Isi data ke komponen form
                     lblValIDBooking.Text = row["booking_id"]?.ToString() ?? "-";
-                    lblValNamaKonseli.Text = row["mahasiswa_anonim"]?.ToString() ?? "-";
+                    lblValNamaKonseli.Text = row["mahasiswa"]?.ToString() ?? "-";
                     lblValKonselor.Text = row["psikolog_nama"]?.ToString() ?? "-";
 
                     // Format tanggal dan jam

@@ -51,7 +51,7 @@ namespace pboFinalProfject
 
                     // Isi data booking
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
-                    lblValNama.Text = row["mahasiswa_anonim"]?.ToString() ?? "-";
+                    lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
 
                     // Format jadwal
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);

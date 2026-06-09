@@ -6,7 +6,7 @@ using pboFinalProfject.View;
 using System;
 using System.Data;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormDashboardPsikolog : Form
     {
@@ -23,6 +23,8 @@ namespace pboFinalProfject
 
             // Hook event handlers
             this.Load += FormDashboardPsikolog_Load;
+            btnKelolaJadwal.Click += btnKelolaJadwal_Click;
+
         }
 
         private void FormDashboardPsikolog_Load(object sender, EventArgs e)
@@ -73,9 +75,6 @@ namespace pboFinalProfject
                 if (dgvPasien.Columns.Contains("mahasiswa"))
                     dgvPasien.Columns["mahasiswa"].HeaderText = "Nama Mahasiswa";
 
-                if (dgvPasien.Columns.Contains("created_at"))
-                    dgvPasien.Columns["created_at"].HeaderText = "Tanggal Konseling";
-
                 if (dgvPasien.Columns.Contains("jam_mulai"))
                     dgvPasien.Columns["jam_mulai"].HeaderText = "Jam Mulai";
 
@@ -88,10 +87,13 @@ namespace pboFinalProfject
                 if (dgvPasien.Columns.Contains("status"))
                     dgvPasien.Columns["status"].HeaderText = "Status";
 
+                if (dgvPasien.Columns.Contains("tgl_booking"))
+                    dgvPasien.Columns["tgl_booking"].HeaderText = "Tanggal Booking";
+
                 // Format tampilan tanggal (created_at)
                 dgvPasien.CellFormatting += (s, ev) =>
                 {
-                    if (ev.ColumnIndex == dgvPasien.Columns["created_at"]?.Index && ev.Value != null)
+                    if (ev.ColumnIndex == dgvPasien.Columns["tgl_booking"]?.Index && ev.Value != null)
                     {
                         DateTime tanggal = Convert.ToDateTime(ev.Value);
                         ev.Value = tanggal.ToString("dd MMM yyyy");
@@ -253,13 +255,13 @@ namespace pboFinalProfject
                 {
                     DataRow row = dt.Rows[0];
                     string detail = $"Detail Konseling\n\n" +
-                                    $"Mahasiswa: {row["mahasiswa_anonim"]}\n" +
-                                    $"Tanggal: {Convert.ToDateTime(row["created_at"]):dd MMMM yyyy}\n" +
+                                    $"Mahasiswa: {row["mahasiswa"]}\n" +
+                                    $"Tanggal: {Convert.ToDateTime(row["tgl_booking"]):dd MMMM yyyy}\n" +
                                     $"Jam: {row["jam_mulai"]} - {row["jam_selesai"]}\n" +
                                     $"Metode: {row["metode"]}\n" +
                                     $"Status: {row["status"]}\n" +
                                     $"Catatan Mahasiswa: {row["catatan_user"]}\n" +
-                                    $"Catatan Psikolog: {row["catatan_psikolog"]}";
+                                    $"Catatan Psikolog: {row["catatan_psikolog"]}\n";
 
                     MessageBox.Show(detail, "Detail Booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -288,6 +290,9 @@ namespace pboFinalProfject
             Application.Exit();
         }
 
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

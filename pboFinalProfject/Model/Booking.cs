@@ -23,6 +23,8 @@ namespace pboFinalProfject.Models
         public Psikolog Psikolog { get; set; }
         public JadwalPsikolog JadwalPsikolog { get; set; }
         //public HasilAssessment HasilAssessment { get; set; }
+        // Gunakan int? (nullable) karena di awal booking, hasil assessment bisa jadi belum ada (null)
+        public int? HasilAssessmentId { get; set; }
 
     }
 }

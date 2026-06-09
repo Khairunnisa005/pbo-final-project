@@ -6,7 +6,7 @@ using pboFinalProfject.Utils;
 using pboFinalProfject.Controllers;
 using pboFinalProfject.Session;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormKelolaJadwal : Form
     {
@@ -24,6 +24,7 @@ namespace pboFinalProfject
             btnTambah.Click += BtnTambah_Click;
             btnUbah.Click += BtnUbah_Click;
             btnHapus.Click += BtnHapus_Click;
+            btnKembali.Click += BtnKembali_Click;
             btnBersihkan.Click += BtnBersihkan_Click;
             dgvSlotJadwal.SelectionChanged += DgvSlotJadwal_SelectionChanged;
 
@@ -77,22 +78,23 @@ namespace pboFinalProfject
                 if (dgvSlotJadwal.Columns.Contains("kuota"))
                     dgvSlotJadwal.Columns["kuota"].HeaderText = "Kuota";
 
+                //if (dgvSlotJadwal.Columns.Contains("is_active"))
+                //{
+                //    dgvSlotJadwal.Columns["is_active"].HeaderText = "Status";
+
+                //    //// Format tampilan status
+                //    //dgvSlotJadwal.CellFormatting += (s, ev) =>
+                //    //{
+                //    //    if (ev.ColumnIndex == dgvSlotJadwal.Columns["is_active"].Index && ev.Value != null)
+                //    //    {
+                //    //        bool isActive = Convert.ToBoolean(ev.Value);
+                //    //        ev.Value = isActive ? "✅ Aktif" : "❌ Tidak Aktif";
+                //    //        ev.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
+                //    //    }
+                //    //};
+                //}
                 if (dgvSlotJadwal.Columns.Contains("is_active"))
-                {
                     dgvSlotJadwal.Columns["is_active"].HeaderText = "Status";
-
-                    // Format tampilan status
-                    dgvSlotJadwal.CellFormatting += (s, ev) =>
-                    {
-                        if (ev.ColumnIndex == dgvSlotJadwal.Columns["is_active"].Index && ev.Value != null)
-                        {
-                            bool isActive = Convert.ToBoolean(ev.Value);
-                            ev.Value = isActive ? "✅ Aktif" : "❌ Tidak Aktif";
-                            ev.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
-                        }
-                    };
-                }
-
                 // Auto-size columns
                 dgvSlotJadwal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
@@ -174,7 +176,7 @@ namespace pboFinalProfject
                 if (dgvSlotJadwal.Columns.Contains("is_active") && row.Cells["is_active"].Value != null)
                     chkIsActive.Checked = Convert.ToBoolean(row.Cells["is_active"].Value);
 
-                btnTambah.Enabled = false;
+                btnTambah.Enabled = true;
                 btnUbah.Enabled = true;
                 btnHapus.Enabled = true;
             }
@@ -216,6 +218,17 @@ namespace pboFinalProfject
                 string metode = cmbMetode.SelectedItem.ToString();
                 bool isActive = chkIsActive.Checked;
 
+                // DEBUG: Tampilkan parameter yang akan dikirim
+                MessageBox.Show($"Debug - Parameter:\n\n" +
+                    $"psikologId: {_psikologId}\n" +
+                    $"hari: {hari}\n" +
+                    $"jamMulai: {jamMulai}\n" +
+                    $"jamSelesai: {jamSelesai}\n" +
+                    $"metode: {metode}\n" +
+                    $"kuota: {kuota}\n" +
+                    $"isActive: {isActive}",
+                    "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 bool berhasil = _psikologController.TambahJadwal(_psikologId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
 
                 if (berhasil)
@@ -224,6 +237,11 @@ namespace pboFinalProfject
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BersihkanForm();
                     LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menambah jadwal: Method mengembalikan false.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -339,7 +357,7 @@ namespace pboFinalProfject
         }
 
 
-        private void FormKelolaJadwal_Load_1(object sender, EventArgs e)
+        private void BtnKembali_Click(object sender, EventArgs e)
         {
 
         }

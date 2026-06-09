@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using pboFinalProfject.Services;
 using pboFinalProfject.Session;
 
-namespace pboFinalProfject
+namespace pboFinalProfject.View
 {
     public partial class FormKonfirmasiBooking : Form
     {
@@ -21,6 +21,9 @@ namespace pboFinalProfject
             _bookingService = new BookingService();
 
             this.Load += FormKonfirmasiBooking_Load;
+            btnKembali.Click += BtnKembali_Click;
+
+            lblID.Click += lblID_Click;
         }
 
         private void FormKonfirmasiBooking_Load(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace pboFinalProfject
 
                     // Isi data ke label
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
-                    lblValNama.Text = row["mahasiswa_anonim"]?.ToString() ?? "-";
+                    lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
 
                     // Format jadwal
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
@@ -220,6 +223,16 @@ namespace pboFinalProfject
         private void lblPrompt_Click(object sender, EventArgs e)
         {
             // Event handler kosong (tidak diperlukan, tapi tidak boleh dihapus)
+        }
+
+        private void lblID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnKembali_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
