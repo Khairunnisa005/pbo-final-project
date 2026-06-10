@@ -30,8 +30,18 @@ namespace pboFinalProfject.View.Mahasiswa
         {
             InitializeComponent();
             _controller = new PsikologController();
+            // wire sidebar
+            btnKuisioner.Click += BtnKuisioner_Click;
+            btnKonselor.Click += BtnKonselor_Click;
+            btnKonsultasi.Click += BtnKonsultasi_Click;
+            btnProfile.Click += BtnProfile_Click;
+            btnBeranda.Click += BtnBeranda_Click;
+            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
             //LoadPsikologs();
+            this.Shown += (s, e) => { this.Activate(); };
         }
+
+        // When embedded, the parent dashboard will manage docking and sizing. Keep form as-is.
 
         // ini dihapus juga kagak apa apa
 
@@ -90,6 +100,39 @@ namespace pboFinalProfject.View.Mahasiswa
         private void btnKembali_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnKuisioner_Click(object? sender, EventArgs e)
+        {
+            var f = new FormKuesioner();
+            f.ShowDialog(this);
+        }
+
+        private void BtnKonselor_Click(object? sender, EventArgs e)
+        {
+            // already here
+        }
+
+        private void BtnKonsultasi_Click(object? sender, EventArgs e)
+        {
+            var f = new FormBuatBooking();
+            f.ShowDialog(this);
+        }
+
+        private void BtnProfile_Click(object? sender, EventArgs e)
+        {
+            var f = new FormProfilMahasiswa();
+            f.ShowDialog(this);
+        }
+
+        private void BtnBeranda_Click(object? sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormDaftarKonselor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

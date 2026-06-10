@@ -15,6 +15,10 @@ namespace pboFinalProfject.View.Mahasiswa
         private JadwalRepository _jadwalRepo;
         private int? _editJadwalId;
         private int? _editBookingId;
+        // keep original booking values so UI can show them when category changes
+        private int? _originalPsikologId;
+        private string _originalPsikologName;
+        private int? _originalJadwalId;
 
         public FormBuatBooking()
         {
@@ -28,8 +32,50 @@ namespace pboFinalProfject.View.Mahasiswa
             comboPsikolog.SelectedIndexChanged += ComboPsikolog_SelectedIndexChanged;
             dgvJadwal.CellDoubleClick += DgvJadwal_CellDoubleClick;
             btnSubmit.Click += BtnSubmit_Click;
+            // sidebar buttons
+            btnKuisioner.Click += BtnKuisioner_Click;
+            btnKonselor.Click += BtnKonselor_Click;
+            btnKonsultasi.Click += BtnKonsultasi_Click;
+            btnProfile.Click += BtnProfile_Click;
+            btnBeranda.Click += BtnBeranda_Click;
+            // logout
+            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
+            // logout handled by AuthController via main btnKeluar elsewhere
 
             LoadCategories();
+            this.Shown += (s, e) => { this.Activate(); };
+        }
+
+        private void BtnKuisioner_Click(object? sender, EventArgs e)
+        {
+            var parent = this.ParentForm as FormDashboardMahasiswa;
+            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormKuesioner() });
+            else { var f = new FormKuesioner(); f.ShowDialog(this); }
+        }
+
+        private void BtnKonselor_Click(object? sender, EventArgs e)
+        {
+            var parent = this.ParentForm as FormDashboardMahasiswa;
+            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() });
+            else { var f = new FormDaftarKonselor(); f.ShowDialog(this); }
+        }
+
+        private void BtnKonsultasi_Click(object? sender, EventArgs e)
+        {
+            var f = new FormBuatBooking();
+            f.ShowDialog(this);
+        }
+
+        private void BtnProfile_Click(object? sender, EventArgs e)
+        {
+            var parent = this.ParentForm as FormDashboardMahasiswa;
+            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormProfilMahasiswa() });
+            else { var f = new FormProfilMahasiswa(); f.ShowDialog(this); }
+        }
+
+        private void BtnBeranda_Click(object? sender, EventArgs e)
+        {
+            this.Close();
         }
 
         /// <summary>
@@ -99,6 +145,8 @@ namespace pboFinalProfject.View.Mahasiswa
                     comboPsikolog.ValueMember = "psikolog_id";
 
                     comboPsikolog.SelectedValue = jadwal.PsikologId;
+                    _originalPsikologId = jadwal.PsikologId;
+                    _originalPsikologName = psikologTable.Columns.Contains("nama_lengkap") ? matchRow["nama_lengkap"].ToString() : matchRow["username"].ToString();
                 }
 
                 // Load jadwal for the psikolog
@@ -117,6 +165,7 @@ namespace pboFinalProfject.View.Mahasiswa
                         {
                             row.Selected = true;
                             dgvJadwal.CurrentCell = row.Cells[0];
+                            _originalJadwalId = jadwalId;
                             break;
                         }
                     }
@@ -166,9 +215,18 @@ namespace pboFinalProfject.View.Mahasiswa
                     string hari = jadwal == null ? "-" : (jadwal.Hari ?? "-");
                     string jamMulai = jadwal == null ? "-" : jadwal.JamMulai.ToString();
                     string jamSelesai = jadwal == null ? "-" : jadwal.JamSelesai.ToString();
-                    string prev = $"Sebelumnya: Psikolog={psikologName}, Hari={hari}, Jam={jamMulai} - {jamSelesai}";
-                    if (!string.IsNullOrEmpty(booking.CatatanUser)) prev += $" | Catatan: {booking.CatatanUser}";
-                    if (lblPrevInfo != null) lblPrevInfo.Text = prev;
+                    if (lblPrevPsikolog != null) lblPrevPsikolog.Text = $"Psikolog sebelumnya: {psikologName}";
+                    if (lblPrevJadwal != null) lblPrevJadwal.Text = $"Jadwal sebelumnya: {hari}, {jamMulai} - {jamSelesai}";
+                    if (lblPrevInfo != null)
+                    {
+                        lblPrevInfo.Text = string.IsNullOrEmpty(booking.CatatanUser) ? "" : $"Catatan sebelumnya: {booking.CatatanUser}";
+                    }
+                    // kategori info is not directly stored on booking; show placeholder if exists
+                    if (lblPrevKategori != null) lblPrevKategori.Text = "Kategori sebelumnya: (lihat psikolog)";
+                    // remember original ids/names so we can preserve display across category changes
+                    _originalPsikologId = booking.PsikologId;
+                    _originalPsikologName = psikologName;
+                    _originalJadwalId = booking.JadwalId;
                 }
                 catch { }
             }
@@ -265,6 +323,21 @@ namespace pboFinalProfject.View.Mahasiswa
                 comboPsikolog.DisplayMember = psykTable.Columns.Contains("nama_lengkap") ? "nama_lengkap" : "username";
                 comboPsikolog.ValueMember = "psikolog_id";
                 comboPsikolog.DataSource = psykTable;
+                // if editing an existing booking and the original psikolog is not in this filtered list,
+                // inject a placeholder row so the original remains visible and selectable
+                if (_originalPsikologId.HasValue)
+                {
+                    bool found = false;
+                    foreach (DataRow r in psykTable.Rows) if (Convert.ToInt32(r["psikolog_id"]) == _originalPsikologId.Value) { found = true; break; }
+                    if (!found)
+                    {
+                        var newRow = psykTable.NewRow();
+                        if (psykTable.Columns.Contains("nama_lengkap")) newRow["nama_lengkap"] = _originalPsikologName ?? "(Psikolog sebelumnya)";
+                        if (psykTable.Columns.Contains("username") && !psykTable.Columns.Contains("nama_lengkap")) newRow["username"] = _originalPsikologName ?? "(Psikolog sebelumnya)";
+                        newRow["psikolog_id"] = _originalPsikologId.Value;
+                        psykTable.Rows.InsertAt(newRow, 0);
+                    }
+                }
                 if (comboPsikolog.Items.Count > 0) comboPsikolog.SelectedIndex = 0;
             }
             catch (Exception ex)

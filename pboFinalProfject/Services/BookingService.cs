@@ -287,6 +287,7 @@ namespace pboFinalProfject
         public bool UpdateBookingJadwal(int bookingId, int psikologId, int jadwalId, string catatanUser = null)
         {
             // basic validation: pastikan jadwal milik psikolog dan slot tersedia
+            // When checking availability, exclude the current booking from the count so saving without change is allowed
             string cekJadwalQuery = @"
                 SELECT 
                     CASE
@@ -297,7 +298,7 @@ namespace pboFinalProfject
                 LEFT JOIN (
                     SELECT jadwal_id, COUNT(*) as jumlah_booking
                     FROM booking
-                    WHERE status IN ('Pending','Disetujui')
+                    WHERE status IN ('Pending','Disetujui') AND booking_id != @booking_id
                     GROUP BY jadwal_id
                 ) b ON j.jadwal_id = b.jadwal_id
                 WHERE j.jadwal_id = @jadwal_id";
@@ -305,32 +306,34 @@ namespace pboFinalProfject
             var cekParams = new[]
             {
                 new NpgsqlParameter("@psikolog_id", psikologId),
-                new NpgsqlParameter("@jadwal_id", jadwalId)
+                new NpgsqlParameter("@jadwal_id", jadwalId),
+                new NpgsqlParameter("@booking_id", bookingId)
             };
             object avail = _db.ExecuteScalar(cekJadwalQuery, cekParams);
             if (avail == null || !Convert.ToBoolean(avail))
                 throw new Exception("Jadwal tidak valid atau slot tidak tersedia!");
 
-            // Pastikan booking ada dan milik psikolog yang dimaksud
-            string cekBookingQuery = "SELECT COUNT(*) FROM booking WHERE booking_id = @booking_id AND psikolog_id = @psikolog_id";
+            // Pastikan booking ada
+            string cekBookingQuery = "SELECT COUNT(*) FROM booking WHERE booking_id = @booking_id";
             var cekBookingParams = new[]
             {
-                new NpgsqlParameter("@booking_id", bookingId),
-                new NpgsqlParameter("@psikolog_id", psikologId)
+                new NpgsqlParameter("@booking_id", bookingId)
             };
             int bookingCount = Convert.ToInt32(_db.ExecuteScalar(cekBookingQuery, cekBookingParams));
             if (bookingCount == 0)
-                throw new Exception("Booking tidak ditemukan untuk psikolog ini!");
+                throw new Exception("Booking tidak ditemukan!");
 
-            // Lakukan update jadwal
+            // Lakukan update jadwal + psikolog jika perlu
             string updateQuery = @"
                 UPDATE booking
-                SET jadwal_id = @jadwal_id,
+                SET psikolog_id = @psikolog_id,
+                    jadwal_id = @jadwal_id,
                     catatan_user = @catatan_user
                 WHERE booking_id = @booking_id";
 
             var updateParams = new[]
             {
+                new NpgsqlParameter("@psikolog_id", psikologId),
                 new NpgsqlParameter("@jadwal_id", jadwalId),
                 new NpgsqlParameter("@catatan_user", string.IsNullOrEmpty(catatanUser) ? (object)DBNull.Value : (object)catatanUser),
                 new NpgsqlParameter("@booking_id", bookingId)

@@ -69,38 +69,51 @@ partial class FormDashboardMahasiswa
         // btnBeranda
         // 
         btnBeranda.BackColor = Color.Transparent;
-        btnBeranda.Font = new Font("Calibri", 12F);
-        btnBeranda.Location = new Point(80, 155);
+        btnBeranda.FlatAppearance.BorderSize = 0;
+        btnBeranda.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnBeranda.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnBeranda.FlatStyle = FlatStyle.Flat;
+        btnBeranda.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnBeranda.ForeColor = SystemColors.ButtonHighlight;
+        btnBeranda.Location = new Point(80, 157);
         btnBeranda.Name = "btnBeranda";
         btnBeranda.Size = new Size(165, 38);
-        btnBeranda.TabIndex = 2;
+        btnBeranda.TabIndex = 9;
         btnBeranda.Text = "Beranda";
         btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
         btnBeranda.UseVisualStyleBackColor = false;
-        btnBeranda.Click += button1_Click;
         // 
         // btnProfile
         // 
         btnProfile.BackColor = Color.Transparent;
-        btnProfile.Font = new Font("Calibri", 12F);
+        btnProfile.FlatAppearance.BorderSize = 0;
+        btnProfile.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnProfile.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnProfile.FlatStyle = FlatStyle.Flat;
+        btnProfile.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnProfile.ForeColor = SystemColors.ButtonHighlight;
         btnProfile.ImageAlign = ContentAlignment.TopRight;
-        btnProfile.Location = new Point(82, 417);
+        btnProfile.Location = new Point(82, 420);
         btnProfile.Name = "btnProfile";
         btnProfile.Size = new Size(165, 38);
-        btnProfile.TabIndex = 3;
+        btnProfile.TabIndex = 10;
         btnProfile.Text = "Profil";
         btnProfile.TextAlign = ContentAlignment.MiddleLeft;
         btnProfile.UseVisualStyleBackColor = false;
-        btnProfile.Click += btnProfile_Click;
         // 
         // btnKonsultasi
         // 
         btnKonsultasi.BackColor = Color.Transparent;
-        btnKonsultasi.Font = new Font("Calibri", 12F);
-        btnKonsultasi.Location = new Point(80, 352);
+        btnKonsultasi.FlatAppearance.BorderSize = 0;
+        btnKonsultasi.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnKonsultasi.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnKonsultasi.FlatStyle = FlatStyle.Flat;
+        btnKonsultasi.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnKonsultasi.ForeColor = SystemColors.ButtonHighlight;
+        btnKonsultasi.Location = new Point(82, 356);
         btnKonsultasi.Name = "btnKonsultasi";
         btnKonsultasi.Size = new Size(167, 38);
-        btnKonsultasi.TabIndex = 4;
+        btnKonsultasi.TabIndex = 11;
         btnKonsultasi.Text = "Jadwal Konsultasi";
         btnKonsultasi.TextAlign = ContentAlignment.MiddleLeft;
         btnKonsultasi.UseVisualStyleBackColor = false;
@@ -108,11 +121,16 @@ partial class FormDashboardMahasiswa
         // btnKonselor
         // 
         btnKonselor.BackColor = Color.Transparent;
-        btnKonselor.Font = new Font("Calibri", 12F);
-        btnKonselor.Location = new Point(80, 289);
+        btnKonselor.FlatAppearance.BorderSize = 0;
+        btnKonselor.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnKonselor.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnKonselor.FlatStyle = FlatStyle.Flat;
+        btnKonselor.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnKonselor.ForeColor = SystemColors.ButtonHighlight;
+        btnKonselor.Location = new Point(80, 286);
         btnKonselor.Name = "btnKonselor";
         btnKonselor.Size = new Size(165, 38);
-        btnKonselor.TabIndex = 5;
+        btnKonselor.TabIndex = 12;
         btnKonselor.Text = "Konselor";
         btnKonselor.TextAlign = ContentAlignment.MiddleLeft;
         btnKonselor.UseVisualStyleBackColor = false;
@@ -120,16 +138,20 @@ partial class FormDashboardMahasiswa
         // btnKuisioner
         // 
         btnKuisioner.BackColor = Color.Transparent;
-        btnKuisioner.Font = new Font("Calibri", 12F);
+        btnKuisioner.FlatAppearance.BorderSize = 0;
+        btnKuisioner.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnKuisioner.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnKuisioner.FlatStyle = FlatStyle.Flat;
+        btnKuisioner.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnKuisioner.ForeColor = SystemColors.ButtonHighlight;
         btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
-        btnKuisioner.Location = new Point(80, 221);
+        btnKuisioner.Location = new Point(80, 219);
         btnKuisioner.Name = "btnKuisioner";
         btnKuisioner.Size = new Size(165, 38);
-        btnKuisioner.TabIndex = 6;
+        btnKuisioner.TabIndex = 13;
         btnKuisioner.Text = "Kuisioner";
         btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
         btnKuisioner.UseVisualStyleBackColor = false;
-        btnKuisioner.Click += btnKuisioner_Click;
         // 
         // btnDaftar
         // 
@@ -170,19 +192,22 @@ partial class FormDashboardMahasiswa
         // btnKeluar
         // 
         btnKeluar.BackColor = Color.Transparent;
-        btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        btnKeluar.Location = new Point(80, 785);
+        btnKeluar.FlatAppearance.BorderSize = 0;
+        btnKeluar.FlatAppearance.MouseDownBackColor = Color.Transparent;
+        btnKeluar.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        btnKeluar.FlatStyle = FlatStyle.Flat;
+        btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnKeluar.ForeColor = SystemColors.ButtonHighlight;
+        btnKeluar.Location = new Point(76, 785);
         btnKeluar.Name = "btnKeluar";
-        btnKeluar.Size = new Size(116, 40);
-        btnKeluar.TabIndex = 10;
+        btnKeluar.Size = new Size(165, 38);
+        btnKeluar.TabIndex = 14;
         btnKeluar.Text = "Keluar";
         btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
         btnKeluar.UseVisualStyleBackColor = false;
-        btnKeluar.Click += btnKeluar_Click;
         // 
         // FormDashboardMahasiswa
         // 
-        AutoScaleMode = AutoScaleMode.None;
         BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
         ClientSize = new Size(1518, 817);
         Controls.Add(btnKeluar);
@@ -200,11 +225,9 @@ partial class FormDashboardMahasiswa
         FormBorderStyle = FormBorderStyle.FixedSingle;
         Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
-        MaximumSize = new Size(1536, 864);
-        MinimumSize = new Size(1536, 864);
         Name = "FormDashboardMahasiswa";
         StartPosition = FormStartPosition.CenterParent;
-        Text = "Form1";
+        Text = "Dasboard Mahasiswa";
         Load += Dashboard_Load;
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
         ResumeLayout(false);

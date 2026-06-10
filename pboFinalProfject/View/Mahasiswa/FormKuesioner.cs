@@ -23,6 +23,37 @@ namespace pboFinalProfject.View.Mahasiswa
         {
             InitializeComponent();
             LoadQuestions();
+            WireSidebar();
+            ShowLatestScore();
+            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
+            // help ensure single-click buttons respond immediately when form is shown
+            this.Shown += (s, e) => { this.Activate(); };
+        }
+
+        private void WireSidebar()
+        {
+            btnKuisioner.Click += (s, e) => { /* already here */ };
+            btnKonselor.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() }); else new FormDaftarKonselor().ShowDialog(this); };
+            btnKonsultasi.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormBuatBooking() }); else new FormBuatBooking().ShowDialog(this); };
+            btnProfile.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormProfilMahasiswa() }); else new FormProfilMahasiswa().ShowDialog(this); };
+            btnBeranda.Click += (s, e) => { this.Close(); };
+        }
+
+        private void ShowLatestScore()
+        {
+            try
+            {
+                var latest = _hasilRepo.GetLatestByUserId(UserSession.GetCurrentUserId());
+                if (latest != null)
+                {
+                    lblLastScore.Text = $"Skor terakhir: {latest.SkorTotal} ({latest.TingkatStres}) - {latest.TanggalAssessment:d}";
+                }
+                else
+                {
+                    lblLastScore.Text = "Belum ada kuisioner yang tersimpan.";
+                }
+            }
+            catch { }
         }
 
         private void LoadQuestions()
@@ -119,6 +150,7 @@ namespace pboFinalProfject.View.Mahasiswa
                 {
                     // show result and offer mulai lagi / kembali
                     kuisTotal(total, tingkat, rekom);
+                    ShowLatestScore();
                     btnMulaiLagi.Visible = true;
                     btnKembali.Visible = true;
                     btnSubmit.Enabled = false;

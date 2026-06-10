@@ -22,6 +22,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKonsultasi = new Button();
             btnProfile = new Button();
             btnBeranda = new Button();
+            btnKeluar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).BeginInit();
             SuspendLayout();
             // 
@@ -44,12 +45,19 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKembali.Size = new Size(436, 55);
             btnKembali.TabIndex = 0;
             btnKembali.Text = "Kembali";
+            btnKembali.Click -= btnKembali_Click;
             btnKembali.Click += btnKembali_Click;
+            btnKembali.DialogResult = DialogResult.Cancel;
             // 
             // btnKuisioner
             // 
             btnKuisioner.BackColor = Color.Transparent;
+            btnKuisioner.FlatStyle = FlatStyle.Flat;
+            btnKuisioner.FlatAppearance.BorderSize = 0;
+            btnKuisioner.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnKuisioner.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnKuisioner.Font = new Font("Calibri", 12F);
+            btnKuisioner.UseVisualStyleBackColor = false;
             btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
             btnKuisioner.Location = new Point(65, 211);
             btnKuisioner.Name = "btnKuisioner";
@@ -62,7 +70,12 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKonselor
             // 
             btnKonselor.BackColor = Color.Transparent;
+            btnKonselor.FlatStyle = FlatStyle.Flat;
+            btnKonselor.FlatAppearance.BorderSize = 0;
+            btnKonselor.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnKonselor.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnKonselor.Font = new Font("Calibri", 12F);
+            btnKonselor.UseVisualStyleBackColor = false;
             btnKonselor.Location = new Point(65, 281);
             btnKonselor.Name = "btnKonselor";
             btnKonselor.Size = new Size(165, 38);
@@ -74,7 +87,12 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKonsultasi
             // 
             btnKonsultasi.BackColor = Color.Transparent;
+            btnKonsultasi.FlatStyle = FlatStyle.Flat;
+            btnKonsultasi.FlatAppearance.BorderSize = 0;
+            btnKonsultasi.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnKonsultasi.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnKonsultasi.Font = new Font("Calibri", 12F);
+            btnKonsultasi.UseVisualStyleBackColor = false;
             btnKonsultasi.Location = new Point(65, 348);
             btnKonsultasi.Name = "btnKonsultasi";
             btnKonsultasi.Size = new Size(167, 38);
@@ -86,7 +104,12 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnProfile
             // 
             btnProfile.BackColor = Color.Transparent;
+            btnProfile.FlatStyle = FlatStyle.Flat;
+            btnProfile.FlatAppearance.BorderSize = 0;
+            btnProfile.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnProfile.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnProfile.Font = new Font("Calibri", 12F);
+            btnProfile.UseVisualStyleBackColor = false;
             btnProfile.ImageAlign = ContentAlignment.TopRight;
             btnProfile.Location = new Point(67, 417);
             btnProfile.Name = "btnProfile";
@@ -99,7 +122,12 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnBeranda
             // 
             btnBeranda.BackColor = Color.Transparent;
+            btnBeranda.FlatStyle = FlatStyle.Flat;
+            btnBeranda.FlatAppearance.BorderSize = 0;
+            btnBeranda.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnBeranda.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnBeranda.Font = new Font("Calibri", 12F);
+            btnBeranda.UseVisualStyleBackColor = false;
             btnBeranda.Location = new Point(65, 142);
             btnBeranda.Name = "btnBeranda";
             btnBeranda.Size = new Size(165, 38);
@@ -107,6 +135,23 @@ namespace pboFinalProfject.View.Mahasiswa
             btnBeranda.Text = "Beranda";
             btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
             btnBeranda.UseVisualStyleBackColor = false;
+            // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnKeluar.Font = new Font("Calibri", 12F);
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Location = new Point(65, 748);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(165, 38);
+            btnKeluar.TabIndex = 19;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
+            btnKeluar.UseVisualStyleBackColor = false;
             // 
             // FormDaftarKonselor
             // 
@@ -119,11 +164,13 @@ namespace pboFinalProfject.View.Mahasiswa
             Controls.Add(btnKonsultasi);
             Controls.Add(btnProfile);
             Controls.Add(btnBeranda);
+            Controls.Add(btnKeluar);
             Controls.Add(btnKembali);
             Controls.Add(dgvPsikolog);
             Name = "FormDaftarKonselor";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Daftar Konselor";
+            Load += FormDaftarKonselor_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).EndInit();
             ResumeLayout(false);
         }
@@ -135,5 +182,6 @@ namespace pboFinalProfject.View.Mahasiswa
         private Button btnKonsultasi;
         private Button btnProfile;
         private Button btnBeranda;
+        private Button btnKeluar;
     }
 }

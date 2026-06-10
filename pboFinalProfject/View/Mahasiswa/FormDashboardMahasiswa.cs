@@ -23,72 +23,9 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKuisioner.Click += btnKuisioner_Click;
             //btnKuis.Click += btnCekKeadaan_Click;
             btnJadwal.Click += BtnJadwal_Click;
+            btnKonselor.Click += (s, e) => { var f = new FormDaftarKonselor(); f.ShowDialog(this); };
+            btnKonsultasi.Click += (s, e) => { var f = new FormBuatBooking(); f.ShowDialog(this); };
         }
-
-        //private void InitializeDashboard()
-        //{
-        //    // Outer container that keeps fixed client size but allows flowPanel to be scrollable
-        //    containerPanel = new Panel
-        //    {
-        //        Dock = DockStyle.Fill,
-        //        AutoScroll = true,
-        //        BackColor = SystemColors.ControlLight,
-        //    };
-
-        //    // FlowLayoutPanel to arrange dashboard items vertically
-        //    flowPanel = new FlowLayoutPanel
-        //    {
-        //        FlowDirection = FlowDirection.TopDown,
-        //        WrapContents = false,
-        //        AutoSize = true,
-        //        Padding = new Padding(10),
-        //    };
-
-        //    containerPanel.Controls.Add(flowPanel);
-        //    this.Controls.Add(containerPanel);
-
-        //    // Add sample cards to demonstrate scrolling
-        //    for (int i = 0; i < 12; i++)
-        //    {
-        //        var card = CreateCard($"Panel {i + 1}", "Konten contoh...");
-        //        flowPanel.Controls.Add(card);
-        //    }
-
-        //    // Optional: set a preferred starting size similar to typical login form
-        //    this.ClientSize = new Size(880, 503);
-        //}
-
-        //private Control CreateCard(string title, string content)
-        //{
-        //    var panel = new Panel
-        //    {
-        //        Width = 800,
-        //        Height = 80,
-        //        BackColor = Color.White,
-        //        Margin = new Padding(0, 0, 0, 10),
-        //    };
-
-        //    var lblTitle = new Label
-        //    {
-        //        Text = title,
-        //        Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-        //        Location = new Point(10, 10),
-        //        AutoSize = true,
-        //    };
-
-        //    var lblContent = new Label
-        //    {
-        //        Text = content,
-        //        Font = new Font("Segoe UI", 8F),
-        //        Location = new Point(10, 35),
-        //        AutoSize = true,
-        //    };
-
-        //    panel.Controls.Add(lblTitle);
-        //    panel.Controls.Add(lblContent);
-
-        //    return panel;
-        //}
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -138,12 +75,6 @@ namespace pboFinalProfject.View.Mahasiswa
             login.Show();
         }
 
-        //private void btnCekKeadaan_Click(object sender, EventArgs e)
-        //{
-        //    var form = new FormCekKeadaan();
-        //    form.ShowDialog(this);
-        //}
-
         private void BtnJadwal_Click(object sender, EventArgs e)
         {
             var form = new FormBuatBooking();
@@ -159,8 +90,13 @@ namespace pboFinalProfject.View.Mahasiswa
                 var dt = _mahasiswaController.GetJadwalAktif();
                 dataGridView1.DataSource = dt;
                 if (dataGridView1.Columns.Contains("jadwal_id")) dataGridView1.Columns["jadwal_id"].Visible = false;
+                if (dataGridView1.Columns.Contains("booking_id")) dataGridView1.Columns["booking_id"].Visible = false;
+                if (dataGridView1.Columns.Contains("psikolog_id")) dataGridView1.Columns["psikolog_id"].Visible = false;
+                if (dataGridView1.Columns.Contains("created_at")) dataGridView1.Columns["created_at"].Visible = false;
+                if (dataGridView1.Columns.Contains("user_id")) dataGridView1.Columns["user_id"].Visible = false;
                 if (dataGridView1.Columns.Contains("psikolog_nama")) dataGridView1.Columns["psikolog_nama"].HeaderText = "Psikolog";
                 if (dataGridView1.Columns.Contains("kategori")) dataGridView1.Columns["kategori"].HeaderText = "Kategori";
+                if (dataGridView1.Columns.Contains("catatan_user")) dataGridView1.Columns["catatan_user"].HeaderText = "Catatan";
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 // add edit/delete buttons if not present
                 if (!dataGridView1.Columns.Contains("_edit"))

@@ -26,13 +26,19 @@ namespace pboFinalProfject.View.Mahasiswa
             LoadProfile();
 
             // sidebar navigation
-            btnKuisioner.Click += (s, e) => { new FormKuesioner().ShowDialog(this); };
-            btnKonselor.Click += (s, e) => { new FormDaftarKonselor().ShowDialog(this); };
-            btnKonsultasi.Click += (s, e) => { new FormBuatBooking().ShowDialog(this); };
+            btnKuisioner.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; parent?.GetType(); if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormKuesioner() }); else new FormKuesioner().ShowDialog(this); };
+            btnKonselor.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() }); else new FormDaftarKonselor().ShowDialog(this); };
+            btnKonsultasi.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormBuatBooking() }); else new FormBuatBooking().ShowDialog(this); };
             btnBeranda.Click += (s, e) => { this.Close(); };
+            btnKeluar.Click += (s, e) => { var auth = new pboFinalProfject.Controllers.AuthController(); auth.Logout(this); };
 
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         //private void LoadProfile()
