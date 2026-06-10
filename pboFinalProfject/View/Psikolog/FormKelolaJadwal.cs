@@ -124,33 +124,51 @@ namespace pboFinalProfject.View
 
         private void DgvSlotJadwal_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvSlotJadwal.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dgvSlotJadwal.SelectedRows[0];
+            if (dgvSlotJadwal.SelectedRows.Count <= 0)
+                return;
 
-                // Pastikan kolom yang diperlukan ada
-                if (dgvSlotJadwal.Columns.Contains("jadwal_id"))
+            DataGridViewRow row = dgvSlotJadwal.SelectedRows[0];
+
+            try
+            {
+                // Pastikan kolom yang diperlukan ada dan nilai tidak null
+                if (dgvSlotJadwal.Columns.Contains("jadwal_id") && row.Cells["jadwal_id"].Value != null)
                     _selectedJadwalId = Convert.ToInt32(row.Cells["jadwal_id"].Value);
 
                 if (dgvSlotJadwal.Columns.Contains("hari") && row.Cells["hari"].Value != null)
-                    cmbHari.SelectedItem = row.Cells["hari"].Value.ToString();
-
-                //if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value != null)
-                //    dtpJamMulai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_mulai"].Value);
-                if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value is TimeOnly jamMulai)
                 {
-                    dtpJamMulai.Value = DateTime.Today.Add(jamMulai.ToTimeSpan());
+                    var hariVal = row.Cells["hari"].Value.ToString();
+                    if (cmbHari.Items.Contains(hariVal)) cmbHari.SelectedItem = hariVal; else cmbHari.SelectedIndex = -1;
                 }
 
-                //if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value != null)
-                //    dtpJamSelesai.Value = DateTime.Today.Add((TimeSpan)row.Cells["jam_selesai"].Value);
-                if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value is TimeOnly jamSelesai)
+                // jam_mulai may be TimeSpan, DateTime or string; handle gracefully
+                if (dgvSlotJadwal.Columns.Contains("jam_mulai") && row.Cells["jam_mulai"].Value != null)
                 {
-                    dtpJamMulai.Value = DateTime.Today.Add(jamSelesai.ToTimeSpan());
+                    var v = row.Cells["jam_mulai"].Value;
+                    TimeSpan ts;
+                    if (v is TimeSpan) ts = (TimeSpan)v;
+                    else if (v is DateTime) ts = ((DateTime)v).TimeOfDay;
+                    else if (!TimeSpan.TryParse(v.ToString(), out ts) && DateTime.TryParse(v.ToString(), out var dt)) ts = dt.TimeOfDay;
+                    else if (!TimeSpan.TryParse(v.ToString(), out ts)) ts = TimeSpan.Zero;
+                    dtpJamMulai.Value = DateTime.Today.Add(ts);
+                }
+
+                if (dgvSlotJadwal.Columns.Contains("jam_selesai") && row.Cells["jam_selesai"].Value != null)
+                {
+                    var v = row.Cells["jam_selesai"].Value;
+                    TimeSpan ts;
+                    if (v is TimeSpan) ts = (TimeSpan)v;
+                    else if (v is DateTime) ts = ((DateTime)v).TimeOfDay;
+                    else if (!TimeSpan.TryParse(v.ToString(), out ts) && DateTime.TryParse(v.ToString(), out var dt)) ts = dt.TimeOfDay;
+                    else if (!TimeSpan.TryParse(v.ToString(), out ts)) ts = TimeSpan.Zero;
+                    dtpJamSelesai.Value = DateTime.Today.Add(ts);
                 }
 
                 if (dgvSlotJadwal.Columns.Contains("metode") && row.Cells["metode"].Value != null)
-                    cmbMetode.SelectedItem = row.Cells["metode"].Value.ToString();
+                {
+                    var metodeVal = row.Cells["metode"].Value.ToString();
+                    if (cmbMetode.Items.Contains(metodeVal)) cmbMetode.SelectedItem = metodeVal; else cmbMetode.SelectedIndex = -1;
+                }
 
                 if (dgvSlotJadwal.Columns.Contains("kuota") && row.Cells["kuota"].Value != null)
                     tbKuota.Text = row.Cells["kuota"].Value.ToString();
@@ -161,6 +179,10 @@ namespace pboFinalProfject.View
                 btnTambah.Enabled = true;
                 btnUbah.Enabled = true;
                 btnHapus.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengambil data baris: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -224,7 +246,8 @@ namespace pboFinalProfject.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal menambah jadwal: {ex.Message}", "Error",
+                // show full exception details to help debugging (stack trace)
+                MessageBox.Show($"Gagal menambah jadwal: {ex}\n", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -281,7 +304,7 @@ namespace pboFinalProfject.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal mengubah jadwal: {ex.Message}", "Error",
+                MessageBox.Show($"Gagal mengubah jadwal: {ex}\n", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -315,7 +338,7 @@ namespace pboFinalProfject.View
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Gagal menghapus jadwal: {ex.Message}", "Error",
+                    MessageBox.Show($"Gagal menghapus jadwal: {ex}\n", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

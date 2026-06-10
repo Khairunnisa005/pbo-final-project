@@ -24,6 +24,12 @@ namespace pboFinalProfject
         /// Mengupdate status booking (untuk psikolog)
         bool UpdateStatusBooking(int bookingId, string status, string catatanPsikolog = null);
 
+        /// Memperbarui jadwal sebuah booking (reschedule) oleh mahasiswa
+        bool UpdateBookingJadwal(int bookingId, int psikologId, int jadwalId, string catatanUser = null);
+
+        /// Mendapatkan detail booking untuk mahasiswa
+        DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId);
+
         /// Menyetujui booking
         bool SetujuiBooking(int bookingId, string catatanPsikolog = null);
 

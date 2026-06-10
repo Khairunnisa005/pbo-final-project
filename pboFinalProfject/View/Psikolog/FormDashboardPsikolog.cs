@@ -134,15 +134,21 @@ namespace pboFinalProfject.View
                          ev.ColumnIndex == dgvPasien.Columns["jam_selesai"]?.Index) && ev.Value != null)
                     {
                         // Cek jika tipenya TimeOnly (bawaan PostgreSQL di .NET baru)
-                        if (ev.Value is TimeOnly jamOnly)
-                        {
-                            ev.Value = jamOnly.ToString("HH:mm"); // Format 24 jam (Contoh: 14:30)
-                        }
-                        // Backup: Cek jika tipenya TimeSpan (agar tidak error jika ada perubahan)
-                        else if (ev.Value is TimeSpan jamSpan)
-                        {
-                            ev.Value = jamSpan.ToString(@"hh\:mm");
-                        }
+                    // Support both TimeOnly (newer providers) and TimeSpan
+                    if (ev.Value is TimeOnly jamOnly)
+                    {
+                        ev.Value = jamOnly.ToString("HH:mm"); // Format 24 jam
+                    }
+                    else if (ev.Value is TimeSpan jamSpan)
+                    {
+                        ev.Value = jamSpan.ToString(@"hh\:mm");
+                    }
+                    else if (ev.Value is string)
+                    {
+                        var sval = ev.Value.ToString();
+                        if (TimeOnly.TryParse(sval, out var t)) ev.Value = t.ToString("HH:mm");
+                        else if (TimeSpan.TryParse(sval, out var ts)) ev.Value = ts.ToString(@"hh\:mm");
+                    }
 
                         // Atur posisi teks di tengah-tengah cell
                         ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

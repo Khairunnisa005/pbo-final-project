@@ -15,6 +15,11 @@ namespace pboFinalProfject
             _bookingService = new BookingService();
         }
 
+        public bool UpdateBookingJadwal(int bookingId, int psikologId, int jadwalId, string catatanUser = null)
+        {
+            return _bookingService.UpdateBookingJadwal(bookingId, psikologId, jadwalId, catatanUser);
+        }
+
         public DataTable GetJadwalTersediaByPsikolog(int psikologId)
         {
             return _bookingService.GetJadwalTersediaByPsikolog(psikologId);
@@ -45,6 +50,11 @@ namespace pboFinalProfject
         public DataTable GetDetailBookingById(int bookingId, int psikologId)
         {
             return _bookingService.GetDetailBookingById(bookingId, psikologId);
+        }
+
+        public DataTable GetDetailBookingForMahasiswa(int bookingId, int mahasiswaId)
+        {
+            return _bookingService.GetDetailBookingForMahasiswa(bookingId, mahasiswaId);
         }
 
         public bool SetujuiBooking(int bookingId, string catatanPsikolog = null)

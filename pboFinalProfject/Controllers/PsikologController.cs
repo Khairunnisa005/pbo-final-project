@@ -10,10 +10,24 @@ namespace pboFinalProfject
     public class PsikologController
     {
         private DatabaseHelper _db;
+        private Repositories.PsikologRepository _psikologRepo;
+        private Repositories.JadwalRepository _jadwalRepo;
 
         public PsikologController()
         {
             _db = new DatabaseHelper();
+            _psikologRepo = new Repositories.PsikologRepository();
+            _jadwalRepo = new Repositories.JadwalRepository();
+        }
+
+        public DataTable GetDistinctKeahlian()
+        {
+            return _psikologRepo.GetDistinctKeahlian();
+        }
+
+        public DataTable GetPsikologByKeahlian(string keahlian)
+        {
+            return _psikologRepo.GetByKeahlian(keahlian);
         }
 
         /// <summary>
@@ -26,6 +40,11 @@ namespace pboFinalProfject
 
             object result = _db.ExecuteScalar(query, parameters);
             return result != null ? Convert.ToInt32(result) : 0;
+        }
+
+        public DataTable GetAllPsikolog()
+        {
+            return _psikologRepo.GetAll();
         }
 
         /// <summary>
@@ -139,124 +158,22 @@ namespace pboFinalProfject
 
         public DataTable GetJadwalByPsikologId(int psikologId)
         {
-            string query = @"
-                SELECT jadwal_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active 
-                FROM jadwal_psikolog 
-                WHERE psikolog_id = @psikolog_id 
-                ORDER BY 
-                    CASE hari 
-                        WHEN 'Senin' THEN 1
-                        WHEN 'Selasa' THEN 2
-                        WHEN 'Rabu' THEN 3
-                        WHEN 'Kamis' THEN 4
-                        WHEN 'Jumat' THEN 5
-                        WHEN 'Sabtu' THEN 6
-                        WHEN 'Minggu' THEN 7
-                    END, 
-                    jam_mulai";
-
-            var parameters = new[] { new NpgsqlParameter("@psikolog_id", psikologId) };
-            return _db.ExecuteQuery(query, parameters);
+            return _jadwalRepo.GetByPsikologId(psikologId);
         }
 
         public bool TambahJadwal(int psikologId, string hari, TimeSpan jamMulai, TimeSpan jamSelesai, string metode, int kuota, bool isActive)
         {
-            // Validasi jam mulai harus lebih kecil dari jam selesai
-            if (jamMulai >= jamSelesai)
-            {
-                throw new Exception("Jam mulai harus lebih awal dari jam selesai!");
-            }
-
-            // Cek apakah sudah ada jadwal yang bentrok
-            string cekQuery = @"
-                SELECT COUNT(*) FROM jadwal_psikolog 
-                WHERE psikolog_id = @psikolog_id 
-                AND hari = @hari 
-                AND ((jam_mulai <= @jam_mulai AND jam_selesai > @jam_mulai)
-                  OR (jam_mulai < @jam_selesai AND jam_selesai >= @jam_selesai)
-                  OR (@jam_mulai <= jam_mulai AND @jam_selesai >= jam_selesai))";
-
-            var cekParams = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", psikologId),
-                new NpgsqlParameter("@hari", hari),
-                new NpgsqlParameter("@jam_mulai", jamMulai),
-                new NpgsqlParameter("@jam_selesai", jamSelesai)
-            };
-
-            int count = Convert.ToInt32(_db.ExecuteScalar(cekQuery, cekParams));
-            if (count > 0)
-            {
-                throw new Exception("Jadwal bentrok dengan jadwal yang sudah ada!");
-            }
-            // insert jadwaal baru
-            string query = @"
-                INSERT INTO jadwal_psikolog (psikolog_id, hari, jam_mulai, jam_selesai, metode, kuota, is_active, created_at) 
-                VALUES (@psikolog_id, @hari, @jam_mulai, @jam_selesai, @metode, @kuota, @is_active, @created_at)";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", psikologId),
-                new NpgsqlParameter("@hari", hari),
-                new NpgsqlParameter("@jam_mulai", jamMulai),
-                new NpgsqlParameter("@jam_selesai", jamSelesai),
-                new NpgsqlParameter("@metode", metode),
-                new NpgsqlParameter("@kuota", kuota),
-                new NpgsqlParameter("@is_active", isActive),
-                new NpgsqlParameter("@created_at", DateTime.Now)
-            };
-
-            //return _db.ExecuteNonQuery(query, parameters) > 0;
-            int result = _db.ExecuteNonQuery(query, parameters);
-            return result > 0;
+            return _jadwalRepo.TambahJadwal(psikologId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
         }
 
         public bool UpdateJadwal(int jadwalId, string hari, TimeSpan jamMulai, TimeSpan jamSelesai, string metode, int kuota, bool isActive)
         {
-            if (jamMulai >= jamSelesai)
-            {
-                throw new Exception("Jam mulai harus lebih awal dari jam selesai!");
-            }
-
-            string query = @"
-                UPDATE jadwal_psikolog 
-                SET hari = @hari, 
-                    jam_mulai = @jam_mulai, 
-                    jam_selesai = @jam_selesai, 
-                    metode = @metode, 
-                    kuota = @kuota, 
-                    is_active = @is_active 
-                WHERE jadwal_id = @jadwal_id";
-
-            var parameters = new[]
-            {
-                new NpgsqlParameter("@jadwal_id", jadwalId),
-                new NpgsqlParameter("@hari", hari),
-                new NpgsqlParameter("@jam_mulai", jamMulai),
-                new NpgsqlParameter("@jam_selesai", jamSelesai),
-                new NpgsqlParameter("@metode", metode),
-                new NpgsqlParameter("@kuota", kuota),
-                new NpgsqlParameter("@is_active", isActive)
-            };
-
-            return _db.ExecuteNonQuery(query, parameters) > 0;
+            return _jadwalRepo.UpdateJadwal(jadwalId, hari, jamMulai, jamSelesai, metode, kuota, isActive);
         }
 
         public bool HapusJadwal(int jadwalId)
         {
-            // Cek apakah jadwal sudah memiliki booking
-            string cekQuery = "SELECT COUNT(*) FROM booking WHERE jadwal_id = @jadwal_id";
-            var cekParams = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
-            int count = Convert.ToInt32(_db.ExecuteScalar(cekQuery, cekParams));
-
-            if (count > 0)
-            {
-                throw new Exception("Tidak dapat menghapus jadwal karena sudah ada booking yang terkait!");
-            }
-
-            string query = "DELETE FROM jadwal_psikolog WHERE jadwal_id = @jadwal_id";
-            var parameters = new[] { new NpgsqlParameter("@jadwal_id", jadwalId) };
-            return _db.ExecuteNonQuery(query, parameters) > 0;
+            return _jadwalRepo.HapusJadwal(jadwalId);
         }
 
         public DataTable GetProfilPsikologByUserId(int userId)
@@ -327,8 +244,35 @@ namespace pboFinalProfject
 
             try
             {
-                // 3. Kirim paket transaksi ke DatabaseHelper
-                return _db.ExecuteNonQuery(queries, parameterSets) > 0;
+                using (var conn = _db.GetConnection())
+                {
+                    conn.Open();
+                    using (var trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (var cmd = new NpgsqlCommand(queries[0], conn, trans))
+                            {
+                                cmd.Parameters.AddRange(paramUser);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (var cmd2 = new NpgsqlCommand(queries[1], conn, trans))
+                            {
+                                cmd2.Parameters.AddRange(paramPsikolog);
+                                cmd2.ExecuteNonQuery();
+                            }
+
+                            trans.Commit();
+                            return true;
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

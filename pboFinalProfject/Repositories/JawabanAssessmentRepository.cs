@@ -4,7 +4,6 @@ using pboFinalProfject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace pboFinalProfject.Repositories
 {
@@ -40,7 +39,7 @@ namespace pboFinalProfject.Repositories
             {
                 new NpgsqlParameter("@hasil_id", entity.HasilId),
                 new NpgsqlParameter("@pertanyaan_id", entity.PertanyaanId),
-                new NpgsqlParameter("@jawaban", entity.Jawaban),
+                new NpgsqlParameter("@jawaban", entity.Jawaban.ToString()),
                 new NpgsqlParameter("@nilai", entity.Nilai),
                 new NpgsqlParameter("@created_at", DateTime.Now)
             };
@@ -56,6 +55,28 @@ namespace pboFinalProfject.Repositories
                     return false;
             }
             return true;
+        }
+
+        public bool InsertMany(int hasilId, List<JawabanAssessment> jawabanList)
+        {
+            string query = @"INSERT INTO jawaban_assessment (hasil_id, pertanyaan_id, jawaban, nilai)
+                             VALUES (@hasil_id, @pertanyaan_id, @jawaban, @nilai)";
+
+            int success = 0;
+            foreach (var j in jawabanList)
+            {
+                var parameters = new[]
+                {
+                    new NpgsqlParameter("@hasil_id", hasilId),
+                    new NpgsqlParameter("@pertanyaan_id", j.PertanyaanId),
+                    new NpgsqlParameter("@jawaban", j.Jawaban.ToString()),
+                    new NpgsqlParameter("@nilai", j.Nilai),
+                };
+
+                success += _db.ExecuteNonQuery(query, parameters);
+            }
+
+            return success == jawabanList.Count;
         }
 
         private JawabanAssessment MapToJawabanAssessment(DataRow row)

@@ -25,6 +25,7 @@
             tbKuota = new TextBox();
             chkIsActive = new CheckBox();
             dgvSlotJadwal = new DataGridView();
+            // duplicates removed
             btnTambah = new Button();
             btnBersihkan = new Button();
             btnKembali = new Button();
@@ -113,6 +114,28 @@
             btnTambah.Text = "Tambah";
             btnTambah.UseVisualStyleBackColor = false;
             // 
+            // btnUbah
+            // 
+            btnUbah.BackColor = Color.Orange;
+            btnUbah.ForeColor = Color.White;
+            btnUbah.Location = new Point(1164, 630);
+            btnUbah.Name = "btnUbah";
+            btnUbah.Size = new Size(310, 56);
+            btnUbah.TabIndex = 7;
+            btnUbah.Text = "Ubah";
+            btnUbah.UseVisualStyleBackColor = false;
+            // 
+            // btnHapus
+            // 
+            btnHapus.BackColor = Color.FromArgb(220, 53, 69);
+            btnHapus.ForeColor = Color.White;
+            btnHapus.Location = new Point(1164, 554);
+            btnHapus.Name = "btnHapus";
+            btnHapus.Size = new Size(310, 56);
+            btnHapus.TabIndex = 8;
+            btnHapus.Text = "Hapus";
+            btnHapus.UseVisualStyleBackColor = false;
+            // 
             // btnBersihkan
             // 
             btnBersihkan.BackColor = Color.Gray;
@@ -195,6 +218,7 @@
         private System.Windows.Forms.CheckBox chkIsActive;
         private System.Windows.Forms.DataGridView dgvSlotJadwal;
         private System.Windows.Forms.Button btnTambah;
+        // duplicate fields removed
         private System.Windows.Forms.Button btnBersihkan;
         private System.Windows.Forms.Button btnKembali;
         private System.Windows.Forms.Button btnUbah;

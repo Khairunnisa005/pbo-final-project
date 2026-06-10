@@ -73,10 +73,8 @@ namespace pboFinalProfject.Services
 
         public bool SimpanHasilAssessment(HasilAssessment hasil, List<JawabanAssessment> jawabanList)
         {
-            bool hasilInsert = _hasilRepo.Insert(hasil);
-            if (!hasilInsert) return false;
-
-            int hasilId = _hasilRepo.GetLastInsertedId();
+            int hasilId = _hasilRepo.Insert(hasil);
+            if (hasilId <= 0) return false;
 
             foreach (var jawaban in jawabanList)
             {

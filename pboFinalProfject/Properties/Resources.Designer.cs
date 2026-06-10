@@ -63,6 +63,16 @@ namespace pboFinalProfject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap booking {
+            get {
+                object obj = ResourceManager.GetObject("booking", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cuplikan_layar_2026_05_31_221853 {
             get {
                 object obj = ResourceManager.GetObject("Cuplikan layar 2026-05-31 221853", resourceCulture);
@@ -86,6 +96,46 @@ namespace pboFinalProfject.Properties {
         internal static System.Drawing.Bitmap Cuplikan_layar_2026_06_01_095249 {
             get {
                 object obj = ResourceManager.GetObject("Cuplikan layar 2026-06-01 095249", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap daftarKonselor {
+            get {
+                object obj = ResourceManager.GetObject("daftarKonselor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap home {
+            get {
+                object obj = ResourceManager.GetObject("home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kuisioner__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Kuisioner (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap profil__2_ {
+            get {
+                object obj = ResourceManager.GetObject("profil (2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
