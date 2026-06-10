@@ -39,7 +39,6 @@ namespace pboFinalProfject.View
                 this.Close();
                 return;
             }
-
             // Load data dashboard
             LoadDataDashboard();
             LoadDaftarAntreanKonseling();

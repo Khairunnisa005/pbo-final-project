@@ -17,8 +17,8 @@
 
         private void InitializeComponent()
         {
-            pnlHeader = new Panel();
-            lblHeaderTitle = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormKelolaProfil));
+            btnKembali = new Button();
             grpDataAkun = new GroupBox();
             txtTelepon = new TextBox();
             lblTelepon = new Label();
@@ -42,35 +42,21 @@
             lblGelar = new Label();
             btnSimpan = new Button();
             btnBatal = new Button();
-            btnKembali = new Button();
-            pnlHeader.SuspendLayout();
             grpDataAkun.SuspendLayout();
             grpDataKlinis.SuspendLayout();
             SuspendLayout();
             // 
-            // pnlHeader
+            // btnKembali
             // 
-            pnlHeader.BackColor = Color.FromArgb(26, 54, 141);
-            pnlHeader.Controls.Add(btnKembali);
-            pnlHeader.Controls.Add(lblHeaderTitle);
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Location = new Point(0, 0);
-            pnlHeader.Margin = new Padding(4, 5, 4, 5);
-            pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(1214, 100);
-            pnlHeader.TabIndex = 0;
-            // 
-            // lblHeaderTitle
-            // 
-            lblHeaderTitle.AutoSize = true;
-            lblHeaderTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblHeaderTitle.ForeColor = Color.White;
-            lblHeaderTitle.Location = new Point(29, 25);
-            lblHeaderTitle.Margin = new Padding(4, 0, 4, 0);
-            lblHeaderTitle.Name = "lblHeaderTitle";
-            lblHeaderTitle.Size = new Size(442, 45);
-            lblHeaderTitle.TabIndex = 0;
-            lblHeaderTitle.Text = "PENGATURAN PROFIL SAYA";
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(1361, 52);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(126, 49);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
             // 
             // grpDataAkun
             // 
@@ -83,18 +69,18 @@
             grpDataAkun.Controls.Add(txtUsername);
             grpDataAkun.Controls.Add(lblUsername);
             grpDataAkun.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            grpDataAkun.Location = new Point(36, 142);
+            grpDataAkun.Location = new Point(337, 151);
             grpDataAkun.Margin = new Padding(4, 5, 4, 5);
             grpDataAkun.Name = "grpDataAkun";
             grpDataAkun.Padding = new Padding(4, 5, 4, 5);
-            grpDataAkun.Size = new Size(543, 600);
+            grpDataAkun.Size = new Size(543, 503);
             grpDataAkun.TabIndex = 1;
             grpDataAkun.TabStop = false;
             grpDataAkun.Text = "Informasi Dasar Akun";
             // 
             // txtTelepon
             // 
-            txtTelepon.Location = new Point(29, 492);
+            txtTelepon.Location = new Point(29, 443);
             txtTelepon.Margin = new Padding(4, 5, 4, 5);
             txtTelepon.Name = "txtTelepon";
             txtTelepon.Size = new Size(484, 34);
@@ -102,7 +88,7 @@
             // 
             // lblTelepon
             // 
-            lblTelepon.Location = new Point(29, 453);
+            lblTelepon.Location = new Point(29, 400);
             lblTelepon.Margin = new Padding(4, 0, 4, 0);
             lblTelepon.Name = "lblTelepon";
             lblTelepon.Size = new Size(143, 38);
@@ -111,7 +97,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(29, 358);
+            txtEmail.Location = new Point(29, 319);
             txtEmail.Margin = new Padding(4, 5, 4, 5);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(484, 34);
@@ -119,7 +105,7 @@
             // 
             // lblEmail
             // 
-            lblEmail.Location = new Point(29, 320);
+            lblEmail.Location = new Point(29, 276);
             lblEmail.Margin = new Padding(4, 0, 4, 0);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(143, 38);
@@ -128,7 +114,7 @@
             // 
             // txtNama
             // 
-            txtNama.Location = new Point(29, 225);
+            txtNama.Location = new Point(29, 197);
             txtNama.Margin = new Padding(4, 5, 4, 5);
             txtNama.Name = "txtNama";
             txtNama.Size = new Size(484, 34);
@@ -136,7 +122,7 @@
             // 
             // lblNama
             // 
-            lblNama.Location = new Point(29, 187);
+            lblNama.Location = new Point(29, 154);
             lblNama.Margin = new Padding(4, 0, 4, 0);
             lblNama.Name = "lblNama";
             lblNama.Size = new Size(143, 38);
@@ -175,18 +161,18 @@
             grpDataKlinis.Controls.Add(txtGelar);
             grpDataKlinis.Controls.Add(lblGelar);
             grpDataKlinis.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            grpDataKlinis.Location = new Point(621, 142);
+            grpDataKlinis.Location = new Point(930, 151);
             grpDataKlinis.Margin = new Padding(4, 5, 4, 5);
             grpDataKlinis.Name = "grpDataKlinis";
             grpDataKlinis.Padding = new Padding(4, 5, 4, 5);
-            grpDataKlinis.Size = new Size(557, 600);
+            grpDataKlinis.Size = new Size(557, 503);
             grpDataKlinis.TabIndex = 2;
             grpDataKlinis.TabStop = false;
             grpDataKlinis.Text = "Kompetensi dan Detail Klinis";
             // 
             // chkOffline
             // 
-            chkOffline.Location = new Point(300, 533);
+            chkOffline.Location = new Point(286, 441);
             chkOffline.Margin = new Padding(4, 5, 4, 5);
             chkOffline.Name = "chkOffline";
             chkOffline.Size = new Size(149, 40);
@@ -195,7 +181,7 @@
             // 
             // chkOnline
             // 
-            chkOnline.Location = new Point(36, 533);
+            chkOnline.Location = new Point(29, 441);
             chkOnline.Margin = new Padding(4, 5, 4, 5);
             chkOnline.Name = "chkOnline";
             chkOnline.Size = new Size(149, 40);
@@ -204,7 +190,7 @@
             // 
             // lblLayanan
             // 
-            lblLayanan.Location = new Point(29, 487);
+            lblLayanan.Location = new Point(29, 400);
             lblLayanan.Margin = new Padding(4, 0, 4, 0);
             lblLayanan.Name = "lblLayanan";
             lblLayanan.Size = new Size(143, 38);
@@ -213,16 +199,16 @@
             // 
             // txtDeskripsi
             // 
-            txtDeskripsi.Location = new Point(29, 358);
+            txtDeskripsi.Location = new Point(29, 319);
             txtDeskripsi.Margin = new Padding(4, 5, 4, 5);
             txtDeskripsi.Multiline = true;
             txtDeskripsi.Name = "txtDeskripsi";
-            txtDeskripsi.Size = new Size(498, 97);
+            txtDeskripsi.Size = new Size(498, 76);
             txtDeskripsi.TabIndex = 3;
             // 
             // lblDeskripsi
             // 
-            lblDeskripsi.Location = new Point(29, 320);
+            lblDeskripsi.Location = new Point(29, 276);
             lblDeskripsi.Margin = new Padding(4, 0, 4, 0);
             lblDeskripsi.Name = "lblDeskripsi";
             lblDeskripsi.Size = new Size(143, 38);
@@ -248,7 +234,7 @@
             // 
             // txtPendidikan
             // 
-            txtPendidikan.Location = new Point(29, 225);
+            txtPendidikan.Location = new Point(29, 197);
             txtPendidikan.Margin = new Padding(4, 5, 4, 5);
             txtPendidikan.Name = "txtPendidikan";
             txtPendidikan.Size = new Size(498, 34);
@@ -256,7 +242,7 @@
             // 
             // lblPendidikan
             // 
-            lblPendidikan.Location = new Point(29, 187);
+            lblPendidikan.Location = new Point(29, 154);
             lblPendidikan.Margin = new Padding(4, 0, 4, 0);
             lblPendidikan.Name = "lblPendidikan";
             lblPendidikan.Size = new Size(198, 38);
@@ -286,7 +272,7 @@
             btnSimpan.FlatStyle = FlatStyle.Flat;
             btnSimpan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSimpan.ForeColor = Color.White;
-            btnSimpan.Location = new Point(750, 775);
+            btnSimpan.Location = new Point(1257, 706);
             btnSimpan.Margin = new Padding(4, 5, 4, 5);
             btnSimpan.Name = "btnSimpan";
             btnSimpan.Size = new Size(200, 67);
@@ -301,7 +287,7 @@
             btnBatal.FlatStyle = FlatStyle.Flat;
             btnBatal.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnBatal.ForeColor = Color.Black;
-            btnBatal.Location = new Point(979, 775);
+            btnBatal.Location = new Point(1049, 706);
             btnBatal.Margin = new Padding(4, 5, 4, 5);
             btnBatal.Name = "btnBatal";
             btnBatal.Size = new Size(200, 67);
@@ -310,40 +296,24 @@
             btnBatal.UseVisualStyleBackColor = false;
             btnBatal.Click += btnBatal_Click;
             // 
-            // btnKembali
-            // 
-            btnKembali.BackColor = Color.FromArgb(220, 220, 220);
-            btnKembali.FlatStyle = FlatStyle.Flat;
-            btnKembali.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnKembali.ForeColor = Color.Black;
-            btnKembali.Location = new Point(1061, 25);
-            btnKembali.Margin = new Padding(4, 5, 4, 5);
-            btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(118, 51);
-            btnKembali.TabIndex = 0;
-            btnKembali.Text = "KEMBALI";
-            btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += btnKembali_Click;
-            // 
             // FormKelolaProfil
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1214, 883);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1514, 808);
+            Controls.Add(btnKembali);
             Controls.Add(btnBatal);
             Controls.Add(btnSimpan);
             Controls.Add(grpDataKlinis);
             Controls.Add(grpDataAkun);
-            Controls.Add(pnlHeader);
-            FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 5, 4, 5);
             Name = "FormKelolaProfil";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind - Kelola Profil";
             Load += FormKelolaProfil_Load;
-            pnlHeader.ResumeLayout(false);
-            pnlHeader.PerformLayout();
             grpDataAkun.ResumeLayout(false);
             grpDataAkun.PerformLayout();
             grpDataKlinis.ResumeLayout(false);
@@ -353,9 +323,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblHeaderTitle;
         private System.Windows.Forms.GroupBox grpDataAkun;
         private System.Windows.Forms.TextBox txtTelepon;
         private System.Windows.Forms.Label lblTelepon;

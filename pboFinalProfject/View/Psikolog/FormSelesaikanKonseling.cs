@@ -153,5 +153,9 @@ namespace pboFinalProfject.View
                 this.Close();
             }
         }
+        private void BtnKembali_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -66,8 +66,8 @@ namespace pboFinalProfject
                     TimeSpan jamSelesai = (TimeSpan)row["jam_selesai"];
                     lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulai:hh\\:mm} - {jamSelesai:hh\\:mm} WIB";
 
-                    lblValTipe.Text = row["metode"]?.ToString() ?? "-";
-                    txtValKeluhan.Text = row["catatan_user"]?.ToString() ?? "-";
+                    lblValMetode.Text = row["metode"]?.ToString() ?? "-";
+                    txtValCatatanMhs.Text = row["catatan_user"]?.ToString() ?? "-";
                     _currentStatus = row["status"]?.ToString() ?? "Pending";
 
                     //// Tampilkan hasil screening jika ada
@@ -113,31 +113,26 @@ namespace pboFinalProfject
             if (statusLower == "disetujui")
             {
                 lblValStatus.ForeColor = Color.FromArgb(46, 125, 50);
-                panelStatus.BackColor = Color.FromArgb(232, 245, 233);
                 lblValStatus.Text = "✓ DISETUJUI";
             }
             else if (statusLower == "selesai")
             {
                 lblValStatus.ForeColor = Color.FromArgb(46, 125, 50);
-                panelStatus.BackColor = Color.FromArgb(232, 245, 233);
                 lblValStatus.Text = "✔️ SELESAI";
             }
             else if (statusLower == "pending")
             {
                 lblValStatus.ForeColor = Color.FromArgb(216, 111, 0);
-                panelStatus.BackColor = Color.FromArgb(255, 243, 224);
                 lblValStatus.Text = "⏳ PENDING";
             }
             else if (statusLower == "ditolak")
             {
                 lblValStatus.ForeColor = Color.FromArgb(198, 40, 40);
-                panelStatus.BackColor = Color.FromArgb(255, 235, 235);
                 lblValStatus.Text = "✗ DITOLAK";
             }
             else if (statusLower == "batal")
             {
                 lblValStatus.ForeColor = Color.FromArgb(198, 40, 40);
-                panelStatus.BackColor = Color.FromArgb(255, 235, 235);
                 lblValStatus.Text = "✗ DIBATALKAN";
             }
             else
@@ -231,6 +226,11 @@ namespace pboFinalProfject
         }
 
         private void BtnTutup_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnKembali_Click(object sender, EventArgs e)
         {
             this.Close();
         }

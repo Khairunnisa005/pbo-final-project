@@ -37,6 +37,11 @@ namespace pboFinalProfject.View
             LoadDataMahasiswa();
         }
 
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #region LOGIKA MANAJEMEN PSIKOLOG (KARYAWAN)
 
         private void LoadDataPsikolog()

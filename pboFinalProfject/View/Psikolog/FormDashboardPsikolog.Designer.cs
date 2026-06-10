@@ -33,8 +33,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboardPsikolog));
             dgvPasien = new DataGridView();
             btnKelolaJadwal = new Button();
-            btnKembali = new Button();
+            btnKeluar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
+            SuspendLayout();
             // 
             // dgvPasien
             // 
@@ -58,12 +59,12 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvPasien.DefaultCellStyle = dataGridViewCellStyle2;
             dgvPasien.EnableHeadersVisualStyles = false;
-            dgvPasien.Location = new Point(255, 241);
+            dgvPasien.Location = new Point(343, 289);
             dgvPasien.Margin = new Padding(4, 5, 4, 5);
             dgvPasien.Name = "dgvPasien";
             dgvPasien.RowHeadersWidth = 51;
             dgvPasien.RowTemplate.Height = 30;
-            dgvPasien.Size = new Size(980, 344);
+            dgvPasien.Size = new Size(1171, 422);
             dgvPasien.TabIndex = 1;
             // 
             // btnKelolaJadwal
@@ -72,7 +73,7 @@
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
             btnKelolaJadwal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = Color.White;
-            btnKelolaJadwal.Location = new Point(1031, 595);
+            btnKelolaJadwal.Location = new Point(1297, 721);
             btnKelolaJadwal.Margin = new Padding(4, 5, 4, 5);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
             btnKelolaJadwal.Size = new Size(204, 56);
@@ -81,17 +82,17 @@
             btnKelolaJadwal.UseVisualStyleBackColor = false;
             btnKelolaJadwal.Click += btnKelolaJadwal_Click;
             // 
-            // btnKembali
+            // btnKeluar
             // 
-            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
-            btnKembali.ForeColor = Color.White;
-            btnKembali.Location = new Point(1125, 12);
-            btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(110, 56);
-            btnKembali.TabIndex = 10;
-            btnKembali.Text = "Kembali";
-            btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += btnKembali_Click;
+            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(25, 760);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(234, 51);
+            btnKeluar.TabIndex = 10;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
             // 
             // FormDashboardPsikolog
             // 
@@ -99,12 +100,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1276, 710);
+            ClientSize = new Size(1514, 808);
             Controls.Add(btnKelolaJadwal);
             Controls.Add(dgvPasien);
-            Controls.Add(btnKembali);
+            Controls.Add(btnKeluar);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 5, 4, 5);
             Name = "FormDashboardPsikolog";
             StartPosition = FormStartPosition.CenterScreen;
@@ -117,6 +118,6 @@
         #endregion
         private System.Windows.Forms.DataGridView dgvPasien;
         private System.Windows.Forms.Button btnKelolaJadwal;
-        private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.Button btnKeluar;
     }
 }

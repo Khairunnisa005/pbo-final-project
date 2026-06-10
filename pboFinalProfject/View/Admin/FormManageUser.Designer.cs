@@ -18,8 +18,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            pnlTopBar = new Panel();
-            lblTitleForm = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManageUser));
             tabUserControl = new TabControl();
             pagePsikolog = new TabPage();
             dgvPsikolog = new DataGridView();
@@ -51,7 +50,7 @@
             lblNamaMhs = new Label();
             txtUserMhs = new TextBox();
             lblUserMhs = new Label();
-            pnlTopBar.SuspendLayout();
+            btnKembali = new Button();
             tabUserControl.SuspendLayout();
             pagePsikolog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).BeginInit();
@@ -61,40 +60,16 @@
             pnlSideInputMhs.SuspendLayout();
             SuspendLayout();
             // 
-            // pnlTopBar
-            // 
-            pnlTopBar.BackColor = Color.FromArgb(26, 54, 141);
-            pnlTopBar.Controls.Add(lblTitleForm);
-            pnlTopBar.Dock = DockStyle.Top;
-            pnlTopBar.Location = new Point(0, 0);
-            pnlTopBar.Margin = new Padding(4, 5, 4, 5);
-            pnlTopBar.Name = "pnlTopBar";
-            pnlTopBar.Size = new Size(1371, 100);
-            pnlTopBar.TabIndex = 0;
-            // 
-            // lblTitleForm
-            // 
-            lblTitleForm.AutoSize = true;
-            lblTitleForm.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitleForm.ForeColor = Color.White;
-            lblTitleForm.Location = new Point(29, 25);
-            lblTitleForm.Margin = new Padding(4, 0, 4, 0);
-            lblTitleForm.Name = "lblTitleForm";
-            lblTitleForm.Size = new Size(407, 45);
-            lblTitleForm.TabIndex = 0;
-            lblTitleForm.Text = "MANAGE USER UNIMIND";
-            // 
             // tabUserControl
             // 
             tabUserControl.Controls.Add(pagePsikolog);
             tabUserControl.Controls.Add(pageMahasiswa);
-            tabUserControl.Dock = DockStyle.Fill;
             tabUserControl.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            tabUserControl.Location = new Point(0, 100);
+            tabUserControl.Location = new Point(317, 130);
             tabUserControl.Margin = new Padding(4, 5, 4, 5);
             tabUserControl.Name = "tabUserControl";
             tabUserControl.SelectedIndex = 0;
-            tabUserControl.Size = new Size(1371, 867);
+            tabUserControl.Size = new Size(1191, 677);
             tabUserControl.TabIndex = 1;
             // 
             // pagePsikolog
@@ -105,7 +80,7 @@
             pagePsikolog.Margin = new Padding(4, 5, 4, 5);
             pagePsikolog.Name = "pagePsikolog";
             pagePsikolog.Padding = new Padding(4, 5, 4, 5);
-            pagePsikolog.Size = new Size(1363, 826);
+            pagePsikolog.Size = new Size(1183, 636);
             pagePsikolog.TabIndex = 0;
             pagePsikolog.Text = "Manage Psikolog";
             // 
@@ -122,11 +97,11 @@
             dgvPsikolog.ColumnHeadersHeight = 34;
             dgvPsikolog.Dock = DockStyle.Fill;
             dgvPsikolog.EnableHeadersVisualStyles = false;
-            dgvPsikolog.Location = new Point(433, 5);
+            dgvPsikolog.Location = new Point(425, 5);
             dgvPsikolog.Margin = new Padding(4, 5, 4, 5);
             dgvPsikolog.Name = "dgvPsikolog";
             dgvPsikolog.RowHeadersWidth = 62;
-            dgvPsikolog.Size = new Size(926, 816);
+            dgvPsikolog.Size = new Size(754, 626);
             dgvPsikolog.TabIndex = 0;
             dgvPsikolog.CellClick += dgvPsikolog_CellClick;
             // 
@@ -149,7 +124,7 @@
             pnlSideInputPsi.Location = new Point(4, 5);
             pnlSideInputPsi.Margin = new Padding(4, 5, 4, 5);
             pnlSideInputPsi.Name = "pnlSideInputPsi";
-            pnlSideInputPsi.Size = new Size(429, 816);
+            pnlSideInputPsi.Size = new Size(421, 626);
             pnlSideInputPsi.TabIndex = 1;
             // 
             // btnHapusPsi
@@ -157,7 +132,7 @@
             btnHapusPsi.BackColor = Color.FromArgb(217, 83, 79);
             btnHapusPsi.FlatStyle = FlatStyle.Flat;
             btnHapusPsi.ForeColor = Color.White;
-            btnHapusPsi.Location = new Point(26, 692);
+            btnHapusPsi.Location = new Point(26, 546);
             btnHapusPsi.Margin = new Padding(4, 5, 4, 5);
             btnHapusPsi.Name = "btnHapusPsi";
             btnHapusPsi.Size = new Size(371, 58);
@@ -171,7 +146,7 @@
             btnSimpanPsikolog.BackColor = Color.FromArgb(26, 54, 141);
             btnSimpanPsikolog.FlatStyle = FlatStyle.Flat;
             btnSimpanPsikolog.ForeColor = Color.White;
-            btnSimpanPsikolog.Location = new Point(26, 617);
+            btnSimpanPsikolog.Location = new Point(25, 478);
             btnSimpanPsikolog.Margin = new Padding(4, 5, 4, 5);
             btnSimpanPsikolog.Name = "btnSimpanPsikolog";
             btnSimpanPsikolog.Size = new Size(371, 58);
@@ -182,16 +157,16 @@
             // 
             // lblKeahlian
             // 
-            lblKeahlian.Location = new Point(26, 483);
+            lblKeahlian.Location = new Point(26, 305);
             lblKeahlian.Margin = new Padding(4, 0, 4, 0);
             lblKeahlian.Name = "lblKeahlian";
-            lblKeahlian.Size = new Size(143, 38);
+            lblKeahlian.Size = new Size(143, 30);
             lblKeahlian.TabIndex = 2;
             lblKeahlian.Text = "Keahlian";
             // 
             // txtKeahlian
             // 
-            txtKeahlian.Location = new Point(26, 525);
+            txtKeahlian.Location = new Point(26, 340);
             txtKeahlian.Margin = new Padding(4, 5, 4, 5);
             txtKeahlian.Name = "txtKeahlian";
             txtKeahlian.Size = new Size(370, 34);
@@ -199,7 +174,7 @@
             // 
             // txtTelpPsi
             // 
-            txtTelpPsi.Location = new Point(26, 417);
+            txtTelpPsi.Location = new Point(26, 266);
             txtTelpPsi.Margin = new Padding(4, 5, 4, 5);
             txtTelpPsi.Name = "txtTelpPsi";
             txtTelpPsi.Size = new Size(370, 34);
@@ -207,16 +182,16 @@
             // 
             // lblTelpPsi
             // 
-            lblTelpPsi.Location = new Point(26, 375);
+            lblTelpPsi.Location = new Point(26, 231);
             lblTelpPsi.Margin = new Padding(4, 0, 4, 0);
             lblTelpPsi.Name = "lblTelpPsi";
-            lblTelpPsi.Size = new Size(143, 38);
+            lblTelpPsi.Size = new Size(143, 30);
             lblTelpPsi.TabIndex = 5;
             lblTelpPsi.Text = "No. Telepon";
             // 
             // txtEmailPsi
             // 
-            txtEmailPsi.Location = new Point(26, 308);
+            txtEmailPsi.Location = new Point(26, 192);
             txtEmailPsi.Margin = new Padding(4, 5, 4, 5);
             txtEmailPsi.Name = "txtEmailPsi";
             txtEmailPsi.Size = new Size(370, 34);
@@ -224,16 +199,16 @@
             // 
             // lblEmailPsi
             // 
-            lblEmailPsi.Location = new Point(26, 267);
+            lblEmailPsi.Location = new Point(26, 160);
             lblEmailPsi.Margin = new Padding(4, 0, 4, 0);
             lblEmailPsi.Name = "lblEmailPsi";
-            lblEmailPsi.Size = new Size(143, 38);
+            lblEmailPsi.Size = new Size(143, 27);
             lblEmailPsi.TabIndex = 7;
             lblEmailPsi.Text = "Email";
             // 
             // txtNamaPsi
             // 
-            txtNamaPsi.Location = new Point(26, 200);
+            txtNamaPsi.Location = new Point(26, 121);
             txtNamaPsi.Margin = new Padding(4, 5, 4, 5);
             txtNamaPsi.Name = "txtNamaPsi";
             txtNamaPsi.Size = new Size(370, 34);
@@ -241,16 +216,16 @@
             // 
             // lblNamaPsi
             // 
-            lblNamaPsi.Location = new Point(26, 158);
+            lblNamaPsi.Location = new Point(26, 84);
             lblNamaPsi.Margin = new Padding(4, 0, 4, 0);
             lblNamaPsi.Name = "lblNamaPsi";
-            lblNamaPsi.Size = new Size(223, 38);
+            lblNamaPsi.Size = new Size(223, 32);
             lblNamaPsi.TabIndex = 9;
             lblNamaPsi.Text = "Nama Lengkap";
             // 
             // txtUserPsi
             // 
-            txtUserPsi.Location = new Point(26, 92);
+            txtUserPsi.Location = new Point(26, 45);
             txtUserPsi.Margin = new Padding(4, 5, 4, 5);
             txtUserPsi.Name = "txtUserPsi";
             txtUserPsi.Size = new Size(370, 34);
@@ -258,10 +233,10 @@
             // 
             // lblUserPsi
             // 
-            lblUserPsi.Location = new Point(26, 50);
+            lblUserPsi.Location = new Point(26, 12);
             lblUserPsi.Margin = new Padding(4, 0, 4, 0);
             lblUserPsi.Name = "lblUserPsi";
-            lblUserPsi.Size = new Size(143, 38);
+            lblUserPsi.Size = new Size(143, 28);
             lblUserPsi.TabIndex = 11;
             lblUserPsi.Text = "Username";
             // 
@@ -272,7 +247,7 @@
             pageMahasiswa.Location = new Point(4, 37);
             pageMahasiswa.Margin = new Padding(4, 5, 4, 5);
             pageMahasiswa.Name = "pageMahasiswa";
-            pageMahasiswa.Size = new Size(1363, 826);
+            pageMahasiswa.Size = new Size(1183, 636);
             pageMahasiswa.TabIndex = 1;
             pageMahasiswa.Text = "Manage Mahasiswa";
             // 
@@ -290,7 +265,7 @@
             dgvMahasiswa.Margin = new Padding(4, 5, 4, 5);
             dgvMahasiswa.Name = "dgvMahasiswa";
             dgvMahasiswa.RowHeadersWidth = 62;
-            dgvMahasiswa.Size = new Size(934, 826);
+            dgvMahasiswa.Size = new Size(754, 636);
             dgvMahasiswa.TabIndex = 0;
             dgvMahasiswa.CellClick += dgvMahasiswa_CellClick;
             // 
@@ -313,7 +288,7 @@
             pnlSideInputMhs.Location = new Point(0, 0);
             pnlSideInputMhs.Margin = new Padding(4, 5, 4, 5);
             pnlSideInputMhs.Name = "pnlSideInputMhs";
-            pnlSideInputMhs.Size = new Size(429, 826);
+            pnlSideInputMhs.Size = new Size(429, 636);
             pnlSideInputMhs.TabIndex = 1;
             // 
             // btnHapusMhs
@@ -321,7 +296,7 @@
             btnHapusMhs.BackColor = Color.FromArgb(217, 83, 79);
             btnHapusMhs.FlatStyle = FlatStyle.Flat;
             btnHapusMhs.ForeColor = Color.White;
-            btnHapusMhs.Location = new Point(26, 692);
+            btnHapusMhs.Location = new Point(26, 555);
             btnHapusMhs.Margin = new Padding(4, 5, 4, 5);
             btnHapusMhs.Name = "btnHapusMhs";
             btnHapusMhs.Size = new Size(371, 58);
@@ -335,7 +310,7 @@
             btnSimpanMhs.BackColor = Color.FromArgb(26, 54, 141);
             btnSimpanMhs.FlatStyle = FlatStyle.Flat;
             btnSimpanMhs.ForeColor = Color.White;
-            btnSimpanMhs.Location = new Point(26, 617);
+            btnSimpanMhs.Location = new Point(26, 487);
             btnSimpanMhs.Margin = new Padding(4, 5, 4, 5);
             btnSimpanMhs.Name = "btnSimpanMhs";
             btnSimpanMhs.Size = new Size(371, 58);
@@ -346,10 +321,10 @@
             // 
             // lblStatusMhs
             // 
-            lblStatusMhs.Location = new Point(26, 483);
+            lblStatusMhs.Location = new Point(26, 310);
             lblStatusMhs.Margin = new Padding(4, 0, 4, 0);
             lblStatusMhs.Name = "lblStatusMhs";
-            lblStatusMhs.Size = new Size(143, 38);
+            lblStatusMhs.Size = new Size(143, 28);
             lblStatusMhs.TabIndex = 2;
             lblStatusMhs.Text = "Status Keanggotaan";
             // 
@@ -357,15 +332,15 @@
             // 
             cmbStatusMhs.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbStatusMhs.Items.AddRange(new object[] { "REGULER", "VIP", "BEASISWA" });
-            cmbStatusMhs.Location = new Point(26, 525);
+            cmbStatusMhs.Location = new Point(26, 343);
             cmbStatusMhs.Margin = new Padding(4, 5, 4, 5);
             cmbStatusMhs.Name = "cmbStatusMhs";
-            cmbStatusMhs.Size = new Size(370, 34);
+            cmbStatusMhs.Size = new Size(370, 36);
             cmbStatusMhs.TabIndex = 3;
             // 
             // txtTelpMhs
             // 
-            txtTelpMhs.Location = new Point(26, 417);
+            txtTelpMhs.Location = new Point(26, 271);
             txtTelpMhs.Margin = new Padding(4, 5, 4, 5);
             txtTelpMhs.Name = "txtTelpMhs";
             txtTelpMhs.Size = new Size(370, 34);
@@ -373,16 +348,16 @@
             // 
             // lblTelpMhs
             // 
-            lblTelpMhs.Location = new Point(26, 375);
+            lblTelpMhs.Location = new Point(26, 236);
             lblTelpMhs.Margin = new Padding(4, 0, 4, 0);
             lblTelpMhs.Name = "lblTelpMhs";
-            lblTelpMhs.Size = new Size(179, 38);
+            lblTelpMhs.Size = new Size(179, 30);
             lblTelpMhs.TabIndex = 5;
             lblTelpMhs.Text = "No. Telepon";
             // 
             // txtEmailMhs
             // 
-            txtEmailMhs.Location = new Point(26, 308);
+            txtEmailMhs.Location = new Point(26, 197);
             txtEmailMhs.Margin = new Padding(4, 5, 4, 5);
             txtEmailMhs.Name = "txtEmailMhs";
             txtEmailMhs.Size = new Size(370, 34);
@@ -390,16 +365,16 @@
             // 
             // lblEmailMhs
             // 
-            lblEmailMhs.Location = new Point(26, 267);
+            lblEmailMhs.Location = new Point(26, 166);
             lblEmailMhs.Margin = new Padding(4, 0, 4, 0);
             lblEmailMhs.Name = "lblEmailMhs";
-            lblEmailMhs.Size = new Size(143, 38);
+            lblEmailMhs.Size = new Size(143, 26);
             lblEmailMhs.TabIndex = 7;
             lblEmailMhs.Text = "Email";
             // 
             // txtNamaMhs
             // 
-            txtNamaMhs.Location = new Point(26, 200);
+            txtNamaMhs.Location = new Point(26, 127);
             txtNamaMhs.Margin = new Padding(4, 5, 4, 5);
             txtNamaMhs.Name = "txtNamaMhs";
             txtNamaMhs.Size = new Size(370, 34);
@@ -407,16 +382,16 @@
             // 
             // lblNamaMhs
             // 
-            lblNamaMhs.Location = new Point(26, 158);
+            lblNamaMhs.Location = new Point(26, 87);
             lblNamaMhs.Margin = new Padding(4, 0, 4, 0);
             lblNamaMhs.Name = "lblNamaMhs";
-            lblNamaMhs.Size = new Size(143, 38);
+            lblNamaMhs.Size = new Size(179, 35);
             lblNamaMhs.TabIndex = 9;
             lblNamaMhs.Text = "Nama Lengkap";
             // 
             // txtUserMhs
             // 
-            txtUserMhs.Location = new Point(26, 92);
+            txtUserMhs.Location = new Point(26, 48);
             txtUserMhs.Margin = new Padding(4, 5, 4, 5);
             txtUserMhs.Name = "txtUserMhs";
             txtUserMhs.Size = new Size(370, 34);
@@ -424,29 +399,40 @@
             // 
             // lblUserMhs
             // 
-            lblUserMhs.Location = new Point(26, 50);
+            lblUserMhs.Location = new Point(26, 12);
             lblUserMhs.Margin = new Padding(4, 0, 4, 0);
             lblUserMhs.Name = "lblUserMhs";
-            lblUserMhs.Size = new Size(143, 38);
+            lblUserMhs.Size = new Size(143, 31);
             lblUserMhs.TabIndex = 11;
             lblUserMhs.Text = "Username (NIM)";
+            // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(1374, 29);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(126, 52);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
             // 
             // FormManageUser
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1371, 967);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1514, 808);
+            Controls.Add(btnKembali);
             Controls.Add(tabUserControl);
-            Controls.Add(pnlTopBar);
-            FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 5, 4, 5);
             Name = "FormManageUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind - User Management Control";
             Load += FormManageUser_Load;
-            pnlTopBar.ResumeLayout(false);
-            pnlTopBar.PerformLayout();
             tabUserControl.ResumeLayout(false);
             pagePsikolog.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).EndInit();
@@ -461,9 +447,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlTopBar;
-        private System.Windows.Forms.Label lblTitleForm;
         private System.Windows.Forms.TabControl tabUserControl;
         private System.Windows.Forms.TabPage pagePsikolog;
         private System.Windows.Forms.TabPage pageMahasiswa;
@@ -495,5 +478,6 @@
         private System.Windows.Forms.Label lblNamaMhs;
         private System.Windows.Forms.TextBox txtUserMhs;
         private System.Windows.Forms.Label lblUserMhs;
+        private System.Windows.Forms.Button btnKembali;
     }
 }

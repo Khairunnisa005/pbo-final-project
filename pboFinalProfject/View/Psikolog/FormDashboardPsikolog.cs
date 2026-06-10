@@ -284,7 +284,7 @@ namespace pboFinalProfject.View
             Application.Exit();
         }
 
-        private void btnKembali_Click(object sender, EventArgs e)
+        private void btnKeluar_Click(object sender, EventArgs e)
         {
 
         }

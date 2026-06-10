@@ -17,330 +17,213 @@
 
         private void InitializeComponent()
         {
-            this.lblHeaderTitle = new System.Windows.Forms.Label();
-            this.lblHeaderSubtitle = new System.Windows.Forms.Label();
-            this.lblIDBooking = new System.Windows.Forms.Label();
-            this.lblValIDBooking = new System.Windows.Forms.Label();
-            this.lblNamaKonseli = new System.Windows.Forms.Label();
-            this.lblValNamaKonseli = new System.Windows.Forms.Label();
-            this.lblKonselor = new System.Windows.Forms.Label();
-            this.lblValKonselor = new System.Windows.Forms.Label();
-            this.lblJadwal = new System.Windows.Forms.Label();
-            this.lblValJadwal = new System.Windows.Forms.Label();
-            this.lblTipe = new System.Windows.Forms.Label();
-            this.lblValTipe = new System.Windows.Forms.Label();
-            this.lblKeluhan = new System.Windows.Forms.Label();
-            this.txtValKeluhan = new System.Windows.Forms.TextBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.panelStatus = new System.Windows.Forms.Panel();
-            this.lblValStatus = new System.Windows.Forms.Label();
-            this.btnTutup = new System.Windows.Forms.Button();
-            this.btnAksiUtama = new System.Windows.Forms.Button();
-            this.panelStatus.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // lblHeaderTitle
-            // 
-            this.lblHeaderTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblHeaderTitle.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185);
-            this.lblHeaderTitle.Location = new System.Drawing.Point(16, 15);
-            this.lblHeaderTitle.Name = "lblHeaderTitle";
-            this.lblHeaderTitle.Size = new System.Drawing.Size(350, 30);
-            this.lblHeaderTitle.Text = "DETAIL SESI KONSELING";
-            // 
-            // lblHeaderSubtitle
-            // 
-            this.lblHeaderSubtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHeaderSubtitle.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
-            this.lblHeaderSubtitle.Location = new System.Drawing.Point(18, 48);
-            this.lblHeaderSubtitle.Name = "lblHeaderSubtitle";
-            this.lblHeaderSubtitle.Size = new System.Drawing.Size(350, 20);
-            this.lblHeaderSubtitle.Text = "Sistem Informasi Layanan Konseling Unimind";
-            // 
-            // lblIDBooking
-            // 
-            this.lblIDBooking.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblIDBooking.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblIDBooking.Location = new System.Drawing.Point(20, 90);
-            this.lblIDBooking.Name = "lblIDBooking";
-            this.lblIDBooking.Size = new System.Drawing.Size(120, 20);
-            this.lblIDBooking.Text = "ID Registrasi";
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDetailBooking));
+            lblValIDBooking = new Label();
+            lblValNamaKonseli = new Label();
+            lblValKonselor = new Label();
+            lblValJadwal = new Label();
+            lblValMetode = new Label();
+            txtValCatatanMhs = new TextBox();
+            lblValStatus = new Label();
+            btnTutup = new Button();
+            btnAksiUtama = new Button();
+            lblValEmail = new Label();
+            lblValNoTelepon = new Label();
+            lblValJamMulai = new Label();
+            lblValJamSelesai = new Label();
+            lblJam = new Label();
+            btnKembali = new Button();
+            SuspendLayout();
             // 
             // lblValIDBooking
             // 
-            this.lblValIDBooking.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblValIDBooking.Location = new System.Drawing.Point(150, 90);
-            this.lblValIDBooking.Name = "lblValIDBooking";
-            this.lblValIDBooking.Size = new System.Drawing.Size(210, 20);
-            this.lblValIDBooking.Text = "-";
-            // 
-            // lblNamaKonseli
-            // 
-            this.lblNamaKonseli.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblNamaKonseli.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblNamaKonseli.Location = new System.Drawing.Point(20, 125);
-            this.lblNamaKonseli.Name = "lblNamaKonseli";
-            this.lblNamaKonseli.Size = new System.Drawing.Size(120, 20);
-            this.lblNamaKonseli.Text = "Nama Konseli";
+            lblValIDBooking.Font = new Font("Segoe UI", 9.5F);
+            lblValIDBooking.Location = new Point(533, 257);
+            lblValIDBooking.Name = "lblValIDBooking";
+            lblValIDBooking.Size = new Size(210, 26);
+            lblValIDBooking.TabIndex = 14;
+            lblValIDBooking.Text = "-";
             // 
             // lblValNamaKonseli
             // 
-            this.lblValNamaKonseli.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblValNamaKonseli.Location = new System.Drawing.Point(150, 125);
-            this.lblValNamaKonseli.Name = "lblValNamaKonseli";
-            this.lblValNamaKonseli.Size = new System.Drawing.Size(210, 20);
-            this.lblValNamaKonseli.Text = "-";
-            // 
-            // lblKonselor
-            // 
-            this.lblKonselor.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblKonselor.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblKonselor.Location = new System.Drawing.Point(20, 160);
-            this.lblKonselor.Name = "lblKonselor";
-            this.lblKonselor.Size = new System.Drawing.Size(120, 20);
-            this.lblKonselor.Text = "Konselor";
+            lblValNamaKonseli.Font = new Font("Segoe UI", 9.5F);
+            lblValNamaKonseli.Location = new Point(533, 296);
+            lblValNamaKonseli.Name = "lblValNamaKonseli";
+            lblValNamaKonseli.Size = new Size(210, 27);
+            lblValNamaKonseli.TabIndex = 12;
+            lblValNamaKonseli.Text = "-";
             // 
             // lblValKonselor
             // 
-            this.lblValKonselor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblValKonselor.Location = new System.Drawing.Point(150, 160);
-            this.lblValKonselor.Name = "lblValKonselor";
-            this.lblValKonselor.Size = new System.Drawing.Size(210, 20);
-            this.lblValKonselor.Text = "-";
-            // 
-            // lblJadwal
-            // 
-            this.lblJadwal.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblJadwal.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblJadwal.Location = new System.Drawing.Point(20, 195);
-            this.lblJadwal.Name = "lblJadwal";
-            this.lblJadwal.Size = new System.Drawing.Size(120, 20);
-            this.lblJadwal.Text = "Jadwal Sesi";
+            lblValKonselor.Font = new Font("Segoe UI", 9.5F);
+            lblValKonselor.Location = new Point(533, 422);
+            lblValKonselor.Name = "lblValKonselor";
+            lblValKonselor.Size = new Size(210, 26);
+            lblValKonselor.TabIndex = 10;
+            lblValKonselor.Text = "-";
             // 
             // lblValJadwal
             // 
-            this.lblValJadwal.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblValJadwal.Location = new System.Drawing.Point(150, 195);
-            this.lblValJadwal.Name = "lblValJadwal";
-            this.lblValJadwal.Size = new System.Drawing.Size(210, 20);
-            this.lblValJadwal.Text = "-";
+            lblValJadwal.Font = new Font("Segoe UI", 9.5F);
+            lblValJadwal.Location = new Point(533, 464);
+            lblValJadwal.Name = "lblValJadwal";
+            lblValJadwal.Size = new Size(210, 27);
+            lblValJadwal.TabIndex = 8;
+            lblValJadwal.Text = "-";
             // 
-            // lblTipe
+            // lblValMetode
             // 
-            this.lblTipe.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblTipe.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblTipe.Location = new System.Drawing.Point(20, 230);
-            this.lblTipe.Name = "lblTipe";
-            this.lblTipe.Size = new System.Drawing.Size(120, 20);
-            this.lblTipe.Text = "Tipe Pertemuan";
+            lblValMetode.Font = new Font("Segoe UI", 9.5F);
+            lblValMetode.Location = new Point(533, 546);
+            lblValMetode.Name = "lblValMetode";
+            lblValMetode.Size = new Size(210, 25);
+            lblValMetode.TabIndex = 6;
+            lblValMetode.Text = "-";
             // 
-            // lblValTipe
+            // txtValCatatanMhs
             // 
-            this.lblValTipe.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblValTipe.Location = new System.Drawing.Point(150, 230);
-            this.lblValTipe.Name = "lblValTipe";
-            this.lblValTipe.Size = new System.Drawing.Size(210, 20);
-            this.lblValTipe.Text = "-";
-            // 
-            // lblKeluhan
-            // 
-            this.lblKeluhan.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblKeluhan.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblKeluhan.Location = new System.Drawing.Point(20, 265);
-            this.lblKeluhan.Name = "lblKeluhan";
-            this.lblKeluhan.Size = new System.Drawing.Size(120, 20);
-            this.lblKeluhan.Text = "Topik / Keluhan";
-            // 
-            // txtValKeluhan
-            // 
-            this.txtValKeluhan.BackColor = System.Drawing.Color.White;
-            this.txtValKeluhan.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtValKeluhan.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.txtValKeluhan.Location = new System.Drawing.Point(150, 265);
-            this.txtValKeluhan.Multiline = true;
-            this.txtValKeluhan.Name = "txtValKeluhan";
-            this.txtValKeluhan.ReadOnly = true;
-            this.txtValKeluhan.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtValKeluhan.Size = new System.Drawing.Size(210, 65);
-            this.txtValKeluhan.Text = "-";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblStatus.Location = new System.Drawing.Point(20, 350);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(120, 20);
-            this.lblStatus.Text = "Status Sesi";
-            // 
-            // panelStatus
-            // 
-            this.panelStatus.Controls.Add(this.lblValStatus);
-            this.panelStatus.Location = new System.Drawing.Point(150, 347);
-            this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(120, 26);
+            txtValCatatanMhs.BackColor = Color.White;
+            txtValCatatanMhs.BorderStyle = BorderStyle.None;
+            txtValCatatanMhs.Font = new Font("Segoe UI", 9.5F);
+            txtValCatatanMhs.Location = new Point(533, 610);
+            txtValCatatanMhs.Multiline = true;
+            txtValCatatanMhs.Name = "txtValCatatanMhs";
+            txtValCatatanMhs.ReadOnly = true;
+            txtValCatatanMhs.ScrollBars = ScrollBars.Vertical;
+            txtValCatatanMhs.Size = new Size(457, 65);
+            txtValCatatanMhs.TabIndex = 4;
+            txtValCatatanMhs.Text = "-";
             // 
             // lblValStatus
             // 
-            this.lblValStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblValStatus.Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold);
-            this.lblValStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblValStatus.Name = "lblValStatus";
-            this.lblValStatus.Size = new System.Drawing.Size(120, 26);
-            this.lblValStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblValStatus.Text = "-";
-
-
-            // Tambahkan di bagian komponen (setelah komponen status)
-
-            // ==================== HASIL SCREENING ====================
-
-
-            // lblHasilScreening
-            this.lblHasilScreening.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblHasilScreening.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
-            this.lblHasilScreening.Location = new System.Drawing.Point(20, 385);
-            this.lblHasilScreening.Name = "lblHasilScreening";
-            this.lblHasilScreening.Size = new System.Drawing.Size(150, 25);
-            this.lblHasilScreening.Text = "Hasil Screening:";
-
-            // panelScreening
-            this.panelScreening.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            this.panelScreening.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelScreening.Location = new System.Drawing.Point(20, 410);
-            this.panelScreening.Size = new System.Drawing.Size(340, 120);
-
-            // lblTingkatStres
-            this.lblTingkatStres.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTingkatStres.Location = new System.Drawing.Point(10, 10);
-            this.lblTingkatStres.Size = new System.Drawing.Size(100, 20);
-            this.lblTingkatStres.Text = "Tingkat Stres:";
-
-            // lblValTingkatStres
-            this.lblValTingkatStres.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblValTingkatStres.Location = new System.Drawing.Point(120, 10);
-            this.lblValTingkatStres.Size = new System.Drawing.Size(100, 20);
-            this.lblValTingkatStres.Text = "-";
-
-            // lblSkorTotal
-            this.lblSkorTotal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblSkorTotal.Location = new System.Drawing.Point(10, 35);
-            this.lblSkorTotal.Size = new System.Drawing.Size(100, 20);
-            this.lblSkorTotal.Text = "Skor Total:";
-
-            // lblValSkorTotal
-            this.lblValSkorTotal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblValSkorTotal.Location = new System.Drawing.Point(120, 35);
-            this.lblValSkorTotal.Size = new System.Drawing.Size(100, 20);
-            this.lblValSkorTotal.Text = "-";
-
-            // lblRekomendasi
-            this.lblRekomendasi.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRekomendasi.Location = new System.Drawing.Point(10, 60);
-            this.lblRekomendasi.Size = new System.Drawing.Size(80, 20);
-            this.lblRekomendasi.Text = "Rekomendasi:";
-
-            // txtValRekomendasi
-            this.txtValRekomendasi.BackColor = System.Drawing.Color.White;
-            this.txtValRekomendasi.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtValRekomendasi.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtValRekomendasi.Location = new System.Drawing.Point(10, 80);
-            this.txtValRekomendasi.Multiline = true;
-            this.txtValRekomendasi.Name = "txtValRekomendasi";
-            this.txtValRekomendasi.ReadOnly = true;
-            this.txtValRekomendasi.Size = new System.Drawing.Size(315, 30);
-            this.txtValRekomendasi.Text = "-";
-
-            // Tambahkan ke panelScreening
-            this.panelScreening.Controls.Add(this.lblTingkatStres);
-            this.panelScreening.Controls.Add(this.lblValTingkatStres);
-            this.panelScreening.Controls.Add(this.lblSkorTotal);
-            this.panelScreening.Controls.Add(this.lblValSkorTotal);
-            this.panelScreening.Controls.Add(this.lblRekomendasi);
-            this.panelScreening.Controls.Add(this.txtValRekomendasi);
-
-            // Tambahkan ke form
-            this.Controls.Add(this.lblHasilScreening);
-            this.Controls.Add(this.panelScreening);
+            lblValStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblValStatus.Location = new Point(533, 713);
+            lblValStatus.Name = "lblValStatus";
+            lblValStatus.Size = new Size(120, 29);
+            lblValStatus.TabIndex = 0;
+            lblValStatus.Text = "-";
             // 
             // btnTutup
             // 
-            this.btnTutup.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnTutup.Location = new System.Drawing.Point(275, 405);
-            this.btnTutup.Name = "btnTutup";
-            this.btnTutup.Size = new System.Drawing.Size(85, 32);
-            this.btnTutup.Text = "Tutup";
-            this.btnTutup.UseVisualStyleBackColor = true;
-            this.btnTutup.Click += new System.EventHandler(this.BtnTutup_Click);
+            btnTutup.Font = new Font("Segoe UI", 9F);
+            btnTutup.Location = new Point(1333, 713);
+            btnTutup.Name = "btnTutup";
+            btnTutup.Size = new Size(111, 50);
+            btnTutup.TabIndex = 1;
+            btnTutup.Text = "Tutup";
+            btnTutup.UseVisualStyleBackColor = true;
+            btnTutup.Click += BtnTutup_Click;
             // 
             // btnAksiUtama
             // 
-            this.btnAksiUtama.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnAksiUtama.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAksiUtama.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnAksiUtama.ForeColor = System.Drawing.Color.White;
-            this.btnAksiUtama.Location = new System.Drawing.Point(150, 405);
-            this.btnAksiUtama.Name = "btnAksiUtama";
-            this.btnAksiUtama.Size = new System.Drawing.Size(115, 32);
-            this.btnAksiUtama.Text = "Lihat Selesai";
-            this.btnAksiUtama.UseVisualStyleBackColor = false;
-            this.btnAksiUtama.Click += new System.EventHandler(this.BtnAksiUtama_Click);
+            btnAksiUtama.BackColor = Color.FromArgb(41, 128, 185);
+            btnAksiUtama.FlatStyle = FlatStyle.Flat;
+            btnAksiUtama.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnAksiUtama.ForeColor = Color.White;
+            btnAksiUtama.Location = new Point(1105, 713);
+            btnAksiUtama.Name = "btnAksiUtama";
+            btnAksiUtama.Size = new Size(204, 50);
+            btnAksiUtama.TabIndex = 0;
+            btnAksiUtama.Text = "Konfirmasi";
+            btnAksiUtama.UseVisualStyleBackColor = false;
+            btnAksiUtama.Click += BtnAksiUtama_Click;
+            // 
+            // lblValEmail
+            // 
+            lblValEmail.Font = new Font("Segoe UI", 9.5F);
+            lblValEmail.Location = new Point(533, 339);
+            lblValEmail.Name = "lblValEmail";
+            lblValEmail.Size = new Size(210, 28);
+            lblValEmail.TabIndex = 0;
+            lblValEmail.Text = "-";
+            // 
+            // lblValNoTelepon
+            // 
+            lblValNoTelepon.Font = new Font("Segoe UI", 9.5F);
+            lblValNoTelepon.Location = new Point(533, 380);
+            lblValNoTelepon.Name = "lblValNoTelepon";
+            lblValNoTelepon.Size = new Size(210, 27);
+            lblValNoTelepon.TabIndex = 0;
+            lblValNoTelepon.Text = "-";
+            // 
+            // lblValJamMulai
+            // 
+            lblValJamMulai.Font = new Font("Segoe UI", 9.5F);
+            lblValJamMulai.Location = new Point(533, 507);
+            lblValJamMulai.Name = "lblValJamMulai";
+            lblValJamMulai.Size = new Size(100, 28);
+            lblValJamMulai.TabIndex = 0;
+            lblValJamMulai.Text = "-";
+            // 
+            // lblValJamSelesai
+            // 
+            lblValJamSelesai.Font = new Font("Segoe UI", 9.5F);
+            lblValJamSelesai.Location = new Point(685, 507);
+            lblValJamSelesai.Name = "lblValJamSelesai";
+            lblValJamSelesai.Size = new Size(100, 28);
+            lblValJamSelesai.TabIndex = 0;
+            lblValJamSelesai.Text = "-";
+            // 
+            // lblJam
+            // 
+            lblJam.Location = new Point(639, 507);
+            lblJam.Name = "lblJam";
+            lblJam.Size = new Size(40, 28);
+            lblJam.TabIndex = 0;
+            lblJam.Text = "s/d";
+            // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
+            btnKembali.ForeColor = Color.White;
+            btnKembali.Location = new Point(1363, 52);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(128, 51);
+            btnKembali.TabIndex = 10;
+            btnKembali.Text = "Kembali";
+            btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
             // 
             // FormDetailBooking
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(384, 461);
-            this.Controls.Add(this.btnAksiUtama);
-            this.Controls.Add(this.btnTutup);
-            this.Controls.Add(this.panelStatus);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.txtValKeluhan);
-            this.Controls.Add(this.lblKeluhan);
-            this.Controls.Add(this.lblValTipe);
-            this.Controls.Add(this.lblTipe);
-            this.Controls.Add(this.lblValJadwal);
-            this.Controls.Add(this.lblJadwal);
-            this.Controls.Add(this.lblValKonselor);
-            this.Controls.Add(this.lblKonselor);
-            this.Controls.Add(this.lblValNamaKonseli);
-            this.Controls.Add(this.lblNamaKonseli);
-            this.Controls.Add(this.lblValIDBooking);
-            this.Controls.Add(this.lblIDBooking);
-            this.Controls.Add(this.lblHeaderSubtitle);
-            this.Controls.Add(this.lblHeaderTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormDetailBooking";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Detail Booking Konseling - Unimind";
-            this.panelStatus.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            BackColor = Color.FromArgb(250, 250, 250);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1514, 808);
+            Controls.Add(lblValStatus);
+            Controls.Add(btnAksiUtama);
+            Controls.Add(btnTutup);
+            Controls.Add(txtValCatatanMhs);
+            Controls.Add(lblValMetode);
+            Controls.Add(lblValJadwal);
+            Controls.Add(lblValKonselor);
+            Controls.Add(lblValNamaKonseli);
+            Controls.Add(lblValIDBooking);
+            Controls.Add(lblValEmail);
+            Controls.Add(lblValNoTelepon);
+            Controls.Add(lblValJamMulai);
+            Controls.Add(lblValJamSelesai);
+            Controls.Add(lblJam);
+            Controls.Add(btnKembali);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FormDetailBooking";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Detail Booking Konseling - Unimind";
+            ResumeLayout(false);
+            PerformLayout();
 
 
         }
 
-
-
         #endregion
-
-        private System.Windows.Forms.Label lblHeaderTitle;
-        private System.Windows.Forms.Label lblHeaderSubtitle;
-        private System.Windows.Forms.Label lblIDBooking;
         private System.Windows.Forms.Label lblValIDBooking;
-        private System.Windows.Forms.Label lblNamaKonseli;
         private System.Windows.Forms.Label lblValNamaKonseli;
-        private System.Windows.Forms.Label lblKonselor;
         private System.Windows.Forms.Label lblValKonselor;
-        private System.Windows.Forms.Label lblJadwal;
         private System.Windows.Forms.Label lblValJadwal;
-        private System.Windows.Forms.Label lblTipe;
-        private System.Windows.Forms.Label lblValTipe;
-        private System.Windows.Forms.Label lblKeluhan;
-        private System.Windows.Forms.TextBox txtValKeluhan;
-        private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Panel panelStatus;
+        private System.Windows.Forms.Label lblValMetode;
+        private System.Windows.Forms.TextBox txtValCatatanMhs;
         private System.Windows.Forms.Label lblValStatus;
         private System.Windows.Forms.Button btnTutup;
         private System.Windows.Forms.Button btnAksiUtama;
@@ -352,6 +235,11 @@
         private System.Windows.Forms.Label lblValSkorTotal;
         private System.Windows.Forms.Label lblRekomendasi;
         private System.Windows.Forms.TextBox txtValRekomendasi;
-
+        private System.Windows.Forms.Label lblValEmail;
+        private System.Windows.Forms.Label lblValNoTelepon;
+        private System.Windows.Forms.Label lblValJamMulai;
+        private System.Windows.Forms.Label lblValJamSelesai;
+        private System.Windows.Forms.Label lblJam;
+        private System.Windows.Forms.Button btnKembali;
     }
 }

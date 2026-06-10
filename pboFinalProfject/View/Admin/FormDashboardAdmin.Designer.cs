@@ -33,9 +33,7 @@ namespace pboFinalProfject.View
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            pnlHeader = new Panel();
-            lblSubJudul = new Label();
-            lblJudulApp = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboardAdmin));
             btnKeluar = new Button();
             btnLogout = new Button();
             btnRefresh = new Button();
@@ -46,51 +44,12 @@ namespace pboFinalProfject.View
             lblTotalKonselor = new Label();
             lblTitleKonselor = new Label();
             dgvAntreanKonseling = new DataGridView();
-            lblTabelTitle = new Label();
             btnKelolaUser = new Button();
             btnLaporan = new Button();
-            pnlHeader.SuspendLayout();
             pnlStatMahasiswa.SuspendLayout();
             pnlStatKonselor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).BeginInit();
             SuspendLayout();
-            // 
-            // pnlHeader
-            // 
-            pnlHeader.BackColor = Color.FromArgb(31, 47, 152);
-            pnlHeader.Controls.Add(lblSubJudul);
-            pnlHeader.Controls.Add(lblJudulApp);
-            pnlHeader.Controls.Add(btnKeluar);
-            pnlHeader.Controls.Add(btnLogout);
-            pnlHeader.Controls.Add(btnRefresh);
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Location = new Point(0, 0);
-            pnlHeader.Margin = new Padding(3, 4, 3, 4);
-            pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(900, 100);
-            pnlHeader.TabIndex = 0;
-            // 
-            // lblSubJudul
-            // 
-            lblSubJudul.AutoSize = true;
-            lblSubJudul.Font = new Font("Segoe UI", 10F);
-            lblSubJudul.ForeColor = Color.FromArgb(74, 222, 222);
-            lblSubJudul.Location = new Point(22, 54);
-            lblSubJudul.Name = "lblSubJudul";
-            lblSubJudul.Size = new Size(277, 23);
-            lblSubJudul.TabIndex = 0;
-            lblSubJudul.Text = "Panel Kontrol Utama Administrator";
-            // 
-            // lblJudulApp
-            // 
-            lblJudulApp.AutoSize = true;
-            lblJudulApp.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblJudulApp.ForeColor = Color.White;
-            lblJudulApp.Location = new Point(20, 11);
-            lblJudulApp.Name = "lblJudulApp";
-            lblJudulApp.Size = new Size(128, 37);
-            lblJudulApp.TabIndex = 1;
-            lblJudulApp.Text = "UniMind";
             // 
             // btnKeluar
             // 
@@ -98,10 +57,10 @@ namespace pboFinalProfject.View
             btnKeluar.FlatStyle = FlatStyle.Flat;
             btnKeluar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(817, 15);
-            btnKeluar.Margin = new Padding(2, 2, 2, 2);
+            btnKeluar.Location = new Point(1382, 87);
+            btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(76, 36);
+            btnKeluar.Size = new Size(110, 45);
             btnKeluar.TabIndex = 6;
             btnKeluar.Text = "Keluar";
             btnKeluar.UseVisualStyleBackColor = false;
@@ -112,10 +71,10 @@ namespace pboFinalProfject.View
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(735, 15);
-            btnLogout.Margin = new Padding(2, 2, 2, 2);
+            btnLogout.Location = new Point(1249, 87);
+            btnLogout.Margin = new Padding(2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(78, 36);
+            btnLogout.Size = new Size(116, 45);
             btnLogout.TabIndex = 8;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = false;
@@ -126,10 +85,10 @@ namespace pboFinalProfject.View
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(655, 15);
-            btnRefresh.Margin = new Padding(2, 2, 2, 2);
+            btnRefresh.Location = new Point(1118, 87);
+            btnRefresh.Margin = new Padding(2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(75, 36);
+            btnRefresh.Size = new Size(117, 45);
             btnRefresh.TabIndex = 7;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = false;
@@ -139,10 +98,10 @@ namespace pboFinalProfject.View
             pnlStatMahasiswa.BackColor = Color.FromArgb(120, 127, 246);
             pnlStatMahasiswa.Controls.Add(lblTotalMahasiswa);
             pnlStatMahasiswa.Controls.Add(lblTitleMhs);
-            pnlStatMahasiswa.Location = new Point(27, 131);
-            pnlStatMahasiswa.Margin = new Padding(3, 4, 3, 4);
+            pnlStatMahasiswa.Location = new Point(334, 183);
+            pnlStatMahasiswa.Margin = new Padding(4, 5, 4, 5);
             pnlStatMahasiswa.Name = "pnlStatMahasiswa";
-            pnlStatMahasiswa.Size = new Size(240, 125);
+            pnlStatMahasiswa.Size = new Size(300, 156);
             pnlStatMahasiswa.TabIndex = 1;
             // 
             // lblTotalMahasiswa
@@ -150,9 +109,10 @@ namespace pboFinalProfject.View
             lblTotalMahasiswa.AutoSize = true;
             lblTotalMahasiswa.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTotalMahasiswa.ForeColor = Color.White;
-            lblTotalMahasiswa.Location = new Point(15, 44);
+            lblTotalMahasiswa.Location = new Point(19, 55);
+            lblTotalMahasiswa.Margin = new Padding(4, 0, 4, 0);
             lblTotalMahasiswa.Name = "lblTotalMahasiswa";
-            lblTotalMahasiswa.Size = new Size(43, 50);
+            lblTotalMahasiswa.Size = new Size(50, 60);
             lblTotalMahasiswa.TabIndex = 0;
             lblTotalMahasiswa.Text = "0";
             // 
@@ -161,9 +121,10 @@ namespace pboFinalProfject.View
             lblTitleMhs.AutoSize = true;
             lblTitleMhs.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTitleMhs.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTitleMhs.Location = new Point(15, 15);
+            lblTitleMhs.Location = new Point(19, 19);
+            lblTitleMhs.Margin = new Padding(4, 0, 4, 0);
             lblTitleMhs.Name = "lblTitleMhs";
-            lblTitleMhs.Size = new Size(140, 23);
+            lblTitleMhs.Size = new Size(169, 28);
             lblTitleMhs.TabIndex = 1;
             lblTitleMhs.Text = "Total Mahasiswa";
             // 
@@ -172,10 +133,10 @@ namespace pboFinalProfject.View
             pnlStatKonselor.BackColor = Color.FromArgb(123, 213, 245);
             pnlStatKonselor.Controls.Add(lblTotalKonselor);
             pnlStatKonselor.Controls.Add(lblTitleKonselor);
-            pnlStatKonselor.Location = new Point(285, 131);
-            pnlStatKonselor.Margin = new Padding(3, 4, 3, 4);
+            pnlStatKonselor.Location = new Point(652, 183);
+            pnlStatKonselor.Margin = new Padding(4, 5, 4, 5);
             pnlStatKonselor.Name = "pnlStatKonselor";
-            pnlStatKonselor.Size = new Size(240, 125);
+            pnlStatKonselor.Size = new Size(298, 156);
             pnlStatKonselor.TabIndex = 2;
             // 
             // lblTotalKonselor
@@ -183,9 +144,10 @@ namespace pboFinalProfject.View
             lblTotalKonselor.AutoSize = true;
             lblTotalKonselor.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTotalKonselor.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTotalKonselor.Location = new Point(15, 44);
+            lblTotalKonselor.Location = new Point(19, 55);
+            lblTotalKonselor.Margin = new Padding(4, 0, 4, 0);
             lblTotalKonselor.Name = "lblTotalKonselor";
-            lblTotalKonselor.Size = new Size(43, 50);
+            lblTotalKonselor.Size = new Size(50, 60);
             lblTotalKonselor.TabIndex = 0;
             lblTotalKonselor.Text = "0";
             // 
@@ -194,9 +156,10 @@ namespace pboFinalProfject.View
             lblTitleKonselor.AutoSize = true;
             lblTitleKonselor.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTitleKonselor.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTitleKonselor.Location = new Point(15, 15);
+            lblTitleKonselor.Location = new Point(19, 19);
+            lblTitleKonselor.Margin = new Padding(4, 0, 4, 0);
             lblTitleKonselor.Name = "lblTitleKonselor";
-            lblTitleKonselor.Size = new Size(201, 23);
+            lblTitleKonselor.Size = new Size(237, 28);
             lblTitleKonselor.TabIndex = 1;
             lblTitleKonselor.Text = "Konselor/Psikolog Aktif";
             // 
@@ -224,25 +187,14 @@ namespace pboFinalProfject.View
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvAntreanKonseling.DefaultCellStyle = dataGridViewCellStyle2;
             dgvAntreanKonseling.EnableHeadersVisualStyles = false;
-            dgvAntreanKonseling.Location = new Point(27, 325);
-            dgvAntreanKonseling.Margin = new Padding(3, 4, 3, 4);
+            dgvAntreanKonseling.Location = new Point(334, 407);
+            dgvAntreanKonseling.Margin = new Padding(4, 5, 4, 5);
             dgvAntreanKonseling.Name = "dgvAntreanKonseling";
             dgvAntreanKonseling.ReadOnly = true;
             dgvAntreanKonseling.RowHeadersWidth = 51;
             dgvAntreanKonseling.RowTemplate.Height = 30;
-            dgvAntreanKonseling.Size = new Size(846, 325);
+            dgvAntreanKonseling.Size = new Size(1158, 406);
             dgvAntreanKonseling.TabIndex = 3;
-            // 
-            // lblTabelTitle
-            // 
-            lblTabelTitle.AutoSize = true;
-            lblTabelTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblTabelTitle.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTabelTitle.Location = new Point(22, 282);
-            lblTabelTitle.Name = "lblTabelTitle";
-            lblTabelTitle.Size = new Size(268, 28);
-            lblTabelTitle.TabIndex = 6;
-            lblTabelTitle.Text = "Daftar Aktivitas Booking";
             // 
             // btnKelolaUser
             // 
@@ -250,10 +202,10 @@ namespace pboFinalProfject.View
             btnKelolaUser.FlatStyle = FlatStyle.Flat;
             btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaUser.ForeColor = Color.White;
-            btnKelolaUser.Location = new Point(546, 169);
-            btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaUser.Location = new Point(994, 257);
+            btnKelolaUser.Margin = new Padding(4, 5, 4, 5);
             btnKelolaUser.Name = "btnKelolaUser";
-            btnKelolaUser.Size = new Size(160, 56);
+            btnKelolaUser.Size = new Size(200, 41);
             btnKelolaUser.TabIndex = 4;
             btnKelolaUser.Text = "Kelola Pengguna";
             btnKelolaUser.UseVisualStyleBackColor = false;
@@ -264,50 +216,46 @@ namespace pboFinalProfject.View
             btnLaporan.FlatStyle = FlatStyle.Flat;
             btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLaporan.ForeColor = Color.White;
-            btnLaporan.Location = new Point(713, 169);
-            btnLaporan.Margin = new Padding(3, 4, 3, 4);
+            btnLaporan.Location = new Point(1259, 257);
+            btnLaporan.Margin = new Padding(4, 5, 4, 5);
             btnLaporan.Name = "btnLaporan";
-            btnLaporan.Size = new Size(160, 56);
+            btnLaporan.Size = new Size(200, 41);
             btnLaporan.TabIndex = 5;
             btnLaporan.Text = "Lihat Laporan";
             btnLaporan.UseVisualStyleBackColor = false;
             // 
             // FormDashboardAdmin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 244, 248);
-            ClientSize = new Size(900, 687);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1514, 808);
             Controls.Add(btnLaporan);
             Controls.Add(btnKelolaUser);
-            Controls.Add(lblTabelTitle);
+            Controls.Add(btnKeluar);
+            Controls.Add(btnLogout);
             Controls.Add(dgvAntreanKonseling);
+            Controls.Add(btnRefresh);
             Controls.Add(pnlStatKonselor);
             Controls.Add(pnlStatMahasiswa);
-            Controls.Add(pnlHeader);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 4, 3, 4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             Name = "FormDashboardAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind Admin Dashboard Center";
-            pnlHeader.ResumeLayout(false);
-            pnlHeader.PerformLayout();
             pnlStatMahasiswa.ResumeLayout(false);
             pnlStatMahasiswa.PerformLayout();
             pnlStatKonselor.ResumeLayout(false);
             pnlStatKonselor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).EndInit();
             ResumeLayout(false);
-            PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblJudulApp;
-        private System.Windows.Forms.Label lblSubJudul;
         private System.Windows.Forms.Panel pnlStatMahasiswa;
         private System.Windows.Forms.Label lblTotalMahasiswa;
         private System.Windows.Forms.Label lblTitleMhs;
@@ -315,12 +263,10 @@ namespace pboFinalProfject.View
         private System.Windows.Forms.Label lblTotalKonselor;
         private System.Windows.Forms.Label lblTitleKonselor;
         private System.Windows.Forms.DataGridView dgvAntreanKonseling;
-        private System.Windows.Forms.Label lblTabelTitle;
         private System.Windows.Forms.Button btnKelolaUser;
         private System.Windows.Forms.Button btnLaporan;
         private System.Windows.Forms.Button btnKeluar;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnLogout;
-
     }
 }

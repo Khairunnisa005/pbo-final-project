@@ -232,7 +232,7 @@ namespace pboFinalProfject.View
 
         private void BtnKembali_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
