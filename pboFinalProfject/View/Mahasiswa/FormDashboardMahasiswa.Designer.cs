@@ -209,7 +209,7 @@ partial class FormDashboardMahasiswa
         // FormDashboardMahasiswa
         // 
         BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-        ClientSize = new Size(1518, 817);
+        ClientSize = new Size(1518, 860);
         Controls.Add(btnKeluar);
         Controls.Add(btnKuis);
         Controls.Add(btnJadwal);

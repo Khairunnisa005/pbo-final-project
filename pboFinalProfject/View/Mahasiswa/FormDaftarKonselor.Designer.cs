@@ -45,7 +45,6 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKembali.Size = new Size(436, 55);
             btnKembali.TabIndex = 0;
             btnKembali.Text = "Kembali";
-            btnKembali.Click -= btnKembali_Click;
             btnKembali.Click += btnKembali_Click;
             btnKembali.DialogResult = DialogResult.Cancel;
             // 
