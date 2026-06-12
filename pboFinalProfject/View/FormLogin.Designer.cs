@@ -43,12 +43,12 @@ namespace pboFinalProfject
             // 
             tbEmail.BackColor = SystemColors.HighlightText;
             tbEmail.BorderStyle = BorderStyle.None;
-            tbEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbEmail.Font = new Font("Segoe UI", 13F);
             tbEmail.ForeColor = SystemColors.WindowFrame;
-            tbEmail.Location = new Point(460, 341);
+            tbEmail.Location = new Point(890, 345);
             tbEmail.Margin = new Padding(2);
             tbEmail.Name = "tbEmail";
-            tbEmail.Size = new Size(600, 27);
+            tbEmail.Size = new Size(554, 29);
             tbEmail.TabIndex = 0;
             tbEmail.Text = "nama@gmail.com";
             tbEmail.TextChanged += tbEmail_TextChanged;
@@ -57,12 +57,12 @@ namespace pboFinalProfject
             // 
             tbSandi.BackColor = SystemColors.HighlightText;
             tbSandi.BorderStyle = BorderStyle.None;
-            tbSandi.Font = new Font("Segoe UI", 12F);
+            tbSandi.Font = new Font("Segoe UI", 13F);
             tbSandi.ForeColor = SystemColors.WindowFrame;
-            tbSandi.Location = new Point(460, 400);
+            tbSandi.Location = new Point(890, 485);
             tbSandi.Margin = new Padding(2);
             tbSandi.Name = "tbSandi";
-            tbSandi.Size = new Size(600, 27);
+            tbSandi.Size = new Size(554, 29);
             tbSandi.TabIndex = 1;
             tbSandi.Text = "Masukkan kata sandi";
             // 
@@ -71,7 +71,7 @@ namespace pboFinalProfject
             btnMasuk.BackColor = SystemColors.MenuHighlight;
             btnMasuk.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnMasuk.ForeColor = SystemColors.ButtonHighlight;
-            btnMasuk.Location = new Point(460, 470);
+            btnMasuk.Location = new Point(871, 552);
             btnMasuk.Margin = new Padding(2);
             btnMasuk.Name = "btnMasuk";
             btnMasuk.Size = new Size(600, 81);
@@ -99,7 +99,7 @@ namespace pboFinalProfject
             lblDaftar.BackColor = SystemColors.ControlLightLight;
             lblDaftar.Font = new Font("Segoe UI", 12F);
             lblDaftar.LinkColor = SystemColors.Highlight;
-            lblDaftar.Location = new Point(1227, 653);
+            lblDaftar.Location = new Point(1187, 653);
             lblDaftar.Margin = new Padding(2, 0, 2, 0);
             lblDaftar.Name = "lblDaftar";
             lblDaftar.Size = new Size(66, 28);
@@ -109,26 +109,22 @@ namespace pboFinalProfject
             // 
             // FormLogin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            // Lock scaling to avoid DPI/layout shifts
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1536, 864);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimumSize = new Size(1536, 864);
-            MaximumSize = new Size(1536, 864);
-            StartPosition = FormStartPosition.CenterScreen;
+            ClientSize = new Size(1518, 860);
             Controls.Add(lblDaftar);
             Controls.Add(labelDaftar);
             Controls.Add(btnMasuk);
             Controls.Add(tbSandi);
             Controls.Add(tbEmail);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2);
+            MaximizeBox = false;
             Name = "FormLogin";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Login ";
             Load += FormLogin_Load;
             ResumeLayout(false);
             PerformLayout();

@@ -39,17 +39,18 @@ namespace pboFinalProfject.View.Mahasiswa
             // comboKategori
             // 
             comboKategori.Font = new Font("Segoe UI", 12F);
-            comboKategori.Location = new Point(487, 210);
+            comboKategori.Location = new Point(487, 214);
             comboKategori.Name = "comboKategori";
-            comboKategori.Size = new Size(435, 36);
+            comboKategori.Size = new Size(456, 36);
             comboKategori.TabIndex = 8;
+            comboKategori.SelectedIndexChanged += comboKategori_SelectedIndexChanged_1;
             // 
             // comboPsikolog
             // 
             comboPsikolog.Font = new Font("Segoe UI", 12F);
-            comboPsikolog.Location = new Point(487, 268);
+            comboPsikolog.Location = new Point(487, 272);
             comboPsikolog.Name = "comboPsikolog";
-            comboPsikolog.Size = new Size(435, 36);
+            comboPsikolog.Size = new Size(456, 36);
             comboPsikolog.TabIndex = 6;
             // 
             // dgvJadwal
@@ -58,24 +59,24 @@ namespace pboFinalProfject.View.Mahasiswa
             dgvJadwal.BorderStyle = BorderStyle.Fixed3D;
             dgvJadwal.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvJadwal.ColumnHeadersHeight = 29;
-            dgvJadwal.Location = new Point(301, 364);
+            dgvJadwal.Location = new Point(321, 371);
             dgvJadwal.Name = "dgvJadwal";
             dgvJadwal.RowHeadersWidth = 51;
-            dgvJadwal.Size = new Size(1169, 174);
+            dgvJadwal.Size = new Size(1170, 174);
             dgvJadwal.TabIndex = 0;
             // 
             // txtCatatan
             // 
-            txtCatatan.Location = new Point(487, 571);
+            txtCatatan.Location = new Point(487, 580);
             txtCatatan.Multiline = true;
             txtCatatan.Name = "txtCatatan";
-            txtCatatan.Size = new Size(983, 106);
+            txtCatatan.Size = new Size(1004, 106);
             txtCatatan.TabIndex = 3;
             // 
             // chkAttachAssessment
             // 
             chkAttachAssessment.BackColor = SystemColors.ControlLightLight;
-            chkAttachAssessment.Location = new Point(298, 701);
+            chkAttachAssessment.Location = new Point(324, 704);
             chkAttachAssessment.Name = "chkAttachAssessment";
             chkAttachAssessment.Size = new Size(300, 24);
             chkAttachAssessment.TabIndex = 2;
@@ -84,7 +85,7 @@ namespace pboFinalProfject.View.Mahasiswa
             // 
             // btnSubmit
             // 
-            btnSubmit.Location = new Point(1257, 751);
+            btnSubmit.Location = new Point(1278, 752);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(213, 47);
             btnSubmit.TabIndex = 1;
@@ -93,7 +94,7 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKembali
             // 
             btnKembali.DialogResult = DialogResult.Cancel;
-            btnKembali.Location = new Point(1032, 751);
+            btnKembali.Location = new Point(1053, 752);
             btnKembali.Name = "btnKembali";
             btnKembali.Size = new Size(195, 47);
             btnKembali.TabIndex = 0;
@@ -103,17 +104,17 @@ namespace pboFinalProfject.View.Mahasiswa
             // lblPrevKategori
             // 
             lblPrevKategori.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            lblPrevKategori.Location = new Point(487, 186);
+            lblPrevKategori.Location = new Point(487, 190);
             lblPrevKategori.Name = "lblPrevKategori";
-            lblPrevKategori.Size = new Size(983, 20);
+            lblPrevKategori.Size = new Size(1004, 20);
             lblPrevKategori.TabIndex = 0;
             // 
             // lblPrevPsikolog
             // 
             lblPrevPsikolog.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            lblPrevPsikolog.Location = new Point(487, 248);
+            lblPrevPsikolog.Location = new Point(487, 252);
             lblPrevPsikolog.Name = "lblPrevPsikolog";
-            lblPrevPsikolog.Size = new Size(983, 20);
+            lblPrevPsikolog.Size = new Size(1004, 20);
             lblPrevPsikolog.TabIndex = 0;
             // 
             // lblPrevJadwal
@@ -121,15 +122,15 @@ namespace pboFinalProfject.View.Mahasiswa
             lblPrevJadwal.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             lblPrevJadwal.Location = new Point(487, 340);
             lblPrevJadwal.Name = "lblPrevJadwal";
-            lblPrevJadwal.Size = new Size(983, 20);
+            lblPrevJadwal.Size = new Size(1004, 20);
             lblPrevJadwal.TabIndex = 0;
             // 
             // lblPrevInfo
             // 
             lblPrevInfo.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            lblPrevInfo.Location = new Point(487, 548);
+            lblPrevInfo.Location = new Point(487, 557);
             lblPrevInfo.Name = "lblPrevInfo";
-            lblPrevInfo.Size = new Size(983, 24);
+            lblPrevInfo.Size = new Size(1004, 24);
             lblPrevInfo.TabIndex = 0;
             // 
             // btnKeluar
@@ -141,7 +142,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKeluar.FlatStyle = FlatStyle.Flat;
             btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKeluar.ForeColor = SystemColors.ButtonHighlight;
-            btnKeluar.Location = new Point(69, 796);
+            btnKeluar.Location = new Point(69, 784);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(165, 38);
             btnKeluar.TabIndex = 20;
@@ -159,7 +160,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKuisioner.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKuisioner.ForeColor = SystemColors.ButtonHighlight;
             btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
-            btnKuisioner.Location = new Point(69, 205);
+            btnKuisioner.Location = new Point(69, 217);
             btnKuisioner.Name = "btnKuisioner";
             btnKuisioner.Size = new Size(165, 38);
             btnKuisioner.TabIndex = 19;
@@ -176,7 +177,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKonselor.FlatStyle = FlatStyle.Flat;
             btnKonselor.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKonselor.ForeColor = SystemColors.ButtonHighlight;
-            btnKonselor.Location = new Point(69, 279);
+            btnKonselor.Location = new Point(69, 285);
             btnKonselor.Name = "btnKonselor";
             btnKonselor.Size = new Size(165, 38);
             btnKonselor.TabIndex = 18;
@@ -193,7 +194,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKonsultasi.FlatStyle = FlatStyle.Flat;
             btnKonsultasi.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKonsultasi.ForeColor = SystemColors.ButtonHighlight;
-            btnKonsultasi.Location = new Point(71, 349);
+            btnKonsultasi.Location = new Point(71, 355);
             btnKonsultasi.Name = "btnKonsultasi";
             btnKonsultasi.Size = new Size(167, 38);
             btnKonsultasi.TabIndex = 17;
@@ -211,7 +212,7 @@ namespace pboFinalProfject.View.Mahasiswa
             btnProfile.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnProfile.ForeColor = SystemColors.ButtonHighlight;
             btnProfile.ImageAlign = ContentAlignment.TopRight;
-            btnProfile.Location = new Point(71, 413);
+            btnProfile.Location = new Point(71, 421);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(165, 38);
             btnProfile.TabIndex = 16;
@@ -228,18 +229,19 @@ namespace pboFinalProfject.View.Mahasiswa
             btnBeranda.FlatStyle = FlatStyle.Flat;
             btnBeranda.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBeranda.ForeColor = SystemColors.ButtonHighlight;
-            btnBeranda.Location = new Point(69, 143);
+            btnBeranda.Location = new Point(69, 155);
             btnBeranda.Name = "btnBeranda";
             btnBeranda.Size = new Size(165, 38);
             btnBeranda.TabIndex = 15;
             btnBeranda.Text = "Beranda";
             btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
             btnBeranda.UseVisualStyleBackColor = false;
+            btnBeranda.Click += btnBeranda_Click_1;
             // 
             // FormBuatBooking
             // 
-            BackgroundImage = Properties.Resources.booking;
-            ClientSize = new Size(1518, 817);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1518, 860);
             Controls.Add(btnKeluar);
             Controls.Add(btnKuisioner);
             Controls.Add(btnKonselor);
@@ -257,9 +259,10 @@ namespace pboFinalProfject.View.Mahasiswa
             Controls.Add(dgvJadwal);
             Controls.Add(comboPsikolog);
             Controls.Add(comboKategori);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBuatBooking";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Buat Booking";
             Load += FormBuatBooking_Load;
             ((System.ComponentModel.ISupportInitialize)dgvJadwal).EndInit();

@@ -36,7 +36,7 @@
             // 
             lblValID.Font = new Font("Segoe UI", 9.5F);
             lblValID.ForeColor = Color.FromArgb(52, 73, 94);
-            lblValID.Location = new Point(546, 173);
+            lblValID.Location = new Point(554, 176);
             lblValID.Name = "lblValID";
             lblValID.Size = new Size(403, 25);
             lblValID.TabIndex = 4;
@@ -46,7 +46,7 @@
             // 
             lblValNama.Font = new Font("Segoe UI", 9.5F);
             lblValNama.ForeColor = Color.FromArgb(52, 73, 94);
-            lblValNama.Location = new Point(546, 220);
+            lblValNama.Location = new Point(554, 223);
             lblValNama.Name = "lblValNama";
             lblValNama.Size = new Size(403, 25);
             lblValNama.TabIndex = 6;
@@ -56,7 +56,7 @@
             // 
             lblValJadwal.Font = new Font("Segoe UI", 9.5F);
             lblValJadwal.ForeColor = Color.FromArgb(52, 73, 94);
-            lblValJadwal.Location = new Point(546, 259);
+            lblValJadwal.Location = new Point(554, 262);
             lblValJadwal.Name = "lblValJadwal";
             lblValJadwal.Size = new Size(403, 25);
             lblValJadwal.TabIndex = 8;
@@ -66,7 +66,7 @@
             // 
             lblValMetode.Font = new Font("Segoe UI", 9.5F);
             lblValMetode.ForeColor = Color.FromArgb(52, 73, 94);
-            lblValMetode.Location = new Point(546, 344);
+            lblValMetode.Location = new Point(554, 347);
             lblValMetode.Name = "lblValMetode";
             lblValMetode.Size = new Size(403, 25);
             lblValMetode.TabIndex = 10;
@@ -102,7 +102,7 @@
             btnSelesaikan.FlatStyle = FlatStyle.Flat;
             btnSelesaikan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSelesaikan.ForeColor = Color.White;
-            btnSelesaikan.Location = new Point(1276, 723);
+            btnSelesaikan.Location = new Point(1274, 722);
             btnSelesaikan.Name = "btnSelesaikan";
             btnSelesaikan.Size = new Size(191, 48);
             btnSelesaikan.TabIndex = 16;
@@ -125,7 +125,7 @@
             // lblValJamMulai
             // 
             lblValJamMulai.Font = new Font("Segoe UI", 9.5F);
-            lblValJamMulai.Location = new Point(546, 302);
+            lblValJamMulai.Location = new Point(554, 305);
             lblValJamMulai.Name = "lblValJamMulai";
             lblValJamMulai.Size = new Size(167, 28);
             lblValJamMulai.TabIndex = 0;
@@ -134,7 +134,7 @@
             // lblValJamSelesai
             // 
             lblValJamSelesai.Font = new Font("Segoe UI", 9.5F);
-            lblValJamSelesai.Location = new Point(763, 302);
+            lblValJamSelesai.Location = new Point(771, 305);
             lblValJamSelesai.Name = "lblValJamSelesai";
             lblValJamSelesai.Size = new Size(186, 28);
             lblValJamSelesai.TabIndex = 0;
@@ -142,7 +142,7 @@
             // 
             // lblJam
             // 
-            lblJam.Location = new Point(719, 302);
+            lblJam.Location = new Point(727, 305);
             lblJam.Name = "lblJam";
             lblJam.Size = new Size(38, 28);
             lblJam.TabIndex = 0;
@@ -164,7 +164,7 @@
             // 
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 860);
             Controls.Add(btnBatal);
             Controls.Add(btnSelesaikan);
             Controls.Add(txtCatatanPsikolog);
@@ -177,6 +177,7 @@
             Controls.Add(lblValJamSelesai);
             Controls.Add(lblJam);
             Controls.Add(btnKembali);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -184,6 +185,7 @@
             Name = "FormSelesaikanKonseling";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Unimind - Selesaikan Konseling";
+            Load += FormSelesaikanKonseling_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }

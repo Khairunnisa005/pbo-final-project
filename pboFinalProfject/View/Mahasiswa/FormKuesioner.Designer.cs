@@ -23,6 +23,7 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormKuesioner));
             panelQuestions = new Panel();
             btnSubmit = new Button();
             btnMulaiLagi = new Button();
@@ -32,6 +33,8 @@ namespace pboFinalProfject.View.Mahasiswa
             btnKonsultasi = new Button();
             btnProfile = new Button();
             btnBeranda = new Button();
+            btnKeluar = new Button();
+            lblLastScore = new Label();
             SuspendLayout();
             // 
             // panelQuestions
@@ -39,16 +42,16 @@ namespace pboFinalProfject.View.Mahasiswa
             panelQuestions.AutoScroll = true;
             panelQuestions.BackColor = Color.WhiteSmoke;
             panelQuestions.BorderStyle = BorderStyle.FixedSingle;
-            panelQuestions.Location = new Point(311, 220);
+            panelQuestions.Location = new Point(330, 259);
             panelQuestions.Name = "panelQuestions";
-            panelQuestions.Size = new Size(1159, 509);
+            panelQuestions.Size = new Size(1159, 474);
             panelQuestions.TabIndex = 0;
             // 
             // btnSubmit
             // 
             btnSubmit.BackColor = SystemColors.ControlLight;
             btnSubmit.Font = new Font("Calibri", 12F, FontStyle.Bold);
-            btnSubmit.Location = new Point(1255, 753);
+            btnSubmit.Location = new Point(1274, 753);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(215, 45);
             btnSubmit.TabIndex = 1;
@@ -60,7 +63,7 @@ namespace pboFinalProfject.View.Mahasiswa
             // 
             btnMulaiLagi.BackColor = SystemColors.ControlLight;
             btnMulaiLagi.Font = new Font("Calibri", 10F);
-            btnMulaiLagi.Location = new Point(1032, 751);
+            btnMulaiLagi.Location = new Point(1051, 752);
             btnMulaiLagi.Name = "btnMulaiLagi";
             btnMulaiLagi.Size = new Size(199, 47);
             btnMulaiLagi.TabIndex = 2;
@@ -72,46 +75,45 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKembali
             // 
             btnKembali.BackColor = SystemColors.ControlLight;
+            btnKembali.DialogResult = DialogResult.Cancel;
             btnKembali.Font = new Font("Calibri", 10F);
-            btnKembali.Location = new Point(839, 751);
+            btnKembali.Location = new Point(858, 754);
             btnKembali.Name = "btnKembali";
             btnKembali.Size = new Size(172, 45);
             btnKembali.TabIndex = 3;
             btnKembali.Text = "Kembali";
             btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Visible = true;
-            btnKembali.Click -= btnKembali_Click;
             btnKembali.Click += btnKembali_Click;
-            btnKembali.DialogResult = DialogResult.Cancel;
             // 
             // btnKuisioner
             // 
             btnKuisioner.BackColor = Color.Transparent;
-            btnKuisioner.FlatStyle = FlatStyle.Flat;
             btnKuisioner.FlatAppearance.BorderSize = 0;
             btnKuisioner.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKuisioner.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKuisioner.Font = new Font("Calibri", 12F);
-            btnKuisioner.UseVisualStyleBackColor = false;
+            btnKuisioner.FlatStyle = FlatStyle.Flat;
+            btnKuisioner.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKuisioner.ForeColor = SystemColors.ButtonHighlight;
             btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
-            btnKuisioner.Location = new Point(62, 212);
+            btnKuisioner.Location = new Point(75, 219);
             btnKuisioner.Name = "btnKuisioner";
             btnKuisioner.Size = new Size(165, 38);
             btnKuisioner.TabIndex = 18;
             btnKuisioner.Text = "Kuisioner";
             btnKuisioner.TextAlign = ContentAlignment.MiddleLeft;
             btnKuisioner.UseVisualStyleBackColor = false;
+            btnKuisioner.Click += btnKuisioner_Click;
             // 
             // btnKonselor
             // 
             btnKonselor.BackColor = Color.Transparent;
-            btnKonselor.FlatStyle = FlatStyle.Flat;
             btnKonselor.FlatAppearance.BorderSize = 0;
             btnKonselor.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKonselor.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKonselor.Font = new Font("Calibri", 12F);
-            btnKonselor.UseVisualStyleBackColor = false;
-            btnKonselor.Location = new Point(62, 282);
+            btnKonselor.FlatStyle = FlatStyle.Flat;
+            btnKonselor.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKonselor.ForeColor = SystemColors.ButtonHighlight;
+            btnKonselor.Location = new Point(75, 285);
             btnKonselor.Name = "btnKonselor";
             btnKonselor.Size = new Size(165, 38);
             btnKonselor.TabIndex = 17;
@@ -122,13 +124,13 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKonsultasi
             // 
             btnKonsultasi.BackColor = Color.Transparent;
-            btnKonsultasi.FlatStyle = FlatStyle.Flat;
             btnKonsultasi.FlatAppearance.BorderSize = 0;
             btnKonsultasi.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKonsultasi.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKonsultasi.Font = new Font("Calibri", 12F);
-            btnKonsultasi.UseVisualStyleBackColor = false;
-            btnKonsultasi.Location = new Point(62, 349);
+            btnKonsultasi.FlatStyle = FlatStyle.Flat;
+            btnKonsultasi.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKonsultasi.ForeColor = SystemColors.ButtonHighlight;
+            btnKonsultasi.Location = new Point(75, 352);
             btnKonsultasi.Name = "btnKonsultasi";
             btnKonsultasi.Size = new Size(167, 38);
             btnKonsultasi.TabIndex = 16;
@@ -139,14 +141,14 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnProfile
             // 
             btnProfile.BackColor = Color.Transparent;
-            btnProfile.FlatStyle = FlatStyle.Flat;
             btnProfile.FlatAppearance.BorderSize = 0;
             btnProfile.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnProfile.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnProfile.Font = new Font("Calibri", 12F);
-            btnProfile.UseVisualStyleBackColor = false;
+            btnProfile.FlatStyle = FlatStyle.Flat;
+            btnProfile.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnProfile.ForeColor = SystemColors.ButtonHighlight;
             btnProfile.ImageAlign = ContentAlignment.TopRight;
-            btnProfile.Location = new Point(64, 418);
+            btnProfile.Location = new Point(77, 421);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(165, 38);
             btnProfile.TabIndex = 15;
@@ -157,45 +159,51 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnBeranda
             // 
             btnBeranda.BackColor = Color.Transparent;
-            btnBeranda.FlatStyle = FlatStyle.Flat;
             btnBeranda.FlatAppearance.BorderSize = 0;
             btnBeranda.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnBeranda.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnBeranda.Font = new Font("Calibri", 12F);
-            btnBeranda.UseVisualStyleBackColor = false;
-            btnBeranda.Location = new Point(62, 143);
+            btnBeranda.FlatStyle = FlatStyle.Flat;
+            btnBeranda.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnBeranda.ForeColor = SystemColors.ButtonHighlight;
+            btnBeranda.Location = new Point(75, 157);
             btnBeranda.Name = "btnBeranda";
             btnBeranda.Size = new Size(165, 38);
             btnBeranda.TabIndex = 14;
             btnBeranda.Text = "Beranda";
             btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
             btnBeranda.UseVisualStyleBackColor = false;
-            btnKeluar = new Button();
+            // 
+            // btnKeluar
+            // 
             btnKeluar.BackColor = Color.Transparent;
-            btnKeluar.Font = new Font("Calibri", 12F);
-            btnKeluar.Location = new Point(62, 750);
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnKeluar.ForeColor = SystemColors.ButtonHighlight;
+            btnKeluar.Location = new Point(69, 784);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(165, 38);
-            btnKeluar.TabIndex = 19;
+            btnKeluar.TabIndex = 20;
             btnKeluar.Text = "Keluar";
             btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
-            Controls.Add(btnKeluar);
-
-            // last score label
-            lblLastScore = new Label();
-            lblLastScore.Location = new Point(311, 180);
-            lblLastScore.Size = new Size(600, 24);
-            lblLastScore.Text = string.Empty;
+            // 
+            // lblLastScore
+            // 
             lblLastScore.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            Controls.Add(lblLastScore);
+            lblLastScore.Location = new Point(330, 219);
+            lblLastScore.Name = "lblLastScore";
+            lblLastScore.Size = new Size(600, 24);
+            lblLastScore.TabIndex = 20;
             // 
             // FormKuesioner
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Kuisioner__1_;
-            ClientSize = new Size(1518, 817);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1536, 907);
+            Controls.Add(btnKeluar);
+            Controls.Add(lblLastScore);
             Controls.Add(btnKuisioner);
             Controls.Add(btnKonselor);
             Controls.Add(btnKonsultasi);
@@ -205,10 +213,12 @@ namespace pboFinalProfject.View.Mahasiswa
             Controls.Add(btnMulaiLagi);
             Controls.Add(btnKembali);
             Controls.Add(panelQuestions);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormKuesioner";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Kuisioner Kesehatan Mental";
             Load += FormKuesioner_Load;
             ResumeLayout(false);

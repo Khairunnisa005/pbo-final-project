@@ -60,9 +60,9 @@
             btnSetuju.FlatStyle = FlatStyle.Flat;
             btnSetuju.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnSetuju.ForeColor = Color.White;
-            btnSetuju.Location = new Point(1312, 726);
+            btnSetuju.Location = new Point(1300, 723);
             btnSetuju.Name = "btnSetuju";
-            btnSetuju.Size = new Size(153, 47);
+            btnSetuju.Size = new Size(169, 57);
             btnSetuju.TabIndex = 1;
             btnSetuju.Text = "Setujui & Konfirmasi";
             btnSetuju.UseVisualStyleBackColor = false;
@@ -74,9 +74,9 @@
             btnBatal.FlatStyle = FlatStyle.Flat;
             btnBatal.Font = new Font("Segoe UI", 9.5F);
             btnBatal.ForeColor = Color.FromArgb(100, 100, 100);
-            btnBatal.Location = new Point(1092, 726);
+            btnBatal.Location = new Point(1076, 724);
             btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(202, 47);
+            btnBatal.Size = new Size(218, 56);
             btnBatal.TabIndex = 0;
             btnBatal.Text = "Tolak / Batal";
             btnBatal.UseVisualStyleBackColor = false;
@@ -104,7 +104,7 @@
             txtValCatatanPsi.Name = "txtValCatatanPsi";
             txtValCatatanPsi.ReadOnly = true;
             txtValCatatanPsi.ScrollBars = ScrollBars.Vertical;
-            txtValCatatanPsi.Size = new Size(424, 101);
+            txtValCatatanPsi.Size = new Size(424, 88);
             txtValCatatanPsi.TabIndex = 4;
             txtValCatatanPsi.Text = "-";
             // 
@@ -112,7 +112,7 @@
             // 
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 860);
             Controls.Add(btnKembali);
             Controls.Add(btnBatal);
             Controls.Add(btnSetuju);
@@ -120,6 +120,7 @@
             Controls.Add(lblValNama);
             Controls.Add(lblValID);
             Controls.Add(txtValCatatanPsi);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

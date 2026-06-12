@@ -103,7 +103,7 @@ namespace pboFinalProfject.View
                 MessageBox.Show("Gagal memuat data jadwal: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
+
         }
 
         private void BersihkanForm()
@@ -353,7 +353,7 @@ namespace pboFinalProfject.View
         // Mengambil data dari baris grid yang diklik user untuk dimasukkan kembali ke form input
         private void dgvSlotJadwal_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
 
@@ -363,6 +363,11 @@ namespace pboFinalProfject.View
         }
 
         private void panelForm_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnTambah_Click_1(object sender, EventArgs e)
         {
 
         }

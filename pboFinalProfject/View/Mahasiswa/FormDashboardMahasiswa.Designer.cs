@@ -82,6 +82,7 @@ partial class FormDashboardMahasiswa
         btnBeranda.Text = "Beranda";
         btnBeranda.TextAlign = ContentAlignment.MiddleLeft;
         btnBeranda.UseVisualStyleBackColor = false;
+        btnBeranda.Click += btnBeranda_Click;
         // 
         // btnProfile
         // 
@@ -226,7 +227,7 @@ partial class FormDashboardMahasiswa
         Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         Name = "FormDashboardMahasiswa";
-        StartPosition = FormStartPosition.CenterParent;
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Dasboard Mahasiswa";
         Load += Dashboard_Load;
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

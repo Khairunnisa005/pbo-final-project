@@ -44,7 +44,7 @@
             btnDaftar.BackColor = SystemColors.MenuHighlight;
             btnDaftar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnDaftar.ForeColor = SystemColors.HighlightText;
-            btnDaftar.Location = new Point(480, 600);
+            btnDaftar.Location = new Point(87, 701);
             btnDaftar.Margin = new Padding(2);
             btnDaftar.Name = "btnDaftar";
             btnDaftar.Size = new Size(600, 69);
@@ -57,11 +57,11 @@
             tbNamaLengkap.BackColor = SystemColors.Menu;
             tbNamaLengkap.BorderStyle = BorderStyle.None;
             tbNamaLengkap.Font = new Font("Segoe UI", 12F);
-            tbNamaLengkap.Location = new Point(480, 220);
+            tbNamaLengkap.Location = new Point(114, 231);
             tbNamaLengkap.Margin = new Padding(2);
             tbNamaLengkap.Name = "tbNamaLengkap";
             tbNamaLengkap.PlaceholderText = "Masukkan nama lengkap";
-            tbNamaLengkap.Size = new Size(600, 27);
+            tbNamaLengkap.Size = new Size(539, 27);
             tbNamaLengkap.TabIndex = 1;
             // 
             // tbEmail
@@ -70,10 +70,10 @@
             tbEmail.BorderStyle = BorderStyle.None;
             tbEmail.Font = new Font("Segoe UI", 12F);
             tbEmail.ForeColor = SystemColors.ControlDarkDark;
-            tbEmail.Location = new Point(480, 280);
+            tbEmail.Location = new Point(114, 333);
             tbEmail.Margin = new Padding(2);
             tbEmail.Name = "tbEmail";
-            tbEmail.Size = new Size(600, 27);
+            tbEmail.Size = new Size(539, 27);
             tbEmail.TabIndex = 2;
             tbEmail.Text = "nama@gmail.com";
             // 
@@ -83,10 +83,10 @@
             tbTelepon.BorderStyle = BorderStyle.None;
             tbTelepon.Font = new Font("Segoe UI", 12F);
             tbTelepon.ForeColor = SystemColors.ControlDarkDark;
-            tbTelepon.Location = new Point(480, 340);
+            tbTelepon.Location = new Point(114, 434);
             tbTelepon.Margin = new Padding(2);
             tbTelepon.Name = "tbTelepon";
-            tbTelepon.Size = new Size(600, 27);
+            tbTelepon.Size = new Size(539, 27);
             tbTelepon.TabIndex = 3;
             tbTelepon.Text = "+628 xxxx xxxx";
             // 
@@ -96,10 +96,10 @@
             tbSandi.BorderStyle = BorderStyle.None;
             tbSandi.Font = new Font("Segoe UI", 12F);
             tbSandi.ForeColor = SystemColors.WindowFrame;
-            tbSandi.Location = new Point(480, 400);
+            tbSandi.Location = new Point(114, 534);
             tbSandi.Margin = new Padding(2);
             tbSandi.Name = "tbSandi";
-            tbSandi.Size = new Size(600, 27);
+            tbSandi.Size = new Size(539, 27);
             tbSandi.TabIndex = 4;
             tbSandi.Text = "Masukkan kata sandi";
             // 
@@ -109,10 +109,10 @@
             tbUsername.BorderStyle = BorderStyle.None;
             tbUsername.Font = new Font("Segoe UI", 12F);
             tbUsername.ForeColor = SystemColors.WindowFrame;
-            tbUsername.Location = new Point(480, 460);
+            tbUsername.Location = new Point(114, 637);
             tbUsername.Margin = new Padding(2);
             tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(600, 27);
+            tbUsername.Size = new Size(539, 27);
             tbUsername.TabIndex = 5;
             tbUsername.Text = "Masukkan nama tampilan";
             // 
@@ -136,7 +136,7 @@
             lblMasuk.BackColor = SystemColors.ControlLightLight;
             lblMasuk.Font = new Font("Segoe UI", 12F);
             lblMasuk.LinkColor = SystemColors.Highlight;
-            lblMasuk.Location = new Point(412, 773);
+            lblMasuk.Location = new Point(381, 773);
             lblMasuk.Margin = new Padding(2, 0, 2, 0);
             lblMasuk.Name = "lblMasuk";
             lblMasuk.Size = new Size(69, 28);
@@ -144,17 +144,11 @@
             lblMasuk.TabStop = true;
             lblMasuk.Text = "Masuk";
             // 
-            // Registrasi
+            // FormRegistrasi
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1536, 864);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimumSize = new Size(1536, 864);
-            MaximumSize = new Size(1536, 864);
-            StartPosition = FormStartPosition.CenterScreen;
+            ClientSize = new Size(1518, 860);
             Controls.Add(lblMasuk);
             Controls.Add(labelMasuk);
             Controls.Add(tbUsername);
@@ -164,9 +158,12 @@
             Controls.Add(tbNamaLengkap);
             Controls.Add(btnDaftar);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2);
-            Name = "Registrasi";
+            MaximizeBox = false;
+            Name = "FormRegistrasi";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrasi";
             ResumeLayout(false);
             PerformLayout();

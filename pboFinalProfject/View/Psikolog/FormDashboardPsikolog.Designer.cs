@@ -59,12 +59,12 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvPasien.DefaultCellStyle = dataGridViewCellStyle2;
             dgvPasien.EnableHeadersVisualStyles = false;
-            dgvPasien.Location = new Point(343, 289);
-            dgvPasien.Margin = new Padding(4, 5, 4, 5);
+            dgvPasien.Location = new Point(341, 237);
+            dgvPasien.Margin = new Padding(3, 4, 3, 4);
             dgvPasien.Name = "dgvPasien";
             dgvPasien.RowHeadersWidth = 51;
             dgvPasien.RowTemplate.Height = 30;
-            dgvPasien.Size = new Size(1171, 422);
+            dgvPasien.Size = new Size(1176, 468);
             dgvPasien.TabIndex = 1;
             // 
             // btnKelolaJadwal
@@ -73,10 +73,10 @@
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
             btnKelolaJadwal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = Color.White;
-            btnKelolaJadwal.Location = new Point(1297, 721);
-            btnKelolaJadwal.Margin = new Padding(4, 5, 4, 5);
+            btnKelolaJadwal.Location = new Point(1317, 734);
+            btnKelolaJadwal.Margin = new Padding(3, 4, 3, 4);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
-            btnKelolaJadwal.Size = new Size(204, 56);
+            btnKelolaJadwal.Size = new Size(163, 45);
             btnKelolaJadwal.TabIndex = 2;
             btnKelolaJadwal.Text = "Kelola Jadwal";
             btnKelolaJadwal.UseVisualStyleBackColor = false;
@@ -86,9 +86,10 @@
             // 
             btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(25, 760);
+            btnKeluar.Location = new Point(37, 775);
+            btnKeluar.Margin = new Padding(2, 2, 2, 2);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(234, 51);
+            btnKeluar.Size = new Size(218, 41);
             btnKeluar.TabIndex = 10;
             btnKeluar.Text = "Keluar";
             btnKeluar.UseVisualStyleBackColor = false;
@@ -96,17 +97,16 @@
             // 
             // FormDashboardPsikolog
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 860);
             Controls.Add(btnKelolaJadwal);
             Controls.Add(dgvPasien);
             Controls.Add(btnKeluar);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormDashboardPsikolog";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind Dashboard";

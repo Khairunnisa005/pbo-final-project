@@ -16,6 +16,15 @@ namespace pboFinalProfject.View.Mahasiswa
                 DataTable dt = _controller.GetAllPsikolog();
                 dgvPsikolog.DataSource = dt;
                 if (dgvPsikolog.Columns.Contains("psikolog_id")) dgvPsikolog.Columns["psikolog_id"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("user_id")) dgvPsikolog.Columns["user_id"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("email")) dgvPsikolog.Columns["email"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("username")) dgvPsikolog.Columns["username"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("nama_lengkap")) dgvPsikolog.Columns["nama_lengkap"].HeaderText = "Nama Lengkap";
+                //if (dgvPsikolog.Columns.Contains("email")) dgvPsikolog.Columns["email"].HeaderText = "Email";
+                if (dgvPsikolog.Columns.Contains("gelar")) dgvPsikolog.Columns["gelar"].HeaderText = "Gelar";
+                if (dgvPsikolog.Columns.Contains("pendidikan")) dgvPsikolog.Columns["pendidikan"].HeaderText = "Pendidikan";
+                if (dgvPsikolog.Columns.Contains("deskripsi_singkat")) dgvPsikolog.Columns["deskripsi_singkat"].HeaderText = "Deskripsi singkat";
+                if (dgvPsikolog.Columns.Contains("layanan")) dgvPsikolog.Columns["layanan"].HeaderText = "Layanan";
                 dgvPsikolog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvPsikolog.CellDoubleClick -= DgvPsikolog_CellDoubleClick;
                 dgvPsikolog.CellDoubleClick += DgvPsikolog_CellDoubleClick;
@@ -29,16 +38,21 @@ namespace pboFinalProfject.View.Mahasiswa
         public FormDaftarKonselor()
         {
             InitializeComponent();
-            _controller = new PsikologController();
-            // wire sidebar
-            btnKuisioner.Click += BtnKuisioner_Click;
-            btnKonselor.Click += BtnKonselor_Click;
-            btnKonsultasi.Click += BtnKonsultasi_Click;
-            btnProfile.Click += BtnProfile_Click;
-            btnBeranda.Click += BtnBeranda_Click;
-            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
-            //LoadPsikologs();
+            if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                _controller = new PsikologController();
+                // wire sidebar
+                btnKuisioner.Click += BtnKuisioner_Click;
+                btnKonselor.Click += BtnKonselor_Click;
+                btnKonsultasi.Click += BtnKonsultasi_Click;
+                btnProfile.Click += BtnProfile_Click;
+                btnBeranda.Click += BtnBeranda_Click;
+                try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.LogoutAndRedirect(this); }; } catch { }
+                //LoadPsikologs();
+            }
             this.Shown += (s, e) => { this.Activate(); };
+            // Di constructor form atau di InitializeComponent()
+            this.AutoScaleMode = AutoScaleMode.None;
         }
 
         // When embedded, the parent dashboard will manage docking and sizing. Keep form as-is.
@@ -127,10 +141,15 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void BtnBeranda_Click(object? sender, EventArgs e)
         {
-            this.Close();
+            pboFinalProfject.Utils.Navigation.GoToDashboard(this);
         }
 
         private void FormDaftarKonselor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvPsikolog_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

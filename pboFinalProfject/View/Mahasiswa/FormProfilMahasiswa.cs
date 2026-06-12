@@ -17,23 +17,25 @@ namespace pboFinalProfject.View.Mahasiswa
         private Label lblTelepon;
         private TextBox tbTelepon;
         private Button btnSave;
-        private Button btnDelete;
 
         public FormProfilMahasiswa()
         {
             InitializeComponent();
-            _userRepo = new UserRepository();
-            LoadProfile();
+            if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                _userRepo = new UserRepository();
+                LoadProfile();
 
-            // sidebar navigation
-            btnKuisioner.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; parent?.GetType(); if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormKuesioner() }); else new FormKuesioner().ShowDialog(this); };
-            btnKonselor.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() }); else new FormDaftarKonselor().ShowDialog(this); };
-            btnKonsultasi.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormBuatBooking() }); else new FormBuatBooking().ShowDialog(this); };
-            btnBeranda.Click += (s, e) => { this.Close(); };
-            btnKeluar.Click += (s, e) => { var auth = new pboFinalProfject.Controllers.AuthController(); auth.Logout(this); };
+                // sidebar navigation
+            btnKuisioner.Click += (s, e) => { new FormKuesioner().ShowDialog(this); };
+            btnKonselor.Click += (s, e) => { new FormDaftarKonselor().ShowDialog(this); };
+            btnKonsultasi.Click += (s, e) => { new FormBuatBooking().ShowDialog(this); };
+                btnBeranda.Click += (s, e) => { pboFinalProfject.Utils.Navigation.GoToDashboard(this); };
+                btnKeluar.Click += (s, e) => { var auth = new pboFinalProfject.Controllers.AuthController(); auth.LogoutAndRedirect(this); };
+            this.Shown += (s, e) => { this.Activate(); };
 
-            btnSave.Click += BtnSave_Click;
-            btnDelete.Click += BtnDelete_Click;
+                btnSave.Click += BtnSave_Click;
+            }
         }
 
         private void btnKembali_Click(object sender, EventArgs e)

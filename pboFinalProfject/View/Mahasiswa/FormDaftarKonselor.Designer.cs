@@ -15,6 +15,7 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDaftarKonselor));
             dgvPsikolog = new DataGridView();
             btnKembali = new Button();
             btnKuisioner = new Button();
@@ -31,34 +32,35 @@ namespace pboFinalProfject.View.Mahasiswa
             dgvPsikolog.BackgroundColor = SystemColors.ControlLightLight;
             dgvPsikolog.BorderStyle = BorderStyle.Fixed3D;
             dgvPsikolog.ColumnHeadersHeight = 29;
-            dgvPsikolog.Location = new Point(303, 159);
+            dgvPsikolog.Location = new Point(321, 178);
             dgvPsikolog.Name = "dgvPsikolog";
             dgvPsikolog.RowHeadersWidth = 51;
             dgvPsikolog.Size = new Size(1164, 531);
             dgvPsikolog.TabIndex = 0;
+            dgvPsikolog.CellContentClick += dgvPsikolog_CellContentClick;
             // 
             // btnKembali
             // 
+            btnKembali.DialogResult = DialogResult.Cancel;
             btnKembali.Font = new Font("Segoe UI", 12F);
-            btnKembali.Location = new Point(1031, 750);
+            btnKembali.Location = new Point(1049, 753);
             btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(436, 55);
+            btnKembali.Size = new Size(436, 48);
             btnKembali.TabIndex = 0;
             btnKembali.Text = "Kembali";
             btnKembali.Click += btnKembali_Click;
-            btnKembali.DialogResult = DialogResult.Cancel;
             // 
             // btnKuisioner
             // 
             btnKuisioner.BackColor = Color.Transparent;
-            btnKuisioner.FlatStyle = FlatStyle.Flat;
             btnKuisioner.FlatAppearance.BorderSize = 0;
             btnKuisioner.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKuisioner.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKuisioner.Font = new Font("Calibri", 12F);
-            btnKuisioner.UseVisualStyleBackColor = false;
+            btnKuisioner.FlatStyle = FlatStyle.Flat;
+            btnKuisioner.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKuisioner.ForeColor = SystemColors.ButtonHighlight;
             btnKuisioner.ImageAlign = ContentAlignment.MiddleLeft;
-            btnKuisioner.Location = new Point(65, 211);
+            btnKuisioner.Location = new Point(80, 220);
             btnKuisioner.Name = "btnKuisioner";
             btnKuisioner.Size = new Size(165, 38);
             btnKuisioner.TabIndex = 18;
@@ -69,13 +71,13 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKonselor
             // 
             btnKonselor.BackColor = Color.Transparent;
-            btnKonselor.FlatStyle = FlatStyle.Flat;
             btnKonselor.FlatAppearance.BorderSize = 0;
             btnKonselor.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKonselor.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKonselor.Font = new Font("Calibri", 12F);
-            btnKonselor.UseVisualStyleBackColor = false;
-            btnKonselor.Location = new Point(65, 281);
+            btnKonselor.FlatStyle = FlatStyle.Flat;
+            btnKonselor.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKonselor.ForeColor = SystemColors.ButtonHighlight;
+            btnKonselor.Location = new Point(80, 288);
             btnKonselor.Name = "btnKonselor";
             btnKonselor.Size = new Size(165, 38);
             btnKonselor.TabIndex = 17;
@@ -86,13 +88,13 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKonsultasi
             // 
             btnKonsultasi.BackColor = Color.Transparent;
-            btnKonsultasi.FlatStyle = FlatStyle.Flat;
             btnKonsultasi.FlatAppearance.BorderSize = 0;
             btnKonsultasi.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKonsultasi.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKonsultasi.Font = new Font("Calibri", 12F);
-            btnKonsultasi.UseVisualStyleBackColor = false;
-            btnKonsultasi.Location = new Point(65, 348);
+            btnKonsultasi.FlatStyle = FlatStyle.Flat;
+            btnKonsultasi.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKonsultasi.ForeColor = SystemColors.ButtonHighlight;
+            btnKonsultasi.Location = new Point(80, 355);
             btnKonsultasi.Name = "btnKonsultasi";
             btnKonsultasi.Size = new Size(167, 38);
             btnKonsultasi.TabIndex = 16;
@@ -103,14 +105,14 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnProfile
             // 
             btnProfile.BackColor = Color.Transparent;
-            btnProfile.FlatStyle = FlatStyle.Flat;
             btnProfile.FlatAppearance.BorderSize = 0;
             btnProfile.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnProfile.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnProfile.Font = new Font("Calibri", 12F);
-            btnProfile.UseVisualStyleBackColor = false;
+            btnProfile.FlatStyle = FlatStyle.Flat;
+            btnProfile.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnProfile.ForeColor = SystemColors.ButtonHighlight;
             btnProfile.ImageAlign = ContentAlignment.TopRight;
-            btnProfile.Location = new Point(67, 417);
+            btnProfile.Location = new Point(82, 424);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(165, 38);
             btnProfile.TabIndex = 15;
@@ -121,13 +123,13 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnBeranda
             // 
             btnBeranda.BackColor = Color.Transparent;
-            btnBeranda.FlatStyle = FlatStyle.Flat;
             btnBeranda.FlatAppearance.BorderSize = 0;
             btnBeranda.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnBeranda.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnBeranda.Font = new Font("Calibri", 12F);
-            btnBeranda.UseVisualStyleBackColor = false;
-            btnBeranda.Location = new Point(65, 142);
+            btnBeranda.FlatStyle = FlatStyle.Flat;
+            btnBeranda.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnBeranda.ForeColor = SystemColors.ButtonHighlight;
+            btnBeranda.Location = new Point(80, 155);
             btnBeranda.Name = "btnBeranda";
             btnBeranda.Size = new Size(165, 38);
             btnBeranda.TabIndex = 14;
@@ -138,13 +140,13 @@ namespace pboFinalProfject.View.Mahasiswa
             // btnKeluar
             // 
             btnKeluar.BackColor = Color.Transparent;
-            btnKeluar.FlatStyle = FlatStyle.Flat;
             btnKeluar.FlatAppearance.BorderSize = 0;
             btnKeluar.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnKeluar.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnKeluar.Font = new Font("Calibri", 12F);
-            btnKeluar.UseVisualStyleBackColor = false;
-            btnKeluar.Location = new Point(65, 748);
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnKeluar.ForeColor = SystemColors.ButtonHighlight;
+            btnKeluar.Location = new Point(80, 787);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(165, 38);
             btnKeluar.TabIndex = 19;
@@ -154,10 +156,9 @@ namespace pboFinalProfject.View.Mahasiswa
             // 
             // FormDaftarKonselor
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.daftarKonselor;
-            ClientSize = new Size(1518, 817);
+            AutoScaleMode = AutoScaleMode.Inherit;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1518, 860);
             Controls.Add(btnKuisioner);
             Controls.Add(btnKonselor);
             Controls.Add(btnKonsultasi);
@@ -166,8 +167,12 @@ namespace pboFinalProfject.View.Mahasiswa
             Controls.Add(btnKeluar);
             Controls.Add(btnKembali);
             Controls.Add(dgvPsikolog);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormDaftarKonselor";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Daftar Konselor";
             Load += FormDaftarKonselor_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).EndInit();

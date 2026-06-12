@@ -23,41 +23,43 @@ namespace pboFinalProfject.View.Mahasiswa
         public FormBuatBooking()
         {
             InitializeComponent();
-            _bookingController = new BookingController();
-            _psikologController = new PsikologController();
-            _jadwalRepo = new JadwalRepository();
+            // don't execute runtime initialization when opened in Designer
+            if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                _bookingController = new BookingController();
+                _psikologController = new PsikologController();
+                _jadwalRepo = new JadwalRepository();
 
-            // wire events
-            comboKategori.SelectedIndexChanged += ComboKategori_SelectedIndexChanged;
-            comboPsikolog.SelectedIndexChanged += ComboPsikolog_SelectedIndexChanged;
-            dgvJadwal.CellDoubleClick += DgvJadwal_CellDoubleClick;
-            btnSubmit.Click += BtnSubmit_Click;
-            // sidebar buttons
-            btnKuisioner.Click += BtnKuisioner_Click;
-            btnKonselor.Click += BtnKonselor_Click;
-            btnKonsultasi.Click += BtnKonsultasi_Click;
-            btnProfile.Click += BtnProfile_Click;
-            btnBeranda.Click += BtnBeranda_Click;
-            // logout
-            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
-            // logout handled by AuthController via main btnKeluar elsewhere
+                // wire events
+                comboKategori.SelectedIndexChanged += ComboKategori_SelectedIndexChanged;
+                comboPsikolog.SelectedIndexChanged += ComboPsikolog_SelectedIndexChanged;
+                dgvJadwal.CellDoubleClick += DgvJadwal_CellDoubleClick;
+                btnSubmit.Click += BtnSubmit_Click;
+                // sidebar buttons
+                btnKuisioner.Click += BtnKuisioner_Click;
+                btnKonselor.Click += BtnKonselor_Click;
+                btnKonsultasi.Click += BtnKonsultasi_Click;
+                btnProfile.Click += BtnProfile_Click;
+                btnBeranda.Click += BtnBeranda_Click;
+                // logout
+                try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.LogoutAndRedirect(this); }; } catch { }
+                // logout handled by AuthController via main btnKeluar elsewhere
 
-            LoadCategories();
+                LoadCategories();
+            }
             this.Shown += (s, e) => { this.Activate(); };
         }
 
         private void BtnKuisioner_Click(object? sender, EventArgs e)
         {
-            var parent = this.ParentForm as FormDashboardMahasiswa;
-            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormKuesioner() });
-            else { var f = new FormKuesioner(); f.ShowDialog(this); }
+            var f = new FormKuesioner();
+            f.ShowDialog(this);
         }
 
         private void BtnKonselor_Click(object? sender, EventArgs e)
         {
-            var parent = this.ParentForm as FormDashboardMahasiswa;
-            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() });
-            else { var f = new FormDaftarKonselor(); f.ShowDialog(this); }
+            var f = new FormDaftarKonselor();
+            f.ShowDialog(this);
         }
 
         private void BtnKonsultasi_Click(object? sender, EventArgs e)
@@ -68,14 +70,13 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void BtnProfile_Click(object? sender, EventArgs e)
         {
-            var parent = this.ParentForm as FormDashboardMahasiswa;
-            if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormProfilMahasiswa() });
-            else { var f = new FormProfilMahasiswa(); f.ShowDialog(this); }
+            var f = new FormProfilMahasiswa();
+            f.ShowDialog(this);
         }
 
         private void BtnBeranda_Click(object? sender, EventArgs e)
         {
-            this.Close();
+            pboFinalProfject.Utils.Navigation.GoToDashboard(this);
         }
 
         /// <summary>
@@ -407,8 +408,8 @@ namespace pboFinalProfject.View.Mahasiswa
 
         private void SubmitBooking(int jadwalId)
         {
-            string msg = _editJadwalId.HasValue 
-                ? "Simpan perubahan untuk jadwal ini?" 
+            string msg = _editJadwalId.HasValue
+                ? "Simpan perubahan untuk jadwal ini?"
                 : "Kirim permintaan booking untuk jadwal ini?";
             var confirm = MessageBox.Show(msg, "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
@@ -493,6 +494,16 @@ namespace pboFinalProfject.View.Mahasiswa
         }
 
         private void FormBuatBooking_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboKategori_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBeranda_Click_1(object sender, EventArgs e)
         {
 
         }

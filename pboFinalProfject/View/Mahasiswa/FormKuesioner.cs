@@ -22,10 +22,13 @@ namespace pboFinalProfject.View.Mahasiswa
         public FormKuesioner()
         {
             InitializeComponent();
-            LoadQuestions();
-            WireSidebar();
-            ShowLatestScore();
-            try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.Logout(this); var login = new pboFinalProfject.FormLogin(); login.Show(); }; } catch { }
+            if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                LoadQuestions();
+                WireSidebar();
+                ShowLatestScore();
+                try { btnKeluar.Click += (s, e) => { var auth = new Controllers.AuthController(); auth.LogoutAndRedirect(this); }; } catch { }
+            }
             // help ensure single-click buttons respond immediately when form is shown
             this.Shown += (s, e) => { this.Activate(); };
         }
@@ -33,10 +36,11 @@ namespace pboFinalProfject.View.Mahasiswa
         private void WireSidebar()
         {
             btnKuisioner.Click += (s, e) => { /* already here */ };
-            btnKonselor.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormDaftarKonselor() }); else new FormDaftarKonselor().ShowDialog(this); };
-            btnKonsultasi.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormBuatBooking() }); else new FormBuatBooking().ShowDialog(this); };
-            btnProfile.Click += (s, e) => { var parent = this.ParentForm as FormDashboardMahasiswa; if (parent != null) parent.GetType().GetMethod("OpenChildForm", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(parent, new object[] { new FormProfilMahasiswa() }); else new FormProfilMahasiswa().ShowDialog(this); };
-            btnBeranda.Click += (s, e) => { this.Close(); };
+            btnKonselor.Click += (s, e) => { new FormDaftarKonselor().ShowDialog(this); };
+            btnKonsultasi.Click += (s, e) => { new FormBuatBooking().ShowDialog(this); };
+            btnProfile.Click += (s, e) => { new FormProfilMahasiswa().ShowDialog(this); };
+            btnBeranda.Click += (s, e) => { pboFinalProfject.Utils.Navigation.GoToDashboard(this); };
+            this.Shown += (s, e) => { this.Activate(); };
         }
 
         private void ShowLatestScore()
@@ -203,6 +207,11 @@ namespace pboFinalProfject.View.Mahasiswa
         }
 
         private void FormKuesioner_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnKuisioner_Click(object sender, EventArgs e)
         {
 
         }

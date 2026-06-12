@@ -80,6 +80,29 @@ namespace pboFinalProfject.Controllers
             currentForm.Close();
         }
 
+        /// <summary>
+        /// Logout and redirect to login form. Use this when you want a consistent
+        /// logout flow that opens the login page after clearing session.
+        /// </summary>
+        public void LogoutAndRedirect(Form currentForm)
+        {
+            try
+            {
+                UserSession.Clear();
+                MessageBox.Show("Logout Berhasil!", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // close current form and open login
+                var login = new pboFinalProfject.FormLogin();
+                login.StartPosition = FormStartPosition.CenterScreen;
+                login.Show();
+                currentForm.Close();
+            }
+            catch
+            {
+                // fallback to basic logout
+                Logout(currentForm);
+            }
+        }
+
         /// Cek apakah user sudah login
         public bool IsLoggedIn()
         {

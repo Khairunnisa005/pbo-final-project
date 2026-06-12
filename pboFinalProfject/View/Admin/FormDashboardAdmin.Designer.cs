@@ -57,10 +57,10 @@ namespace pboFinalProfject.View
             btnKeluar.FlatStyle = FlatStyle.Flat;
             btnKeluar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(1382, 87);
+            btnKeluar.Location = new Point(1379, 87);
             btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(110, 45);
+            btnKeluar.Size = new Size(115, 47);
             btnKeluar.TabIndex = 6;
             btnKeluar.Text = "Keluar";
             btnKeluar.UseVisualStyleBackColor = false;
@@ -71,10 +71,10 @@ namespace pboFinalProfject.View
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(1249, 87);
+            btnLogout.Location = new Point(1248, 87);
             btnLogout.Margin = new Padding(2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(116, 45);
+            btnLogout.Size = new Size(120, 47);
             btnLogout.TabIndex = 8;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = false;
@@ -85,10 +85,10 @@ namespace pboFinalProfject.View
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(1118, 87);
+            btnRefresh.Location = new Point(1114, 87);
             btnRefresh.Margin = new Padding(2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(117, 45);
+            btnRefresh.Size = new Size(121, 47);
             btnRefresh.TabIndex = 7;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = false;
@@ -98,10 +98,10 @@ namespace pboFinalProfject.View
             pnlStatMahasiswa.BackColor = Color.FromArgb(120, 127, 246);
             pnlStatMahasiswa.Controls.Add(lblTotalMahasiswa);
             pnlStatMahasiswa.Controls.Add(lblTitleMhs);
-            pnlStatMahasiswa.Location = new Point(334, 183);
-            pnlStatMahasiswa.Margin = new Padding(4, 5, 4, 5);
+            pnlStatMahasiswa.Location = new Point(352, 200);
+            pnlStatMahasiswa.Margin = new Padding(3, 4, 3, 4);
             pnlStatMahasiswa.Name = "pnlStatMahasiswa";
-            pnlStatMahasiswa.Size = new Size(300, 156);
+            pnlStatMahasiswa.Size = new Size(264, 125);
             pnlStatMahasiswa.TabIndex = 1;
             // 
             // lblTotalMahasiswa
@@ -109,10 +109,9 @@ namespace pboFinalProfject.View
             lblTotalMahasiswa.AutoSize = true;
             lblTotalMahasiswa.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTotalMahasiswa.ForeColor = Color.White;
-            lblTotalMahasiswa.Location = new Point(19, 55);
-            lblTotalMahasiswa.Margin = new Padding(4, 0, 4, 0);
+            lblTotalMahasiswa.Location = new Point(15, 44);
             lblTotalMahasiswa.Name = "lblTotalMahasiswa";
-            lblTotalMahasiswa.Size = new Size(50, 60);
+            lblTotalMahasiswa.Size = new Size(43, 50);
             lblTotalMahasiswa.TabIndex = 0;
             lblTotalMahasiswa.Text = "0";
             // 
@@ -121,10 +120,9 @@ namespace pboFinalProfject.View
             lblTitleMhs.AutoSize = true;
             lblTitleMhs.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTitleMhs.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTitleMhs.Location = new Point(19, 19);
-            lblTitleMhs.Margin = new Padding(4, 0, 4, 0);
+            lblTitleMhs.Location = new Point(15, 15);
             lblTitleMhs.Name = "lblTitleMhs";
-            lblTitleMhs.Size = new Size(169, 28);
+            lblTitleMhs.Size = new Size(140, 23);
             lblTitleMhs.TabIndex = 1;
             lblTitleMhs.Text = "Total Mahasiswa";
             // 
@@ -133,10 +131,10 @@ namespace pboFinalProfject.View
             pnlStatKonselor.BackColor = Color.FromArgb(123, 213, 245);
             pnlStatKonselor.Controls.Add(lblTotalKonselor);
             pnlStatKonselor.Controls.Add(lblTitleKonselor);
-            pnlStatKonselor.Location = new Point(652, 183);
-            pnlStatKonselor.Margin = new Padding(4, 5, 4, 5);
+            pnlStatKonselor.Location = new Point(674, 200);
+            pnlStatKonselor.Margin = new Padding(3, 4, 3, 4);
             pnlStatKonselor.Name = "pnlStatKonselor";
-            pnlStatKonselor.Size = new Size(298, 156);
+            pnlStatKonselor.Size = new Size(261, 125);
             pnlStatKonselor.TabIndex = 2;
             // 
             // lblTotalKonselor
@@ -144,10 +142,9 @@ namespace pboFinalProfject.View
             lblTotalKonselor.AutoSize = true;
             lblTotalKonselor.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTotalKonselor.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTotalKonselor.Location = new Point(19, 55);
-            lblTotalKonselor.Margin = new Padding(4, 0, 4, 0);
+            lblTotalKonselor.Location = new Point(15, 44);
             lblTotalKonselor.Name = "lblTotalKonselor";
-            lblTotalKonselor.Size = new Size(50, 60);
+            lblTotalKonselor.Size = new Size(43, 50);
             lblTotalKonselor.TabIndex = 0;
             lblTotalKonselor.Text = "0";
             // 
@@ -156,10 +153,9 @@ namespace pboFinalProfject.View
             lblTitleKonselor.AutoSize = true;
             lblTitleKonselor.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTitleKonselor.ForeColor = Color.FromArgb(31, 47, 152);
-            lblTitleKonselor.Location = new Point(19, 19);
-            lblTitleKonselor.Margin = new Padding(4, 0, 4, 0);
+            lblTitleKonselor.Location = new Point(15, 15);
             lblTitleKonselor.Name = "lblTitleKonselor";
-            lblTitleKonselor.Size = new Size(237, 28);
+            lblTitleKonselor.Size = new Size(201, 23);
             lblTitleKonselor.TabIndex = 1;
             lblTitleKonselor.Text = "Konselor/Psikolog Aktif";
             // 
@@ -187,14 +183,15 @@ namespace pboFinalProfject.View
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvAntreanKonseling.DefaultCellStyle = dataGridViewCellStyle2;
             dgvAntreanKonseling.EnableHeadersVisualStyles = false;
-            dgvAntreanKonseling.Location = new Point(334, 407);
-            dgvAntreanKonseling.Margin = new Padding(4, 5, 4, 5);
+            dgvAntreanKonseling.Location = new Point(352, 380);
+            dgvAntreanKonseling.Margin = new Padding(3, 4, 3, 4);
             dgvAntreanKonseling.Name = "dgvAntreanKonseling";
             dgvAntreanKonseling.ReadOnly = true;
             dgvAntreanKonseling.RowHeadersWidth = 51;
             dgvAntreanKonseling.RowTemplate.Height = 30;
-            dgvAntreanKonseling.Size = new Size(1158, 406);
+            dgvAntreanKonseling.Size = new Size(1126, 408);
             dgvAntreanKonseling.TabIndex = 3;
+            dgvAntreanKonseling.CellContentClick += dgvAntreanKonseling_CellContentClick;
             // 
             // btnKelolaUser
             // 
@@ -202,10 +199,10 @@ namespace pboFinalProfject.View
             btnKelolaUser.FlatStyle = FlatStyle.Flat;
             btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaUser.ForeColor = Color.White;
-            btnKelolaUser.Location = new Point(994, 257);
-            btnKelolaUser.Margin = new Padding(4, 5, 4, 5);
+            btnKelolaUser.Location = new Point(997, 261);
+            btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
             btnKelolaUser.Name = "btnKelolaUser";
-            btnKelolaUser.Size = new Size(200, 41);
+            btnKelolaUser.Size = new Size(216, 33);
             btnKelolaUser.TabIndex = 4;
             btnKelolaUser.Text = "Kelola Pengguna";
             btnKelolaUser.UseVisualStyleBackColor = false;
@@ -216,21 +213,20 @@ namespace pboFinalProfject.View
             btnLaporan.FlatStyle = FlatStyle.Flat;
             btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLaporan.ForeColor = Color.White;
-            btnLaporan.Location = new Point(1259, 257);
-            btnLaporan.Margin = new Padding(4, 5, 4, 5);
+            btnLaporan.Location = new Point(1262, 261);
+            btnLaporan.Margin = new Padding(3, 4, 3, 4);
             btnLaporan.Name = "btnLaporan";
-            btnLaporan.Size = new Size(200, 41);
+            btnLaporan.Size = new Size(216, 33);
             btnLaporan.TabIndex = 5;
             btnLaporan.Text = "Lihat Laporan";
             btnLaporan.UseVisualStyleBackColor = false;
             // 
             // FormDashboardAdmin
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.FromArgb(240, 244, 248);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 817);
             Controls.Add(btnLaporan);
             Controls.Add(btnKelolaUser);
             Controls.Add(btnKeluar);
@@ -239,9 +235,10 @@ namespace pboFinalProfject.View
             Controls.Add(btnRefresh);
             Controls.Add(pnlStatKonselor);
             Controls.Add(pnlStatMahasiswa);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "FormDashboardAdmin";
             StartPosition = FormStartPosition.CenterScreen;

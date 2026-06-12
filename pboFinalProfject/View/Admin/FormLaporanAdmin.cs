@@ -28,7 +28,7 @@ namespace pboFinalProfject.View
             cmbStatus.Items.Add("Ditolak");
             cmbStatus.Items.Add("Selesai");
             cmbStatus.Items.Add("Batal");
-            cmbStatus.SelectedIndex=0; // default semua
+            cmbStatus.SelectedIndex = 0; // default semua
 
             btnKembali.Click += btnKembali_Click;
         }
@@ -248,6 +248,11 @@ namespace pboFinalProfject.View
         }
 
         private void btnKembali_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvLaporan_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

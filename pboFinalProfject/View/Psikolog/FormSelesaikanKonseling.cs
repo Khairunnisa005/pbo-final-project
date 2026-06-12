@@ -157,5 +157,10 @@ namespace pboFinalProfject.View
         {
             this.Close();
         }
+
+        private void FormSelesaikanKonseling_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

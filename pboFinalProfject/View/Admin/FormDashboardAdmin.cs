@@ -71,7 +71,7 @@ namespace pboFinalProfject.View
 
                 // set default value jika error
                 lblTotalMahasiswa.Text = "0";
-                lblTotalKonselor.Text= "0";
+                lblTotalKonselor.Text = "0";
             }
         }
 
@@ -208,6 +208,11 @@ namespace pboFinalProfject.View
                 FormLogin formLogin = new FormLogin();
                 formLogin.Show();
             }
+        }
+
+        private void dgvAntreanKonseling_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

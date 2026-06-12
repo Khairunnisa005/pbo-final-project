@@ -188,7 +188,7 @@
             // 
             BackColor = Color.FromArgb(250, 250, 250);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 860);
             Controls.Add(lblValStatus);
             Controls.Add(btnAksiUtama);
             Controls.Add(btnTutup);
@@ -204,6 +204,7 @@
             Controls.Add(lblValJamSelesai);
             Controls.Add(lblJam);
             Controls.Add(btnKembali);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

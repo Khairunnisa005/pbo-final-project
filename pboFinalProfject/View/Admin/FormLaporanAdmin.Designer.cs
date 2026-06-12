@@ -57,7 +57,7 @@
             cmbStatus.Font = new Font("Segoe UI", 9F);
             cmbStatus.Location = new Point(1016, 197);
             cmbStatus.Name = "cmbStatus";
-            cmbStatus.Size = new Size(184, 33);
+            cmbStatus.Size = new Size(184, 28);
             cmbStatus.TabIndex = 1;
             // 
             // lblStatus
@@ -75,7 +75,7 @@
             dtpSelesai.Format = DateTimePickerFormat.Short;
             dtpSelesai.Location = new Point(703, 197);
             dtpSelesai.Name = "dtpSelesai";
-            dtpSelesai.Size = new Size(202, 31);
+            dtpSelesai.Size = new Size(202, 27);
             dtpSelesai.TabIndex = 3;
             // 
             // lblSampai
@@ -93,7 +93,7 @@
             dtpMulai.Format = DateTimePickerFormat.Short;
             dtpMulai.Location = new Point(441, 197);
             dtpMulai.Name = "dtpMulai";
-            dtpMulai.Size = new Size(191, 31);
+            dtpMulai.Size = new Size(191, 27);
             dtpMulai.TabIndex = 5;
             // 
             // lblPeriode
@@ -142,6 +142,7 @@
             dgvLaporan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvLaporan.Size = new Size(827, 476);
             dgvLaporan.TabIndex = 3;
+            dgvLaporan.CellContentClick += dgvLaporan_CellContentClick;
             // 
             // pnlSummary
             // 
@@ -205,7 +206,7 @@
             // 
             BackColor = Color.FromArgb(250, 250, 250);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1514, 808);
+            ClientSize = new Size(1518, 860);
             Controls.Add(lblPeriode);
             Controls.Add(dtpMulai);
             Controls.Add(lblSampai);
