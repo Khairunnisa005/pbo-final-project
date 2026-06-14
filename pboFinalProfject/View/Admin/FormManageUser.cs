@@ -56,6 +56,9 @@ namespace pboFinalProfject.View
                     dgvPsikolog.Columns["psikolog_id"].Visible = false;
                 if (dgvPsikolog.Columns.Contains("user_id"))
                     dgvPsikolog.Columns["user_id"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("deskripsi_singkat"))
+                    dgvPsikolog.Columns["deskripsi_singkat"].Visible = false;
+
 
                 // Atur header
                 if (dgvPsikolog.Columns.Contains("username"))
@@ -70,10 +73,11 @@ namespace pboFinalProfject.View
                     dgvPsikolog.Columns["gelar"].HeaderText = "Gelar";
                 if (dgvPsikolog.Columns.Contains("pendidikan"))
                     dgvPsikolog.Columns["pendidikan"].HeaderText = "Pendidikan";
-                if (dgvPsikolog.Columns.Contains("no_izin_praktek"))
-                    dgvPsikolog.Columns["no_izin_praktek"].HeaderText = "No. Izin Praktek";
                 if (dgvPsikolog.Columns.Contains("keahlian"))
                     dgvPsikolog.Columns["keahlian"].HeaderText = "Keahlian";
+                if (dgvPsikolog.Columns.Contains("no_izin_praktek"))
+                    dgvPsikolog.Columns["no_izin_praktek"].HeaderText = "No. Izin Praktek";
+                
 
                 dgvPsikolog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
