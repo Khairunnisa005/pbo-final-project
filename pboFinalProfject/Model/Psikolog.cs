@@ -12,6 +12,7 @@ namespace pboFinalProfject.Model
         public string Gelar { get; set; }
         public string Pendidikan { get; set; }
         public string NoIzinPraktek { get; set; }
+        public string Keahlian { get; set; }
         public string DeskripsiSingkat { get; set; }
         public bool MelayaniOnline { get; set; }
         public bool MelayaniOffline { get; set; }

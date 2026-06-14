@@ -19,11 +19,11 @@ namespace pboFinalProfject.View.Mahasiswa
                 if (dgvPsikolog.Columns.Contains("user_id")) dgvPsikolog.Columns["user_id"].Visible = false;
                 if (dgvPsikolog.Columns.Contains("email")) dgvPsikolog.Columns["email"].Visible = false;
                 if (dgvPsikolog.Columns.Contains("username")) dgvPsikolog.Columns["username"].Visible = false;
+                if (dgvPsikolog.Columns.Contains("deskripsi_singkat")) dgvPsikolog.Columns["deskripsi_singkat"].Visible = false;
                 if (dgvPsikolog.Columns.Contains("nama_lengkap")) dgvPsikolog.Columns["nama_lengkap"].HeaderText = "Nama Lengkap";
                 //if (dgvPsikolog.Columns.Contains("email")) dgvPsikolog.Columns["email"].HeaderText = "Email";
                 if (dgvPsikolog.Columns.Contains("gelar")) dgvPsikolog.Columns["gelar"].HeaderText = "Gelar";
                 if (dgvPsikolog.Columns.Contains("pendidikan")) dgvPsikolog.Columns["pendidikan"].HeaderText = "Pendidikan";
-                if (dgvPsikolog.Columns.Contains("deskripsi_singkat")) dgvPsikolog.Columns["deskripsi_singkat"].HeaderText = "Deskripsi singkat";
                 if (dgvPsikolog.Columns.Contains("layanan")) dgvPsikolog.Columns["layanan"].HeaderText = "Layanan";
                 dgvPsikolog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvPsikolog.CellDoubleClick -= DgvPsikolog_CellDoubleClick;

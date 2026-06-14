@@ -68,11 +68,15 @@ namespace pboFinalProfject.View
                     dgvPsikolog.Columns["no_telepon"].HeaderText = "No. Telepon";
                 if (dgvPsikolog.Columns.Contains("gelar"))
                     dgvPsikolog.Columns["gelar"].HeaderText = "Gelar";
+                if (dgvPsikolog.Columns.Contains("pendidikan"))
+                    dgvPsikolog.Columns["pendidikan"].HeaderText = "Pendidikan";
+                if (dgvPsikolog.Columns.Contains("no_izin_praktek"))
+                    dgvPsikolog.Columns["no_izin_praktek"].HeaderText = "No. Izin Praktek";
                 if (dgvPsikolog.Columns.Contains("keahlian"))
                     dgvPsikolog.Columns["keahlian"].HeaderText = "Keahlian";
 
                 dgvPsikolog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                
+
             }
             catch (Exception ex)
             {
@@ -82,7 +86,7 @@ namespace pboFinalProfject.View
 
         private void btnSimpanPsikolog_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 string username = txtUserPsi.Text.Trim();
@@ -90,6 +94,9 @@ namespace pboFinalProfject.View
                 string email = txtEmailPsi.Text.Trim();
                 string noTelepon = txtTelpPsi.Text.Trim();
                 string keahlian = txtKeahlian.Text.Trim();
+                string gelar = txtGelar.Text.Trim();
+                string pendidikan = txtPendidikan.Text.Trim();
+                string no_izin = txtIzinPraktek.Text.Trim();
 
                 // validasi
                 if (string.IsNullOrWhiteSpace(txtUserPsi.Text) || string.IsNullOrWhiteSpace(txtNamaPsi.Text))
@@ -128,13 +135,14 @@ namespace pboFinalProfject.View
 
                     Psikolog newPsikolog = new Psikolog
                     {
-                        Gelar = "",
-                        Pendidikan = "",
-                        NoIzinPraktek = "",
-                        DeskripsiSingkat = keahlian,
+                        Gelar = gelar,
+                        Pendidikan = pendidikan,
+                        NoIzinPraktek = no_izin,
+                        Keahlian = keahlian,
                         MelayaniOnline = true,
                         MelayaniOffline = true,
                         CreatedAt = DateTime.Now
+                        //ini kenapa ga lengap dah - aca
                     };
 
                     bool berhasil = _adminController.TambahPsikolog(newUser, newPsikolog);
@@ -206,6 +214,9 @@ namespace pboFinalProfject.View
                 txtEmailPsi.Text = row.Cells["email"].Value?.ToString();
                 txtTelpPsi.Text = row.Cells["no_telepon"].Value?.ToString();
                 txtKeahlian.Text = row.Cells["keahlian"].Value?.ToString();
+                txtGelar.Text = row.Cells["gelar"].Value?.ToString();
+                txtPendidikan.Text = row.Cells["pendidikan"].Value?.ToString();
+                txtIzinPraktek.Text = row.Cells["no_izin_praktek"].Value?.ToString();
 
                 // Ubah tombol simpan menjadi "UPDATE"
                 btnSimpanPsikolog.Text = "UPDATE PSIKOLOG";
@@ -220,6 +231,9 @@ namespace pboFinalProfject.View
             txtEmailPsi.Clear();
             txtTelpPsi.Clear();
             txtKeahlian.Clear();
+            txtGelar.Clear();
+            txtPendidikan.Clear();
+            txtIzinPraktek.Clear();
             _selectedPsikologId = 0;
             btnSimpanPsikolog.Text = "TAMBAH PSIKOLOG";
             btnSimpanPsikolog.BackColor = Color.FromArgb(26, 54, 141);
@@ -251,6 +265,8 @@ namespace pboFinalProfject.View
                     dgvMahasiswa.Columns["no_telepon"].HeaderText = "No. Telepon";
                 if (dgvMahasiswa.Columns.Contains("tgl_daftar"))
                     dgvMahasiswa.Columns["tgl_daftar"].HeaderText = "Tanggal Daftar";
+                if (dgvMahasiswa.Columns.Contains("preferensi_waktu")) dgvMahasiswa.Columns["preferensi_waktu"].Visible = false;
+
 
                 dgvMahasiswa.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
@@ -326,12 +342,16 @@ namespace pboFinalProfject.View
             txtNamaMhs.Clear();
             txtEmailMhs.Clear();
             txtTelpMhs.Clear();
-            cmbStatusMhs.SelectedIndex = -1;
-            _selectedMahasiswaId = 0;
+            //cmbStatusMhs.SelectedIndex = -1;
+            //_selectedMahasiswaId = 0;
             btnSimpanMhs.Text = "TAMBAH MAHASISWA";
             btnSimpanMhs.BackColor = Color.FromArgb(26, 54, 141);
         }
 
+        
+
         #endregion
+
+
     }
 }
