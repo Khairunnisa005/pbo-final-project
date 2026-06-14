@@ -71,6 +71,19 @@ namespace pboFinalProfject.Services
             return hasil;
         }
 
+        /// Mendapatkan riwayat screening user
+        public DataTable GetRiwayatScreening(int userId)
+        {
+            string query = @"
+        SELECT hasil_id, tanggal_assessment, skor_total, tingkat_stres, rekomendasi, created_at
+        FROM hasil_assessment
+        WHERE user_id = @user_id
+        ORDER BY created_at DESC";
+
+            var parameters = new[] { new NpgsqlParameter("@user_id", userId) };
+            return _db.ExecuteQuery(query, parameters);
+        }
+
         public bool SimpanHasilAssessment(HasilAssessment hasil, List<JawabanAssessment> jawabanList)
         {
             int hasilId = _hasilRepo.Insert(hasil);
@@ -79,7 +92,8 @@ namespace pboFinalProfject.Services
             foreach (var jawaban in jawabanList)
             {
                 jawaban.HasilId = hasilId;
-                _jawabanRepo.Insert(jawaban);
+                bool jawabanSaved = _jawabanRepo.Insert(jawaban);
+                if (!jawabanSaved) return false;
             }
 
             return true;

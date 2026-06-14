@@ -19,29 +19,25 @@ namespace pboFinalProfject.Repositories
             _db = new DatabaseHelper();
         }
 
-        public int Insert(HasilAssessment hasil)
+        public int Insert(HasilAssessment entity)
         {
             // Use RETURNING to reliably obtain the inserted primary key
-            string query = @"INSERT INTO hasil_assessment (user_id, tanggal_assessment, skor_total, tingkat_stres, rekomendasi)
-                             VALUES (@user_id, @tanggal, @skor, @tingkat, @rekom)
-                             RETURNING hasil_id";
+            string query = @"INSERT INTO hasil_assessment (user_id, tanggal_assessment, skor_total, tingkat_stres, rekomendasi, created_at) 
+        VALUES (@user_id, @tanggal_assessment, @skor_total, @tingkat_stres, @rekomendasi, @created_at)
+        RETURNING hasil_id";
 
             var parameters = new[]
             {
-                new NpgsqlParameter("@user_id", hasil.UserId),
-                new NpgsqlParameter("@tanggal", hasil.TanggalAssessment),
-                new NpgsqlParameter("@skor", hasil.SkorTotal),
-                new NpgsqlParameter("@tingkat", hasil.TingkatStres ?? string.Empty),
-                new NpgsqlParameter("@rekom", hasil.Rekomendasi ?? string.Empty),
+                new NpgsqlParameter("@user_id", entity.UserId),
+                new NpgsqlParameter("@tanggal_assessment", entity.TanggalAssessment),
+                new NpgsqlParameter("@skor_total", entity.SkorTotal),
+                new NpgsqlParameter("@tingkat_stres", entity.TingkatStres ?? string.Empty),
+                new NpgsqlParameter("@rekomendasi", entity.Rekomendasi ?? string.Empty),
+                new NpgsqlParameter("@created_at", entity.CreatedAt)
             };
 
-            var result = _db.ExecuteScalar(query, parameters);
-            if (result != null && int.TryParse(result.ToString(), out int id))
-            {
-                return id;
-            }
-
-            return -1;
+            object result = _db.ExecuteScalar(query, parameters);
+            return result != null ? Convert.ToInt32(result) : 0;
         }
 
         public List<HasilAssessment> GetByUserId(int userId)
