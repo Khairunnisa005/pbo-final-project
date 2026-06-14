@@ -40,8 +40,6 @@
             pnlSideInputMhs = new Panel();
             btnHapusMhs = new Button();
             btnSimpanMhs = new Button();
-            lblStatusMhs = new Label();
-            cmbStatusMhs = new ComboBox();
             txtTelpMhs = new TextBox();
             lblTelpMhs = new Label();
             txtEmailMhs = new TextBox();
@@ -51,6 +49,12 @@
             txtUserMhs = new TextBox();
             lblUserMhs = new Label();
             btnKembali = new Button();
+            lblGelar = new Label();
+            txtGelar = new TextBox();
+            lblPendidikan = new Label();
+            txtPendidikan = new TextBox();
+            lblIzinPraktek = new Label();
+            txtIzinPraktek = new TextBox();
             tabUserControl.SuspendLayout();
             pagePsikolog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).BeginInit();
@@ -108,6 +112,12 @@
             // pnlSideInputPsi
             // 
             pnlSideInputPsi.BackColor = Color.FromArgb(245, 247, 250);
+            pnlSideInputPsi.Controls.Add(lblIzinPraktek);
+            pnlSideInputPsi.Controls.Add(txtIzinPraktek);
+            pnlSideInputPsi.Controls.Add(lblPendidikan);
+            pnlSideInputPsi.Controls.Add(txtPendidikan);
+            pnlSideInputPsi.Controls.Add(lblGelar);
+            pnlSideInputPsi.Controls.Add(txtGelar);
             pnlSideInputPsi.Controls.Add(btnHapusPsi);
             pnlSideInputPsi.Controls.Add(btnSimpanPsikolog);
             pnlSideInputPsi.Controls.Add(lblKeahlian);
@@ -269,8 +279,6 @@
             pnlSideInputMhs.BackColor = Color.FromArgb(245, 247, 250);
             pnlSideInputMhs.Controls.Add(btnHapusMhs);
             pnlSideInputMhs.Controls.Add(btnSimpanMhs);
-            pnlSideInputMhs.Controls.Add(lblStatusMhs);
-            pnlSideInputMhs.Controls.Add(cmbStatusMhs);
             pnlSideInputMhs.Controls.Add(txtTelpMhs);
             pnlSideInputMhs.Controls.Add(lblTelpMhs);
             pnlSideInputMhs.Controls.Add(txtEmailMhs);
@@ -409,6 +417,54 @@
             btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += btnKembali_Click;
             // 
+            // lblGelar
+            // 
+            lblGelar.Location = new Point(20, 314);
+            lblGelar.Name = "lblGelar";
+            lblGelar.Size = new Size(114, 24);
+            lblGelar.TabIndex = 12;
+            lblGelar.Text = "Gelar";
+            // 
+            // txtGelar
+            // 
+            txtGelar.Location = new Point(20, 342);
+            txtGelar.Margin = new Padding(3, 4, 3, 4);
+            txtGelar.Name = "txtGelar";
+            txtGelar.Size = new Size(297, 30);
+            txtGelar.TabIndex = 13;
+            // 
+            // lblPendidikan
+            // 
+            lblPendidikan.Location = new Point(20, 385);
+            lblPendidikan.Name = "lblPendidikan";
+            lblPendidikan.Size = new Size(114, 24);
+            lblPendidikan.TabIndex = 14;
+            lblPendidikan.Text = "Pendidikan";
+            // 
+            // txtPendidikan
+            // 
+            txtPendidikan.Location = new Point(20, 413);
+            txtPendidikan.Margin = new Padding(3, 4, 3, 4);
+            txtPendidikan.Name = "txtPendidikan";
+            txtPendidikan.Size = new Size(297, 30);
+            txtPendidikan.TabIndex = 15;
+            // 
+            // lblIzinPraktek
+            // 
+            lblIzinPraktek.Location = new Point(20, 452);
+            lblIzinPraktek.Name = "lblIzinPraktek";
+            lblIzinPraktek.Size = new Size(157, 24);
+            lblIzinPraktek.TabIndex = 16;
+            lblIzinPraktek.Text = "No Izin Praktik";
+            // 
+            // txtIzinPraktek
+            // 
+            txtIzinPraktek.Location = new Point(20, 480);
+            txtIzinPraktek.Margin = new Padding(3, 4, 3, 4);
+            txtIzinPraktek.Name = "txtIzinPraktek";
+            txtIzinPraktek.Size = new Size(297, 30);
+            txtIzinPraktek.TabIndex = 17;
+            // 
             // FormManageUser
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -451,6 +507,7 @@
         private System.Windows.Forms.Label lblTelpPsi;
         private System.Windows.Forms.TextBox txtEmailPsi;
         private System.Windows.Forms.Label lblEmailPsi;
+        private System.Windows.Forms.TextBox txtGelar;
         private System.Windows.Forms.TextBox txtNamaPsi;
         private System.Windows.Forms.Label lblNamaPsi;
         private System.Windows.Forms.TextBox txtUserPsi;
