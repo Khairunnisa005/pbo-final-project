@@ -1,5 +1,5 @@
 ﻿using Npgsql;
-using pboFinalProfject.Models;
+using pboFinalProfject.Model;
 using pboFinalProfject.Repositories;
 using pboFinalProfject.Utils;
 using System;

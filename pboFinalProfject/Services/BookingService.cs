@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Data;
 using Npgsql;
-using pboFinalProfject.Models;
+using pboFinalProfject.Model;
 using pboFinalProfject.Repositories;
 using pboFinalProfject.Utils;
+using pboFinalProfject.Services;
 
 namespace pboFinalProfject
 {
-    public class BookingService : IBookingService
+    public class BookingService : BaseService, IBookingService
     {
-        private readonly DatabaseHelper _db;
         private readonly UserRepository _userRepository;
         //private readonly PsikologRepository _psikologRepository;
 
         public BookingService()
         {
-            _db = new DatabaseHelper();
             _userRepository = new UserRepository();
             //_psikologRepository = new PsikologRepository();
         }

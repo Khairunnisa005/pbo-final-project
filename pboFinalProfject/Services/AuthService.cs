@@ -5,7 +5,7 @@ using pboFinalProfject.Services;
 
 namespace pboFinalProfject.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService : BaseService, IAuthService
     {
         private readonly UserRepository _userRepository;
 

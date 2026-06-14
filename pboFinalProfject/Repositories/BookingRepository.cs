@@ -1,5 +1,5 @@
 ﻿using Npgsql;
-using pboFinalProfject.Models;
+using pboFinalProfject.Model;
 using pboFinalProfject.Utils;
 using System;
 using System.Collections.Generic;
@@ -147,12 +147,27 @@ namespace pboFinalProfject.Repositories
 
             var parameters = new[]
             {
-                new NpgsqlParameter("@booking_id", entity.BookingId),
+                new NpgsqlParameter("@booking_id", value: GetBookingId(entity)),
                 new NpgsqlParameter("@status", entity.Status),
                 new NpgsqlParameter("@catatan_psikolog", string.IsNullOrEmpty(entity.CatatanPsikolog) ? DBNull.Value : (object)entity.CatatanPsikolog)
             };
 
             return _db.ExecuteNonQuery(query, parameters) > 0;
+        }
+
+        private static int GetBookingId(Booking entity)
+        {
+            return GetBookingId1(entity);
+        }
+
+        private static int GetBookingId1(Booking entity)
+        {
+            return GetBookingId2(entity);
+
+            static int GetBookingId2(Booking entity)
+            {
+                return entity.BookingId;
+            }
         }
 
         public bool UpdateStatus(int bookingId, string status, string catatanPsikolog = null)
@@ -225,15 +240,15 @@ namespace pboFinalProfject.Repositories
         {
             return new Booking
             {
-                BookingId = Convert.ToInt32(row["booking_id"]),
-                UserId = Convert.ToInt32(row["user_id"]),
-                PsikologId = Convert.ToInt32(row["psikolog_id"]),
-                JadwalId = Convert.ToInt32(row["jadwal_id"]),
-                Status = row["status"].ToString(),
-                CatatanUser = row["catatan_user"] != DBNull.Value ? row["catatan_user"].ToString() : null,
-                CatatanPsikolog = row["catatan_psikolog"] != DBNull.Value ? row["catatan_psikolog"].ToString() : null,
-                HasilAssessmentId = row["hasil_assessment_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["hasil_assessment_id"]) : null,
-                CreatedAt = Convert.ToDateTime(row["created_at"])
+                BookingId = row.Field<int>("booking_id"),
+                UserId = row.Field<int>("user_id"),
+                PsikologId = row.Field<int>("psikolog_id"),
+                JadwalId = row.Field<int>("jadwal_id"),
+                Status = row.Field<string>("status"),
+                CatatanUser = row["catatan_user"] != DBNull.Value ? row.Field<string>("catatan_user") : null,
+                CatatanPsikolog = row["catatan_psikolog"] != DBNull.Value ? row.Field<string>("catatan_psikolog") : null,
+                HasilAssessmentId = row["hasil_assessment_id"] != DBNull.Value ? row.Field<int?>("hasil_assessment_id") : null,
+                CreatedAt = row.Field<DateTime>("created_at")
             };
         }
     }
