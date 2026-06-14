@@ -5,10 +5,12 @@ using pboFinalProfject.Utils;
 using pboFinalProfject.View;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace pboFinalProfject.View
 {
-    public partial class FormDashboardPsikolog : Form
+    public partial class FormDashboardPsikolog : Form, IFormLoadable
     {
         private PsikologController _psikologController;
         private AuthController _authController;
@@ -20,11 +22,31 @@ namespace pboFinalProfject.View
             InitializeComponent();
             _psikologController = new PsikologController();
             _authController = new AuthController();
+            _currentPsikologId = _psikologController.GetPsikologIdByUserId(UserSession.GetCurrentUserId());
 
             // Hook event handlers
             this.Load += FormDashboardPsikolog_Load;
             btnKelolaJadwal.Click += btnKelolaJadwal_Click;
 
+        }
+
+        public void LoadData()
+        {  // Load data saat form dibuka
+            FormDashboardPsikolog_Load(this, EventArgs.Empty);
+        }
+        public void RefreshData()
+        {
+            LoadDaftarPasien();
+        }
+        public void ResetForm()
+        {
+            // Reset form jika diperlukan (misal setelah update data)
+            LoadDaftarPasien();
+        }
+        public void SetupUIByRole()
+        {
+            // Atur UI berdasarkan role (jika ada elemen khusus untuk psikolog)
+            // Misal: sembunyikan tombol tertentu jika bukan psikolog
         }
 
         private void FormDashboardPsikolog_Load(object sender, EventArgs e)
@@ -234,8 +256,8 @@ namespace pboFinalProfject.View
                 //else if (status == "Disetujui")
                 //{
                 //    // Buka form selesaikan konseling
-                //    FormSelesaikanKonseling formSelesaikan = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
-                //    formSelesaikan.ShowDialog();
+                //    FormSelesikanKonseling formSelesikan = new FormSelesikanKonseling(bookingId, _currentPsikologId);
+                //    formSelesikan.ShowDialog();
                 //    LoadDaftarPasien(); // Refresh setelah selesai
                 //}
                 //else
@@ -246,8 +268,12 @@ namespace pboFinalProfject.View
             }
         }
 
-        private void ShowDetailBooking(int bookingId)
+        // Modified: allow optional bookingId. If no id provided (<=0), do nothing.
+        private void ShowDetailBooking(int bookingId = 0)
         {
+            // If no booking specified, skip showing details (called from LoadData for initialization)
+            if (bookingId <= 0) return;
+
             try
             {
                 DataTable dt = _psikologController.GetDetailBookingById(bookingId, _currentPsikologId);

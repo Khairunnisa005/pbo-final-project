@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace pboFinalProfject.Models
+namespace pboFinalProfject.Model
 {
-    public class KeahlianPsikolog
+    public class KeahlianPsikolog 
     {
         public int KeahlianId { get; set; }
         public int PsikologId { get; set; }

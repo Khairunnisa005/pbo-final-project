@@ -1,5 +1,6 @@
 ﻿using pboFinalProfject.Controllers;
 using pboFinalProfject.Session;
+using pboFinalProfject.View;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,16 +9,22 @@ using System.Windows.Forms;
 namespace pboFinalProfject.View.Mahasiswa
 {
 
-    public partial class FormDashboardMahasiswa : Form
+    public partial class FormDashboardMahasiswa : Form, IFormLoadable
     {
         private Panel containerPanel;
         private FlowLayoutPanel flowPanel;
-        private Controllers.MahasiswaController _mahasiswaController;
+        private MahasiswaController _mahasiswaController;
+        private BookingController _bookingController;
+        private ScreeningController _screeningController;
+        private int _currentUserId;
 
         public FormDashboardMahasiswa()
         {
             InitializeComponent();
             _mahasiswaController = new Controllers.MahasiswaController();
+            _bookingController = new BookingController();
+            _screeningController = new ScreeningController();
+            _currentUserId = UserSession.GetCurrentUserId();
             this.AutoScaleMode = AutoScaleMode.None;
 
             // wire existing buttons
@@ -39,6 +46,30 @@ namespace pboFinalProfject.View.Mahasiswa
         {
 
         }
+
+        public void LoadData()
+        {
+            Dashboard_Load(this, EventArgs.Empty);
+        }
+        public void RefreshData()
+        {
+            Dashboard_Load(this, EventArgs.Empty);
+        }
+        public void ResetForm()
+        {
+            // tidak ada form input di dashboard, jadi kosong
+        }
+        public void SetupUIByRole()
+        {
+            // dashboard mahasiswa hanya tampilkan fitur untuk mahasiswa
+            btnKuisioner.Visible = true;
+            btnKonselor.Visible = true;
+            btnKonsultasi.Visible = true;
+            btnProfile.Visible = true;
+            btnJadwal.Visible = true;
+            btnBeranda.Visible = false; // karena sudah di dashboard
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

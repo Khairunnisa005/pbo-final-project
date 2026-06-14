@@ -9,7 +9,7 @@ using pboFinalProfject.View;
 
 namespace pboFinalProfject.View
 {
-    public partial class FormDashboardAdmin : Form
+    public partial class FormDashboardAdmin : Form, IFormLoadable
     {
         private AdminController _adminController;
         private AuthController _authController;
@@ -21,7 +21,7 @@ namespace pboFinalProfject.View
             _authController = new AuthController();
 
             // hook event handler
-            this.Load += FormDashboardAdmin_Load;
+            this.Load += (s, e) => LoadData();
             btnKelolaUser.Click += btnKelolaUser_Click;
             btnLaporan.Click += btnLaporan_Click;
             btnKeluar.Click += btnKeluar_Click;
@@ -29,6 +29,33 @@ namespace pboFinalProfject.View
             btnLogout.Click += btnLogout_Click;
 
         }
+        public void LoadData()
+        {
+            LoadDataDashboard();
+            LoadDaftarAntreanKonseling();
+
+        }
+        public void RefreshData()
+        {
+            LoadData();
+            MessageBox.Show("Data dashboard berhasil di-refresh!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void ResetForm()
+        {
+            // reset semua label ke default
+        }
+
+        public void SetupUIByRole()
+        {
+            // pastikan hanya admin yang bisa akses
+            if (!UserSession.IsAdmin)
+            {
+                MessageBox.Show("Akses ditolak! Hanya admin yang dapat mengakses halaman ini.", "Akses Ditolak", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+            }
+        }
+
 
         private void FormDashboardAdmin_Load(object sender, EventArgs e)
         {
@@ -40,8 +67,7 @@ namespace pboFinalProfject.View
                 return;
             }
             // Load data dashboard
-            LoadDataDashboard();
-            LoadDaftarAntreanKonseling();
+            LoadData();
         }
 
         private void LoadDataDashboard()

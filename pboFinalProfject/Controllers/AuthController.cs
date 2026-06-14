@@ -30,8 +30,7 @@ namespace pboFinalProfject.Controllers
 
                     // Tampilkan pesan sukses sesuai role
                     string roleName = user.Role;
-                    MessageBox.Show($"Login Sukses sebagai {roleName}!", "Sukses",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Login Sukses sebagai {roleName}!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     return true;
                 }
@@ -40,8 +39,7 @@ namespace pboFinalProfject.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Login Gagal: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Login Gagal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }

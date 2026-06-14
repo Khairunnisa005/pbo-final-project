@@ -1,4 +1,4 @@
-﻿using pboFinalProfject.Models;
+﻿using pboFinalProfject.Model;
 using pboFinalProfject.Repositories;
 using pboFinalProfject.Session;
 using System;
