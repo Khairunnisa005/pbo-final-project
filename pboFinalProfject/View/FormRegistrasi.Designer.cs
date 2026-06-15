@@ -51,6 +51,7 @@
             btnDaftar.TabIndex = 0;
             btnDaftar.Text = "Daftar";
             btnDaftar.UseVisualStyleBackColor = false;
+            //this.btnDaftar.Click += new System.EventHandler(this.BtnDaftar_Click);
             // 
             // tbNamaLengkap
             // 

@@ -84,64 +84,108 @@ namespace pboFinalProfject.View
             lblMasuk.LinkClicked += LblMasuk_LinkClicked;
         }
 
-        private void BtnDaftar_Click(object? sender, EventArgs e)
+        //private void BtnDaftar_Click(object? sender, EventArgs e)
+        //{
+        //    // Ambil data dari form
+        //    string username = tbUsername.Text?.Trim() ?? string.Empty;
+        //    string email = tbEmail.Text?.Trim() ?? string.Empty;
+        //    string noTelepon = tbTelepon.Text?.Trim() ?? string.Empty;
+        //    string password = tbSandi.Text ?? string.Empty;
+        //    string nama = tbNamaLengkap.Text?.Trim() ?? string.Empty;
+
+        //    // Validasi field wajib
+        //    if (string.IsNullOrWhiteSpace(username))
+        //    {
+        //        MessageBox.Show("Username tidak boleh kosong!", "Validasi",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(email))
+        //    {
+        //        MessageBox.Show("Email tidak boleh kosong!", "Validasi",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(password))
+        //    {
+        //        MessageBox.Show("Password tidak boleh kosong!", "Validasi",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(nama))
+        //    {
+        //        MessageBox.Show("Nama lengkap tidak boleh kosong!", "Validasi",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    // Validasi format email sederhana
+        //    if (!email.Contains("@") || !email.Contains("."))
+        //    {
+        //        MessageBox.Show("Format email tidak valid!", "Validasi",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    // Panggil AuthController untuk registrasi
+        //    bool registrasiBerhasil = _authController.RegisterMahasiswa(
+        //        username, email, noTelepon, password, nama);
+
+        //    if (registrasiBerhasil)
+        //    {
+        //        // Registrasi berhasil, tutup form registrasi
+        //        MessageBox.Show("Pendaftaran berhasil! Silakan login.", "Sukses",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        this.Close();
+        //    }
+        //    // Jika gagal, pesan error sudah ditampilkan oleh AuthController
+        //}
+
+        private void BtnDaftar_Click(object sender, EventArgs e)
         {
-            // Ambil data dari form
-            string username = tbUsername.Text?.Trim() ?? string.Empty;
-            string email = tbEmail.Text?.Trim() ?? string.Empty;
-            string noTelepon = tbTelepon.Text?.Trim() ?? string.Empty;
-            string password = tbSandi.Text ?? string.Empty;
-            string nama = tbNamaLengkap.Text?.Trim() ?? string.Empty;
+            //MessageBox.Show("Tombol Daftar diklik!"); // DEBUG
+            string username = tbUsername.Text.Trim();
+            string email = tbEmail.Text.Trim();
+            string noTelepon = tbTelepon.Text.Trim();
+            string password = tbSandi.Text;
+            string namaLengkap = tbNamaLengkap.Text.Trim();
 
-            // Validasi field wajib
-            if (string.IsNullOrWhiteSpace(username))
+            // Validasi sederhana
+            if (string.IsNullOrEmpty(namaLengkap))
             {
-                MessageBox.Show("Username tidak boleh kosong!", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nama lengkap harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrEmpty(email))
             {
-                MessageBox.Show("Email tidak boleh kosong!", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Email harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Password tidak boleh kosong!", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Password harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(nama))
+            if (string.IsNullOrEmpty(username))
             {
-                MessageBox.Show("Nama lengkap tidak boleh kosong!", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username harus diisi!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Validasi format email sederhana
-            if (!email.Contains("@") || !email.Contains("."))
-            {
-                MessageBox.Show("Format email tidak valid!", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // Panggil AuthController
+            AuthController authController = new AuthController();
+            bool berhasil = authController.RegisterMahasiswa(username, email, noTelepon, password, namaLengkap);
 
-            // Panggil AuthController untuk registrasi
-            bool registrasiBerhasil = _authController.RegisterMahasiswa(
-                username, email, noTelepon, password, nama);
-
-            if (registrasiBerhasil)
+            if (berhasil)
             {
-                // Registrasi berhasil, tutup form registrasi
-                MessageBox.Show("Pendaftaran berhasil! Silakan login.", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                this.Close(); // Tutup form registrasi jika berhasil
             }
-            // Jika gagal, pesan error sudah ditampilkan oleh AuthController
         }
 
         private void LblMasuk_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)

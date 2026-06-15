@@ -27,12 +27,13 @@ namespace pboFinalProfject.View
             // Hook event handlers
             this.Load += FormDashboardPsikolog_Load;
             btnKelolaJadwal.Click += btnKelolaJadwal_Click;
+            dgvPasien.CellClick += DgvPasien_CellClick;
 
         }
 
         public void LoadData()
         {  // Load data saat form dibuka
-            FormDashboardPsikolog_Load(this, EventArgs.Empty);
+            LoadDaftarPasien();
         }
         public void RefreshData()
         {
@@ -93,9 +94,18 @@ namespace pboFinalProfject.View
                 if (dgvPasien.Columns.Contains("user_id"))
                     dgvPasien.Columns["user_id"].Visible = false;
 
+                if (dgvPasien.Columns.Contains("catatan_user"))
+                    dgvPasien.Columns["catatan_user"].Visible = false;
+
+                if (dgvPasien.Columns.Contains("catatan_psikolog"))
+                    dgvPasien.Columns["catatan_psikolog"].Visible = false;
+
                 // Atur header kolom
                 if (dgvPasien.Columns.Contains("mahasiswa"))
                     dgvPasien.Columns["mahasiswa"].HeaderText = "Nama Mahasiswa";
+
+                if (dgvPasien.Columns.Contains("tgl_booking"))
+                    dgvPasien.Columns["tgl_booking"].HeaderText = "Tanggal Booking";
 
                 if (dgvPasien.Columns.Contains("jam_mulai"))
                     dgvPasien.Columns["jam_mulai"].HeaderText = "Jam Mulai";
@@ -109,8 +119,17 @@ namespace pboFinalProfject.View
                 if (dgvPasien.Columns.Contains("status"))
                     dgvPasien.Columns["status"].HeaderText = "Status";
 
-                if (dgvPasien.Columns.Contains("tgl_booking"))
-                    dgvPasien.Columns["tgl_booking"].HeaderText = "Tanggal Booking";
+                // Hapus kolom tombol aksi yang lama jika ada (untuk menghindari duplikasi)
+                if (dgvPasien.Columns["btnAksi"] != null)
+                    dgvPasien.Columns.Remove("btnAksi");
+
+                // Tambah kolom tombol aksi
+                DataGridViewButtonColumn btnAksi = new DataGridViewButtonColumn();
+                btnAksi.Name = "btnAksi";
+                btnAksi.HeaderText = "Aksi";
+                btnAksi.Text = "Proses";
+                btnAksi.UseColumnTextForButtonValue = true;
+                dgvPasien.Columns.Add(btnAksi);
 
                 // Format tampilan tanggal (created_at)
                 dgvPasien.CellFormatting += (s, ev) =>
@@ -176,37 +195,9 @@ namespace pboFinalProfject.View
                         ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
 
-                    //// Format jam
-                    //if (ev.ColumnIndex == dgvPasien.Columns["jam_mulai"]?.Index && ev.Value != null)
-                    //{
-                    //    TimeSpan jam = (TimeSpan)ev.Value;
-                    //    ev.Value = jam.ToString(@"hh\:mm");
-                    //    ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //}
-
-                    //if (ev.ColumnIndex == dgvPasien.Columns["jam_selesai"]?.Index && ev.Value != null)
-                    //{
-                    //    TimeSpan jam = (TimeSpan)ev.Value;
-                    //    ev.Value = jam.ToString(@"hh\:mm");
-                    //    ev.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //}
                 };
-
-                // Tambahkan kolom tombol aksi jika belum ada
-                if (dgvPasien.Columns["btnAksi"] == null)
-                {
-                    DataGridViewButtonColumn btnAksi = new DataGridViewButtonColumn();
-                    btnAksi.Name = "btnAksi";
-                    btnAksi.HeaderText = "Aksi";
-                    btnAksi.Text = "Proses";
-                    btnAksi.UseColumnTextForButtonValue = true;
-                    dgvPasien.Columns.Add(btnAksi);
-                }
-
-                // Event klik untuk tombol aksi
-                dgvPasien.CellClick += DgvPasien_CellClick;
-                // Atur auto-size columns
                 dgvPasien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             }
             catch (Exception ex)
             {
@@ -217,87 +208,102 @@ namespace pboFinalProfject.View
 
         private void DgvPasien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Jika klik pada kolom tombol aksi
-            if (e.RowIndex >= 0 && dgvPasien.Columns[e.ColumnIndex].Name == "btnAksi")
+            // Validasi dasar
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (dgvPasien.Columns[e.ColumnIndex].Name != "btnAksi") return;
+
+            // Ambil baris yang diklik
+            DataGridViewRow row = dgvPasien.Rows[e.RowIndex];
+
+            // Validasi kolom booking_id
+            if (!dgvPasien.Columns.Contains("booking_id"))
             {
-                int bookingId = Convert.ToInt32(dgvPasien.Rows[e.RowIndex].Cells["booking_id"].Value);
-                string status = dgvPasien.Rows[e.RowIndex].Cells["status"].Value.ToString();
+                MessageBox.Show("Error: Kolom 'booking_id' tidak ditemukan.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                // Hapus simbol emoji jika ada
-                status = status.Replace("✅", "").Replace("⏳", "").Replace("❌", "").Replace("✔️", "").Replace("🚫", "").Trim();
+            object bookingIdObj = row.Cells["booking_id"].Value;
+            if (bookingIdObj == null || bookingIdObj == DBNull.Value)
+            {
+                MessageBox.Show("Error: Data booking tidak valid (ID booking kosong).", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                if (status == "Pending")
-                {
-                    FormKonfirmasiBooking formKonfirmasi = new FormKonfirmasiBooking(bookingId, _currentPsikologId);
-                    formKonfirmasi.ShowDialog();
-                    LoadDaftarPasien(); // Refresh
-                }
-                else if (status == "Disetujui")
-                {
-                    FormSelesaikanKonseling formSelesaikan = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
-                    formSelesaikan.ShowDialog();
-                    LoadDaftarPasien(); // Refresh
-                }
-                else
-                {
-                    FormDetailBooking formDetail = new FormDetailBooking(bookingId, _currentPsikologId);
-                    formDetail.ShowDialog();
-                }
+            int bookingId = Convert.ToInt32(bookingIdObj);
 
-                ShowDetailBooking(bookingId);
+            // Validasi kolom status
+            if (!dgvPasien.Columns.Contains("status"))
+            {
+                MessageBox.Show("Error: Kolom 'status' tidak ditemukan.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            string status = row.Cells["status"].Value?.ToString() ?? "";
+            status = status.Replace("✅", "").Replace("⏳", "").Replace("❌", "").Replace("✔️", "").Replace("🚫", "").Trim();
+
+            try
+            {
                 //if (status == "Pending")
                 //{
-                //    // Buka form konfirmasi booking
-                //    FormKonfirmasiBooking formKonfirmasi = new FormKonfirmasiBooking(bookingId, _currentPsikologId);
-                //    formKonfirmasi.ShowDialog();
-                //    LoadDaftarPasien(); // Refresh setelah konfirmasi
+                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
+                //    LoadDaftarPasien();
                 //}
                 //else if (status == "Disetujui")
                 //{
-                //    // Buka form selesaikan konseling
-                //    FormSelesikanKonseling formSelesikan = new FormSelesikanKonseling(bookingId, _currentPsikologId);
-                //    formSelesikan.ShowDialog();
-                //    LoadDaftarPasien(); // Refresh setelah selesai
+                //    FormSelesaikanKonseling form = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
+                //    LoadDaftarPasien();
                 //}
                 //else
                 //{
-                //    // Tampilkan detail booking
-                //    ShowDetailBooking(bookingId);
+                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
                 //}
+                FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                form.ShowDialog();
+                LoadDaftarPasien();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memproses aksi: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // Modified: allow optional bookingId. If no id provided (<=0), do nothing.
-        private void ShowDetailBooking(int bookingId = 0)
-        {
-            // If no booking specified, skip showing details (called from LoadData for initialization)
-            if (bookingId <= 0) return;
+        //private void ShowDetailBooking(int bookingId = 0)
+        //{
+        //    // If no booking specified, skip showing details (called from LoadData for initialization)
+        //    if (bookingId <= 0) return;
 
-            try
-            {
-                DataTable dt = _psikologController.GetDetailBookingById(bookingId, _currentPsikologId);
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow row = dt.Rows[0];
-                    string detail = $"Detail Konseling\n\n" +
-                                    $"Mahasiswa: {row["mahasiswa"]}\n" +
-                                    $"Tanggal: {Convert.ToDateTime(row["tgl_booking"]):dd MMMM yyyy}\n" +
-                                    $"Jam: {row["jam_mulai"]} - {row["jam_selesai"]}\n" +
-                                    $"Metode: {row["metode"]}\n" +
-                                    $"Status: {row["status"]}\n" +
-                                    $"Catatan Mahasiswa: {row["catatan_user"]}\n" +
-                                    $"Catatan Psikolog: {row["catatan_psikolog"]}\n";
+        //    try
+        //    {
+        //        DataTable dt = _psikologController.GetDetailBookingById(bookingId, _currentPsikologId);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            DataRow row = dt.Rows[0];
+        //            string detail = $"Detail Konseling\n\n" +
+        //                            $"Mahasiswa: {row["mahasiswa"]}\n" +
+        //                            $"Tanggal: {Convert.ToDateTime(row["tgl_booking"]):dd MMMM yyyy}\n" +
+        //                            $"Jam: {row["jam_mulai"]} - {row["jam_selesai"]}\n" +
+        //                            $"Metode: {row["metode"]}\n" +
+        //                            $"Status: {row["status"]}\n" +
+        //                            $"Catatan Mahasiswa: {row["catatan_user"]}\n" +
+        //                            $"Catatan Psikolog: {row["catatan_psikolog"]}\n";
 
-                    MessageBox.Show(detail, "Detail Booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal mengambil detail booking: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //            MessageBox.Show(detail, "Detail Booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Gagal mengambil detail booking: " + ex.Message,
+        //            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
@@ -305,20 +311,31 @@ namespace pboFinalProfject.View
             FormKelolaJadwal formJadwal = new FormKelolaJadwal(_currentPsikologId);
             formJadwal.ShowDialog();
         }
-
+        private void btnKelolaProfil_Click(object sender, EventArgs e)
+        {
+            // Buka form kelola profil untuk psikolog ini
+            FormKelolaProfil formProfil = new FormKelolaProfil(UserSession.GetCurrentUserId());
+            formProfil.ShowDialog();
+        }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            //base.OnFormClosed(e);
-            //// Optional: Logout atau kembali ke form login
-            //_authController.Logout(this);
+            base.OnFormClosed(e);
 
-            // Mematikan seluruh proses aplikasi secara bersih, termasuk form yang di-hide
-            Application.Exit();
+            // Tampilkan form login lagi
+            FormLogin login = new FormLogin();
+            login.Show();
         }
 
         private void btnKeluar_Click(object sender, EventArgs e)
         {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

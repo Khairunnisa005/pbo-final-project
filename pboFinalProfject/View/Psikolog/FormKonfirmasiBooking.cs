@@ -13,8 +13,22 @@ namespace pboFinalProfject.View
         private int _psikologId;
         private IBookingService _bookingService;
 
+        //public FormKonfirmasiBooking(int bookingId, int psikologId)
+        //{
+        //    InitializeComponent();
+        //    _bookingId = bookingId;
+        //    _psikologId = psikologId;
+        //    _bookingService = new BookingService();
+
+        //    this.Load += FormKonfirmasiBooking_Load;
+        //    btnKembali.Click += BtnKembali_Click;
+
+        //    lblID.Click += lblID_Click;
+        //}
+
         public FormKonfirmasiBooking(int bookingId, int psikologId)
         {
+
             InitializeComponent();
             _bookingId = bookingId;
             _psikologId = psikologId;
@@ -23,7 +37,6 @@ namespace pboFinalProfject.View
             this.Load += FormKonfirmasiBooking_Load;
             btnKembali.Click += BtnKembali_Click;
 
-            lblValID.Click += lblID_Click;
         }
 
         private void FormKonfirmasiBooking_Load(object sender, EventArgs e)
@@ -40,11 +53,20 @@ namespace pboFinalProfject.View
             LoadDataBooking();
         }
 
+
         private void LoadDataBooking()
         {
+
             try
             {
+
                 DataTable dt = _bookingService.GetDetailBookingById(_bookingId, _psikologId);
+                
+                if (dt == null)
+                {
+                    MessageBox.Show("ERROR: dt is NULL!");
+                    return;
+                }
 
                 if (dt.Rows.Count > 0)
                 {
@@ -53,29 +75,46 @@ namespace pboFinalProfject.View
                     // Isi data ke label
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
                     lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
+                    txtValCatatanMhs.Text = row["catatan_mahasiswa"]?.ToString() ?? "-";
 
-                    // Format jadwal
+
+
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
-                    TimeSpan jamMulai = (TimeSpan)row["jam_mulai"];
-                    TimeSpan jamSelesai = (TimeSpan)row["jam_selesai"];
+                    // Handle TimeOnly vs TimeSpan
+                    object jamMulaiObj = row["jam_mulai"];
+                    object jamSelesaiObj = row["jam_selesai"];
                     string metode = row["metode"]?.ToString() ?? "-";
+                    string jamMulaiStr = "", jamSelesaiStr = "";
 
-                    lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulai:hh\\:mm} - {jamSelesai:hh\\:mm} WIB ({metode})";
+                    // Cek tipe dan konversi
+                    if (jamMulaiObj is TimeOnly timeOnly)
+                        jamMulaiStr = timeOnly.ToString("HH:mm");
+                    else if (jamMulaiObj is TimeSpan timeSpan)
+                        jamMulaiStr = timeSpan.ToString(@"hh\:mm");
+                    else if (jamMulaiObj != null)
+                        jamMulaiStr = jamMulaiObj.ToString()?.Length >= 5 ? jamMulaiObj.ToString().Substring(0, 5) : "??:??";
+
+                    if (jamSelesaiObj is TimeOnly timeOnly2)
+                        jamSelesaiStr = timeOnly2.ToString("HH:mm");
+                    else if (jamSelesaiObj is TimeSpan timeSpan2)
+                        jamSelesaiStr = timeSpan2.ToString(@"hh\:mm");
+                    else if (jamSelesaiObj != null)
+                        jamSelesaiStr = jamSelesaiObj.ToString()?.Length >= 5 ? jamSelesaiObj.ToString().Substring(0, 5) : "??:??";
+
+                    lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulaiStr} - {jamSelesaiStr} WIB ({metode})";
                 }
                 else
                 {
-                    MessageBox.Show("Data booking tidak ditemukan.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERROR: Tidak ada data ditemukan untuk booking ini!");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal memuat data booking: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                MessageBox.Show($"ERROR DETAIL: {ex.Message}\n\n{ex.StackTrace}");
             }
         }
+
 
         private void btnSetuju_Click(object sender, EventArgs e)
         {

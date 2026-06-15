@@ -64,8 +64,7 @@ namespace pboFinalProfject
                     j.metode,
                     b.status,
                     b.catatan_user,
-                    b.catatan_psikolog,
-                    b.created_at as tgl_booking
+                    b.catatan_psikolog
                 FROM booking b
                 JOIN users u ON b.user_id = u.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id

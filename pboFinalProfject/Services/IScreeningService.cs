@@ -2,6 +2,7 @@
 using pboFinalProfject.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace pboFinalProfject.Services
@@ -10,6 +11,9 @@ namespace pboFinalProfject.Services
     {
         /// Mendapatkan semua pertanyaan kuesioner
         List<PertanyaanAssessment> GetPertanyaan();
+
+        /// Mendapatkan riwayat screening user
+        DataTable GetRiwayatScreening(int userId);
 
         /// Menghitung skor dan menentukan tingkat stres
         HasilAssessment HitungSkor(List<JawabanAssessment> jawabanList, int userId);

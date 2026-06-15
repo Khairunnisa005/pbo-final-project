@@ -55,12 +55,34 @@ namespace pboFinalProfject.View
 
                     // Format jadwal
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
-                    TimeSpan jamMulai = (TimeSpan)row["jam_mulai"];
-                    TimeSpan jamSelesai = (TimeSpan)row["jam_selesai"];
-                    lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulai:hh\\:mm} - {jamSelesai:hh\\:mm} WIB";
+                    object jamMulaiObj = row["jam_mulai"];
+                    object jamSelesaiObj = row["jam_selesai"];
+                    string metode = row["metode"]?.ToString() ?? "-";
+
+                    string jamMulaiStr = "", jamSelesaiStr = "";
+
+                    // Cek tipe dan konversi
+                    if (jamMulaiObj is TimeOnly timeOnly)
+                        jamMulaiStr = timeOnly.ToString("HH:mm");
+                    else if (jamMulaiObj is TimeSpan timeSpan)
+                        jamMulaiStr = timeSpan.ToString(@"hh\:mm");
+                    else if (jamMulaiObj != null)
+                        jamMulaiStr = jamMulaiObj.ToString()?.Length >= 5 ? jamMulaiObj.ToString().Substring(0, 5) : "??:??";
+
+                    if (jamSelesaiObj is TimeOnly timeOnly2)
+                        jamSelesaiStr = timeOnly2.ToString("HH:mm");
+                    else if (jamSelesaiObj is TimeSpan timeSpan2)
+                        jamSelesaiStr = timeSpan2.ToString(@"hh\:mm");
+                    else if (jamSelesaiObj != null)
+                        jamSelesaiStr = jamSelesaiObj.ToString()?.Length >= 5 ? jamSelesaiObj.ToString().Substring(0, 5) : "??:??";
+
+                    lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulaiStr} - {jamSelesaiStr} WIB ({metode})";
 
                     lblValMetode.Text = row["metode"]?.ToString() ?? "-";
 
+                    lblValJamMulai.Text = jamMulaiStr;
+
+                    lblValJamSelesai.Text = jamSelesaiStr;
                     // Isi catatan dari mahasiswa (read-only)
                     txtCatatanUser.Text = row["catatan_user"]?.ToString() ?? "-";
 

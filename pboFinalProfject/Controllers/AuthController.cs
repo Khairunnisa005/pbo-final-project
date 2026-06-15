@@ -45,11 +45,34 @@ namespace pboFinalProfject.Controllers
         }
 
         /// Registrasi mahasiswa baru
+        //public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string nama)
+        //{
+        //    try
+        //    {
+
+        //        bool result = _service.RegisterMahasiswa(username, email, noTelepon, password, nama);
+
+        //        if (result)
+        //        {
+        //            MessageBox.Show("Registrasi berhasil! Silakan login.", "Sukses",
+        //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            return true;
+        //        }
+
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Registrasi Gagal: {ex.Message}", "Error",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return false;
+        //    }
+        //}
+
         public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string nama)
         {
             try
             {
-
                 bool result = _service.RegisterMahasiswa(username, email, noTelepon, password, nama);
 
                 if (result)
