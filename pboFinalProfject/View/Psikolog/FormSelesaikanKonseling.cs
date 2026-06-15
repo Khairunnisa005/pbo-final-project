@@ -80,6 +80,9 @@ namespace pboFinalProfject.View
 
                     lblValMetode.Text = row["metode"]?.ToString() ?? "-";
 
+                    lblValJamMulai.Text = jamMulaiStr;
+
+                    lblValJamSelesai.Text = jamSelesaiStr;
                     // Isi catatan dari mahasiswa (read-only)
                     txtCatatanUser.Text = row["catatan_user"]?.ToString() ?? "-";
 

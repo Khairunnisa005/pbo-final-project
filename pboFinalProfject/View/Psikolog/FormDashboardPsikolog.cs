@@ -246,23 +246,26 @@ namespace pboFinalProfject.View
 
             try
             {
-                if (status == "Pending")
-                {
-                    FormKonfirmasiBooking form = new FormKonfirmasiBooking(bookingId, _currentPsikologId);
-                    form.ShowDialog();
-                    LoadDaftarPasien();
-                }
-                else if (status == "Disetujui")
-                {
-                    FormSelesaikanKonseling form = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
-                    form.ShowDialog();
-                    LoadDaftarPasien();
-                }
-                else
-                {
-                    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
-                    form.ShowDialog();
-                }
+                //if (status == "Pending")
+                //{
+                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
+                //    LoadDaftarPasien();
+                //}
+                //else if (status == "Disetujui")
+                //{
+                //    FormSelesaikanKonseling form = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
+                //    LoadDaftarPasien();
+                //}
+                //else
+                //{
+                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                //    form.ShowDialog();
+                //}
+                FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
+                form.ShowDialog();
+                LoadDaftarPasien();
             }
             catch (Exception ex)
             {
@@ -308,7 +311,12 @@ namespace pboFinalProfject.View
             FormKelolaJadwal formJadwal = new FormKelolaJadwal(_currentPsikologId);
             formJadwal.ShowDialog();
         }
-
+        private void btnKelolaProfil_Click(object sender, EventArgs e)
+        {
+            // Buka form kelola profil untuk psikolog ini
+            FormKelolaProfil formProfil = new FormKelolaProfil(UserSession.GetCurrentUserId());
+            formProfil.ShowDialog();
+        }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);

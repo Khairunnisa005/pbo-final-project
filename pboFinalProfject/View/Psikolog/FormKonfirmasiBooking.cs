@@ -75,6 +75,7 @@ namespace pboFinalProfject.View
                     // Isi data ke label
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
                     lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
+                    txtValCatatanMhs.Text = row["catatan_mahasiswa"]?.ToString() ?? "-";
 
 
 
@@ -83,7 +84,6 @@ namespace pboFinalProfject.View
                     object jamMulaiObj = row["jam_mulai"];
                     object jamSelesaiObj = row["jam_selesai"];
                     string metode = row["metode"]?.ToString() ?? "-";
-
                     string jamMulaiStr = "", jamSelesaiStr = "";
 
                     // Cek tipe dan konversi
@@ -102,7 +102,6 @@ namespace pboFinalProfject.View
                         jamSelesaiStr = jamSelesaiObj.ToString()?.Length >= 5 ? jamSelesaiObj.ToString().Substring(0, 5) : "??:??";
 
                     lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulaiStr} - {jamSelesaiStr} WIB ({metode})";
-
                 }
                 else
                 {

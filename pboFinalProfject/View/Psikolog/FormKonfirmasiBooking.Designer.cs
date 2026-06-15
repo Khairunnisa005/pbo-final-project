@@ -24,7 +24,7 @@
             btnSetuju = new Button();
             btnBatal = new Button();
             btnKembali = new Button();
-            txtValCatatanPsi = new TextBox();
+            txtValCatatanMhs = new TextBox();
             SuspendLayout();
             // 
             // lblValID
@@ -94,19 +94,19 @@
             btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += BtnKembali_Click;
             // 
-            // txtValCatatanPsi
+            // txtValCatatanMhs
             // 
-            txtValCatatanPsi.BackColor = Color.White;
-            txtValCatatanPsi.BorderStyle = BorderStyle.None;
-            txtValCatatanPsi.Font = new Font("Segoe UI", 9.5F);
-            txtValCatatanPsi.Location = new Point(573, 398);
-            txtValCatatanPsi.Multiline = true;
-            txtValCatatanPsi.Name = "txtValCatatanPsi";
-            txtValCatatanPsi.ReadOnly = true;
-            txtValCatatanPsi.ScrollBars = ScrollBars.Vertical;
-            txtValCatatanPsi.Size = new Size(424, 88);
-            txtValCatatanPsi.TabIndex = 4;
-            txtValCatatanPsi.Text = "-";
+            txtValCatatanMhs.BackColor = Color.White;
+            txtValCatatanMhs.BorderStyle = BorderStyle.None;
+            txtValCatatanMhs.Font = new Font("Segoe UI", 9.5F);
+            txtValCatatanMhs.Location = new Point(573, 399);
+            txtValCatatanMhs.Multiline = true;
+            txtValCatatanMhs.Name = "txtValCatatanMhs";
+            txtValCatatanMhs.ReadOnly = true;
+            txtValCatatanMhs.ScrollBars = ScrollBars.Vertical;
+            txtValCatatanMhs.Size = new Size(424, 87);
+            txtValCatatanMhs.TabIndex = 4;
+            txtValCatatanMhs.Text = "-";
             // 
             // FormKonfirmasiBooking
             // 
@@ -119,7 +119,7 @@
             Controls.Add(lblValJadwal);
             Controls.Add(lblValNama);
             Controls.Add(lblValID);
-            Controls.Add(txtValCatatanPsi);
+            Controls.Add(txtValCatatanMhs);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -139,7 +139,7 @@
         private System.Windows.Forms.Button btnSetuju;
         private System.Windows.Forms.Button btnBatal;
         private System.Windows.Forms.Button btnKembali;
-        private System.Windows.Forms.TextBox txtValCatatanPsi;
+        private System.Windows.Forms.TextBox txtValCatatanMhs;
         private System.Windows.Forms.Label lblID;
     }
 }

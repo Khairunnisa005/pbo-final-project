@@ -51,7 +51,7 @@
             btnKembali.BackColor = Color.FromArgb(28, 167, 236);
             btnKembali.ForeColor = Color.White;
             btnKembali.Location = new Point(1362, 54);
-            btnKembali.Margin = new Padding(2, 2, 2, 2);
+            btnKembali.Margin = new Padding(2);
             btnKembali.Name = "btnKembali";
             btnKembali.Size = new Size(129, 45);
             btnKembali.TabIndex = 10;
@@ -84,14 +84,14 @@
             txtTelepon.Location = new Point(23, 354);
             txtTelepon.Margin = new Padding(3, 4, 3, 4);
             txtTelepon.Name = "txtTelepon";
-            txtTelepon.Size = new Size(388, 30);
+            txtTelepon.Size = new Size(388, 34);
             txtTelepon.TabIndex = 0;
             // 
             // lblTelepon
             // 
             lblTelepon.Location = new Point(23, 320);
             lblTelepon.Name = "lblTelepon";
-            lblTelepon.Size = new Size(114, 30);
+            lblTelepon.Size = new Size(282, 30);
             lblTelepon.TabIndex = 1;
             lblTelepon.Text = "Nomor Telepon / WhatsApp";
             // 
@@ -100,14 +100,14 @@
             txtEmail.Location = new Point(23, 255);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(388, 30);
+            txtEmail.Size = new Size(388, 34);
             txtEmail.TabIndex = 2;
             // 
             // lblEmail
             // 
             lblEmail.Location = new Point(23, 221);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(114, 30);
+            lblEmail.Size = new Size(163, 30);
             lblEmail.TabIndex = 3;
             lblEmail.Text = "Alamat Email";
             // 
@@ -116,14 +116,14 @@
             txtNama.Location = new Point(23, 158);
             txtNama.Margin = new Padding(3, 4, 3, 4);
             txtNama.Name = "txtNama";
-            txtNama.Size = new Size(388, 30);
+            txtNama.Size = new Size(388, 34);
             txtNama.TabIndex = 4;
             // 
             // lblNama
             // 
             lblNama.Location = new Point(23, 123);
             lblNama.Name = "lblNama";
-            lblNama.Size = new Size(114, 30);
+            lblNama.Size = new Size(163, 30);
             lblNama.TabIndex = 5;
             lblNama.Text = "Nama Lengkap";
             // 
@@ -133,7 +133,7 @@
             txtUsername.Location = new Point(23, 74);
             txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(388, 30);
+            txtUsername.Size = new Size(388, 34);
             txtUsername.TabIndex = 6;
             // 
             // lblUsername
@@ -206,7 +206,7 @@
             // 
             lblDeskripsi.Location = new Point(23, 221);
             lblDeskripsi.Name = "lblDeskripsi";
-            lblDeskripsi.Size = new Size(114, 30);
+            lblDeskripsi.Size = new Size(308, 30);
             lblDeskripsi.TabIndex = 4;
             lblDeskripsi.Text = "Deskripsi Singkat Pengalaman";
             // 
@@ -215,14 +215,14 @@
             txtIzinPraktek.Location = new Point(229, 74);
             txtIzinPraktek.Margin = new Padding(3, 4, 3, 4);
             txtIzinPraktek.Name = "txtIzinPraktek";
-            txtIzinPraktek.Size = new Size(194, 30);
+            txtIzinPraktek.Size = new Size(194, 34);
             txtIzinPraktek.TabIndex = 5;
             // 
             // lblIzinPraktek
             // 
             lblIzinPraktek.Location = new Point(229, 42);
             lblIzinPraktek.Name = "lblIzinPraktek";
-            lblIzinPraktek.Size = new Size(114, 30);
+            lblIzinPraktek.Size = new Size(178, 30);
             lblIzinPraktek.TabIndex = 6;
             lblIzinPraktek.Text = "No. Izin Praktek (SIPP)";
             // 
@@ -231,14 +231,14 @@
             txtPendidikan.Location = new Point(23, 158);
             txtPendidikan.Margin = new Padding(3, 4, 3, 4);
             txtPendidikan.Name = "txtPendidikan";
-            txtPendidikan.Size = new Size(399, 30);
+            txtPendidikan.Size = new Size(399, 34);
             txtPendidikan.TabIndex = 7;
             // 
             // lblPendidikan
             // 
             lblPendidikan.Location = new Point(23, 123);
             lblPendidikan.Name = "lblPendidikan";
-            lblPendidikan.Size = new Size(158, 30);
+            lblPendidikan.Size = new Size(259, 30);
             lblPendidikan.TabIndex = 8;
             lblPendidikan.Text = "Riwayat Pendidikan Terakhir";
             // 
@@ -247,14 +247,14 @@
             txtGelar.Location = new Point(23, 74);
             txtGelar.Margin = new Padding(3, 4, 3, 4);
             txtGelar.Name = "txtGelar";
-            txtGelar.Size = new Size(182, 30);
+            txtGelar.Size = new Size(182, 34);
             txtGelar.TabIndex = 9;
             // 
             // lblGelar
             // 
             lblGelar.Location = new Point(23, 42);
             lblGelar.Name = "lblGelar";
-            lblGelar.Size = new Size(114, 30);
+            lblGelar.Size = new Size(182, 30);
             lblGelar.TabIndex = 10;
             lblGelar.Text = "Gelar Akademik";
             // 

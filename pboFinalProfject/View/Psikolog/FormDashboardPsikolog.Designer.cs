@@ -34,6 +34,7 @@
             dgvPasien = new DataGridView();
             btnKelolaJadwal = new Button();
             btnKeluar = new Button();
+            btnKelolaProfil = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPasien).BeginInit();
             SuspendLayout();
             // 
@@ -73,7 +74,7 @@
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
             btnKelolaJadwal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = Color.White;
-            btnKelolaJadwal.Location = new Point(1317, 734);
+            btnKelolaJadwal.Location = new Point(74, 227);
             btnKelolaJadwal.Margin = new Padding(3, 4, 3, 4);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
             btnKelolaJadwal.Size = new Size(163, 45);
@@ -87,13 +88,28 @@
             btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
             btnKeluar.ForeColor = Color.White;
             btnKeluar.Location = new Point(37, 775);
-            btnKeluar.Margin = new Padding(2, 2, 2, 2);
+            btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(218, 41);
             btnKeluar.TabIndex = 10;
             btnKeluar.Text = "Keluar";
             btnKeluar.UseVisualStyleBackColor = false;
             btnKeluar.Click += btnKeluar_Click;
+            // 
+            // btnKelolaProfil
+            // 
+            btnKelolaProfil.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
+            btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaProfil.ForeColor = Color.White;
+            btnKelolaProfil.Location = new Point(74, 290);
+            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaProfil.Name = "btnKelolaProfil";
+            btnKelolaProfil.Size = new Size(163, 45);
+            btnKelolaProfil.TabIndex = 2;
+            btnKelolaProfil.Text = "Kelola Profil";
+            btnKelolaProfil.UseVisualStyleBackColor = false;
+            btnKelolaProfil.Click += btnKelolaProfil_Click;
             // 
             // FormDashboardPsikolog
             // 
@@ -104,6 +120,7 @@
             Controls.Add(btnKelolaJadwal);
             Controls.Add(dgvPasien);
             Controls.Add(btnKeluar);
+            Controls.Add(btnKelolaProfil);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
@@ -119,5 +136,6 @@
         private System.Windows.Forms.DataGridView dgvPasien;
         private System.Windows.Forms.Button btnKelolaJadwal;
         private System.Windows.Forms.Button btnKeluar;
+        private System.Windows.Forms.Button btnKelolaProfil;
     }
 }
