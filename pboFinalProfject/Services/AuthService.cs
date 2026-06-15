@@ -80,8 +80,8 @@ namespace pboFinalProfject.Services
                 throw new ArgumentException("Format email tidak valid!");
 
             // Cek duplikasi
-            if (IsUsernameExist(username))
-                throw new Exception("Username sudah terdaftar! Silakan pilih username lain.");
+            //if (IsUsernameExist(username))
+            //    throw new Exception("Username sudah terdaftar! Silakan pilih username lain.");
 
             if (IsEmailExist(email))
                 throw new Exception("Email sudah terdaftar! Silakan gunakan email lain.");
@@ -124,6 +124,7 @@ namespace pboFinalProfject.Services
                 throw new ArgumentException("Password tidak boleh kosong!");
 
             // Cek duplikasi
+
             if (IsUsernameExist(user.Username))
                 throw new Exception("Username sudah terdaftar!");
 

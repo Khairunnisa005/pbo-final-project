@@ -23,7 +23,7 @@ namespace pboFinalProfject.View
             this.Load += FormKonfirmasiBooking_Load;
             btnKembali.Click += BtnKembali_Click;
 
-            lblID.Click += lblID_Click;
+            lblValID.Click += lblID_Click;
         }
 
         private void FormKonfirmasiBooking_Load(object sender, EventArgs e)
