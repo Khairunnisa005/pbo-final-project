@@ -16,12 +16,11 @@ namespace pboFinalProfject.Model
         public string CatatanPsikolog { get; set; }
         public int? HasilAssessment { get; set; } //Nullable, opsional
 
-
         //Navigation properties 
         public Microsoft.VisualBasic.ApplicationServices.User User { get; set; }
         public Psikolog Psikolog { get; set; }
         public JadwalPsikolog JadwalPsikolog { get; set; }
-        //public HasilAssessment HasilAssessment { get; set; }
+
         // Gunakan int? (nullable) karena di awal booking, hasil assessment bisa jadi belum ada (null)
         public int? HasilAssessmentId { get; set; }
 
