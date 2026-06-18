@@ -98,16 +98,16 @@
             // 
             // btnKelolaProfil
             // 
-            btnKelolaProfil.BackColor = Color.FromArgb(28, 167, 236);
             btnKelolaProfil.FlatStyle = FlatStyle.Flat;
-            btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKelolaProfil.ForeColor = Color.White;
+            btnKelolaProfil.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            btnKelolaProfil.ForeColor = SystemColors.ButtonHighlight;
             btnKelolaProfil.Location = new Point(74, 290);
             btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
             btnKelolaProfil.Name = "btnKelolaProfil";
-            btnKelolaProfil.Size = new Size(163, 45);
+            btnKelolaProfil.Size = new Size(165, 38);
             btnKelolaProfil.TabIndex = 2;
             btnKelolaProfil.Text = "Kelola Profil";
+            btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaProfil.UseVisualStyleBackColor = false;
             btnKelolaProfil.Click += btnKelolaProfil_Click;
             // 
@@ -124,6 +124,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             WindowState = FormWindowState.Maximized;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormDashboardPsikolog";
