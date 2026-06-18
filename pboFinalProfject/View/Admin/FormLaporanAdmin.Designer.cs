@@ -33,6 +33,9 @@
             lblTotalTitle = new Label();
             btnEkspor = new Button();
             btnCetak = new Button();
+            btnKeluar = new Button();
+            btnDashboard = new Button();
+            btnKelolaUser = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLaporan).BeginInit();
             pnlSummary.SuspendLayout();
             SuspendLayout();
@@ -202,11 +205,57 @@
             btnCetak.UseVisualStyleBackColor = false;
             btnCetak.Click += btnCetak_Click;
             // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(39, 751);
+            btnKeluar.Margin = new Padding(2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(218, 53);
+            btnKeluar.TabIndex = 10;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
+            // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.FromArgb(28, 167, 236);
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(74, 166);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(163, 45);
+            btnDashboard.TabIndex = 2;
+            btnDashboard.Text = "Dashboard";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
+            // 
+            // btnKelolaUser
+            // 
+            btnKelolaUser.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser.FlatStyle = FlatStyle.Flat;
+            btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaUser.ForeColor = Color.White;
+            btnKelolaUser.Location = new Point(74, 235);
+            btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaUser.Name = "btnKelolaUser";
+            btnKelolaUser.Size = new Size(163, 45);
+            btnKelolaUser.TabIndex = 2;
+            btnKelolaUser.Text = "Kelola User";
+            btnKelolaUser.UseVisualStyleBackColor = false;
+            btnKelolaUser.Click += btnKelolaUser_Click;
+            // 
             // FormLaporanAdmin
             // 
             BackColor = Color.FromArgb(250, 250, 250);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
+            Controls.Add(btnKelolaUser);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnKeluar);
             Controls.Add(lblPeriode);
             Controls.Add(dtpMulai);
             Controls.Add(lblSampai);
@@ -226,6 +275,7 @@
             Name = "FormLaporanAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Unimind Admin - Panel Laporan";
+            WindowState = FormWindowState.Maximized;
             Load += FormLaporanAdmin_Load;
             ((System.ComponentModel.ISupportInitialize)dgvLaporan).EndInit();
             pnlSummary.ResumeLayout(false);
@@ -248,5 +298,8 @@
         private System.Windows.Forms.Button btnEkspor;
         private System.Windows.Forms.Button btnCetak;
         private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.Button btnKeluar;
+        private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Button btnKelolaUser;
     }
 }

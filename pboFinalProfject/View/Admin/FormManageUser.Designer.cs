@@ -23,6 +23,8 @@
             pagePsikolog = new TabPage();
             dgvPsikolog = new DataGridView();
             pnlSideInputPsi = new Panel();
+            lblDeskPsi = new Label();
+            txtDeskPsi = new TextBox();
             lblIzinPraktek = new Label();
             txtIzinPraktek = new TextBox();
             lblPendidikan = new Label();
@@ -55,6 +57,9 @@
             txtUserMhs = new TextBox();
             lblUserMhs = new Label();
             btnKembali = new Button();
+            btnKeluar = new Button();
+            btnLaporan = new Button();
+            btnDashboard = new Button();
             tabUserControl.SuspendLayout();
             pagePsikolog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPsikolog).BeginInit();
@@ -69,11 +74,11 @@
             tabUserControl.Controls.Add(pagePsikolog);
             tabUserControl.Controls.Add(pageMahasiswa);
             tabUserControl.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            tabUserControl.Location = new Point(325, 138);
+            tabUserControl.Location = new Point(317, 106);
             tabUserControl.Margin = new Padding(3, 4, 3, 4);
             tabUserControl.Name = "tabUserControl";
             tabUserControl.SelectedIndex = 0;
-            tabUserControl.Size = new Size(1158, 688);
+            tabUserControl.Size = new Size(1158, 741);
             tabUserControl.TabIndex = 1;
             // 
             // pagePsikolog
@@ -84,7 +89,7 @@
             pagePsikolog.Margin = new Padding(3, 4, 3, 4);
             pagePsikolog.Name = "pagePsikolog";
             pagePsikolog.Padding = new Padding(3, 4, 3, 4);
-            pagePsikolog.Size = new Size(1150, 652);
+            pagePsikolog.Size = new Size(1150, 705);
             pagePsikolog.TabIndex = 0;
             pagePsikolog.Text = "Manage Psikolog";
             // 
@@ -105,13 +110,15 @@
             dgvPsikolog.Margin = new Padding(3, 4, 3, 4);
             dgvPsikolog.Name = "dgvPsikolog";
             dgvPsikolog.RowHeadersWidth = 62;
-            dgvPsikolog.Size = new Size(807, 644);
+            dgvPsikolog.Size = new Size(807, 697);
             dgvPsikolog.TabIndex = 0;
             dgvPsikolog.CellClick += dgvPsikolog_CellClick;
             // 
             // pnlSideInputPsi
             // 
             pnlSideInputPsi.BackColor = Color.FromArgb(245, 247, 250);
+            pnlSideInputPsi.Controls.Add(lblDeskPsi);
+            pnlSideInputPsi.Controls.Add(txtDeskPsi);
             pnlSideInputPsi.Controls.Add(lblIzinPraktek);
             pnlSideInputPsi.Controls.Add(txtIzinPraktek);
             pnlSideInputPsi.Controls.Add(lblPendidikan);
@@ -134,12 +141,28 @@
             pnlSideInputPsi.Location = new Point(3, 4);
             pnlSideInputPsi.Margin = new Padding(3, 4, 3, 4);
             pnlSideInputPsi.Name = "pnlSideInputPsi";
-            pnlSideInputPsi.Size = new Size(337, 644);
+            pnlSideInputPsi.Size = new Size(337, 697);
             pnlSideInputPsi.TabIndex = 1;
+            // 
+            // lblDeskPsi
+            // 
+            lblDeskPsi.Location = new Point(21, 492);
+            lblDeskPsi.Name = "lblDeskPsi";
+            lblDeskPsi.Size = new Size(160, 22);
+            lblDeskPsi.TabIndex = 11;
+            lblDeskPsi.Text = "Deskripsi Singkat";
+            // 
+            // txtDeskPsi
+            // 
+            txtDeskPsi.Location = new Point(20, 518);
+            txtDeskPsi.Margin = new Padding(3, 4, 3, 4);
+            txtDeskPsi.Name = "txtDeskPsi";
+            txtDeskPsi.Size = new Size(297, 30);
+            txtDeskPsi.TabIndex = 10;
             // 
             // lblIzinPraktek
             // 
-            lblIzinPraktek.Location = new Point(20, 452);
+            lblIzinPraktek.Location = new Point(20, 430);
             lblIzinPraktek.Name = "lblIzinPraktek";
             lblIzinPraktek.Size = new Size(157, 24);
             lblIzinPraktek.TabIndex = 16;
@@ -147,7 +170,7 @@
             // 
             // txtIzinPraktek
             // 
-            txtIzinPraktek.Location = new Point(20, 480);
+            txtIzinPraktek.Location = new Point(20, 458);
             txtIzinPraktek.Margin = new Padding(3, 4, 3, 4);
             txtIzinPraktek.Name = "txtIzinPraktek";
             txtIzinPraktek.Size = new Size(297, 30);
@@ -155,7 +178,7 @@
             // 
             // lblPendidikan
             // 
-            lblPendidikan.Location = new Point(20, 385);
+            lblPendidikan.Location = new Point(20, 368);
             lblPendidikan.Name = "lblPendidikan";
             lblPendidikan.Size = new Size(114, 24);
             lblPendidikan.TabIndex = 14;
@@ -163,7 +186,7 @@
             // 
             // txtPendidikan
             // 
-            txtPendidikan.Location = new Point(20, 413);
+            txtPendidikan.Location = new Point(20, 396);
             txtPendidikan.Margin = new Padding(3, 4, 3, 4);
             txtPendidikan.Name = "txtPendidikan";
             txtPendidikan.Size = new Size(297, 30);
@@ -171,7 +194,7 @@
             // 
             // lblGelar
             // 
-            lblGelar.Location = new Point(20, 314);
+            lblGelar.Location = new Point(20, 306);
             lblGelar.Name = "lblGelar";
             lblGelar.Size = new Size(114, 24);
             lblGelar.TabIndex = 12;
@@ -179,7 +202,7 @@
             // 
             // txtGelar
             // 
-            txtGelar.Location = new Point(20, 342);
+            txtGelar.Location = new Point(20, 334);
             txtGelar.Margin = new Padding(3, 4, 3, 4);
             txtGelar.Name = "txtGelar";
             txtGelar.Size = new Size(297, 30);
@@ -190,7 +213,7 @@
             btnHapusPsi.BackColor = Color.FromArgb(217, 83, 79);
             btnHapusPsi.FlatStyle = FlatStyle.Flat;
             btnHapusPsi.ForeColor = Color.White;
-            btnHapusPsi.Location = new Point(21, 577);
+            btnHapusPsi.Location = new Point(21, 636);
             btnHapusPsi.Margin = new Padding(3, 4, 3, 4);
             btnHapusPsi.Name = "btnHapusPsi";
             btnHapusPsi.Size = new Size(297, 46);
@@ -204,7 +227,7 @@
             btnSimpanPsikolog.BackColor = Color.FromArgb(26, 54, 141);
             btnSimpanPsikolog.FlatStyle = FlatStyle.Flat;
             btnSimpanPsikolog.ForeColor = Color.White;
-            btnSimpanPsikolog.Location = new Point(20, 522);
+            btnSimpanPsikolog.Location = new Point(20, 582);
             btnSimpanPsikolog.Margin = new Padding(3, 4, 3, 4);
             btnSimpanPsikolog.Name = "btnSimpanPsikolog";
             btnSimpanPsikolog.Size = new Size(297, 46);
@@ -300,7 +323,7 @@
             pageMahasiswa.Location = new Point(4, 32);
             pageMahasiswa.Margin = new Padding(3, 4, 3, 4);
             pageMahasiswa.Name = "pageMahasiswa";
-            pageMahasiswa.Size = new Size(1150, 652);
+            pageMahasiswa.Size = new Size(1150, 705);
             pageMahasiswa.TabIndex = 1;
             pageMahasiswa.Text = "Manage Mahasiswa";
             // 
@@ -317,7 +340,7 @@
             dgvMahasiswa.Margin = new Padding(3, 4, 3, 4);
             dgvMahasiswa.Name = "dgvMahasiswa";
             dgvMahasiswa.RowHeadersWidth = 62;
-            dgvMahasiswa.Size = new Size(807, 652);
+            dgvMahasiswa.Size = new Size(807, 705);
             dgvMahasiswa.TabIndex = 0;
             dgvMahasiswa.CellClick += dgvMahasiswa_CellClick;
             // 
@@ -338,7 +361,7 @@
             pnlSideInputMhs.Location = new Point(0, 0);
             pnlSideInputMhs.Margin = new Padding(3, 4, 3, 4);
             pnlSideInputMhs.Name = "pnlSideInputMhs";
-            pnlSideInputMhs.Size = new Size(343, 652);
+            pnlSideInputMhs.Size = new Size(343, 705);
             pnlSideInputMhs.TabIndex = 1;
             // 
             // btnHapusMhs
@@ -346,7 +369,7 @@
             btnHapusMhs.BackColor = Color.FromArgb(217, 83, 79);
             btnHapusMhs.FlatStyle = FlatStyle.Flat;
             btnHapusMhs.ForeColor = Color.White;
-            btnHapusMhs.Location = new Point(21, 574);
+            btnHapusMhs.Location = new Point(21, 643);
             btnHapusMhs.Margin = new Padding(3, 4, 3, 4);
             btnHapusMhs.Name = "btnHapusMhs";
             btnHapusMhs.Size = new Size(297, 46);
@@ -360,7 +383,7 @@
             btnSimpanMhs.BackColor = Color.FromArgb(26, 54, 141);
             btnSimpanMhs.FlatStyle = FlatStyle.Flat;
             btnSimpanMhs.ForeColor = Color.White;
-            btnSimpanMhs.Location = new Point(21, 520);
+            btnSimpanMhs.Location = new Point(21, 589);
             btnSimpanMhs.Margin = new Padding(3, 4, 3, 4);
             btnSimpanMhs.Name = "btnSimpanMhs";
             btnSimpanMhs.Size = new Size(297, 46);
@@ -446,20 +469,68 @@
             btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += btnKembali_Click;
             // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(39, 751);
+            btnKeluar.Margin = new Padding(2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(218, 53);
+            btnKeluar.TabIndex = 10;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
+            // 
+            // btnLaporan
+            // 
+            btnLaporan.BackColor = Color.FromArgb(28, 167, 236);
+            btnLaporan.FlatStyle = FlatStyle.Flat;
+            btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLaporan.ForeColor = Color.White;
+            btnLaporan.Location = new Point(74, 317);
+            btnLaporan.Margin = new Padding(3, 4, 3, 4);
+            btnLaporan.Name = "btnLaporan";
+            btnLaporan.Size = new Size(163, 45);
+            btnLaporan.TabIndex = 2;
+            btnLaporan.Text = "Lihat Laporan";
+            btnLaporan.UseVisualStyleBackColor = false;
+            btnLaporan.Click += btnLaporan_Click;
+            // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.FromArgb(28, 167, 236);
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(74, 158);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(163, 45);
+            btnDashboard.TabIndex = 2;
+            btnDashboard.Text = "Dashboard";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
+            // 
             // FormManageUser
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnLaporan);
+            Controls.Add(btnKeluar);
             Controls.Add(btnKembali);
             Controls.Add(tabUserControl);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormManageUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind - User Management Control";
+            WindowState = FormWindowState.Maximized;
             Load += FormManageUser_Load;
             tabUserControl.ResumeLayout(false);
             pagePsikolog.ResumeLayout(false);
@@ -511,6 +582,11 @@
         private System.Windows.Forms.TextBox txtUserMhs;
         private System.Windows.Forms.Label lblUserMhs;
         private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.Button btnKeluar;
+        private System.Windows.Forms.Button btnLaporan;
+        private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Label lblDeskPsi;
+        private System.Windows.Forms.TextBox txtDeskPsi;
         //private System.Windows.Forms.Label lblIzinPraktek;
         //private System.Windows.Forms.TextBox txtIzinPraktek;
         //private System.Windows.Forms.Label lblPendidikan;

@@ -24,7 +24,6 @@ namespace pboFinalProfject.View
             btnTambah.Click += BtnTambah_Click;
             btnUbah.Click += BtnUbah_Click;
             btnHapus.Click += BtnHapus_Click;
-            btnKembali.Click += BtnKembali_Click;
             btnBersihkan.Click += BtnBersihkan_Click;
             dgvSlotJadwal.SelectionChanged += DgvSlotJadwal_SelectionChanged;
 
@@ -212,7 +211,8 @@ namespace pboFinalProfject.View
                     return;
                 }
 
-                string hari = cmbHari.SelectedItem.ToString();
+                string hariRaw = cmbHari.SelectedItem.ToString().Trim();
+                string hari = char.ToUpper(hariRaw[0]) + hariRaw.Substring(1).ToLower();
                 TimeSpan jamMulai = dtpJamMulai.Value.TimeOfDay;
                 TimeSpan jamSelesai = dtpJamSelesai.Value.TimeOfDay;
                 string metode = cmbMetode.SelectedItem.ToString();
@@ -286,7 +286,8 @@ namespace pboFinalProfject.View
                     return;
                 }
 
-                string hari = cmbHari.SelectedItem.ToString();
+                string hariRaw = cmbHari.SelectedItem.ToString().Trim();
+                string hari = char.ToUpper(hariRaw[0]) + hariRaw.Substring(1).ToLower();
                 TimeSpan jamMulai = dtpJamMulai.Value.TimeOfDay;
                 TimeSpan jamSelesai = dtpJamSelesai.Value.TimeOfDay;
                 string metode = cmbMetode.SelectedItem.ToString();
@@ -357,11 +358,6 @@ namespace pboFinalProfject.View
         }
 
 
-        private void BtnKembali_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void panelForm_Paint(object sender, PaintEventArgs e)
         {
 
@@ -370,6 +366,52 @@ namespace pboFinalProfject.View
         private void btnTambah_Click_1(object sender, EventArgs e)
         {
 
+        }
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
+
+            this.Hide();
+            dashboard.Show();
+        }
+        private void btnKelolaProfil_Click(object sender, EventArgs e)
+        {
+            int userId = UserSession.GetCurrentUserId();
+            FormKelolaProfil formProfil = new FormKelolaProfil(userId);
+
+            this.Hide();
+            formProfil.Show();
+        }
+        private void FormKelolaProfil_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Memastikan jika form ini dicolose murni lewat tombol X Windows, 
+            // seluruh aplikasi dan form yang tersembunyi ikut mati total.
+            Application.Exit();
+        }
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
+            }
+        }
+        private void FormKelolaJadwal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Memastikan jika form ini dicolose murni lewat tombol X Windows, 
+            // seluruh aplikasi dan form yang tersembunyi ikut mati total.
+            Application.Exit();
         }
     }
 }

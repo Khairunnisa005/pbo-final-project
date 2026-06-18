@@ -177,35 +177,41 @@ namespace pboFinalProfject.View
 
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            // TODO: Implementasi FormKelolaUser
-            MessageBox.Show("Membuka Modul Manajemen Pengguna Kampus UniMind...\n\nFitur yang tersedia:\n- Tambah/Edit/Hapus Psikolog\n- Lihat daftar Mahasiswa\n- Reset password pengguna",
-                "Manajemen Pengguna", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //// Buka form kelola jadwal untuk psikolog ini
+            //// 1. Ambil ID admin aktif
+            //int adminId = UserSession.GetCurrentUserId();
 
-            // Ketika form sudah dibuat, aktifkan kode di bawah:
-            FormManageUser formUser = new FormManageUser();
-            formUser.ShowDialog();
-            LoadDataDashboard(); // Refresh jika ada perubahan
+            // 2. Oper ID ke form tujuan
+            FormManageUser formKelolaUser = new FormManageUser();
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Hide();
+
+            // 4. Tampilkan form kelola user
+            formKelolaUser.Show();
         }
-
         private void btnLaporan_Click(object sender, EventArgs e)
         {
-            // TODO: Implementasi FormLaporanAdmin
-            MessageBox.Show("Membuka Modul Rekapitulasi Laporan Grafik Konseling...\n\nFitur yang tersedia:\n- Laporan booking per periode\n- Grafik tren konseling\n- Export data ke CSV",
-                "Laporan Konseling", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //// 1. Ambil ID admin aktif
+            //int adminId = UserSession.GetCurrentUserId();
 
+            // 2. Oper ID ke form tujuan
             FormLaporanAdmin formLaporan = new FormLaporanAdmin();
-            formLaporan.ShowDialog();
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Hide();
+
+            // 4. Tampilkan form laporan
+            formLaporan.Show();
         }
-
-
-        private void btnKeluar_Click(object sender, EventArgs e)
+        private void FormDashboardAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Apakah anda yakin ingin keluar aplikasi?", "Konfirmasi keluar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            // Memastikan jika form ini dicolose murni lewat tombol X Windows, 
+            // seluruh aplikasi dan form yang tersembunyi ikut mati total.
+            Application.Exit();
         }
+
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -218,27 +224,46 @@ namespace pboFinalProfject.View
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            // Logout dan kembali ke form login
-            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin logout?",
-                "Konfirmasi Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Bersihkan session
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
                 UserSession.Clear();
 
-                // Tutup form dashboard
-                this.Close();
-
-                // Buka form login baru
-                FormLogin formLogin = new FormLogin();
-                formLogin.Show();
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
             }
         }
 
         private void dgvAntreanKonseling_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
+            }
         }
     }
 }

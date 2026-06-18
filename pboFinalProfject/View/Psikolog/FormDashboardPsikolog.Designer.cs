@@ -113,7 +113,6 @@
             // 
             // FormDashboardPsikolog
             // 
-            AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
@@ -122,7 +121,10 @@
             Controls.Add(btnKeluar);
             Controls.Add(btnKelolaProfil);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            WindowState = FormWindowState.Maximized;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormDashboardPsikolog";
             StartPosition = FormStartPosition.CenterScreen;
