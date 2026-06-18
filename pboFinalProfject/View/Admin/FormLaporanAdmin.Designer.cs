@@ -26,7 +26,6 @@
             lblSampai = new Label();
             dtpMulai = new DateTimePicker();
             lblPeriode = new Label();
-            btnKembali = new Button();
             dgvLaporan = new DataGridView();
             pnlSummary = new Panel();
             lblTotalSesi = new Label();
@@ -35,7 +34,9 @@
             btnCetak = new Button();
             btnKeluar = new Button();
             btnDashboard = new Button();
+            btnLaporan = new Button();
             btnKelolaUser = new Button();
+            btnKembali = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLaporan).BeginInit();
             pnlSummary.SuspendLayout();
             SuspendLayout();
@@ -107,18 +108,6 @@
             lblPeriode.Size = new Size(87, 60);
             lblPeriode.TabIndex = 6;
             lblPeriode.Text = "Pilih Periode:";
-            // 
-            // btnKembali
-            // 
-            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
-            btnKembali.ForeColor = Color.White;
-            btnKembali.Location = new Point(1369, 60);
-            btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(131, 53);
-            btnKembali.TabIndex = 10;
-            btnKembali.Text = "Kembali";
-            btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += btnKembali_Click;
             // 
             // dgvLaporan
             // 
@@ -207,55 +196,93 @@
             // 
             // btnKeluar
             // 
-            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 10.9F, FontStyle.Bold);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(39, 751);
+            btnKeluar.Location = new Point(84, 755);
             btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(218, 53);
-            btnKeluar.TabIndex = 10;
+            btnKeluar.Size = new Size(179, 41);
+            btnKeluar.TabIndex = 15;
             btnKeluar.Text = "Keluar";
+            btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
-            btnKeluar.Click += btnKeluar_Click;
             // 
             // btnDashboard
             // 
-            btnDashboard.BackColor = Color.FromArgb(28, 167, 236);
+            btnDashboard.BackColor = Color.Transparent;
+            btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDashboard.Font = new Font("Calibri Light", 11.5F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(74, 166);
+            btnDashboard.Location = new Point(74, 168);
             btnDashboard.Margin = new Padding(3, 4, 3, 4);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Size = new Size(163, 45);
-            btnDashboard.TabIndex = 2;
-            btnDashboard.Text = "Dashboard";
+            btnDashboard.TabIndex = 14;
+            btnDashboard.Text = "Beranda";
+            btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
-            btnDashboard.Click += btnDashboard_Click;
+            // 
+            // btnLaporan
+            // 
+            btnLaporan.BackColor = Color.Transparent;
+            btnLaporan.FlatAppearance.BorderSize = 0;
+            btnLaporan.FlatStyle = FlatStyle.Flat;
+            btnLaporan.Font = new Font("Calibri Light", 11.5F, FontStyle.Bold);
+            btnLaporan.ForeColor = Color.White;
+            btnLaporan.Location = new Point(75, 310);
+            btnLaporan.Margin = new Padding(3, 4, 3, 4);
+            btnLaporan.Name = "btnLaporan";
+            btnLaporan.Size = new Size(163, 45);
+            btnLaporan.TabIndex = 12;
+            btnLaporan.Text = "Laporan";
+            btnLaporan.TextAlign = ContentAlignment.MiddleLeft;
+            btnLaporan.UseVisualStyleBackColor = false;
             // 
             // btnKelolaUser
             // 
-            btnKelolaUser.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser.BackColor = Color.Transparent;
+            btnKelolaUser.FlatAppearance.BorderSize = 0;
             btnKelolaUser.FlatStyle = FlatStyle.Flat;
-            btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaUser.Font = new Font("Corbel", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKelolaUser.ForeColor = Color.White;
-            btnKelolaUser.Location = new Point(74, 235);
+            btnKelolaUser.Location = new Point(74, 237);
             btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
             btnKelolaUser.Name = "btnKelolaUser";
             btnKelolaUser.Size = new Size(163, 45);
-            btnKelolaUser.TabIndex = 2;
-            btnKelolaUser.Text = "Kelola User";
+            btnKelolaUser.TabIndex = 13;
+            btnKelolaUser.Text = "Kelola Pengguna";
+            btnKelolaUser.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaUser.UseVisualStyleBackColor = false;
-            btnKelolaUser.Click += btnKelolaUser_Click;
+            // 
+            // btnKembali
+            // 
+            btnKembali.BackColor = Color.Transparent;
+            btnKembali.FlatAppearance.BorderSize = 0;
+            btnKembali.FlatStyle = FlatStyle.Flat;
+            btnKembali.Font = new Font("Calibri", 10.8F);
+            btnKembali.ForeColor = SystemColors.ButtonHighlight;
+            btnKembali.Location = new Point(1411, 62);
+            btnKembali.Name = "btnKembali";
+            btnKembali.Size = new Size(81, 51);
+            btnKembali.TabIndex = 16;
+            btnKembali.Text = "Kembali";
+            btnKembali.TextAlign = ContentAlignment.MiddleLeft;
+            btnKembali.UseVisualStyleBackColor = false;
             // 
             // FormLaporanAdmin
             // 
             BackColor = Color.FromArgb(250, 250, 250);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
-            Controls.Add(btnKelolaUser);
-            Controls.Add(btnDashboard);
+            Controls.Add(btnKembali);
             Controls.Add(btnKeluar);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnLaporan);
+            Controls.Add(btnKelolaUser);
             Controls.Add(lblPeriode);
             Controls.Add(dtpMulai);
             Controls.Add(lblSampai);
@@ -267,7 +294,6 @@
             Controls.Add(btnEkspor);
             Controls.Add(pnlSummary);
             Controls.Add(dgvLaporan);
-            Controls.Add(btnKembali);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -297,9 +323,10 @@
         private System.Windows.Forms.Label lblTotalSesi;
         private System.Windows.Forms.Button btnEkspor;
         private System.Windows.Forms.Button btnCetak;
-        private System.Windows.Forms.Button btnKembali;
-        private System.Windows.Forms.Button btnKeluar;
-        private System.Windows.Forms.Button btnDashboard;
-        private System.Windows.Forms.Button btnKelolaUser;
+        private Button btnKeluar;
+        private Button btnDashboard;
+        private Button btnLaporan;
+        private Button btnKelolaUser;
+        private Button btnKembali;
     }
 }
