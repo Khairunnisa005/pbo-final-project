@@ -15,6 +15,7 @@ namespace pboFinalProfject.Controllers
         private readonly UserRepository _userRepository;
         private readonly PsikologRepository _psikologRepository;
         private readonly BookingRepository _bookingRepository;
+        private readonly AdminRepository _adminRepository;
         public AdminController()
         {
             _db = new DatabaseHelper();
@@ -417,7 +418,22 @@ namespace pboFinalProfject.Controllers
             return csv;
         }
 
+        public bool UpdateMahasiswa(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "Data mahasiswa tidak boleh kosong.");
+            }
 
+            if (user.UserId == 0)
+            {
+                throw new Exception("ID Mahasiswa tidak valid untuk proses update.");
+            }
+
+            // Panggil fungsi update yang ada di layer Repository / Data Access
+            // Sesuaikan '_adminRepository' dengan nama instance repository milik Anda
+            return _adminRepository.UpdateMahasiswa(user);
+        }
     }
     
 }

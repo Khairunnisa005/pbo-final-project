@@ -27,9 +27,11 @@
             dgvSlotJadwal = new DataGridView();
             btnTambah = new Button();
             btnBersihkan = new Button();
-            btnKembali = new Button();
             btnUbah = new Button();
             btnHapus = new Button();
+            btnKelolaProfil = new Button();
+            btnDashboard = new Button();
+            btnKeluar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).BeginInit();
             SuspendLayout();
             // 
@@ -125,18 +127,6 @@
             btnBersihkan.Text = "Clear";
             btnBersihkan.UseVisualStyleBackColor = false;
             // 
-            // btnKembali
-            // 
-            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
-            btnKembali.ForeColor = Color.White;
-            btnKembali.Location = new Point(1383, 22);
-            btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(108, 56);
-            btnKembali.TabIndex = 10;
-            btnKembali.Text = "Kembali";
-            btnKembali.UseVisualStyleBackColor = false;
-            btnKembali.Click += BtnKembali_Click;
-            // 
             // btnUbah
             // 
             btnUbah.BackColor = Color.FromArgb(28, 167, 236);
@@ -159,6 +149,49 @@
             btnHapus.Text = "Hapus";
             btnHapus.UseVisualStyleBackColor = false;
             // 
+            // btnKelolaProfil
+            // 
+            btnKelolaProfil.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
+            btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaProfil.ForeColor = Color.White;
+            btnKelolaProfil.Location = new Point(74, 291);
+            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaProfil.Name = "btnKelolaProfil";
+            btnKelolaProfil.Size = new Size(163, 45);
+            btnKelolaProfil.TabIndex = 2;
+            btnKelolaProfil.Text = "Kelola Profil";
+            btnKelolaProfil.UseVisualStyleBackColor = false;
+            btnKelolaProfil.Click += btnKelolaProfil_Click;
+            // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.FromArgb(28, 167, 236);
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(74, 160);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(163, 45);
+            btnDashboard.TabIndex = 2;
+            btnDashboard.Text = "Dashboard";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
+            // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(32, 770);
+            btnKeluar.Margin = new Padding(2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(218, 41);
+            btnKeluar.TabIndex = 10;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
+            // 
             // FormKelolaJadwal
             // 
             BackColor = Color.FromArgb(31, 47, 152);
@@ -174,14 +207,18 @@
             Controls.Add(dgvSlotJadwal);
             Controls.Add(btnTambah);
             Controls.Add(btnBersihkan);
-            Controls.Add(btnKembali);
             Controls.Add(btnUbah);
             Controls.Add(btnHapus);
+            Controls.Add(btnKelolaProfil);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnKeluar);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormKelolaJadwal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Kelola Jadwal - UniMind";
+            WindowState = FormWindowState.Maximized;
             Load += FormKelolaJadwal_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).EndInit();
             ResumeLayout(false);
@@ -197,10 +234,11 @@
         private System.Windows.Forms.CheckBox chkIsActive;
         private System.Windows.Forms.DataGridView dgvSlotJadwal;
         private System.Windows.Forms.Button btnTambah;
-        // duplicate fields removed
         private System.Windows.Forms.Button btnBersihkan;
-        private System.Windows.Forms.Button btnKembali;
         private System.Windows.Forms.Button btnUbah;
         private System.Windows.Forms.Button btnHapus;
+        private System.Windows.Forms.Button btnKelolaProfil;
+        private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Button btnKeluar;
     }
 }

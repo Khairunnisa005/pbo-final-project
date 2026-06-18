@@ -249,12 +249,57 @@ namespace pboFinalProfject.View
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-
+            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
+            // Agar kembali ke form utama aplikasi
+            FormDashboardAdmin dashboard = new FormDashboardAdmin();
+            this.Hide();         // Sembunyikan Form Laporan
+            dashboard.Show();    // Tampilkan Dashboard
         }
 
         private void dgvLaporan_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-    }
-}
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
+            }
+        }
+        private void btnKelolaUser_Click(object sender, EventArgs e)
+        {
+            //// Buka form kelola jadwal untuk psikolog ini
+            //// 1. Ambil ID admin aktif
+            //int adminId = UserSession.GetCurrentUserId();
+
+            // 2. Oper ID ke form tujuan
+            FormManageUser formKelolaUser = new FormManageUser();
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Hide();
+
+            // 4. Tampilkan form kelola user
+            formKelolaUser.Show();
+        }
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
+            // Agar kembali ke form utama aplikasi
+            FormDashboardAdmin dashboard = new FormDashboardAdmin();
+            this.Hide();         // Sembunyikan Form Laporan
+            dashboard.Show();    // Tampilkan Dashboard
+        }
+}}

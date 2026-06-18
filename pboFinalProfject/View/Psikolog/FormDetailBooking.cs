@@ -234,6 +234,54 @@ namespace pboFinalProfject
         {
             this.Close();
         }
+        private void btnKelolaJadwal_Click(object sender, EventArgs e)
+        {
+            // Buka form kelola jadwal untuk psikolog ini
+            // 1. Ambil ID psikolog aktif
+            int psikologId = UserSession.GetCurrentUserId();
+
+            // 2. Oper ID ke form tujuan
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(psikologId);
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Close();
+
+            // 4. Tampilkan form jadwal
+            formJadwal.Show();
+        }
+        private void btnKelolaProfil_Click(object sender, EventArgs e)
+        {
+            // 1. Ambil ID psikolog aktif
+            int psikologId = UserSession.GetCurrentUserId();
+
+            // 2. Oper ID ke form tujuan
+            FormKelolaProfil formProfil = new FormKelolaProfil(psikologId);
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Close();
+
+            // 4. Tampilkan form profil
+            formProfil.Show();
+        }
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
+            }
+        }
     }
 }
 

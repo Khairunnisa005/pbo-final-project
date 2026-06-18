@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Npgsql; // Pastikan library Npgsql sudah terinstall via NuGet
+using pboFinalProfject.Session;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using Npgsql; // Pastikan library Npgsql sudah terinstall via NuGet
 
 namespace pboFinalProfject.View
 {
@@ -20,6 +21,13 @@ namespace pboFinalProfject.View
 
         private void FormKelolaProfil_Load(object sender, EventArgs e)
         {
+            if (this.currentUserId <= 0)
+            {
+                MessageBox.Show("Sesi login tidak valid!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
             LoadProfilPsikolog();
         }
 
@@ -102,9 +110,50 @@ namespace pboFinalProfject.View
             // Mengembalikan nilai form ke data awal di database
             LoadProfilPsikolog();
         }
-        private void btnKembali_Click(object sender, EventArgs e)
+        // Tombol "Dashboard" di Sidebar Profil
+        private void btnDashboard_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
+            // Agar kembali ke form utama aplikasi
+            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
+
+            this.Hide();         // Sembunyikan Form Profil
+            dashboard.Show();    // Tampilkan Dashboard
+        }
+
+        // Tombol "Kelola Jadwal" di Sidebar Profil
+        private void btnKelolaJadwal_Click(object sender, EventArgs e)
+        {
+            int userId = UserSession.GetCurrentUserId();
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
+
+            this.Hide();         // Sembunyikan Form Profil
+            formJadwal.Show();   // Tampilkan Form Jadwal
+        }
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi keluar
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
+            }
+        }
+        private void FormKelolaProfil_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Memastikan jika form ini dicolose murni lewat tombol X Windows, 
+            // seluruh aplikasi dan form yang tersembunyi ikut mati total.
+            Application.Exit();
         }
     }
 }

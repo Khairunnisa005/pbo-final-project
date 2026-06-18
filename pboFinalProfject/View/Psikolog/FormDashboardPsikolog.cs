@@ -134,7 +134,7 @@ namespace pboFinalProfject.View
                 // Format tampilan tanggal (created_at)
                 dgvPasien.CellFormatting += (s, ev) =>
                 {
-                    if (ev.ColumnIndex == dgvPasien.Columns["tgl_booking"]?.Index && ev.Value != null)
+                    if (ev.ColumnIndex == dgvPasien.Columns["Created_At"]?.Index && ev.Value != null)
                     {
                         DateTime tanggal = Convert.ToDateTime(ev.Value);
                         ev.Value = tanggal.ToString("dd MMM yyyy");
@@ -308,24 +308,38 @@ namespace pboFinalProfject.View
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
             // Buka form kelola jadwal untuk psikolog ini
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(_currentPsikologId);
-            formJadwal.ShowDialog();
+            // 1. Ambil ID psikolog aktif
+            int psikologId = UserSession.GetCurrentUserId();
+
+            // 2. Oper ID ke form tujuan
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(psikologId);
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Hide();
+
+            // 4. Tampilkan form jadwal
+            formJadwal.Show();
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            // Buka form kelola profil untuk psikolog ini
-            FormKelolaProfil formProfil = new FormKelolaProfil(UserSession.GetCurrentUserId());
-            formProfil.ShowDialog();
+            // 1. Ambil ID psikolog aktif
+            int psikologId = UserSession.GetCurrentUserId();
+
+            // 2. Oper ID ke form tujuan
+            FormKelolaProfil formProfil = new FormKelolaProfil(psikologId);
+
+            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
+            this.Hide();
+
+            // 4. Tampilkan form profil
+            formProfil.Show();
         }
-        protected override void OnFormClosed(FormClosedEventArgs e)
+        private void FormDashboardPsikolog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            base.OnFormClosed(e);
-
-            // Tampilkan form login lagi
-            FormLogin login = new FormLogin();
-            login.Show();
+            // Memastikan jika form ini dicolose murni lewat tombol X Windows, 
+            // seluruh aplikasi dan form yang tersembunyi ikut mati total.
+            Application.Exit();
         }
-
         private void btnKeluar_Click(object sender, EventArgs e)
         {
             // Konfirmasi keluar
@@ -334,7 +348,15 @@ namespace pboFinalProfject.View
 
             if (result == DialogResult.Yes)
             {
-                Application.Exit();
+                // 1. Tampilkan form login baru
+                FormLogin login = new FormLogin();
+                login.Show();
+
+                // 2. Clear session data jika diperlukan
+                UserSession.Clear();
+
+                // 3. Tutup Form Dashboard saat ini tanpa memicu loop penutupan otomatis
+                this.Dispose();
             }
         }
     }
