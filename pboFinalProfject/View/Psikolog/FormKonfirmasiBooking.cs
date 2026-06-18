@@ -76,7 +76,7 @@ namespace pboFinalProfject.View
                     // Isi data ke label
                     lblValID.Text = row["booking_id"]?.ToString() ?? "-";
                     lblValNama.Text = row["mahasiswa"]?.ToString() ?? "-";
-                    txtValCatatanMhs.Text = row["catatan_mahasiswa"]?.ToString() ?? "-";
+                    txtValCatatanMhs.Text = row["catatan_user"]?.ToString() ?? "-";
 
 
 
