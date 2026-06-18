@@ -166,37 +166,78 @@
             // 
             // btnDashboard
             // 
-            btnDashboard.BackColor = Color.FromArgb(28, 167, 236);
+            btnDashboard.BackColor = Color.Transparent;
+            btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDashboard.Font = new Font("Calibri Light", 11.5F);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(74, 160);
+            btnDashboard.Location = new Point(75, 162);
             btnDashboard.Margin = new Padding(3, 4, 3, 4);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Size = new Size(163, 45);
             btnDashboard.TabIndex = 2;
-            btnDashboard.Text = "Dashboard";
+            btnDashboard.Text = "Beranda";
+            btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
             // 
+            // btnKelolaJadwal
+            // 
+            btnKelolaJadwal.BackColor = Color.FromArgb(31, 81, 199);
+            btnKelolaJadwal.FlatAppearance.BorderSize = 0;
+            btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
+            btnKelolaJadwal.Font = new Font("Calibri Light", 12.1F);
+            btnKelolaJadwal.ForeColor = SystemColors.ButtonHighlight;
+            btnKelolaJadwal.Location = new Point(77, 231);
+            btnKelolaJadwal.Name = "btnKelolaJadwal";
+            btnKelolaJadwal.RightToLeft = RightToLeft.No;
+            btnKelolaJadwal.Size = new Size(181, 45);
+            btnKelolaJadwal.TabIndex = 20;
+            btnKelolaJadwal.Text = "Jadwal Konsultasi";
+            btnKelolaJadwal.TextAlign = ContentAlignment.MiddleLeft;
+            btnKelolaJadwal.UseVisualStyleBackColor = false;
+            // 
             // btnKeluar
             // 
-            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(35, 774);
+            btnKeluar.Location = new Point(83, 776);
             btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(218, 41);
-            btnKeluar.TabIndex = 10;
+            btnKeluar.Size = new Size(179, 41);
+            btnKeluar.TabIndex = 22;
             btnKeluar.Text = "Keluar";
+            btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
-            btnKeluar.Click += btnKeluar_Click;
+            // 
+            // btnKelolaProfil
+            // 
+            btnKelolaProfil.BackColor = Color.Transparent;
+            btnKelolaProfil.FlatAppearance.BorderSize = 0;
+            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
+            btnKelolaProfil.Font = new Font("Calibri", 10.9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKelolaProfil.ForeColor = SystemColors.ButtonHighlight;
+            btnKelolaProfil.Location = new Point(77, 294);
+            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaProfil.Name = "btnKelolaProfil";
+            btnKelolaProfil.Size = new Size(165, 38);
+            btnKelolaProfil.TabIndex = 21;
+            btnKelolaProfil.Text = "Profil";
+            btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
+            btnKelolaProfil.UseVisualStyleBackColor = false;
             // 
             // FormKelolaJadwal
             // 
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnKelolaJadwal);
+            Controls.Add(btnKeluar);
+            Controls.Add(btnKelolaProfil);
             Controls.Add(cmbHari);
             Controls.Add(dtpJamMulai);
             Controls.Add(dtpJamSelesai);
@@ -208,9 +249,6 @@
             Controls.Add(btnBersihkan);
             Controls.Add(btnUbah);
             Controls.Add(btnHapus);
-            Controls.Add(btnKelolaProfil);
-            Controls.Add(btnDashboard);
-            Controls.Add(btnKeluar);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -236,8 +274,9 @@
         private System.Windows.Forms.Button btnBersihkan;
         private System.Windows.Forms.Button btnUbah;
         private System.Windows.Forms.Button btnHapus;
-        private System.Windows.Forms.Button btnKelolaProfil;
-        private System.Windows.Forms.Button btnDashboard;
-        private System.Windows.Forms.Button btnKeluar;
+        private Button btnDashboard;
+        private Button btnKelolaJadwal;
+        private Button btnKeluar;
+        private Button btnKelolaProfil;
     }
 }
