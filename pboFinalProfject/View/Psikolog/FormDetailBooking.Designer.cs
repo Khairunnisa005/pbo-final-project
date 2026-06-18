@@ -199,7 +199,7 @@
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.Font = new Font("Calibri", 10.8F);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(77, 162);
+            btnDashboard.Location = new Point(76, 162);
             btnDashboard.Margin = new Padding(3, 4, 3, 4);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Size = new Size(163, 45);

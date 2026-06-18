@@ -29,9 +29,10 @@
             btnBersihkan = new Button();
             btnUbah = new Button();
             btnHapus = new Button();
-            btnKelolaProfil = new Button();
             btnDashboard = new Button();
+            btnKelolaJadwal = new Button();
             btnKeluar = new Button();
+            btnKelolaProfil = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).BeginInit();
             SuspendLayout();
             // 
@@ -149,21 +150,6 @@
             btnHapus.Text = "Hapus";
             btnHapus.UseVisualStyleBackColor = false;
             // 
-            // btnKelolaProfil
-            // 
-            btnKelolaProfil.BackColor = Color.FromArgb(28, 167, 236);
-            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
-            btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKelolaProfil.ForeColor = Color.White;
-            btnKelolaProfil.Location = new Point(74, 293);
-            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
-            btnKelolaProfil.Name = "btnKelolaProfil";
-            btnKelolaProfil.Size = new Size(163, 45);
-            btnKelolaProfil.TabIndex = 2;
-            btnKelolaProfil.Text = "Kelola Profil";
-            btnKelolaProfil.UseVisualStyleBackColor = false;
-            btnKelolaProfil.Click += btnKelolaProfil_Click;
-            // 
             // btnDashboard
             // 
             btnDashboard.BackColor = Color.Transparent;
@@ -175,23 +161,22 @@
             btnDashboard.Margin = new Padding(3, 4, 3, 4);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Size = new Size(163, 45);
-            btnDashboard.TabIndex = 2;
+            btnDashboard.TabIndex = 23;
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
-            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnKelolaJadwal
             // 
             btnKelolaJadwal.BackColor = Color.FromArgb(31, 81, 199);
             btnKelolaJadwal.FlatAppearance.BorderSize = 0;
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
-            btnKelolaJadwal.Font = new Font("Calibri Light", 12.1F);
+            btnKelolaJadwal.Font = new Font("Calibri Light", 11, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = SystemColors.ButtonHighlight;
             btnKelolaJadwal.Location = new Point(77, 231);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
             btnKelolaJadwal.RightToLeft = RightToLeft.No;
-            btnKelolaJadwal.Size = new Size(181, 45);
+            btnKelolaJadwal.Size = new Size(195, 45);
             btnKelolaJadwal.TabIndex = 20;
             btnKelolaJadwal.Text = "Jadwal Konsultasi";
             btnKelolaJadwal.TextAlign = ContentAlignment.MiddleLeft;
