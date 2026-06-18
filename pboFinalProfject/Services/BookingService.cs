@@ -268,6 +268,8 @@ namespace pboFinalProfject
                 SELECT 
                     b.booking_id,
                     u.username as mahasiswa,
+                    u.email,
+                    u.no_telepon,
                     b.created_at,
                     j.jam_mulai,
                     j.jam_selesai,

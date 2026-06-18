@@ -60,6 +60,7 @@ namespace pboFinalProfject
                     lblValIDBooking.Text = row["booking_id"]?.ToString() ?? "-";
                     lblValNamaKonseli.Text = row["mahasiswa"]?.ToString() ?? "-";
                     lblValEmail.Text = row["email"]?.ToString() ?? "-";
+                    lblValNoTelepon.Text = row["no_telepon"]?.ToString() ?? "-";
                     // Format tanggal dan jam
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
                     TimeSpan jamMulai = ((TimeOnly)row["jam_mulai"]).ToTimeSpan();
@@ -71,19 +72,19 @@ namespace pboFinalProfject
                     _currentStatus = row["status"]?.ToString() ?? "Pending";
 
                     //// Tampilkan hasil screening jika ada
-                    if (row["tingkat_stres"] != DBNull.Value && !string.IsNullOrEmpty(row["tingkat_stres"]?.ToString()))
-                    {
-                        lblHasilScreening.Visible = true;
-                        panelScreening.Visible = true;
-                        lblValTingkatStres.Text = row["tingkat_stres"]?.ToString() ?? "-";
-                        lblValSkorTotal.Text = row["skor_total"]?.ToString() ?? "-";
-                        txtValRekomendasi.Text = row["rekomendasi"]?.ToString() ?? "-";
-                    }
-                    else
-                    {
-                        lblHasilScreening.Visible = false;
-                        panelScreening.Visible = false;
-                    }
+                    //if (row["tingkat_stres"] != DBNull.Value && !string.IsNullOrEmpty(row["tingkat_stres"]?.ToString()))
+                    //{
+                    //    lblHasilScreening.Visible = true;
+                    //    panelScreening.Visible = true;
+                    //    lblValTingkatStres.Text = row["tingkat_stres"]?.ToString() ?? "-";
+                    //    lblValSkorTotal.Text = row["skor_total"]?.ToString() ?? "-";
+                    //    txtValRekomendasi.Text = row["rekomendasi"]?.ToString() ?? "-";
+                    //}
+                    //else
+                    //{
+                    //    lblHasilScreening.Visible = false;
+                    //    panelScreening.Visible = false;
+                    //}
 
                     // Atur warna status
                     AturKomponenStatus(_currentStatus);
