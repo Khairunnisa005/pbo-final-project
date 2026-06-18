@@ -114,15 +114,65 @@ namespace pboFinalProfject.Services
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
+
+                // tanggal_assessment may be mapped to DateOnly by Npgsql.
+                object rawTanggal = row["tanggal_assessment"];
+                DateTime tanggalAssessment;
+                if (rawTanggal == DBNull.Value)
+                {
+                    tanggalAssessment = default;
+                }
+                else if (rawTanggal is DateTime dtTanggal)
+                {
+                    tanggalAssessment = dtTanggal;
+                }
+                else if (rawTanggal is DateOnly dTanggal)
+                {
+                    // Convert DateOnly to DateTime at midnight
+                    tanggalAssessment = dTanggal.ToDateTime(System.TimeOnly.MinValue);
+                }
+                else if (rawTanggal is string sTanggal && DateTime.TryParse(sTanggal, out var parsedTanggal))
+                {
+                    tanggalAssessment = parsedTanggal;
+                }
+                else
+                {
+                    throw new InvalidCastException($"Cannot convert {rawTanggal?.GetType().FullName} to DateTime");
+                }
+
+                // created_at is expected to be DateTime but handle defensively
+                object rawCreated = row["created_at"];
+                DateTime createdAt;
+                if (rawCreated == DBNull.Value)
+                {
+                    createdAt = default;
+                }
+                else if (rawCreated is DateTime dtCreated)
+                {
+                    createdAt = dtCreated;
+                }
+                else if (rawCreated is DateOnly dCreated)
+                {
+                    createdAt = dCreated.ToDateTime(System.TimeOnly.MinValue);
+                }
+                else if (rawCreated is string sCreated && DateTime.TryParse(sCreated, out var parsedCreated))
+                {
+                    createdAt = parsedCreated;
+                }
+                else
+                {
+                    createdAt = Convert.ToDateTime(rawCreated);
+                }
+
                 return new HasilAssessment
                 {
                     HasilId = Convert.ToInt32(row["hasil_id"]),
                     UserId = Convert.ToInt32(row["user_id"]),
-                    TanggalAssessment = Convert.ToDateTime(row["tanggal_assessment"]),
+                    TanggalAssessment = tanggalAssessment,
                     SkorTotal = Convert.ToInt32(row["skor_total"]),
                     TingkatStres = row["tingkat_stres"].ToString(),
                     Rekomendasi = row["rekomendasi"].ToString(),
-                    CreatedAt = Convert.ToDateTime(row["created_at"])
+                    CreatedAt = createdAt
                 };
             }
 
