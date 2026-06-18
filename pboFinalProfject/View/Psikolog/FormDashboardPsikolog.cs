@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.ApplicationServices;
 using pboFinalProfject.Controllers;
 using pboFinalProfject.Model;
 using pboFinalProfject.Session;
@@ -14,7 +15,9 @@ namespace pboFinalProfject.View
     {
         private PsikologController _psikologController;
         private AuthController _authController;
+        private BookingController _bookingController;
         private int _currentPsikologId;
+        private int userId = UserSession.GetCurrentUserId();
 
         // Tweak Konstruktor: Tambahkan parameter string untuk menangkap nama
         public FormDashboardPsikolog()
@@ -22,8 +25,9 @@ namespace pboFinalProfject.View
             InitializeComponent();
             _psikologController = new PsikologController();
             _authController = new AuthController();
+            _bookingController = new BookingController();
             _currentPsikologId = _psikologController.GetPsikologIdByUserId(UserSession.GetCurrentUserId());
-
+            
             // Hook event handlers
             this.Load += FormDashboardPsikolog_Load;
             btnKelolaJadwal.Click += btnKelolaJadwal_Click;
@@ -62,7 +66,6 @@ namespace pboFinalProfject.View
             }
 
             // Ambil psikolog_id dari user yang login
-            int userId = UserSession.GetCurrentUserId();
             _currentPsikologId = _psikologController.GetPsikologIdByUserId(userId);
 
             if (_currentPsikologId == 0)
@@ -246,26 +249,12 @@ namespace pboFinalProfject.View
 
             try
             {
-                //if (status == "Pending")
-                //{
-                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
-                //    form.ShowDialog();
-                //    LoadDaftarPasien();
-                //}
-                //else if (status == "Disetujui")
-                //{
-                //    FormSelesaikanKonseling form = new FormSelesaikanKonseling(bookingId, _currentPsikologId);
-                //    form.ShowDialog();
-                //    LoadDaftarPasien();
-                //}
-                //else
-                //{
-                //    FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
-                //    form.ShowDialog();
-                //}
-                FormDetailBooking form = new FormDetailBooking(bookingId, _currentPsikologId);
-                form.ShowDialog();
-                LoadDaftarPasien();
+                // Langsung buka form detail dengan mengoper kedua ID (bookingId dan userId/psikologId)
+                FormDetailBooking detailForm = new FormDetailBooking(bookingId, _currentPsikologId);
+                detailForm.ShowDialog();
+
+                // Jika Anda butuh merefresh data setelah form detail ditutup:
+                // LoadDaftarPasien(); 
             }
             catch (Exception ex)
             {
@@ -307,12 +296,10 @@ namespace pboFinalProfject.View
 
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
-            // Buka form kelola jadwal untuk psikolog ini
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
+            
 
             // 2. Oper ID ke form tujuan
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(psikologId);
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Hide();
@@ -322,11 +309,10 @@ namespace pboFinalProfject.View
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
+            
 
             // 2. Oper ID ke form tujuan
-            FormKelolaProfil formProfil = new FormKelolaProfil(psikologId);
+            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _currentPsikologId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Hide();

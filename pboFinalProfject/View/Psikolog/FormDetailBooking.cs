@@ -1,4 +1,5 @@
 ﻿
+using pboFinalProfject.Model;
 using pboFinalProfject.Services;
 using pboFinalProfject.Session;
 using pboFinalProfject.View;
@@ -16,7 +17,7 @@ namespace pboFinalProfject
         private int _psikologId;
         private IBookingService _bookingService;
         private string _currentStatus;
-
+        private int userId = UserSession.GetCurrentUserId();
         // Konstruktor menerima bookingId dan psikologId
         public FormDetailBooking(int bookingId, int psikologId)
         {
@@ -58,12 +59,11 @@ namespace pboFinalProfject
                     // Isi data ke komponen form
                     lblValIDBooking.Text = row["booking_id"]?.ToString() ?? "-";
                     lblValNamaKonseli.Text = row["mahasiswa"]?.ToString() ?? "-";
-                    lblValKonselor.Text = row["psikolog_nama"]?.ToString() ?? "-";
-
+                    lblValEmail.Text = row["email"]?.ToString() ?? "-";
                     // Format tanggal dan jam
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
-                    TimeSpan jamMulai = (TimeSpan)row["jam_mulai"];
-                    TimeSpan jamSelesai = (TimeSpan)row["jam_selesai"];
+                    TimeSpan jamMulai = ((TimeOnly)row["jam_mulai"]).ToTimeSpan();
+                    TimeSpan jamSelesai = ((TimeOnly)row["jam_selesai"]).ToTimeSpan();
                     lblValJadwal.Text = $"{tanggal:dd MMMM yyyy}, {jamMulai:hh\\:mm} - {jamSelesai:hh\\:mm} WIB";
 
                     lblValMetode.Text = row["metode"]?.ToString() ?? "-";
@@ -236,12 +236,9 @@ namespace pboFinalProfject
         }
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
-            // Buka form kelola jadwal untuk psikolog ini
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
 
             // 2. Oper ID ke form tujuan
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(psikologId);
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Close();
@@ -251,11 +248,9 @@ namespace pboFinalProfject
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
 
             // 2. Oper ID ke form tujuan
-            FormKelolaProfil formProfil = new FormKelolaProfil(psikologId);
+            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _psikologId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Close();

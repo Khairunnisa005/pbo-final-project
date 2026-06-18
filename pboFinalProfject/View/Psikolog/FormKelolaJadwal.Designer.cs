@@ -39,7 +39,7 @@
             // 
             cmbHari.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbHari.Items.AddRange(new object[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" });
-            cmbHari.Location = new Point(1251, 246);
+            cmbHari.Location = new Point(1268, 246);
             cmbHari.Name = "cmbHari";
             cmbHari.Size = new Size(235, 28);
             cmbHari.TabIndex = 1;
@@ -48,7 +48,7 @@
             // 
             dtpJamMulai.CustomFormat = "HH:mm";
             dtpJamMulai.Format = DateTimePickerFormat.Custom;
-            dtpJamMulai.Location = new Point(1251, 332);
+            dtpJamMulai.Location = new Point(1268, 335);
             dtpJamMulai.Name = "dtpJamMulai";
             dtpJamMulai.ShowUpDown = true;
             dtpJamMulai.Size = new Size(235, 27);
@@ -58,7 +58,7 @@
             // 
             dtpJamSelesai.CustomFormat = "HH:mm";
             dtpJamSelesai.Format = DateTimePickerFormat.Custom;
-            dtpJamSelesai.Location = new Point(1251, 423);
+            dtpJamSelesai.Location = new Point(1268, 426);
             dtpJamSelesai.Name = "dtpJamSelesai";
             dtpJamSelesai.ShowUpDown = true;
             dtpJamSelesai.Size = new Size(235, 27);
@@ -68,14 +68,14 @@
             // 
             cmbMetode.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMetode.Items.AddRange(new object[] { "Online", "Offline" });
-            cmbMetode.Location = new Point(1251, 515);
+            cmbMetode.Location = new Point(1268, 518);
             cmbMetode.Name = "cmbMetode";
             cmbMetode.Size = new Size(235, 28);
             cmbMetode.TabIndex = 4;
             // 
             // tbKuota
             // 
-            tbKuota.Location = new Point(1251, 604);
+            tbKuota.Location = new Point(1268, 609);
             tbKuota.Name = "tbKuota";
             tbKuota.Size = new Size(235, 27);
             tbKuota.TabIndex = 5;
@@ -85,9 +85,9 @@
             chkIsActive.BackColor = Color.White;
             chkIsActive.FlatStyle = FlatStyle.Flat;
             chkIsActive.ForeColor = Color.Black;
-            chkIsActive.Location = new Point(1245, 679);
+            chkIsActive.Location = new Point(1257, 687);
             chkIsActive.Name = "chkIsActive";
-            chkIsActive.Size = new Size(241, 31);
+            chkIsActive.Size = new Size(246, 31);
             chkIsActive.TabIndex = 6;
             chkIsActive.Text = "Aktif";
             chkIsActive.UseVisualStyleBackColor = false;
@@ -97,18 +97,18 @@
             dgvSlotJadwal.AllowUserToAddRows = false;
             dgvSlotJadwal.BackgroundColor = Color.FromArgb(74, 222, 222);
             dgvSlotJadwal.ColumnHeadersHeight = 34;
-            dgvSlotJadwal.Location = new Point(303, 155);
+            dgvSlotJadwal.Location = new Point(303, 144);
             dgvSlotJadwal.Name = "dgvSlotJadwal";
             dgvSlotJadwal.ReadOnly = true;
             dgvSlotJadwal.RowHeadersWidth = 62;
-            dgvSlotJadwal.Size = new Size(832, 577);
+            dgvSlotJadwal.Size = new Size(852, 577);
             dgvSlotJadwal.TabIndex = 5;
             // 
             // btnTambah
             // 
             btnTambah.BackColor = Color.FromArgb(28, 167, 236);
             btnTambah.ForeColor = Color.White;
-            btnTambah.Location = new Point(1179, 746);
+            btnTambah.Location = new Point(1198, 754);
             btnTambah.Name = "btnTambah";
             btnTambah.Size = new Size(315, 56);
             btnTambah.TabIndex = 6;
@@ -155,7 +155,7 @@
             btnKelolaProfil.FlatStyle = FlatStyle.Flat;
             btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnKelolaProfil.ForeColor = Color.White;
-            btnKelolaProfil.Location = new Point(74, 291);
+            btnKelolaProfil.Location = new Point(74, 293);
             btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
             btnKelolaProfil.Name = "btnKelolaProfil";
             btnKelolaProfil.Size = new Size(163, 45);
@@ -183,7 +183,7 @@
             // 
             btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(32, 770);
+            btnKeluar.Location = new Point(35, 774);
             btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(218, 41);
@@ -196,7 +196,6 @@
             // 
             BackColor = Color.FromArgb(31, 47, 152);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1518, 860);
             Controls.Add(cmbHari);
             Controls.Add(dtpJamMulai);

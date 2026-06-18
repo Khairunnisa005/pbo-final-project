@@ -46,6 +46,9 @@ namespace pboFinalProfject.View
             dgvAntreanKonseling = new DataGridView();
             btnKelolaUser = new Button();
             btnLaporan = new Button();
+            btnKelolaUser2 = new Button();
+            btnLaporan2 = new Button();
+            btnKeluar2 = new Button();
             pnlStatMahasiswa.SuspendLayout();
             pnlStatKonselor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).BeginInit();
@@ -55,7 +58,7 @@ namespace pboFinalProfject.View
             // 
             btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
             btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(39, 751);
+            btnKeluar.Location = new Point(42, 748);
             btnKeluar.Margin = new Padding(2);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(218, 53);
@@ -222,12 +225,60 @@ namespace pboFinalProfject.View
             btnLaporan.UseVisualStyleBackColor = false;
             btnLaporan.Click += btnLaporan_Click;
             // 
+            // btnKelolaUser2
+            // 
+            btnKelolaUser2.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser2.FlatStyle = FlatStyle.Flat;
+            btnKelolaUser2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaUser2.ForeColor = Color.White;
+            btnKelolaUser2.Location = new Point(1002, 253);
+            btnKelolaUser2.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaUser2.Name = "btnKelolaUser2";
+            btnKelolaUser2.Size = new Size(191, 45);
+            btnKelolaUser2.TabIndex = 2;
+            btnKelolaUser2.Text = "Kelola User";
+            btnKelolaUser2.UseVisualStyleBackColor = false;
+            btnKelolaUser2.Click += btnKelolaUser_Click;
+            // 
+            // btnLaporan2
+            // 
+            btnLaporan2.BackColor = Color.FromArgb(28, 167, 236);
+            btnLaporan2.FlatStyle = FlatStyle.Flat;
+            btnLaporan2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLaporan2.ForeColor = Color.White;
+            btnLaporan2.Location = new Point(1267, 255);
+            btnLaporan2.Margin = new Padding(3, 4, 3, 4);
+            btnLaporan2.Name = "btnLaporan2";
+            btnLaporan2.Size = new Size(188, 45);
+            btnLaporan2.TabIndex = 2;
+            btnLaporan2.Text = "Lihat Laporan";
+            btnLaporan2.UseVisualStyleBackColor = false;
+            btnLaporan2.Click += btnLaporan_Click;
+            // 
+            // btnKeluar2
+            // 
+            btnKeluar2.BackColor = Color.FromArgb(255, 0, 0);
+            btnKeluar2.ForeColor = Color.White;
+            btnKeluar2.FlatStyle = FlatStyle.Flat;
+            btnKeluar2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKeluar2.Location = new Point(1377, 87);
+            btnKeluar2.Margin = new Padding(2);
+            btnKeluar2.Name = "btnKeluar2";
+            btnKeluar2.Size = new Size(119, 48);
+            btnKeluar2.TabIndex = 8;
+            btnKeluar2.Text = "Keluar";
+            btnKeluar2.UseVisualStyleBackColor = false;
+            btnKeluar2.Click += btnKeluar_Click;
+            // 
             // FormDashboardAdmin
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.FromArgb(240, 244, 248);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
+            Controls.Add(btnKeluar2);
+            Controls.Add(btnLaporan2);
+            Controls.Add(btnKelolaUser2);
             Controls.Add(btnLaporan);
             Controls.Add(btnKelolaUser);
             Controls.Add(btnKeluar);
@@ -267,5 +318,8 @@ namespace pboFinalProfject.View
         private System.Windows.Forms.Button btnKeluar;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnLaporan2;
+        private System.Windows.Forms.Button btnKelolaUser2;
+        private System.Windows.Forms.Button btnKeluar2;
     }
 }

@@ -12,6 +12,7 @@ namespace pboFinalProfject.View
         private int _bookingId;
         private int _psikologId;
         private IBookingService _bookingService;
+        private int userId = UserSession.GetCurrentUserId();
 
         public FormSelesaikanKonseling(int bookingId, int psikologId)
         {
@@ -186,12 +187,9 @@ namespace pboFinalProfject.View
         }
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
-            // Buka form kelola jadwal untuk psikolog ini
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
 
             // 2. Oper ID ke form tujuan
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(psikologId);
+            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Close();
@@ -201,11 +199,9 @@ namespace pboFinalProfject.View
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            // 1. Ambil ID psikolog aktif
-            int psikologId = UserSession.GetCurrentUserId();
 
             // 2. Oper ID ke form tujuan
-            FormKelolaProfil formProfil = new FormKelolaProfil(psikologId);
+            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _psikologId);
 
             // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
             this.Close();

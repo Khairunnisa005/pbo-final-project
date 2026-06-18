@@ -13,6 +13,7 @@ namespace pboFinalProfject.View
         private PsikologController _psikologController;  // ← pakai PsikologController
         private int _psikologId;
         private int _selectedJadwalId = 0;
+        private int userId = UserSession.GetCurrentUserId();
 
         public FormKelolaJadwal(int psikologId)
         {
@@ -376,8 +377,7 @@ namespace pboFinalProfject.View
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            int userId = UserSession.GetCurrentUserId();
-            FormKelolaProfil formProfil = new FormKelolaProfil(userId);
+            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _psikologId);
 
             this.Hide();
             formProfil.Show();

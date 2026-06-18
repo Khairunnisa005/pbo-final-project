@@ -11,11 +11,13 @@ namespace pboFinalProfject.View
         private PsikologController _psikologController;  // ← pakai PsikologController
         // ID User psikolog yang sedang login (seharusnya dilempar dari session FormLogin)
         private int currentUserId;
+        private int currentPsikologId;
 
-        public FormKelolaProfil(int userId)
+        public FormKelolaProfil(int userId, int psikologId)
         {
             InitializeComponent();
             this.currentUserId = userId;
+            this.currentPsikologId = psikologId;
             _psikologController = new PsikologController(); // Inisialisasi controller
         }
 
