@@ -57,54 +57,6 @@ namespace pboFinalProfject.Services
             return user;
         }
 
-        //public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string nama)
-        //{
-        //    // Validasi input kosong
-        //    if (string.IsNullOrWhiteSpace(username))
-        //        throw new ArgumentException("Username tidak boleh kosong!");
-
-        //    if (string.IsNullOrWhiteSpace(email))
-        //        throw new ArgumentException("Email tidak boleh kosong!");
-
-        //    if (string.IsNullOrWhiteSpace(noTelepon))
-        //        throw new ArgumentException("Nomor telepon tidak boleh kosong!");
-
-        //    if (string.IsNullOrWhiteSpace(password))
-        //        throw new ArgumentException("Password tidak boleh kosong!");
-
-        //    if (string.IsNullOrEmpty(nama))
-        //        throw new ArgumentException("Nama lengkap tidak boleh kosong!");
-
-        //    // Validasi format email sederhana
-        //    if (!email.Contains("@") || !email.Contains("."))
-        //        throw new ArgumentException("Format email tidak valid!");
-
-        //    // Cek duplikasi
-        //    if (IsUsernameExist(username))
-        //        throw new Exception("Username sudah terdaftar! Silakan pilih username lain.");
-
-        //    if (IsEmailExist(email))
-        //        throw new Exception("Email sudah terdaftar! Silakan gunakan email lain.");
-
-        //    if (IsNoTeleponExist(noTelepon))
-        //        throw new Exception("Nomor telepon sudah terdaftar! Silakan gunakan nomor lain.");
-
-        //    // Buat user baru
-        //    User newUser = new User
-        //    {
-        //        Username = username,
-        //        Email = email,
-        //        NoTelepon = noTelepon,
-        //        PasswordHash = password, // TODO: nanti di-hash pakai PasswordHelper
-        //        NamaLengkap = nama,
-        //        Role = "Mahasiswa",
-        //        PreferensiWaktu = null,
-        //        CreatedAt = DateTime.Now
-        //    };
-
-        //    return _userRepository.Insert(newUser);
-        //}
-
         public bool RegisterMahasiswa(string username, string email, string noTelepon, string password, string namaLengkap = null)
         {
             

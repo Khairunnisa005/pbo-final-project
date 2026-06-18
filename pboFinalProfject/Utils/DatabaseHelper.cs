@@ -9,10 +9,6 @@ namespace pboFinalProfject.Utils
         // GANTI CONNECTION STRING INI SESUAI DENGAN POSTGRESQL-MU
         private readonly string _connectionString = "Host=localhost;Port=5432;Database=unimind;Username=postgres;Password=post16;";
 
-        // Alternatif connection string yang sering dipakai:
-        // "Host=localhost;Database=unimind;Username=postgres;Password=postgres;"
-        // "Host=127.0.0.1;Database=unimind;Username=postgres;Password=12345;"
-
         public NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(_connectionString);
