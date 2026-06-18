@@ -224,7 +224,7 @@ namespace pboFinalProfject.View
             btnLaporan2.BackColor = Color.Transparent;
             btnLaporan2.FlatAppearance.BorderSize = 0;
             btnLaporan2.FlatStyle = FlatStyle.Flat;
-            btnLaporan2.Font = new Font("Calibri Light", 10.5F);
+            btnLaporan2.Font = new Font("Corbel", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLaporan2.ForeColor = Color.DarkBlue;
             btnLaporan2.Location = new Point(1263, 257);
             btnLaporan2.Margin = new Padding(3, 4, 3, 4);
