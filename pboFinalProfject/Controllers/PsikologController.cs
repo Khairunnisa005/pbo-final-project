@@ -181,14 +181,14 @@ namespace pboFinalProfject
             string query = @"SELECT u.username, u.nama_lengkap, u.email, u.no_telepon, 
                                     p.gelar, p.pendidikan, p.no_izin_praktek, p.deskripsi_singkat, 
                                     p.melayani_online, p.melayani_offline 
-                             FROM M_User u 
-                             JOIN M_Psikolog p ON u.user_id = p.user_id 
+                             FROM ""users"" u
+                             JOIN ""psikolog"" p ON u.user_id = p.user_id 
                              WHERE u.user_id = @userId";
 
             // 2. Siapkan parameter yang dibutuhkan kueri
             NpgsqlParameter[] parameters = new NpgsqlParameter[]
             {
-                new NpgsqlParameter("userId", userId)
+                new NpgsqlParameter("@userId", userId)
             };
 
             try
@@ -208,11 +208,11 @@ namespace pboFinalProfject
             // 1. Kumpulkan kueri-kueri yang akan dijalankan
             List<string> queries = new List<string>
             {
-                @"UPDATE M_User 
+                @"UPDATE users 
                   SET nama_lengkap = @nama, email = @email, no_telepon = @telepon 
                   WHERE user_id = @userId",
 
-                @"UPDATE M_Psikolog 
+                @"UPDATE psikolog
                   SET gelar = @gelar, pendidikan = @pendidikan, 
                       no_izin_praktek = @izin, deskripsi_singkat = @deskripsi, 
                       melayani_online = @online, melayani_offline = @offline 
@@ -222,21 +222,21 @@ namespace pboFinalProfject
             // 2. Siapkan parameter untuk masing-masing kueri secara berurutan
             NpgsqlParameter[] paramUser = new NpgsqlParameter[]
             {
-                new NpgsqlParameter("nama", nama),
-                new NpgsqlParameter("email", email),
-                new NpgsqlParameter("telepon", telepon),
-                new NpgsqlParameter("userId", userId)
+                new NpgsqlParameter("@nama", nama),
+                new NpgsqlParameter("@email", email),
+                new NpgsqlParameter("@telepon", telepon),
+                new NpgsqlParameter("@userId", userId)
             };
 
             NpgsqlParameter[] paramPsikolog = new NpgsqlParameter[]
             {
-                new NpgsqlParameter("gelar", gelar),
-                new NpgsqlParameter("pendidikan", pendidikan),
-                new NpgsqlParameter("izin", izin),
-                new NpgsqlParameter("deskripsi", deskripsi),
-                new NpgsqlParameter("online", online),
-                new NpgsqlParameter("offline", offline),
-                new NpgsqlParameter("userId", userId)
+                new NpgsqlParameter("@gelar", gelar),
+                new NpgsqlParameter("@pendidikan", pendidikan),
+                new NpgsqlParameter("@izin", izin),
+                new NpgsqlParameter("@deskripsi", deskripsi),
+                new NpgsqlParameter("@online", online),
+                new NpgsqlParameter("@offline", offline),
+                new NpgsqlParameter("@userId", userId)
             };
 
             List<NpgsqlParameter[]> parameterSets = new List<NpgsqlParameter[]> { paramUser, paramPsikolog };
