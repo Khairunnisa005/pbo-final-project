@@ -32,10 +32,11 @@
             lblValJamMulai = new Label();
             lblValJamSelesai = new Label();
             lblJam = new Label();
+            btnKembali = new Button();
+            btnDashboard = new Button();
             btnKelolaJadwal = new Button();
             btnKeluar = new Button();
             btnKelolaProfil = new Button();
-            btnKembali = new Button();
             SuspendLayout();
             // 
             // lblValIDBooking
@@ -175,66 +176,94 @@
             lblJam.TabIndex = 0;
             lblJam.Text = "s/d";
             // 
-            // btnKelolaJadwal
-            // 
-            btnKelolaJadwal.BackColor = Color.FromArgb(28, 167, 236);
-            btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
-            btnKelolaJadwal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKelolaJadwal.ForeColor = Color.White;
-            btnKelolaJadwal.Location = new Point(74, 227);
-            btnKelolaJadwal.Margin = new Padding(3, 4, 3, 4);
-            btnKelolaJadwal.Name = "btnKelolaJadwal";
-            btnKelolaJadwal.Size = new Size(163, 45);
-            btnKelolaJadwal.TabIndex = 2;
-            btnKelolaJadwal.Text = "Kelola Jadwal";
-            btnKelolaJadwal.UseVisualStyleBackColor = false;
-            btnKelolaJadwal.Click += btnKelolaJadwal_Click;
-            // 
-            // btnKeluar
-            // 
-            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
-            btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(37, 775);
-            btnKeluar.Margin = new Padding(2);
-            btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(218, 41);
-            btnKeluar.TabIndex = 10;
-            btnKeluar.Text = "Keluar";
-            btnKeluar.UseVisualStyleBackColor = false;
-            btnKeluar.Click += btnKeluar_Click;
-            // 
-            // btnKelolaProfil
-            // 
-            btnKelolaProfil.BackColor = Color.FromArgb(28, 167, 236);
-            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
-            btnKelolaProfil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKelolaProfil.ForeColor = Color.White;
-            btnKelolaProfil.Location = new Point(74, 290);
-            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
-            btnKelolaProfil.Name = "btnKelolaProfil";
-            btnKelolaProfil.Size = new Size(163, 45);
-            btnKelolaProfil.TabIndex = 2;
-            btnKelolaProfil.Text = "Kelola Profil";
-            btnKelolaProfil.UseVisualStyleBackColor = false;
-            btnKelolaProfil.Click += btnKelolaProfil_Click;
-            // 
             // btnKembali
             // 
-            btnKembali.BackColor = Color.FromArgb(28, 167, 236);
-            btnKembali.ForeColor = Color.White;
-            btnKembali.Location = new Point(1363, 52);
+            btnKembali.BackColor = Color.Transparent;
+            btnKembali.FlatAppearance.BorderSize = 0;
+            btnKembali.FlatStyle = FlatStyle.Flat;
+            btnKembali.Font = new Font("Calibri", 10.8F);
+            btnKembali.ForeColor = SystemColors.ButtonHighlight;
+            btnKembali.Location = new Point(1403, 52);
             btnKembali.Name = "btnKembali";
             btnKembali.Size = new Size(128, 51);
             btnKembali.TabIndex = 10;
             btnKembali.Text = "Kembali";
+            btnKembali.TextAlign = ContentAlignment.MiddleLeft;
             btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += btnKembali_Click;
+            // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.Transparent;
+            btnDashboard.FlatAppearance.BorderSize = 0;
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Calibri", 10.8F);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(77, 162);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(163, 45);
+            btnDashboard.TabIndex = 18;
+            btnDashboard.Text = "Beranda";
+            btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
+            btnDashboard.UseVisualStyleBackColor = false;
+            // 
+            // btnKelolaJadwal
+            // 
+            btnKelolaJadwal.BackColor = Color.Transparent;
+            btnKelolaJadwal.FlatAppearance.BorderSize = 0;
+            btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
+            btnKelolaJadwal.Font = new Font("Calibri", 10.9F);
+            btnKelolaJadwal.ForeColor = SystemColors.ButtonHighlight;
+            btnKelolaJadwal.Location = new Point(75, 228);
+            btnKelolaJadwal.Name = "btnKelolaJadwal";
+            btnKelolaJadwal.Size = new Size(181, 45);
+            btnKelolaJadwal.TabIndex = 15;
+            btnKelolaJadwal.Text = "Jadwal Konsultasi";
+            btnKelolaJadwal.TextAlign = ContentAlignment.MiddleLeft;
+            btnKelolaJadwal.UseVisualStyleBackColor = false;
+            // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(83, 776);
+            btnKeluar.Margin = new Padding(2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(179, 41);
+            btnKeluar.TabIndex = 17;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
+            btnKeluar.UseVisualStyleBackColor = false;
+            // 
+            // btnKelolaProfil
+            // 
+            btnKelolaProfil.BackColor = Color.Transparent;
+            btnKelolaProfil.FlatAppearance.BorderSize = 0;
+            btnKelolaProfil.FlatStyle = FlatStyle.Flat;
+            btnKelolaProfil.Font = new Font("Calibri", 10.9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKelolaProfil.ForeColor = SystemColors.ButtonHighlight;
+            btnKelolaProfil.Location = new Point(76, 294);
+            btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
+            btnKelolaProfil.Name = "btnKelolaProfil";
+            btnKelolaProfil.Size = new Size(165, 38);
+            btnKelolaProfil.TabIndex = 16;
+            btnKelolaProfil.Text = "Profil";
+            btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
+            btnKelolaProfil.UseVisualStyleBackColor = false;
             // 
             // FormDetailBooking
             // 
             BackColor = Color.FromArgb(250, 250, 250);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
+            Controls.Add(btnDashboard);
+            Controls.Add(btnKelolaJadwal);
+            Controls.Add(btnKeluar);
+            Controls.Add(btnKelolaProfil);
             Controls.Add(lblValStatus);
             Controls.Add(btnAksiUtama);
             Controls.Add(btnTutup);
@@ -250,9 +279,6 @@
             Controls.Add(lblValJamSelesai);
             Controls.Add(lblJam);
             Controls.Add(btnKembali);
-            Controls.Add(btnKelolaJadwal);
-            Controls.Add(btnKeluar);
-            Controls.Add(btnKelolaProfil);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -291,9 +317,10 @@
         private System.Windows.Forms.Label lblValJamMulai;
         private System.Windows.Forms.Label lblValJamSelesai;
         private System.Windows.Forms.Label lblJam;
-        private System.Windows.Forms.Button btnKelolaJadwal;
-        private System.Windows.Forms.Button btnKeluar;
-        private System.Windows.Forms.Button btnKelolaProfil;
         private Button btnKembali;
+        private Button btnDashboard;
+        private Button btnKelolaJadwal;
+        private Button btnKeluar;
+        private Button btnKelolaProfil;
     }
 }

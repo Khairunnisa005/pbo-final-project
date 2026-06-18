@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UniMind")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3131dda5734c4ddd1a3027ce88b7dc5720d4d302")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18ceb1b3d84584bda07e96a408b1a23f91bc7383")]
 [assembly: System.Reflection.AssemblyProductAttribute("UniMind")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UniMind")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
