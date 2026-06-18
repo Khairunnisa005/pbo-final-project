@@ -196,6 +196,7 @@ namespace pboFinalProfject.Services
                 throw new ArgumentException("Password tidak boleh kosong!");
 
             // Cek duplikasi
+
             if (IsUsernameExist(user.Username))
                 throw new Exception("Username sudah terdaftar!");
 
