@@ -185,7 +185,7 @@
             btnKembali.ForeColor = SystemColors.ButtonHighlight;
             btnKembali.Location = new Point(1403, 52);
             btnKembali.Name = "btnKembali";
-            btnKembali.Size = new Size(128, 51);
+            btnKembali.Size = new Size(81, 51);
             btnKembali.TabIndex = 10;
             btnKembali.Text = "Kembali";
             btnKembali.TextAlign = ContentAlignment.MiddleLeft;
