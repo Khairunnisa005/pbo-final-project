@@ -34,8 +34,6 @@ namespace pboFinalProfject.View
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboardAdmin));
-            btnKeluar = new Button();
-            btnLogout = new Button();
             btnRefresh = new Button();
             pnlStatMahasiswa = new Panel();
             lblTotalMahasiswa = new Label();
@@ -48,51 +46,26 @@ namespace pboFinalProfject.View
             btnLaporan = new Button();
             btnKelolaUser2 = new Button();
             btnLaporan2 = new Button();
-            btnKeluar2 = new Button();
+            btnDashboard = new Button();
+            btnKeluar = new Button();
             pnlStatMahasiswa.SuspendLayout();
             pnlStatKonselor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAntreanKonseling).BeginInit();
             SuspendLayout();
             // 
-            // btnKeluar
-            // 
-            btnKeluar.BackColor = Color.FromArgb(28, 167, 236);
-            btnKeluar.ForeColor = Color.White;
-            btnKeluar.Location = new Point(42, 748);
-            btnKeluar.Margin = new Padding(2);
-            btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(218, 53);
-            btnKeluar.TabIndex = 10;
-            btnKeluar.Text = "Keluar";
-            btnKeluar.UseVisualStyleBackColor = false;
-            btnKeluar.Click += btnKeluar_Click;
-            // 
-            // btnLogout
-            // 
-            btnLogout.BackColor = Color.FromArgb(255, 193, 7);
-            btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(1248, 87);
-            btnLogout.Margin = new Padding(2);
-            btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(120, 47);
-            btnLogout.TabIndex = 8;
-            btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = false;
-            // 
             // btnRefresh
             // 
-            btnRefresh.BackColor = Color.FromArgb(40, 167, 69);
+            btnRefresh.BackColor = Color.FromArgb(247, 249, 253);
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(1114, 87);
+            btnRefresh.ForeColor = Color.FromArgb(0, 192, 0);
+            btnRefresh.Location = new Point(1390, 95);
             btnRefresh.Margin = new Padding(2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(121, 47);
+            btnRefresh.Size = new Size(107, 47);
             btnRefresh.TabIndex = 7;
-            btnRefresh.Text = "Refresh";
+            btnRefresh.Text = "Refresh   ";
+            btnRefresh.TextAlign = ContentAlignment.MiddleRight;
             btnRefresh.UseVisualStyleBackColor = false;
             // 
             // pnlStatMahasiswa
@@ -197,78 +170,103 @@ namespace pboFinalProfject.View
             // 
             // btnKelolaUser
             // 
-            btnKelolaUser.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser.BackColor = Color.Transparent;
+            btnKelolaUser.FlatAppearance.BorderSize = 0;
             btnKelolaUser.FlatStyle = FlatStyle.Flat;
-            btnKelolaUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnKelolaUser.Font = new Font("Corbel", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKelolaUser.ForeColor = Color.White;
-            btnKelolaUser.Location = new Point(74, 235);
+            btnKelolaUser.Location = new Point(74, 237);
             btnKelolaUser.Margin = new Padding(3, 4, 3, 4);
             btnKelolaUser.Name = "btnKelolaUser";
             btnKelolaUser.Size = new Size(163, 45);
             btnKelolaUser.TabIndex = 2;
-            btnKelolaUser.Text = "Kelola User";
+            btnKelolaUser.Text = "Kelola Pengguna";
+            btnKelolaUser.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaUser.UseVisualStyleBackColor = false;
             btnKelolaUser.Click += btnKelolaUser_Click;
             // 
             // btnLaporan
             // 
-            btnLaporan.BackColor = Color.FromArgb(28, 167, 236);
+            btnLaporan.BackColor = Color.Transparent;
+            btnLaporan.FlatAppearance.BorderSize = 0;
             btnLaporan.FlatStyle = FlatStyle.Flat;
-            btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLaporan.Font = new Font("Calibri Light", 11.5F, FontStyle.Bold);
             btnLaporan.ForeColor = Color.White;
-            btnLaporan.Location = new Point(74, 307);
+            btnLaporan.Location = new Point(75, 310);
             btnLaporan.Margin = new Padding(3, 4, 3, 4);
             btnLaporan.Name = "btnLaporan";
             btnLaporan.Size = new Size(163, 45);
             btnLaporan.TabIndex = 2;
-            btnLaporan.Text = "Lihat Laporan";
+            btnLaporan.Text = "Laporan";
+            btnLaporan.TextAlign = ContentAlignment.MiddleLeft;
             btnLaporan.UseVisualStyleBackColor = false;
             btnLaporan.Click += btnLaporan_Click;
             // 
             // btnKelolaUser2
             // 
-            btnKelolaUser2.BackColor = Color.FromArgb(28, 167, 236);
+            btnKelolaUser2.BackColor = Color.Transparent;
+            btnKelolaUser2.FlatAppearance.BorderSize = 0;
             btnKelolaUser2.FlatStyle = FlatStyle.Flat;
-            btnKelolaUser2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKelolaUser2.ForeColor = Color.White;
-            btnKelolaUser2.Location = new Point(1002, 253);
+            btnKelolaUser2.Font = new Font("Corbel", 9.8F, FontStyle.Bold);
+            btnKelolaUser2.ForeColor = Color.DarkBlue;
+            btnKelolaUser2.Location = new Point(996, 257);
             btnKelolaUser2.Margin = new Padding(3, 4, 3, 4);
             btnKelolaUser2.Name = "btnKelolaUser2";
-            btnKelolaUser2.Size = new Size(191, 45);
+            btnKelolaUser2.Size = new Size(238, 45);
             btnKelolaUser2.TabIndex = 2;
-            btnKelolaUser2.Text = "Kelola User";
+            btnKelolaUser2.Text = "Kelola Pengguna";
+            btnKelolaUser2.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaUser2.UseVisualStyleBackColor = false;
             btnKelolaUser2.Click += btnKelolaUser_Click;
             // 
             // btnLaporan2
             // 
-            btnLaporan2.BackColor = Color.FromArgb(28, 167, 236);
+            btnLaporan2.BackColor = Color.Transparent;
+            btnLaporan2.FlatAppearance.BorderSize = 0;
             btnLaporan2.FlatStyle = FlatStyle.Flat;
-            btnLaporan2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnLaporan2.ForeColor = Color.White;
-            btnLaporan2.Location = new Point(1267, 255);
+            btnLaporan2.Font = new Font("Corbel", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLaporan2.ForeColor = Color.DarkBlue;
+            btnLaporan2.Location = new Point(1263, 257);
             btnLaporan2.Margin = new Padding(3, 4, 3, 4);
             btnLaporan2.Name = "btnLaporan2";
-            btnLaporan2.Size = new Size(188, 45);
+            btnLaporan2.Size = new Size(233, 45);
             btnLaporan2.TabIndex = 2;
             btnLaporan2.Text = "Lihat Laporan";
+            btnLaporan2.TextAlign = ContentAlignment.MiddleLeft;
             btnLaporan2.UseVisualStyleBackColor = false;
             btnLaporan2.Click += btnLaporan_Click;
             // 
-            // btnKeluar2
+            // btnDashboard
             // 
-            btnKeluar2.BackColor = Color.FromArgb(255, 0, 0);
-            btnKeluar2.ForeColor = Color.White;
-            btnKeluar2.FlatStyle = FlatStyle.Flat;
-            btnKeluar2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnKeluar2.Location = new Point(1377, 87);
-            btnKeluar2.Margin = new Padding(2);
-            btnKeluar2.Name = "btnKeluar2";
-            btnKeluar2.Size = new Size(119, 48);
-            btnKeluar2.TabIndex = 8;
-            btnKeluar2.Text = "Keluar";
-            btnKeluar2.UseVisualStyleBackColor = false;
-            btnKeluar2.Click += btnKeluar_Click;
+            btnDashboard.BackColor = Color.Transparent;
+            btnDashboard.FlatAppearance.BorderSize = 0;
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Calibri Light", 11.5F, FontStyle.Bold);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(71, 169);
+            btnDashboard.Margin = new Padding(3, 4, 3, 4);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(163, 45);
+            btnDashboard.TabIndex = 8;
+            btnDashboard.Text = "Beranda";
+            btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
+            btnDashboard.UseVisualStyleBackColor = false;
+            // 
+            // btnKeluar
+            // 
+            btnKeluar.BackColor = Color.Transparent;
+            btnKeluar.FlatAppearance.BorderSize = 0;
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Calibri", 10.9F);
+            btnKeluar.ForeColor = Color.White;
+            btnKeluar.Location = new Point(83, 755);
+            btnKeluar.Margin = new Padding(2);
+            btnKeluar.Name = "btnKeluar";
+            btnKeluar.Size = new Size(179, 41);
+            btnKeluar.TabIndex = 11;
+            btnKeluar.Text = "Keluar";
+            btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
+            btnKeluar.UseVisualStyleBackColor = false;
             // 
             // FormDashboardAdmin
             // 
@@ -276,13 +274,12 @@ namespace pboFinalProfject.View
             BackColor = Color.FromArgb(240, 244, 248);
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1518, 860);
-            Controls.Add(btnKeluar2);
+            Controls.Add(btnKeluar);
+            Controls.Add(btnDashboard);
             Controls.Add(btnLaporan2);
             Controls.Add(btnKelolaUser2);
             Controls.Add(btnLaporan);
             Controls.Add(btnKelolaUser);
-            Controls.Add(btnKeluar);
-            Controls.Add(btnLogout);
             Controls.Add(dgvAntreanKonseling);
             Controls.Add(btnRefresh);
             Controls.Add(pnlStatKonselor);
@@ -315,11 +312,10 @@ namespace pboFinalProfject.View
         private System.Windows.Forms.DataGridView dgvAntreanKonseling;
         private System.Windows.Forms.Button btnKelolaUser;
         private System.Windows.Forms.Button btnLaporan;
-        private System.Windows.Forms.Button btnKeluar;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnLaporan2;
         private System.Windows.Forms.Button btnKelolaUser2;
-        private System.Windows.Forms.Button btnKeluar2;
+        private Button btnDashboard;
+        private Button btnKeluar;
     }
 }

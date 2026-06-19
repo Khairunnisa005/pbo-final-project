@@ -26,7 +26,6 @@ namespace pboFinalProfject.View
             btnLaporan.Click += btnLaporan_Click;
             btnKeluar.Click += btnKeluar_Click;
             btnRefresh.Click += btnRefresh_Click;
-            btnLogout.Click += btnLogout_Click;
 
         }
         public void LoadData()
@@ -265,5 +264,7 @@ namespace pboFinalProfject.View
                 this.Dispose();
             }
         }
+
+       
     }
 }

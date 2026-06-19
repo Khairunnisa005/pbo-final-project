@@ -75,7 +75,7 @@
             btnKelolaJadwal.BackColor = Color.Transparent;
             btnKelolaJadwal.FlatAppearance.BorderSize = 0;
             btnKelolaJadwal.FlatStyle = FlatStyle.Flat;
-            btnKelolaJadwal.Font = new Font("Calibri", 10.9F);
+            btnKelolaJadwal.Font = new Font("Calibri", 10.9F, FontStyle.Bold);
             btnKelolaJadwal.ForeColor = SystemColors.ButtonHighlight;
             btnKelolaJadwal.Location = new Point(75, 228);
             btnKelolaJadwal.Name = "btnKelolaJadwal";
@@ -91,7 +91,7 @@
             btnKeluar.BackColor = Color.Transparent;
             btnKeluar.FlatAppearance.BorderSize = 0;
             btnKeluar.FlatStyle = FlatStyle.Flat;
-            btnKeluar.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKeluar.Font = new Font("Calibri", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKeluar.ForeColor = Color.White;
             btnKeluar.Location = new Point(83, 776);
             btnKeluar.Margin = new Padding(2);
@@ -108,7 +108,7 @@
             btnKelolaProfil.BackColor = Color.Transparent;
             btnKelolaProfil.FlatAppearance.BorderSize = 0;
             btnKelolaProfil.FlatStyle = FlatStyle.Flat;
-            btnKelolaProfil.Font = new Font("Calibri", 10.9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnKelolaProfil.Font = new Font("Calibri", 10.9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKelolaProfil.ForeColor = SystemColors.ButtonHighlight;
             btnKelolaProfil.Location = new Point(76, 295);
             btnKelolaProfil.Margin = new Padding(3, 4, 3, 4);
@@ -132,7 +132,7 @@
             btnDashboard.BackColor = Color.Transparent;
             btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Calibri", 10.8F);
+            btnDashboard.Font = new Font("Calibri", 10.8F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.White;
             btnDashboard.Location = new Point(76, 163);
             btnDashboard.Margin = new Padding(3, 4, 3, 4);
