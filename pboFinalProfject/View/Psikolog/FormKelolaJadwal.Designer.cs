@@ -39,7 +39,7 @@
             // cmbHari
             // 
             cmbHari.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbHari.Items.AddRange(new object[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" });
+            cmbHari.Items.AddRange(new object[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu" });
             cmbHari.Location = new Point(1268, 246);
             cmbHari.Name = "cmbHari";
             cmbHari.Size = new Size(235, 28);
@@ -68,7 +68,7 @@
             // cmbMetode
             // 
             cmbMetode.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMetode.Items.AddRange(new object[] { "Online", "Offline" });
+            cmbMetode.Items.AddRange(new object[] { "Online", "Luring" });
             cmbMetode.Location = new Point(1268, 518);
             cmbMetode.Name = "cmbMetode";
             cmbMetode.Size = new Size(235, 28);

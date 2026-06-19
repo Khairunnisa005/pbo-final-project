@@ -10,7 +10,7 @@ namespace pboFinalProfject.View
 {
     public partial class FormKelolaJadwal : Form
     {
-        private PsikologController _psikologController;  // ← pakai PsikologController
+        private PsikologController _psikologController = new PsikologController();  // ← Pakai PsikologController // ← pakai PsikologController
         private int _psikologId;
         private int _selectedJadwalId = 0;
         private int userId = UserSession.GetCurrentUserId();
@@ -19,8 +19,8 @@ namespace pboFinalProfject.View
         {
             InitializeComponent();
 
-            _psikologController = new PsikologController();  // ← Pakai PsikologController
-            _psikologId = psikologId;
+            
+            this._psikologId = _psikologController.GetPsikologIdByUserId(userId);
 
             btnTambah.Click += BtnTambah_Click;
             btnUbah.Click += BtnUbah_Click;

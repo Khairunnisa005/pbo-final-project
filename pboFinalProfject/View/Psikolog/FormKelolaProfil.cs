@@ -157,5 +157,11 @@ namespace pboFinalProfject.View
             // seluruh aplikasi dan form yang tersembunyi ikut mati total.
             Application.Exit();
         }
-    }
-}
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            // Kembali ke Dashboard Psikolog
+            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
+            this.Hide();
+            dashboard.Show();
+        }
+}}
