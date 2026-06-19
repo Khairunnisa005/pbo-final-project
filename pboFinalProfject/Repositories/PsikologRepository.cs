@@ -18,9 +18,7 @@ namespace pboFinalProfject.Repositories
 
         public DataTable GetAll()
         {
-            string query = @"SELECT p.psikolog_id, p.user_id, u.nama_lengkap, u.username, u.email, p.gelar, p.pendidikan, p.
-
-_singkat,
+            string query = @"SELECT p.psikolog_id, p.user_id, u.nama_lengkap, u.username, u.email, p.gelar, p.pendidikan, p.deskripsi_singkat,
                                     CASE WHEN p.melayani_online = true AND p.melayani_offline = true THEN 'Online, Offline'
                                          WHEN p.melayani_online = true THEN 'Online'
                                          WHEN p.melayani_offline = true THEN 'Offline'
