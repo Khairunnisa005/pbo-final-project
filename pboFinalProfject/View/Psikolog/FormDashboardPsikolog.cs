@@ -249,12 +249,12 @@ namespace pboFinalProfject.View
 
             try
             {
-                // Langsung buka form detail dengan mengoper kedua ID (bookingId dan userId/psikologId)
-                FormDetailBooking detailForm = new FormDetailBooking(bookingId, _currentPsikologId);
-                detailForm.ShowDialog();
-
-                // Jika Anda butuh merefresh data setelah form detail ditutup:
-                // LoadDaftarPasien(); 
+                if (e.RowIndex >= 0)
+                {
+                    // Kode buka form ditaruh DI DALAM SINI
+                    FormDetailBooking formDetail = new FormDetailBooking(bookingId, _currentPsikologId);
+                    formDetail.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -360,5 +360,9 @@ namespace pboFinalProfject.View
             }
         }
 
+        private void FormDashboardPsikolog_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

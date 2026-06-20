@@ -159,12 +159,14 @@ namespace pboFinalProfject.View
                         MessageBox.Show("Gagal mengidentifikasi User ID yang akan di-update.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    // --- UPDATE PSIKOLOG (SOLUSI MASALAH 1) ---
-                    // Set ID psikolog yang dipilih ke objek model agar controller tahu record mana yang di-update
+
+                    // Set ID psikolog dan user yang dipilih ke objek model
                     userModel.UserId = _selectedUserId;
                     psikologModel.PsikologId = _selectedPsikologId;
 
-                    bool berhasil = _adminController.UpdatePsikolog(userModel, psikologModel);
+                    // Tambahkan parameter keahlianList di ujung method ini agar keahlian ikut ter-update di DB
+                    bool berhasil = _adminController.UpdatePsikolog(userModel, psikologModel, keahlianList);
+
                     if (berhasil)
                     {
                         MessageBox.Show("Data psikolog berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
