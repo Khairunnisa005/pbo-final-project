@@ -8,13 +8,15 @@ using pboFinalProfject.Services;
 
 namespace pboFinalProfject
 {
-    public class BookingService : BaseService, IBookingService
+    public class BookingService : IBookingService
     {
+        private readonly DatabaseHelper _db;
         private readonly UserRepository _userRepository;
         //private readonly PsikologRepository _psikologRepository;
 
         public BookingService()
         {
+            _db = new DatabaseHelper();
             _userRepository = new UserRepository();
             //_psikologRepository = new PsikologRepository();
         }
