@@ -48,9 +48,9 @@ namespace pboFinalProfject.Controllers
             return _adminRepository.TambahPsikolog(user, psikolog, keahlianList);
         }
 
-        public bool UpdatePsikolog(User user, Psikolog psikolog)
+        public bool UpdatePsikolog(User user, Psikolog psikolog, List<string> keahlianList = null)
         {
-            return _adminRepository.UpdatePsikolog(user, psikolog);
+            return _adminRepository.UpdatePsikolog(user, psikolog, keahlianList);
         }
 
         public bool HapusPsikolog(int psikologId)

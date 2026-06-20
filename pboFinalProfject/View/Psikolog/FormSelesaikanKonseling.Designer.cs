@@ -235,6 +235,7 @@
             btnKembali.Text = "Kembali";
             btnKembali.TextAlign = ContentAlignment.MiddleLeft;
             btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += BtnKembali_Click;
             // 
             // FormSelesaikanKonseling
             // 

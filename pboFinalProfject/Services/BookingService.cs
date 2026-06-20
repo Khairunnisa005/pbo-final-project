@@ -276,10 +276,13 @@ namespace pboFinalProfject
                     j.metode,
                     b.status,
                     b.catatan_user,
-                    b.catatan_psikolog
+                    b.catatan_psikolog,
+                    h.tingkat_stres,
+                    h.rekomendasi
                 FROM booking b
                 JOIN users u ON b.user_id = u.user_id
                 JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
                 WHERE b.booking_id = @booking_id 
                 AND b.psikolog_id = @psikolog_id";
 

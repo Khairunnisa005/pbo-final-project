@@ -74,26 +74,33 @@ namespace pboFinalProfject.Repositories
         // kelola psikolog
         public DataTable GetDaftarPsikolog()
         {
+            // Menggunakan string_agg untuk menyatukan banyak baris keahlian menjadi satu string dipisah koma
             string query = @"
-                SELECT 
-                    p.psikolog_id,
-                    u.user_id,
-                    u.username,
-                    u.email,
-                    u.no_telepon,
-                    u.nama_lengkap,
-                    p.gelar,
-                    p.pendidikan,
-                    p.no_izin_praktek,
-                    p.deskripsi_singkat,
-                    p.melayani_online,
-                    p.melayani_offline,
-                    u.created_at as tgl_bergabung,
-                    (SELECT string_agg(nama_keahlian, ', ') FROM keahlian_psikolog WHERE psikolog_id = p.psikolog_id) as keahlian
-                FROM psikolog p
-                JOIN users u ON p.user_id = u.user_id
-                ORDER BY u.created_at DESC";
-            return _db.ExecuteQuery(query);
+        SELECT 
+            p.psikolog_id,
+            u.user_id,
+            u.username,
+            u.nama_lengkap,
+            u.email,
+            u.no_telepon,
+            p.gelar,
+            p.pendidikan,
+            p.no_izin_praktek,
+            p.deskripsi_singkat,
+            p.melayani_online,
+            p.melayani_offline,
+            COALESCE(string_agg(kp.nama_keahlian, ', '), '') AS keahlian,
+            u.created_at
+        FROM psikolog p
+        JOIN ""users"" u ON p.user_id = u.user_id
+        LEFT JOIN keahlian_psikolog kp ON p.psikolog_id = kp.psikolog_id
+        GROUP BY 
+            p.psikolog_id, u.user_id, u.username, u.nama_lengkap, 
+            u.email, u.no_telepon, p.gelar, p.pendidikan, 
+            p.no_izin_praktek, p.deskripsi_singkat, p.melayani_online, p.melayani_offline, u.created_at
+        ORDER BY u.nama_lengkap ASC";
+
+            return _db.ExecuteQuery(query, null);
         }
         public DataTable GetPsikologById(int psikologId)
         {
@@ -199,43 +206,77 @@ namespace pboFinalProfject.Repositories
             }
         }
 
-        public bool UpdatePsikolog(User user, Psikolog psikolog)
+        public bool UpdatePsikolog(User user, Psikolog psikolog, List<string> keahlianList = null)
         {
-            string userQuery = @"
-                UPDATE users 
-                SET username = @username, email = @email, no_telepon = @no_telepon, nama_lengkap = @nama_lengkap
-                WHERE user_id = @user_id";
-
-            var userParams = new[]
+            using (var conn = _db.GetConnection())
             {
-                new NpgsqlParameter("@user_id", user.UserId),
-                new NpgsqlParameter("@username", user.Username),
-                new NpgsqlParameter("@email", user.Email),
-                new NpgsqlParameter("@no_telepon", (object)user.NoTelepon ?? DBNull.Value),
-                new NpgsqlParameter("@nama_lengkap", user.NamaLengkap)
-            };
+                conn.Open();
+                using (var trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Update tabel users
+                        string userQuery = @"UPDATE ""users"" SET username = @username, email = @email, no_telepon = @no_telepon, nama_lengkap = @nama_lengkap WHERE user_id = @user_id";
+                        using (var cmd = new NpgsqlCommand(userQuery, conn, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@user_id", user.UserId);
+                            cmd.Parameters.AddWithValue("@username", user.Username);
+                            cmd.Parameters.AddWithValue("@email", user.Email);
+                            cmd.Parameters.AddWithValue("@no_telepon", (object)user.NoTelepon ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@nama_lengkap", user.NamaLengkap);
+                            cmd.ExecuteNonQuery();
+                        }
 
-            bool userUpdated = _db.ExecuteNonQuery(userQuery, userParams) > 0;
+                        // 2. Update tabel psikolog
+                        string psikologQuery = @"UPDATE psikolog SET gelar = @gelar, pendidikan = @pendidikan, no_izin_praktek = @no_izin_praktek, deskripsi_singkat = @deskripsi_singkat, melayani_online = @melayani_online, melayani_offline = @melayani_offline WHERE psikolog_id = @psikolog_id";
+                        using (var cmd2 = new NpgsqlCommand(psikologQuery, conn, trans))
+                        {
+                            cmd2.Parameters.AddWithValue("@psikolog_id", psikolog.PsikologId);
+                            cmd2.Parameters.AddWithValue("@gelar", (object)psikolog.Gelar ?? DBNull.Value);
+                            cmd2.Parameters.AddWithValue("@pendidikan", (object)psikolog.Pendidikan ?? DBNull.Value);
+                            cmd2.Parameters.AddWithValue("@no_izin_praktek", (object)psikolog.NoIzinPraktek ?? DBNull.Value);
+                            cmd2.Parameters.AddWithValue("@deskripsi_singkat", (object)psikolog.DeskripsiSingkat ?? DBNull.Value);
+                            cmd2.Parameters.AddWithValue("@melayani_online", psikolog.MelayaniOnline);
+                            cmd2.Parameters.AddWithValue("@melayani_offline", psikolog.MelayaniOffline);
+                            cmd2.ExecuteNonQuery();
+                        }
 
-            string psikologQuery = @"
-                UPDATE psikolog 
-                SET gelar = @gelar, pendidikan = @pendidikan, no_izin_praktek = @no_izin_praktek,
-                    deskripsi_singkat = @deskripsi_singkat, melayani_online = @melayani_online, melayani_offline = @melayani_offline
-                WHERE psikolog_id = @psikolog_id";
+                        // 3. Update tabel keahlian (Hapus yang lama, insert yang baru)
+                        string deleteKeahlianQuery = "DELETE FROM keahlian_psikolog WHERE psikolog_id = @psikolog_id";
+                        using (var cmdDel = new NpgsqlCommand(deleteKeahlianQuery, conn, trans))
+                        {
+                            cmdDel.Parameters.AddWithValue("@psikolog_id", psikolog.PsikologId);
+                            cmdDel.ExecuteNonQuery();
+                        }
 
-            var psikologParams = new[]
-            {
-                new NpgsqlParameter("@psikolog_id", psikolog.PsikologId),
-                new NpgsqlParameter("@gelar", (object)psikolog.Gelar ?? DBNull.Value),
-                new NpgsqlParameter("@pendidikan", (object)psikolog.Pendidikan ?? DBNull.Value),
-                new NpgsqlParameter("@no_izin_praktek", (object)psikolog.NoIzinPraktek ?? DBNull.Value),
-                new NpgsqlParameter("@deskripsi_singkat", (object)psikolog.DeskripsiSingkat ?? DBNull.Value),
-                new NpgsqlParameter("@melayani_online", psikolog.MelayaniOnline),
-                new NpgsqlParameter("@melayani_offline", psikolog.MelayaniOffline)
-            };
+                        if (keahlianList != null && keahlianList.Count > 0)
+                        {
+                            string insertKeahlianQuery = "INSERT INTO keahlian_psikolog (psikolog_id, nama_keahlian, created_at) VALUES (@psikolog_id, @nama_keahlian, @created_at)";
+                            foreach (var keahlian in keahlianList)
+                            {
+                                if (!string.IsNullOrWhiteSpace(keahlian))
+                                {
+                                    using (var cmdIns = new NpgsqlCommand(insertKeahlianQuery, conn, trans))
+                                    {
+                                        cmdIns.Parameters.AddWithValue("@psikolog_id", psikolog.PsikologId);
+                                        cmdIns.Parameters.AddWithValue("@nama_keahlian", keahlian.Trim());
+                                        cmdIns.Parameters.AddWithValue("@created_at", DateTime.Now);
+                                        cmdIns.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
 
-            bool psikologUpdated = _db.ExecuteNonQuery(psikologQuery, psikologParams) > 0;
-            return userUpdated && psikologUpdated;
+                        trans.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
 
         public bool HapusPsikolog(int psikologId)

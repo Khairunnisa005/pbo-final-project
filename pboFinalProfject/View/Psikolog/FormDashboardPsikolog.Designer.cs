@@ -162,6 +162,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UniMind Dashboard";
             WindowState = FormWindowState.Maximized;
+            Load += FormDashboardPsikolog_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgvPasien).EndInit();
             ResumeLayout(false);
 
