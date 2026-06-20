@@ -115,22 +115,44 @@ namespace pboFinalProfject.View
         // Tombol "Dashboard" di Sidebar Profil
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
-            // Agar kembali ke form utama aplikasi
-            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
+            FormDashboardPsikolog frmDashboard = (FormDashboardPsikolog)Application.OpenForms["FormDashboardPsikolog"];
 
-            this.Hide();         // Sembunyikan Form Profil
-            dashboard.Show();    // Tampilkan Dashboard
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardPsikolog baru = new FormDashboardPsikolog();
+                baru.Show();
+                this.Hide();
+            }
         }
 
         // Tombol "Kelola Jadwal" di Sidebar Profil
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
-            int userId = UserSession.GetCurrentUserId();
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
+            // 1. Cari apakah FormKelolaJadwal sudah ada di memori aplikasi
+            FormKelolaJadwal frmKelola = (FormKelolaJadwal)Application.OpenForms["FormKelolaJadwal"];
 
-            this.Hide();         // Sembunyikan Form Profil
-            formJadwal.Show();   // Tampilkan Form Jadwal
+            if (frmKelola != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmKelola.Show();
+                frmKelola.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormKelolaJadwal baru = new FormKelolaJadwal(currentPsikologId);
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnKeluar_Click(object sender, EventArgs e)
         {
@@ -159,9 +181,22 @@ namespace pboFinalProfject.View
         }
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // Kembali ke Dashboard Psikolog
-            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
-            this.Hide();
-            dashboard.Show();
+            // 1. Cari apakah FormDashboardPsikolog sudah ada di memori aplikasi
+            FormDashboardPsikolog frmDashboard = (FormDashboardPsikolog)Application.OpenForms["FormDashboardPsikolog"];
+
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardPsikolog baru = new FormDashboardPsikolog();
+                baru.Show();
+                this.Hide();
+            }
         }
 }}

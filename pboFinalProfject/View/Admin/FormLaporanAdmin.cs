@@ -249,11 +249,23 @@ namespace pboFinalProfject.View
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
-            // Agar kembali ke form utama aplikasi
-            FormDashboardAdmin dashboard = new FormDashboardAdmin();
-            this.Hide();         // Sembunyikan Form Laporan
-            dashboard.Show();    // Tampilkan Dashboard
+            // 1. Cari apakah FormDashboard sudah ada di memori aplikasi
+            FormDashboardAdmin frmDashboard = (FormDashboardAdmin)Application.OpenForms["FormDashboardAdmin"];
+
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardAdmin baru = new FormDashboardAdmin();
+                baru.Show();
+                this.Hide();
+            }
         }
 
         private void dgvLaporan_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -281,25 +293,42 @@ namespace pboFinalProfject.View
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            //// Buka form kelola jadwal untuk psikolog ini
-            //// 1. Ambil ID admin aktif
-            //int adminId = UserSession.GetCurrentUserId();
+            // 1. Cari apakah FormManageUser sudah ada di memori aplikasi
+            FormManageUser frmKelolaUser = (FormManageUser)Application.OpenForms["FormManageUser"];
 
-            // 2. Oper ID ke form tujuan
-            FormManageUser formKelolaUser = new FormManageUser();
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form kelola user
-            formKelolaUser.Show();
+            if (frmKelolaUser != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmKelolaUser.Show();
+                frmKelolaUser.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormManageUser baru = new FormManageUser();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            // Cari Form Dashboard yang sudah ada atau buat baru jika diperlukan
-            // Agar kembali ke form utama aplikasi
-            FormDashboardAdmin dashboard = new FormDashboardAdmin();
-            this.Hide();         // Sembunyikan Form Laporan
-            dashboard.Show();    // Tampilkan Dashboard
+            // 1. Cari apakah FormDashboard sudah ada di memori aplikasi
+            FormDashboardAdmin frmDashboard = (FormDashboardAdmin)Application.OpenForms["FormDashboardAdmin"];
+
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardAdmin baru = new FormDashboardAdmin();
+                baru.Show();
+                this.Hide();
+            }
         }
 }}

@@ -370,17 +370,41 @@ namespace pboFinalProfject.View
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            FormDashboardPsikolog dashboard = new FormDashboardPsikolog();
+            FormDashboardPsikolog frmDashboard = (FormDashboardPsikolog)Application.OpenForms["FormDashboardPsikolog"];
 
-            this.Hide();
-            dashboard.Show();
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardPsikolog baru = new FormDashboardPsikolog();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
-            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _psikologId);
+            FormKelolaProfil frmProfil = (FormKelolaProfil)Application.OpenForms["FormKelolaProfil"];
 
-            this.Hide();
-            formProfil.Show();
+            if (frmProfil != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmProfil.Show();
+                frmProfil.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormKelolaProfil baru = new FormKelolaProfil(userId, _psikologId);
+                baru.Show();
+                this.Hide();
+            }
         }
         private void FormKelolaProfil_FormClosed(object sender, FormClosedEventArgs e)
         {

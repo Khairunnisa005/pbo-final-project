@@ -22,6 +22,7 @@ namespace pboFinalProfject.Controllers
             _userRepository = new UserRepository();
             _psikologRepository = new PsikologRepository();
             _bookingRepository = new BookingRepository();
+            _adminRepository = new AdminRepository();
         }
 
         // Dashboard Statistik

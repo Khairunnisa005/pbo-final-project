@@ -127,6 +127,7 @@
             btnBersihkan.TabIndex = 9;
             btnBersihkan.Text = "Clear";
             btnBersihkan.UseVisualStyleBackColor = false;
+            btnBersihkan.Click += BtnBersihkan_Click;
             // 
             // btnUbah
             // 
@@ -138,6 +139,7 @@
             btnUbah.TabIndex = 6;
             btnUbah.Text = "Ubah";
             btnUbah.UseVisualStyleBackColor = false;
+            btnUbah.Click += BtnUbah_Click;
             // 
             // btnHapus
             // 
@@ -149,6 +151,7 @@
             btnHapus.TabIndex = 6;
             btnHapus.Text = "Hapus";
             btnHapus.UseVisualStyleBackColor = false;
+            btnHapus.Click += BtnHapus_Click;
             // 
             // btnDashboard
             // 
@@ -165,6 +168,7 @@
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnKelolaJadwal
             // 
@@ -197,6 +201,7 @@
             btnKeluar.Text = "Keluar";
             btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
             // 
             // btnKelolaProfil
             // 
@@ -213,6 +218,7 @@
             btnKelolaProfil.Text = "Profil";
             btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaProfil.UseVisualStyleBackColor = false;
+            btnKelolaProfil.Click += btnKelolaProfil_Click;
             // 
             // FormKelolaJadwal
             // 
@@ -245,6 +251,11 @@
             ((System.ComponentModel.ISupportInitialize)dgvSlotJadwal).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void BtnKelolaJadwal_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

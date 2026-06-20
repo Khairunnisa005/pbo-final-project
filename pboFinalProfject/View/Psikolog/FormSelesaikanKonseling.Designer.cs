@@ -112,6 +112,7 @@
             btnSelesaikan.TabIndex = 16;
             btnSelesaikan.Text = "✔️ Selesaikan";
             btnSelesaikan.UseVisualStyleBackColor = false;
+            btnSelesaikan.Click += BtnSelesaikan_Click;
             // 
             // btnBatal
             // 
@@ -125,6 +126,7 @@
             btnBatal.TabIndex = 17;
             btnBatal.Text = "Batal";
             btnBatal.UseVisualStyleBackColor = false;
+            btnBatal.Click += BtnBatal_Click;
             // 
             // lblValJamMulai
             // 
@@ -167,6 +169,7 @@
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnKelolaJadwal
             // 
@@ -182,6 +185,7 @@
             btnKelolaJadwal.Text = "Jadwal Konsultasi";
             btnKelolaJadwal.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaJadwal.UseVisualStyleBackColor = false;
+            btnKelolaJadwal.Click += btnKelolaJadwal_Click;
             // 
             // btnKeluar
             // 
@@ -198,6 +202,7 @@
             btnKeluar.Text = "Keluar";
             btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
             // 
             // btnKelolaProfil
             // 
@@ -214,6 +219,7 @@
             btnKelolaProfil.Text = "Profil";
             btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaProfil.UseVisualStyleBackColor = false;
+            btnKelolaProfil.Click += btnKelolaProfil_Click;
             // 
             // btnKembali
             // 

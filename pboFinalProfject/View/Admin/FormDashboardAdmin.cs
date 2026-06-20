@@ -176,32 +176,43 @@ namespace pboFinalProfject.View
 
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            //// Buka form kelola jadwal untuk psikolog ini
-            //// 1. Ambil ID admin aktif
-            //int adminId = UserSession.GetCurrentUserId();
+            // 1. Cari apakah FormManageUser sudah ada di memori aplikasi
+            FormManageUser frmManageUser = (FormManageUser)Application.OpenForms["FormManageUser"];
 
-            // 2. Oper ID ke form tujuan
-            FormManageUser formKelolaUser = new FormManageUser();
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form kelola user
-            formKelolaUser.Show();
+            if (frmManageUser != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmManageUser.Show();
+                frmManageUser.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormManageUser baru = new FormManageUser();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnLaporan_Click(object sender, EventArgs e)
         {
-            //// 1. Ambil ID admin aktif
-            //int adminId = UserSession.GetCurrentUserId();
+            // 1. Cari apakah FormLaporanAdmin sudah ada di memori aplikasi
+            FormLaporanAdmin frmLaporan = (FormLaporanAdmin)Application.OpenForms["FormLaporanAdmin"];
 
-            // 2. Oper ID ke form tujuan
-            FormLaporanAdmin formLaporan = new FormLaporanAdmin();
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form laporan
-            formLaporan.Show();
+            if (frmLaporan != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmLaporan.Show();
+                frmLaporan.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormLaporanAdmin baru = new FormLaporanAdmin();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void FormDashboardAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {

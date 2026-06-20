@@ -13,7 +13,7 @@ namespace pboFinalProfject.View
         private AdminController _adminController;
         private int _selectedPsikologId = 0;
         private int _selectedMahasiswaId = 0;
-
+        private int _selectedUserId = 0; // Untuk menyimpan user_id saat update psikolog
         public FormManageUser()
         {
             InitializeComponent();
@@ -36,11 +36,6 @@ namespace pboFinalProfject.View
             LoadDataPsikolog();
             LoadDataMahasiswa();
             btnSimpanMhs.Visible = false;
-        }
-
-        private void btnKembali_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         #region LOGIKA MANAJEMEN PSIKOLOG (KARYAWAN)
@@ -148,8 +143,14 @@ namespace pboFinalProfject.View
                 }
                 else
                 {
+                    if (_selectedPsikologId == 0)
+                    {
+                        MessageBox.Show("Gagal mengidentifikasi User ID yang akan di-update.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     // --- UPDATE PSIKOLOG (SOLUSI MASALAH 1) ---
                     // Set ID psikolog yang dipilih ke objek model agar controller tahu record mana yang di-update
+                    userModel.UserId = _selectedUserId;
                     psikologModel.PsikologId = _selectedPsikologId;
 
                     bool berhasil = _adminController.UpdatePsikolog(userModel, psikologModel);
@@ -205,7 +206,7 @@ namespace pboFinalProfject.View
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvPsikolog.Rows[e.RowIndex];
-
+                _selectedUserId = Convert.ToInt32(row.Cells["user_id"].Value);
                 _selectedPsikologId = Convert.ToInt32(row.Cells["psikolog_id"].Value);
                 txtUserPsi.Text = row.Cells["username"].Value?.ToString();
                 txtNamaPsi.Text = row.Cells["nama_lengkap"].Value?.ToString();
@@ -406,23 +407,43 @@ namespace pboFinalProfject.View
         }
         private void btnLaporan_Click(object sender, EventArgs e)
         {
-            //// 1. Ambil ID admin aktif
-            //int adminId = UserSession.GetCurrentUserId();
+            // 1. Cari apakah FormLaporanAdmin sudah ada di memori aplikasi
+            FormLaporanAdmin frmLaporan = (FormLaporanAdmin)Application.OpenForms["FormLaporanAdmin"];
 
-            // 2. Oper ID ke form tujuan
-            FormLaporanAdmin formLaporan = new FormLaporanAdmin();
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form laporan
-            formLaporan.Show();
+            if (frmLaporan != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmLaporan.Show();
+                frmLaporan.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormLaporanAdmin baru = new FormLaporanAdmin();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            FormDashboardAdmin dashboard = new FormDashboardAdmin();
-            this.Hide();
-            dashboard.Show();
+            // 1. Cari apakah FormDashboard sudah ada di memori aplikasi
+            FormDashboardAdmin frmDashboard = (FormDashboardAdmin)Application.OpenForms["FormDashboardAdmin"];
+
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardAdmin baru = new FormDashboardAdmin();
+                baru.Show();
+                this.Hide();
+            }
         }
         private void FormManageUser_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -430,5 +451,24 @@ namespace pboFinalProfject.View
             // seluruh aplikasi dan form yang tersembunyi ikut mati total.
             Application.Exit();
         }
-    }
-}
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            // 1. Cari apakah FormDashboard sudah ada di memori aplikasi
+            FormDashboardAdmin frmDashboard = (FormDashboardAdmin)Application.OpenForms["FormDashboardAdmin"];
+
+            if (frmDashboard != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmDashboard.Show();
+                frmDashboard.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormDashboardAdmin baru = new FormDashboardAdmin();
+                baru.Show();
+                this.Hide();
+            }
+        }
+}}

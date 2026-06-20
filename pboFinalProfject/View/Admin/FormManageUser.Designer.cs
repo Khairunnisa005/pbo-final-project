@@ -488,6 +488,7 @@
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnLaporan
             // 
@@ -504,6 +505,7 @@
             btnLaporan.Text = "Laporan";
             btnLaporan.TextAlign = ContentAlignment.MiddleLeft;
             btnLaporan.UseVisualStyleBackColor = false;
+            btnLaporan.Click += btnLaporan_Click;
             // 
             // btnKelolaUser
             // 
@@ -535,6 +537,7 @@
             btnKembali.Text = "Kembali";
             btnKembali.TextAlign = ContentAlignment.MiddleLeft;
             btnKembali.UseVisualStyleBackColor = false;
+            btnKembali.Click += btnKembali_Click;
             // 
             // FormManageUser
             // 

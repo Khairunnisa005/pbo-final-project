@@ -207,6 +207,7 @@
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnKelolaJadwal
             // 
@@ -222,6 +223,7 @@
             btnKelolaJadwal.Text = "Jadwal Konsultasi";
             btnKelolaJadwal.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaJadwal.UseVisualStyleBackColor = false;
+            btnKelolaJadwal.Click += btnKelolaJadwal_Click;
             // 
             // btnKeluar
             // 
@@ -238,6 +240,7 @@
             btnKeluar.Text = "Keluar";
             btnKeluar.TextAlign = ContentAlignment.MiddleLeft;
             btnKeluar.UseVisualStyleBackColor = false;
+            btnKeluar.Click += btnKeluar_Click;
             // 
             // btnKelolaProfil
             // 
@@ -254,6 +257,7 @@
             btnKelolaProfil.Text = "Profil";
             btnKelolaProfil.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaProfil.UseVisualStyleBackColor = false;
+            btnKelolaProfil.Click += btnKelolaProfil_Click;
             // 
             // FormDetailBooking
             // 

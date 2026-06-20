@@ -225,6 +225,7 @@
             btnDashboard.Text = "Beranda";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
             // 
             // btnLaporan
             // 
@@ -257,6 +258,7 @@
             btnKelolaUser.Text = "Kelola Pengguna";
             btnKelolaUser.TextAlign = ContentAlignment.MiddleLeft;
             btnKelolaUser.UseVisualStyleBackColor = false;
+            btnKelolaUser.Click += btnKelolaUser_Click;
             // 
             // btnKembali
             // 

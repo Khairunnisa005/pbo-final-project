@@ -296,29 +296,43 @@ namespace pboFinalProfject.View
 
         private void btnKelolaJadwal_Click(object sender, EventArgs e)
         {
+            // 1. Cari apakah FormKelolaJadwal sudah ada di memori aplikasi
+            FormKelolaJadwal frmKelola = (FormKelolaJadwal)Application.OpenForms["FormKelolaJadwal"];
 
-
-            // 2. Oper ID ke form tujuan
-            FormKelolaJadwal formJadwal = new FormKelolaJadwal(userId);
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form jadwal
-            formJadwal.Show();
+            if (frmKelola != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmKelola.Show();
+                frmKelola.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormKelolaJadwal baru = new FormKelolaJadwal(_currentPsikologId);
+                baru.Show();
+                this.Hide();
+            }
         }
         private void btnKelolaProfil_Click(object sender, EventArgs e)
         {
+            // 1. Cari apakah FormManageUser sudah ada di memori aplikasi
+            FormKelolaProfil frmKelola = (FormKelolaProfil)Application.OpenForms["FormKelolaProfil"];
 
-
-            // 2. Oper ID ke form tujuan
-            FormKelolaProfil formProfil = new FormKelolaProfil(userId, _currentPsikologId);
-
-            // 3. Sembunyikan Dashboard (bukan ditutup/dihancurkan)
-            this.Hide();
-
-            // 4. Tampilkan form profil
-            formProfil.Show();
+            if (frmKelola != null)
+            {
+                // 2. Jika SUDAH ADA, tampilkan dan bawa ke baris paling depan
+                frmKelola.Show();
+                frmKelola.BringToFront();
+                this.Hide(); // Sembunyikan form laporan saat ini
+            }
+            else
+            {
+                // 3. Jika BELUM ADA (misal baru pertama kali jalan), baru buat instance baru
+                FormKelolaProfil baru = new FormKelolaProfil(userId, _currentPsikologId);
+                baru.Show();
+                this.Hide();
+            }
         }
         private void FormDashboardPsikolog_FormClosed(object sender, FormClosedEventArgs e)
         {
