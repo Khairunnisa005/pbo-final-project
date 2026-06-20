@@ -4,9 +4,6 @@ using pboFinalProfject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Npgsql;
-using pboFinalProfject.Model;
-using pboFinalProfject.Utils;
 
 namespace pboFinalProfject.Repositories
 {
