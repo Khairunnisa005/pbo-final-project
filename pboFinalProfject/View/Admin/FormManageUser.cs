@@ -104,6 +104,17 @@ namespace pboFinalProfject.View
                     MessageBox.Show("Username, Nama, dan Email wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                // ✅ Parsing keahlian (pisahkan dengan koma)
+                List<string> keahlianList = new List<string>();
+                if (!string.IsNullOrEmpty(keahlian))
+                {
+                    foreach (var item in keahlian.Split(','))
+                    {
+                        string trimmed = item.Trim();
+                        if (!string.IsNullOrEmpty(trimmed))
+                            keahlianList.Add(trimmed);
+                    }
+                }
 
                 // Membuat objek model yang membawa data inputan
                 User userModel = new User
@@ -120,7 +131,7 @@ namespace pboFinalProfject.View
                     Gelar = gelar,
                     Pendidikan = pendidikan,
                     NoIzinPraktek = no_izin,
-                    Keahlian = keahlian, // Pastikan properti ini ada di class Psikolog Anda
+                    //Keahlian = keahlian, // Pastikan properti ini ada di class Psikolog Anda
                     MelayaniOnline = true,
                     MelayaniOffline = true,
                     DeskripsiSingkat = deskripsiSingkat
@@ -133,7 +144,7 @@ namespace pboFinalProfject.View
                     userModel.CreatedAt = DateTime.Now;
                     psikologModel.CreatedAt = DateTime.Now;
 
-                    bool berhasil = _adminController.TambahPsikolog(userModel, psikologModel);
+                    bool berhasil = _adminController.TambahPsikolog(userModel, psikologModel, keahlianList);
                     if (berhasil)
                     {
                         MessageBox.Show("Psikolog berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
