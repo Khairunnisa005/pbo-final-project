@@ -267,26 +267,28 @@ namespace pboFinalProfject
         public DataTable GetDetailBookingById(int bookingId, int psikologId)
         {
             string query = @"
-                SELECT 
-                    b.booking_id,
-                    u.username as mahasiswa,
-                    u.email,
-                    u.no_telepon,
-                    b.created_at,
-                    j.jam_mulai,
-                    j.jam_selesai,
-                    j.metode,
-                    b.status,
-                    b.catatan_user,
-                    b.catatan_psikolog,
-                    h.tingkat_stres,
-                    h.rekomendasi
-                FROM booking b
-                JOIN users u ON b.user_id = u.user_id
-                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
-                JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
-                WHERE b.booking_id = @booking_id 
-                AND b.psikolog_id = @psikolog_id";
+                            SELECT 
+                                b.booking_id,
+                                u_mhs.username as mahasiswa,
+                                u_psi.username as psikolog,
+                                u_mhs.email,
+                                u_mhs.no_telepon,
+                                b.created_at,
+                                j.jam_mulai,
+                                j.jam_selesai,
+                                j.metode,
+                                b.status,
+                                b.catatan_user,
+                                b.catatan_psikolog,
+                                h.tingkat_stres,
+                                h.rekomendasi
+                            FROM booking b
+                            JOIN users u_mhs ON b.user_id = u_mhs.user_id
+                            JOIN users u_psi ON b.psikolog_id = u_psi.user_id
+                            JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                            LEFT JOIN hasil_assessment h ON b.hasil_assessment_id = h.hasil_id
+                            WHERE b.booking_id = @booking_id 
+                            AND b.psikolog_id = @psikolog_id";
 
             var parameters = new[]
             {

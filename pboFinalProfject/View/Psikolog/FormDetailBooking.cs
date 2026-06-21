@@ -61,6 +61,9 @@ namespace pboFinalProfject
                     lblValNamaKonseli.Text = row["mahasiswa"]?.ToString() ?? "-";
                     lblValEmail.Text = row["email"]?.ToString() ?? "-";
                     lblValNoTelepon.Text = row["no_telepon"]?.ToString() ?? "-";
+                    lblValKonselor.Text = row["psikolog"]?.ToString() ?? "-";
+                    lblValJamMulai.Text = ((TimeOnly)row["jam_mulai"]).ToString("HH:mm");
+                    lblValJamSelesai.Text = ((TimeOnly)row["jam_selesai"]).ToString("HH:mm");
                     // Format tanggal dan jam
                     DateTime tanggal = Convert.ToDateTime(row["created_at"]);
                     TimeSpan jamMulai = ((TimeOnly)row["jam_mulai"]).ToTimeSpan();

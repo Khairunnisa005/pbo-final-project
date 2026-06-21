@@ -211,6 +211,7 @@ namespace pboFinalProfject.View
 
         private void DgvPasien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             // Validasi dasar
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             if (dgvPasien.Columns[e.ColumnIndex].Name != "btnAksi") return;
@@ -251,9 +252,20 @@ namespace pboFinalProfject.View
             {
                 if (e.RowIndex >= 0)
                 {
-                    // Kode buka form ditaruh DI DALAM SINI
-                    FormDetailBooking formDetail = new FormDetailBooking(bookingId, _currentPsikologId);
-                    formDetail.Show();
+                    var crow = dgvPasien.Rows[e.RowIndex];
+
+                    // Ambil objek aslinya dulu
+                    var rawBookingId = crow.Cells["booking_id"].Value;
+                    var rawPsikologId = crow.Cells["psikolog_id"].Value;
+
+                    if (rawBookingId != null && rawPsikologId != null)
+                    {
+                        int selectedBookingId = Convert.ToInt32(rawBookingId);
+                        int psikologId = Convert.ToInt32(rawPsikologId);
+
+                        FormDetailBooking formDetail = new FormDetailBooking(selectedBookingId, psikologId);
+                        formDetail.Show();
+                    }
                 }
             }
             catch (Exception ex)
