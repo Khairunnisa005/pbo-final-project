@@ -11,6 +11,7 @@ namespace pboFinalProfject
     public class BookingService : IBookingService
     {
         private readonly DatabaseHelper _db;
+        //private readonly BookingRepository _bookingRepository;
         private readonly UserRepository _userRepository;
         //private readonly PsikologRepository _psikologRepository;
 

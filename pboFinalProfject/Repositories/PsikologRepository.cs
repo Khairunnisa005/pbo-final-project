@@ -15,6 +15,142 @@ namespace pboFinalProfject.Repositories
         {
             _db = new DatabaseHelper();
         }
+        public int GetPsikologIdbyUserId(int userId)
+        {
+            string query = "SELECT psikolog_id FROM psikolog WHERE user_id = @user_id";
+            var parameters = new[] { new NpgsqlParameter("@user_id", userId) };
+
+            object result = _db.ExecuteScalar(query, parameters);
+            return result != null ? Convert.ToInt32(result) : 0;
+        }
+
+        public DataTable GetDaftarPasienbyPsikologId(int psikologId)
+        {
+            string query = @"
+                SELECT 
+                    b.booking_id,
+                    b.user_id,
+                    b.psikolog_id,
+                    u.username as mahasiswa,
+                    b.created_at as tgl_booking,
+                    j.jam_mulai,
+                    j.jam_selesai,
+                    j.metode,
+                    b.status,
+                    b.catatan_user,
+                    b.catatan_psikolog
+                FROM booking b
+                JOIN users u ON b.user_id = u.user_id
+                JOIN jadwal_psikolog j ON b.jadwal_id = j.jadwal_id
+                WHERE b.psikolog_id = @psikolog_id
+                ORDER BY b.created_at DESC, j.jam_mulai ASC";
+
+            var parameters = new[] { new NpgsqlParameter("@psikolog_id", psikologId) };
+            return _db.ExecuteQuery(query, parameters);
+        }
+
+        public DataTable GetProfilPsikologbyUserId(int userId)
+        {
+            // 1. Definisikan string kueri SQL
+            string query = @"SELECT u.username, u.nama_lengkap, u.email, u.no_telepon, 
+                                    p.gelar, p.pendidikan, p.no_izin_praktek, p.deskripsi_singkat, 
+                                    p.melayani_online, p.melayani_offline 
+                             FROM ""users"" u
+                             JOIN ""psikolog"" p ON u.user_id = p.user_id 
+                             WHERE u.user_id = @userId";
+
+            // 2. Siapkan parameter yang dibutuhkan kueri
+            NpgsqlParameter[] parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@userId", userId)
+            };
+
+            try
+            {
+                // 3. Eksekusi kueri langsung melalui perantara DatabaseHelper
+                return _db.ExecuteQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Kesalahan pada Controller saat mengambil profil: {ex.Message}");
+            }
+        }
+
+        public bool UpdateprofilPsikolog(int userId, string nama, string email, string telepon, string gelar, string pendidikan, string izin, string deskripsi, bool online, bool offline)
+        {
+            // 1. Kumpulkan kueri-kueri yang akan dijalankan
+            List<string> queries = new List<string>
+            {
+                @"UPDATE users 
+                  SET nama_lengkap = @nama, email = @email, no_telepon = @telepon 
+                  WHERE user_id = @userId",
+
+                @"UPDATE psikolog
+                  SET gelar = @gelar, pendidikan = @pendidikan, 
+                      no_izin_praktek = @izin, deskripsi_singkat = @deskripsi, 
+                      melayani_online = @online, melayani_offline = @offline 
+                  WHERE user_id = @userId"
+            };
+
+            // 2. Siapkan parameter untuk masing-masing kueri secara berurutan
+            NpgsqlParameter[] paramUser = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@nama", nama),
+                new NpgsqlParameter("@email", email),
+                new NpgsqlParameter("@telepon", telepon),
+                new NpgsqlParameter("@userId", userId)
+            };
+
+            NpgsqlParameter[] paramPsikolog = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@gelar", gelar),
+                new NpgsqlParameter("@pendidikan", pendidikan),
+                new NpgsqlParameter("@izin", izin),
+                new NpgsqlParameter("@deskripsi", deskripsi),
+                new NpgsqlParameter("@online", online),
+                new NpgsqlParameter("@offline", offline),
+                new NpgsqlParameter("@userId", userId)
+            };
+
+            List<NpgsqlParameter[]> parameterSets = new List<NpgsqlParameter[]> { paramUser, paramPsikolog };
+
+            try
+            {
+                using (var conn = _db.GetConnection())
+                {
+                    conn.Open();
+                    using (var trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (var cmd = new NpgsqlCommand(queries[0], conn, trans))
+                            {
+                                cmd.Parameters.AddRange(paramUser);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (var cmd2 = new NpgsqlCommand(queries[1], conn, trans))
+                            {
+                                cmd2.Parameters.AddRange(paramPsikolog);
+                                cmd2.ExecuteNonQuery();
+                            }
+
+                            trans.Commit();
+                            return true;
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Kesalahan pada Controller saat update profil: {ex.Message}");
+            }
+        }
 
         public DataTable GetAll()
         {
